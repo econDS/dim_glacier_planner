@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dim Glacier Ultimate Planner (Fixed)</title>
+  <title>Dim Glacier Ultimate Planner</title>
 
   <style>
     :root {
@@ -212,7 +212,7 @@
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 8px;
       padding: 10px 12px;
-      max-width: 360px;
+      max-width: 380px;
       font-size: 12px;
       line-height: 1.4;
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
@@ -221,6 +221,15 @@
       font-weight: 800;
       color: #f1c40f;
       margin-bottom: 6px;
+    }
+    #craftTooltip .t-sub{
+      opacity: .9;
+      margin-bottom: 6px;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      border-bottom: 1px dashed rgba(255,255,255,0.18);
+      padding-bottom: 6px;
     }
     #craftTooltip .t-row{
       display:flex;
@@ -269,6 +278,32 @@
       color: #888;
       line-height: 1.35;
     }
+
+    /* ===== PC-first: Sticky left column (Market/Best price stays visible) ===== */
+    @media (min-width: 1101px) {
+      .left-col{
+        position: sticky;
+        top: 20px;
+        align-self: start;
+        max-height: calc(100vh - 40px);
+        overflow: auto;
+        padding-right: 8px;
+      }
+      .left-col::-webkit-scrollbar{ width: 10px; }
+      .left-col::-webkit-scrollbar-thumb{ background: #d0d7de; border-radius: 999px; }
+      .left-col::-webkit-scrollbar-track{ background: transparent; }
+    }
+
+    /* ===== Slot2 clue: pulse dropdown when Lv 0 ===== */
+    @keyframes pulseBorder {
+      0%   { box-shadow: 0 0 0 0 rgba(41,128,185,.35); }
+      70%  { box-shadow: 0 0 0 8px rgba(41,128,185,0); }
+      100% { box-shadow: 0 0 0 0 rgba(41,128,185,0); }
+    }
+    .select-attn{
+      border-color: var(--accent) !important;
+      animation: pulseBorder 1.2s infinite;
+    }
   </style>
 </head>
 
@@ -277,7 +312,7 @@
 
   <div class="container">
     <!-- LEFT COLUMN: SETTINGS -->
-    <div>
+    <div class="left-col">
       <div class="card" id="card_market">
         <div class="section-header">Market Prices (Zeny)</div>
         <div style="margin:-8px 0 14px; font-size:12px; color:#888;">
@@ -653,6 +688,8 @@
     function updateSlot2() {
       const chk_s3 = document.getElementById('chk_s3');
       const sel = document.getElementById('sel_s2_lv');
+      const card = document.getElementById('card_s2');
+      const body = document.getElementById('body_s2');
 
       // Dependency
       if (!chk_s3.checked) {
@@ -728,32 +765,73 @@
       let totalCost = 0;
       let html = "";
 
-      if (targetLv > 0) {
-        document.getElementById('card_s2').classList.remove('disabled');
-        document.getElementById('body_s2').style.display = 'block';
-
-        for (let i = 1; i <= targetLv; i++) {
-          totalCost += levels[i].cost;
-
-          const itemsHtml = levels[i].items.map(d =>
-            `<span class="s2-item">- ${d.qty}x <span class="item" data-item="${d.name}" data-copy="${d.name}">${d.name}</span></span>`
-          ).join("");
-
-          html += `<tr>
-            <td style="font-weight:bold;">Lv ${i}</td>
-            <td>${itemsHtml}</td>
-            <td class="num">${fmt(levels[i].cost)}</td>
-          </tr>`;
-        }
-
-        html += `<tr style="background:#e8f6f3; font-weight:bold;">
-          <td colspan="2">Cumulative Cost (Lv 1 - ${targetLv})</td>
-          <td class="num text-green" style="font-size:16px;">${fmt(totalCost)}</td>
+      // Case A) Locked by dependency (Slot 3 off)
+      if (sel.disabled) {
+        card.classList.add('disabled');
+        sel.classList.remove('select-attn');
+        body.style.display = 'block';
+        html = `<tr>
+          <td colspan="3">
+            <div style="padding:10px; background:#fbfbfb; border:1px dashed #ddd; border-radius:8px;">
+              <b>Slot 2 ถูกล็อก</b><br/>
+              <span class="hint" style="font-size:12px; color:#666;">
+                ต้องเปิด <b>Enchant Slot 3</b> ก่อน ถึงจะเลือก Target Level ได้
+              </span>
+            </div>
+          </td>
         </tr>`;
-      } else {
-        document.getElementById('card_s2').classList.add('disabled');
-        document.getElementById('body_s2').style.display = 'none';
+        document.getElementById('list_s2').innerHTML = html;
+        document.getElementById('cost_s2').innerText = fmt(0);
+        DATA.s2_cost = 0;
+        updateRefine();
+        return;
       }
+
+      // Case B) Available but user selected None (Lv0) -> show clue + pulse dropdown
+      if (targetLv === 0) {
+        card.classList.remove('disabled');
+        sel.classList.add('select-attn');
+        body.style.display = 'block';
+        html = `<tr>
+          <td colspan="3">
+            <div style="padding:10px; background:#fbfbff; border:1px dashed rgba(41,128,185,.45); border-radius:8px;">
+              <b>ยังไม่ได้เลือก Target Level</b><br/>
+              <span class="hint" style="font-size:12px; color:#555;">
+                เลือก Target Level ที่ dropdown ด้านบนเพื่อแสดงรายการวัสดุ + ต้นทุน
+              </span>
+            </div>
+          </td>
+        </tr>`;
+        document.getElementById('list_s2').innerHTML = html;
+        document.getElementById('cost_s2').innerText = fmt(0);
+        DATA.s2_cost = 0;
+        updateRefine();
+        return;
+      }
+
+      // Case C) Normal render
+      sel.classList.remove('select-attn');
+      card.classList.remove('disabled');
+      body.style.display = 'block';
+
+      for (let i = 1; i <= targetLv; i++) {
+        totalCost += levels[i].cost;
+
+        const itemsHtml = levels[i].items.map(d =>
+          `<span class="s2-item">- ${d.qty}x <span class="item" data-item="${d.name}" data-copy="${d.name}">${d.name}</span></span>`
+        ).join("");
+
+        html += `<tr>
+          <td style="font-weight:bold;">Lv ${i}</td>
+          <td>${itemsHtml}</td>
+          <td class="num">${fmt(levels[i].cost)}</td>
+        </tr>`;
+      }
+
+      html += `<tr style="background:#e8f6f3; font-weight:bold;">
+        <td colspan="2">Cumulative Cost (Lv 1 - ${targetLv})</td>
+        <td class="num text-green" style="font-size:16px;">${fmt(totalCost)}</td>
+      </tr>`;
 
       document.getElementById('list_s2').innerHTML = html;
       document.getElementById('cost_s2').innerText = fmt(totalCost);
@@ -907,26 +985,6 @@
 
     let activeItemEl = null;
 
-    function showTooltipFor(itemName, x, y){
-      const recipe = RECIPES[itemName];
-      const el = tooltipEl();
-      if (!el || !recipe) return;
-
-      const rows = recipe.map(r =>
-        `<div class="t-row"><span>${escapeHtml(r.name)}</span><strong>x ${r.qty}</strong></div>`
-      ).join("");
-
-      el.innerHTML = `<div class="t-title">Craft: ${escapeHtml(itemName)}</div>${rows}`;
-      el.style.display = "block";
-      positionTooltip(x, y);
-    }
-
-    function hideTooltip(){
-      const el = tooltipEl();
-      if (!el) return;
-      el.style.display = "none";
-    }
-
     function positionTooltip(x, y){
       const el = tooltipEl();
       if (!el || el.style.display === "none") return;
@@ -941,6 +999,12 @@
 
       el.style.left = `${Math.max(8, left)}px`;
       el.style.top  = `${Math.max(8, top)}px`;
+    }
+
+    function hideTooltip(){
+      const el = tooltipEl();
+      if (!el) return;
+      el.style.display = "none";
     }
 
     // ===== Market Price: auto make labels clickable + highlight ingredients =====
@@ -976,13 +1040,39 @@
         .forEach(el => el.classList.remove('hl','hl-src'));
     }
 
+    // PC-first helper: when highlight happens, auto-scroll left sidebar (if needed)
+    function scrollMarketRowIntoView(rowEl){
+      if (!rowEl) return;
+      const scroller = document.querySelector('.left-col');
+      if (!scroller) return;
+
+      const r = rowEl.getBoundingClientRect();
+      const s = scroller.getBoundingClientRect();
+
+      // if row not visible inside left-col viewport -> scroll to center
+      if (r.top < s.top || r.bottom > s.bottom) {
+        rowEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    }
+
+    function getMarketPriceByName(name){
+      const card = document.getElementById('card_market');
+      if (!card) return null;
+      const row = card.querySelector(`.price-row[data-item-row="${cssEsc(name)}"]`);
+      const input = row ? row.querySelector('input') : null;
+      return input ? parse(input.value) : null;
+    }
+
     function highlightMarketSelf(itemName){
       clearMarketHighlights();
       const card = document.getElementById('card_market');
       if (!card) return;
 
-      card.querySelectorAll(`.price-row[data-item-row="${cssEsc(itemName)}"]`)
-        .forEach(el => el.classList.add('hl-src'));
+      const row = card.querySelector(`.price-row[data-item-row="${cssEsc(itemName)}"]`);
+      if (row) {
+        row.classList.add('hl-src');
+        scrollMarketRowIntoView(row);
+      }
     }
 
     function highlightMarketIngredients(itemName){
@@ -993,15 +1083,54 @@
       const recipe = RECIPES[itemName];
       if (!recipe) return;
 
-      // highlight the hovered item row itself (if exists in market)
-      card.querySelectorAll(`.price-row[data-item-row="${cssEsc(itemName)}"]`)
-        .forEach(el => el.classList.add('hl-src'));
+      const selfRow = card.querySelector(`.price-row[data-item-row="${cssEsc(itemName)}"]`);
+      if (selfRow){
+        selfRow.classList.add('hl-src');
+        scrollMarketRowIntoView(selfRow);
+      }
 
-      // highlight ingredient rows
       recipe.forEach(r => {
-        card.querySelectorAll(`.price-row[data-item-row="${cssEsc(r.name)}"]`)
-          .forEach(el => el.classList.add('hl'));
+        const row = card.querySelector(`.price-row[data-item-row="${cssEsc(r.name)}"]`);
+        if (row) row.classList.add('hl');
       });
+
+      if (!selfRow){
+        const firstIng = recipe
+          .map(r => card.querySelector(`.price-row[data-item-row="${cssEsc(r.name)}"]`))
+          .find(Boolean);
+        scrollMarketRowIntoView(firstIng);
+      }
+    }
+
+    function showTooltipFor(itemName, x, y){
+      const recipe = RECIPES[itemName];
+      const el = tooltipEl();
+      if (!el || !recipe) return;
+
+      const selfPrice = getMarketPriceByName(itemName);
+
+      const rows = recipe.map(r => {
+        const pr = getMarketPriceByName(r.name);
+        return `
+          <div class="t-row">
+            <span>${escapeHtml(r.name)} <span style="opacity:.75;">(x ${r.qty})</span></span>
+            <strong>${pr != null ? fmt(pr) : '-'}</strong>
+          </div>`;
+      }).join("");
+
+      el.innerHTML = `
+        <div class="t-title">Craft: ${escapeHtml(itemName)}</div>
+        <div class="t-sub">
+          <span style="opacity:.9;">Market (self)</span>
+          <strong>${selfPrice != null ? fmt(selfPrice) : '-'}</strong>
+        </div>
+        <div style="opacity:.85; font-size:11px; margin-bottom:6px;">
+          (ใน tooltip นี้: ขวาคือราคา Market ต่อชิ้น ณ ตอนนี้)
+        </div>
+        ${rows}
+      `;
+      el.style.display = "block";
+      positionTooltip(x, y);
     }
 
     // ===== Event delegation: click to copy =====
@@ -1023,7 +1152,7 @@
 
       const name = item.dataset.item;
 
-      // craftable -> tooltip + ingredients highlight
+      // craftable -> tooltip + ingredients highlight + auto-scroll left
       if (RECIPES[name]) {
         activeItemEl = item;
         showTooltipFor(name, e.clientX, e.clientY);
