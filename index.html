@@ -1216,11 +1216,11 @@
       el.innerHTML = `
         <div class="t-title">Craft: ${escapeHtml(itemName)}</div>
         <div class="t-sub">
-          <span style="opacity:.9;">Market (self)</span>
+          <span style="opacity:.9;">ราคาตลาด</span>
           <strong>${selfPrice != null ? fmt(selfPrice) : '-'}</strong>
         </div>
         <div style="opacity:.85; font-size:11px; margin-bottom:6px;">
-          (ใน tooltip นี้: ขวาคือราคา Market ต่อชิ้น ณ ตอนนี้)
+          (ด้านล่างคือวัตถุดิบการการสร้าง ด้านขวาคือราคาตลาดต่อชิ้น ณ ตอนนี้)
         </div>
         ${rows}
       `;
