@@ -262,6 +262,13 @@
       background: rgba(39,174,96,.16);
       box-shadow: inset 0 0 0 1px rgba(39,174,96,.35);
     }
+
+    .hint {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #888;
+      line-height: 1.35;
+    }
   </style>
 </head>
 
@@ -273,9 +280,9 @@
     <div>
       <div class="card" id="card_market">
         <div class="section-header">Market Prices (Zeny)</div>
-		<div style="margin:-8px 0 14px; font-size:12px; color:#888;">
-			Last price update: <strong>13/01/2569</strong>
-		</div>
+        <div style="margin:-8px 0 14px; font-size:12px; color:#888;">
+          Last price update: <strong>13/01/2569</strong>
+        </div>
         <div class="input-group">
           <label>Exchange Rate (1M = ? THB)</label>
           <input type="text" id="rate_thb" value="8.7" onkeyup="formatInput(this)">
@@ -308,13 +315,11 @@
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Special</div>
         <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" onkeyup="formatInput(this)"></div>
 
-        <!-- ✅ text changed -->
         <div class="input-group">
           <label style="color:var(--purple);">Slot 4 & 3 Dim Glacier Enchant Coupon</label>
           <input type="text" id="p_coupon" value="14,500,000" onkeyup="formatInput(this)" style="border-color:var(--purple);">
         </div>
 
-        <!-- ✅ text changed -->
         <div class="input-group">
           <label style="color:var(--orange);">Dim Glacier Weapon 9 Refine Cube</label>
           <input type="text" id="m_cube9" value="8,500,000" onkeyup="formatInput(this)" style="border-color:var(--orange);">
@@ -326,6 +331,9 @@
         <table class="tb-best">
           <tbody id="tb_compare"></tbody>
         </table>
+        <div class="hint">
+          * ตารางนี้เทียบเฉพาะ “ต้นทุนต่อกล่องตอนหาได้มา” (Craft vs Market) — ยังไม่รวม Consume ตอนใช้งาน
+        </div>
       </div>
     </div>
 
@@ -416,13 +424,12 @@
       <!-- REFINE -->
       <div class="interactive-card">
         <div class="card-top">
-          <div class="card-title">5. Refinement (Upgrade)</div>
+          <div class="card-title">5. Refinement &amp; Upgrade</div>
           <div class="card-cost" id="cost_refine">0</div>
         </div>
         <div class="card-body">
           <div class="input-group">
             <div>
-              <!-- ✅ add data-item so hover highlight works -->
               <strong class="item" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</strong>
               <div style="font-size:11px; color:#888;">Instant +9 (Market Price)</div>
             </div>
@@ -435,7 +442,12 @@
           <div class="input-group" style="margin-top:10px;">
             <div>
               <strong class="item" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</strong>
-              <div style="font-size:11px; color:var(--green);">Safety +1 (Auto Best Price: Craft/Market)</div>
+              <div style="font-size:11px; color:var(--green);">Safety +1 (Auto Best Price: Craft/Market) + Add Consume Cost</div>
+              <div class="hint">
+                Consume ต่อกล่อง: 40x <span class="item" data-item="Snow Flower Petal" data-copy="Snow Flower Petal">Snow Flower Petal</span>,
+                10x <span class="item" data-item="Encroached Magical Crystal" data-copy="Encroached Magical Crystal">Encroached Magical Crystal</span>,
+                10x <span class="item" data-item="Neutralized Magical Crystal" data-copy="Neutralized Magical Crystal">Neutralized Magical Crystal</span>
+              </div>
             </div>
             <div>
               <input type="number" id="qty_device" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
@@ -530,9 +542,13 @@
       html += check("Encroached Magical Crystal", c_enc_crystal, m_enc_crystal);
       html += check("Neutralized Magical Crystal", c_neu_crystal, m_neu_crystal);
 
+      // ✅ Best Price Analysis: เทียบ "ต่อกล่องตอนหาได้มา" เท่านั้น (ไม่รวม consume)
       const c_device = (10 * best["Encroached Magical Crystal"]) + (10 * best["Neutralized Magical Crystal"]) + p_miasmal;
       html += check("Dim Glacier Refinement Device", c_device, m_device);
       document.getElementById('tb_compare').innerHTML = html;
+
+      // ✅ Consume ต่อกล่อง (ใช้ตอนใช้งานจริง) -> เอาไปบวกใน Refinement & Upgrade เท่านั้น
+      const device_use_cost = (40 * p_petal) + (10 * best["Encroached Magical Crystal"]) + (10 * best["Neutralized Magical Crystal"]);
 
       DATA.prices = {
         EXT: best["Snow Flower Magic Stone Extract"],
@@ -541,7 +557,8 @@
         ENC: best["Encroached Magical Crystal"],
         NEU: best["Neutralized Magical Crystal"],
         BRIL: p_brilliant,
-        DEV: best["Dim Glacier Refinement Device"],
+        DEV: best["Dim Glacier Refinement Device"],      // ✅ acquire cost per box (craft vs market)
+        DEV_USE: device_use_cost,                        // ✅ consume cost per use per box
         MIA: p_miasmal,
         WEAPON: parse(document.getElementById('m_weapon').value),
         COUPON: parse(document.getElementById('p_coupon').value),
@@ -750,7 +767,10 @@
       const q_device = Number(document.getElementById('qty_device').value);
       const m_manual = parse(document.getElementById('manual_cost').value);
 
-      const cost = (q_cube * DATA.prices.CUBE) + (q_device * DATA.prices.DEV) + m_manual;
+      // ✅ ต่อกล่องของ Device = (ต้นทุนหามาได้) + (consume ตอนใช้งาน)
+      const deviceEach = (DATA.prices.DEV || 0) + (DATA.prices.DEV_USE || 0);
+
+      const cost = (q_cube * DATA.prices.CUBE) + (q_device * deviceEach) + m_manual;
       document.getElementById('cost_refine').innerText = fmt(cost);
       DATA.refine_cost = cost;
 
@@ -828,7 +848,6 @@
         { qty: 10, name: "Neutralized Magical Crystal" },
         { qty: 1,  name: "Miasmal Spell" },
       ],
-      // "Brilliant Snow Flower Magic Stone Extract": [...] // ไม่มีสูตร -> ไม่โชว์ tooltip
     };
 
     // ===== Items ที่ "ไม่มีคราฟต์" แต่ต้องการให้ hover แล้ว highlight ใน market price =====
