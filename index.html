@@ -320,44 +320,45 @@
         </div>
         <div class="input-group">
           <label>Exchange Rate (1M = ? THB)</label>
-          <input type="text" id="rate_thb" value="8.7" onkeyup="formatInput(this)">
+          <input type="text" id="rate_thb" value="8.7" inputmode="decimal"
+                 oninput="sanitizeRateTyping(this)" onblur="normalizeRateOnBlur(this)">
         </div>
 
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Raw Materials</div>
-        <div class="input-group"><label>Snow Flower Petal</label><input type="text" id="p_petal" value="20,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Amethyst Fragment</label><input type="text" id="p_amethyst" value="5,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="8,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Neutralized Magical Ore</label><input type="text" id="p_neu_ore" value="70,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Miasmal Spell</label><input type="text" id="p_miasmal" value="300,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Snow Flower Magic Stone</label><input type="text" id="p_sf_stone" value="22,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Shining Snow Flower Magic Stone</label><input type="text" id="p_shining_stone" value="125,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Snow Flower Petal</label><input type="text" id="p_petal" value="20,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Amethyst Fragment</label><input type="text" id="p_amethyst" value="5,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="8,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Neutralized Magical Ore</label><input type="text" id="p_neu_ore" value="70,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Miasmal Spell</label><input type="text" id="p_miasmal" value="300,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Snow Flower Magic Stone</label><input type="text" id="p_sf_stone" value="22,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Shining Snow Flower Magic Stone</label><input type="text" id="p_shining_stone" value="125,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group" style="border-left:3px solid var(--orange); padding-left:5px;">
           <label>Brilliant Snow Flower Magic Stone Extract</label>
-          <input type="text" id="p_brilliant" value="1,300,000" onkeyup="formatInput(this)">
+          <input type="text" id="p_brilliant" value="1,300,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
         </div>
 
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Finished Goods</div>
-        <div class="input-group"><label>Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="270,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="2,400,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Glacier Extract</label><input type="text" id="m_glacier_extract" value="180,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Encroached Magical Crystal</label><input type="text" id="m_enc_crystal" value="1,650,000" onkeyup="formatInput(this)"></div>
-        <div class="input-group"><label>Neutralized Magical Crystal</label><input type="text" id="m_neu_crystal" value="700,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="270,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="2,400,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Glacier Extract</label><input type="text" id="m_glacier_extract" value="180,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Encroached Magical Crystal</label><input type="text" id="m_enc_crystal" value="1,650,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label>Neutralized Magical Crystal</label><input type="text" id="m_neu_crystal" value="700,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group" style="border-left:3px solid var(--green); padding-left:5px;">
           <label>Dim Glacier Refinement Device</label>
-          <input type="text" id="m_device" value="30,000,000" onkeyup="formatInput(this)">
+          <input type="text" id="m_device" value="30,000,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
         </div>
 
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Special</div>
-        <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
 
         <div class="input-group">
           <label style="color:var(--purple);">Slot 4 & 3 Dim Glacier Enchant Coupon</label>
-          <input type="text" id="p_coupon" value="14,500,000" onkeyup="formatInput(this)" style="border-color:var(--purple);">
+          <input type="text" id="p_coupon" value="14,500,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)" style="border-color:var(--purple);">
         </div>
 
         <div class="input-group">
           <label style="color:var(--orange);">Dim Glacier Weapon 9 Refine Cube</label>
-          <input type="text" id="m_cube9" value="8,500,000" onkeyup="formatInput(this)" style="border-color:var(--orange);">
+          <input type="text" id="m_cube9" value="8,500,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)" style="border-color:var(--orange);">
         </div>
       </div>
 
@@ -492,7 +493,9 @@
 
           <div class="input-group" style="margin-top:10px; border-top:1px dashed #eee; padding-top:10px;">
             <div>Manual Refine Budget (Ore/Fee)</div>
-            <input type="text" id="manual_cost" value="0" style="width:100px;" onkeyup="formatInput(this)">
+            <input type="text" id="manual_cost" value="0" inputmode="numeric"
+                   style="width:100px;"
+                   oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
           </div>
         </div>
       </div>
@@ -524,9 +527,106 @@
       refine_cost: 0
     };
 
-    function formatInput(elm) {
-      let val = parse(elm.value);
-      elm.value = fmt(val);
+
+    document.addEventListener('compositionstart', e => {
+      if (e.target && e.target.tagName === 'INPUT') e.target._isComposing = true;
+    });
+    document.addEventListener('compositionend', e => {
+      if (e.target && e.target.tagName === 'INPUT') {
+        e.target._isComposing = false;
+        if (e.target.id === 'rate_thb') {
+          sanitizeRateTyping(e.target);
+          normalizeRateOnBlur(e.target);
+        } else {
+          sanitizeNumberTyping(e.target);
+        }
+      }
+    });
+
+    function sanitizeNumberTyping(elm){
+      if (elm._isComposing) return;
+
+      const old = String(elm.value ?? "");
+      const start = elm.selectionStart ?? old.length;
+      const end   = elm.selectionEnd ?? old.length;
+
+      const allow = (ch) => (ch >= '0' && ch <= '9') || ch === ',';
+
+      let cleaned = "";
+      let newStart = 0;
+      let newEnd = 0;
+
+      for (let i = 0; i < old.length; i++){
+        const ch = old[i];
+        const keep = allow(ch);
+
+        if (i < start && keep) newStart++;
+        if (i < end   && keep) newEnd++;
+
+        if (keep) cleaned += ch;
+      }
+
+      if (cleaned !== old){
+        elm.value = cleaned;
+        try { elm.setSelectionRange(newStart, newEnd); } catch(_){}
+      }
+
+      recalc();
+    }
+
+    function formatOnBlur(elm){
+      if (elm._isComposing) return;
+      elm.value = fmt(parse(elm.value));
+      recalc();
+    }
+
+    function sanitizeRateTyping(elm){
+      if (elm._isComposing) return;
+
+      const old = String(elm.value ?? "");
+      const start = elm.selectionStart ?? old.length;
+      const end   = elm.selectionEnd ?? old.length;
+
+      // keep digits + dot only, and only first dot
+      let cleaned = "";
+      let dotUsed = false;
+
+      // map caret
+      const keepChar = (ch) => (ch >= '0' && ch <= '9') || ch === '.';
+
+      let newStart = 0, newEnd = 0;
+
+      for (let i = 0; i < old.length; i++){
+        const ch = old[i];
+        let keep = keepChar(ch);
+        if (keep && ch === '.'){
+          if (dotUsed) keep = false;
+          else dotUsed = true;
+        }
+
+        if (i < start && keep) newStart++;
+        if (i < end   && keep) newEnd++;
+
+        if (keep) cleaned += ch;
+      }
+
+      if (cleaned !== old){
+        elm.value = cleaned;
+        try { elm.setSelectionRange(newStart, newEnd); } catch(_){}
+      }
+
+      recalc();
+    }
+
+    function normalizeRateOnBlur(elm){
+      if (elm._isComposing) return;
+
+      const v = Number(String(elm.value ?? "").replace(/,/g,''));
+      if (!isFinite(v)){
+        elm.value = "0";
+      } else {
+        elm.value = v.toLocaleString('en-US', { maximumFractionDigits: 2 });
+      }
       recalc();
     }
 
@@ -577,7 +677,6 @@
       html += check("Encroached Magical Crystal", c_enc_crystal, m_enc_crystal);
       html += check("Neutralized Magical Crystal", c_neu_crystal, m_neu_crystal);
 
-      // ✅ Best Price Analysis: เทียบ "ต่อกล่องตอนหาได้มา" เท่านั้น (ไม่รวม consume)
       const c_device = (10 * best["Encroached Magical Crystal"]) + (10 * best["Neutralized Magical Crystal"]) + p_miasmal;
       html += check("Dim Glacier Refinement Device", c_device, m_device);
       document.getElementById('tb_compare').innerHTML = html;
@@ -765,7 +864,6 @@
       let totalCost = 0;
       let html = "";
 
-      // Case A) Locked by dependency (Slot 3 off)
       if (sel.disabled) {
         card.classList.add('disabled');
         sel.classList.remove('select-attn');
@@ -787,7 +885,6 @@
         return;
       }
 
-      // Case B) Available but user selected None (Lv0) -> show clue + pulse dropdown
       if (targetLv === 0) {
         card.classList.remove('disabled');
         sel.classList.add('select-attn');
@@ -809,7 +906,6 @@
         return;
       }
 
-      // Case C) Normal render
       sel.classList.remove('select-attn');
       card.classList.remove('disabled');
       body.style.display = 'block';
@@ -1040,7 +1136,6 @@
         .forEach(el => el.classList.remove('hl','hl-src'));
     }
 
-    // PC-first helper: when highlight happens, auto-scroll left sidebar (if needed)
     function scrollMarketRowIntoView(rowEl){
       if (!rowEl) return;
       const scroller = document.querySelector('.left-col');
