@@ -1,655 +1,1053 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dim Glacier Ultimate Planner (Fixed)</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --accent: #2980b9;
-            --bg: #f4f7f6;
-            --card-bg: #ffffff;
-            --green: #27ae60;
-            --orange: #d35400;
-            --purple: #8e44ad;
-            --border: #e0e0e0;
-        }
-        body {
-            font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
-            background-color: var(--bg);
-            color: var(--primary);
-            margin: 0;
-            padding: 20px;
-            font-size: 14px;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 420px 1fr;
-            gap: 20px;
-        }
-        h1 { grid-column: 1 / -1; text-align: center; color: var(--accent); margin-bottom: 25px; font-weight: 800; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dim Glacier Ultimate Planner (Fixed)</title>
 
-        /* INPUT PANEL */
-        .card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-        }
-        .section-header {
-            font-weight: bold;
-            font-size: 15px;
-            color: var(--primary);
-            border-bottom: 2px solid var(--bg);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .input-group label { flex: 1; font-size: 13px; color: #555; padding-right: 10px; }
-        .input-group input {
-            width: 120px;
-            padding: 6px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: right;
-            font-family: monospace;
-            font-weight: 600;
-        }
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #2980b9;
+      --bg: #f4f7f6;
+      --card-bg: #ffffff;
+      --green: #27ae60;
+      --orange: #d35400;
+      --purple: #8e44ad;
+      --border: #e0e0e0;
+    }
+    body {
+      font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
+      background-color: var(--bg);
+      color: var(--primary);
+      margin: 0;
+      padding: 20px;
+      font-size: 14px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 20px;
+    }
+    h1 {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 25px;
+      font-weight: 800;
+    }
 
-        /* INTERACTIVE SECTIONS */
-        .interactive-card {
-            background: #fff;
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        /* Fixed: Removed pointer-events: none so checkbox stays clickable */
-        .interactive-card.disabled {
-            border-color: #ddd;
-            opacity: 0.5;
-        }
-        .card-top {
-            background: #eaf2f8;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #eee;
-        }
-        .card-title {
-            font-weight: bold;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--accent);
-            cursor: pointer;
-        }
-        .card-cost {
-            font-family: monospace;
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--primary);
-        }
-        .card-body { padding: 15px; }
+    /* INPUT PANEL */
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .section-header {
+      font-weight: bold;
+      font-size: 15px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--bg);
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .input-group label {
+      flex: 1;
+      font-size: 13px;
+      color: #555;
+      padding-right: 10px;
+    }
+    .input-group input {
+      width: 120px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: right;
+      font-family: monospace;
+      font-weight: 600;
+    }
 
-        /* CONTROLS */
-        .chk-big { transform: scale(1.5); cursor: pointer; margin-right: 10px; }
-        .method-select {
-            padding: 5px;
-            border-radius: 4px;
-            border: 1px solid #bbb;
-            background: #fff;
-            font-size: 13px;
-        }
-        .method-select:disabled {
-            background: #eee;
-            color: #999;
-        }
-        
-        /* MATERIAL LIST */
-        .mat-list {
-            background: #f9f9f9;
-            border-left: 4px solid #ddd;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-        .mat-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed #e0e0e0;
-            padding: 4px 0;
-        }
-        .mat-row:last-child { border-bottom: none; }
-        .mat-name { color: #555; }
-        .mat-qty { font-weight: bold; margin-left: 10px; }
+    /* INTERACTIVE SECTIONS */
+    .interactive-card {
+      background: #fff;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .interactive-card.disabled {
+      border-color: #ddd;
+      opacity: 0.5;
+    }
+    .card-top {
+      background: #eaf2f8;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+    }
+    .card-title {
+      font-weight: bold;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    .card-cost {
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    .card-body { padding: 15px; }
 
-        /* SLOT 2 TABLE */
-        .s2-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top:10px; }
-        .s2-table th { text-align: left; background: #eee; padding: 8px; }
-        .s2-table td { border-bottom: 1px solid #eee; padding: 8px; vertical-align: top; }
-        .s2-item { display: block; margin-bottom: 2px; color: #666; font-size: 12px; }
+    /* CONTROLS */
+    .chk-big { transform: scale(1.5); cursor: pointer; margin-right: 10px; }
+    .method-select {
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid #bbb;
+      background: #fff;
+      font-size: 13px;
+    }
+    .method-select:disabled {
+      background: #eee;
+      color: #999;
+    }
 
-        /* GIMMICK BOX */
-        .gimmick-box {
-            background: #2c3e50;
-            color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-style: italic;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .gimmick-title { font-weight: bold; font-size: 18px; color: #f1c40f; margin-bottom: 5px; }
+    /* MATERIAL LIST */
+    .mat-list {
+      background: #f9f9f9;
+      border-left: 4px solid #ddd;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .mat-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #e0e0e0;
+      padding: 4px 0;
+    }
+    .mat-row:last-child { border-bottom: none; }
+    .mat-name { color: #555; }
+    .mat-qty { font-weight: bold; margin-left: 10px; }
 
-        /* GRAND TOTAL */
-        .grand-total {
-            background: var(--accent);
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            position: sticky;
-            bottom: 20px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
+    /* SLOT 2 TABLE */
+    .s2-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top:10px; }
+    .s2-table th { text-align: left; background: #eee; padding: 8px; }
+    .s2-table td { border-bottom: 1px solid #eee; padding: 8px; vertical-align: top; }
+    .s2-item { display: block; margin-bottom: 2px; color: #666; font-size: 12px; }
 
-        /* Utilities */
-        .text-green { color: var(--green); }
-        .bg-green { background: var(--green); color: white; padding: 2px 5px; border-radius: 3px; font-size: 11px; }
-        .bg-orange { background: var(--orange); color: white; padding: 2px 5px; border-radius: 3px; font-size: 11px; }
-        
-        /* Table Best Price */
-        .tb-best { width: 100%; font-size: 12px; border-collapse: collapse; }
-        .tb-best td { padding: 4px; border-bottom: 1px solid #eee; }
-        .num { text-align: right; font-family: monospace; font-weight: bold; }
+    /* GIMMICK BOX */
+    .gimmick-box {
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-style: italic;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .gimmick-title { font-weight: bold; font-size: 18px; color: #f1c40f; margin-bottom: 5px; }
 
-        @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } }
-    </style>
+    /* GRAND TOTAL */
+    .grand-total {
+      background: var(--accent);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      position: sticky;
+      bottom: 20px;
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    /* Utilities */
+    .text-green { color: var(--green); }
+    .bg-green { background: var(--green); color: white; padding: 2px 5px; border-radius: 3px; font-size: 11px; }
+    .bg-orange { background: var(--orange); color: white; padding: 2px 5px; border-radius: 3px; font-size: 11px; }
+
+    /* Table Best Price */
+    .tb-best { width: 100%; font-size: 12px; border-collapse: collapse; }
+    .tb-best td { padding: 4px; border-bottom: 1px solid #eee; }
+    .num { text-align: right; font-family: monospace; font-weight: bold; }
+
+    @media (max-width: 1100px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Clickable items + Tooltip + Toast ===== */
+    .item {
+      cursor: pointer;
+      text-decoration: underline dotted;
+    }
+    .item:hover { color: var(--accent); }
+
+    #craftTooltip{
+      position: fixed;
+      z-index: 9999;
+      display: none;
+      pointer-events: none;
+      background: rgba(44,62,80,0.95);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 10px 12px;
+      max-width: 360px;
+      font-size: 12px;
+      line-height: 1.4;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    #craftTooltip .t-title{
+      font-weight: 800;
+      color: #f1c40f;
+      margin-bottom: 6px;
+    }
+    #craftTooltip .t-row{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.18);
+      padding-top: 6px;
+      margin-top: 6px;
+    }
+
+    #copyToast{
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      color:#fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 10000;
+    }
+    #copyToast.show{ opacity: 1; }
+
+    /* ===== Market Price Highlight ===== */
+    .price-row{
+      padding: 4px 6px;
+      border-radius: 8px;
+      transition: background .15s ease, box-shadow .15s ease;
+    }
+    .price-row.hl{
+      background: rgba(241,196,15,.22);
+      box-shadow: inset 0 0 0 1px rgba(241,196,15,.35);
+    }
+    .price-row.hl-src{
+      background: rgba(39,174,96,.16);
+      box-shadow: inset 0 0 0 1px rgba(39,174,96,.35);
+    }
+  </style>
 </head>
+
 <body>
+  <h1>Dim Glacier Ultimate Planner</h1>
 
-    <h1>Dim Glacier Ultimate Planner</h1>
-
-    <div class="container">
-        <!-- LEFT COLUMN: SETTINGS -->
-        <div>
-            <div class="card">
-                <div class="section-header">Market Prices (Zeny)</div>
-                <div class="input-group">
-                    <label>Exchange Rate (1M = ? THB)</label>
-                    <input type="text" id="rate_thb" value="9.2" onkeyup="formatInput(this)">
-                </div>
-
-                <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Raw Materials</div>
-                <div class="input-group"><label>Snow Flower Petal</label><input type="text" id="p_petal" value="20,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Amethyst Fragment</label><input type="text" id="p_amethyst" value="5,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="2,800" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Neutralized Magical Ore</label><input type="text" id="p_neu_ore" value="41,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Miasmal Spell</label><input type="text" id="p_miasmal" value="300,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Snow Flower Magic Stone</label><input type="text" id="p_sf_stone" value="27,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Shining Snow Flower Magic Stone</label><input type="text" id="p_shining_stone" value="140,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group" style="border-left:3px solid var(--orange); padding-left:5px;">
-                    <label>Brilliant Snow Flower Magic Stone Extract</label>
-                    <input type="text" id="p_brilliant" value="1,000,000" onkeyup="formatInput(this)">
-                </div>
-
-                <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Finished Goods</div>
-                <div class="input-group"><label>Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="280,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="1,390,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Glacier Extract</label><input type="text" id="m_glacier_extract" value="180,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Encroached Magical Crystal</label><input type="text" id="m_enc_crystal" value="1,650,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label>Neutralized Magical Crystal</label><input type="text" id="m_neu_crystal" value="650,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group" style="border-left:3px solid var(--green); padding-left:5px;">
-                    <label>Dim Glacier Refinement Device</label>
-                    <input type="text" id="m_device" value="22,000,000" onkeyup="formatInput(this)">
-                </div>
-
-                <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Special</div>
-                <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" onkeyup="formatInput(this)"></div>
-                <div class="input-group"><label style="color:var(--purple);">Slot 4 & 3 Coupon</label><input type="text" id="p_coupon" value="11,000,000" onkeyup="formatInput(this)" style="border-color:var(--purple);"></div>
-                <div class="input-group"><label style="color:var(--orange);">Refine Cube +9</label><input type="text" id="m_cube9" value="7,500,000" onkeyup="formatInput(this)" style="border-color:var(--orange);"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-header">Best Price Analysis</div>
-                <table class="tb-best">
-                    <tbody id="tb_compare"></tbody>
-                </table>
-            </div>
+  <div class="container">
+    <!-- LEFT COLUMN: SETTINGS -->
+    <div>
+      <div class="card" id="card_market">
+        <div class="section-header">Market Prices (Zeny)</div>
+		<div style="margin:-8px 0 14px; font-size:12px; color:#888;">
+			Last price update: <strong>13/01/2569</strong>
+		</div>
+        <div class="input-group">
+          <label>Exchange Rate (1M = ? THB)</label>
+          <input type="text" id="rate_thb" value="8.7" onkeyup="formatInput(this)">
         </div>
 
-        <!-- RIGHT COLUMN: PLANNER -->
-        <div>
-            <!-- BASE WEAPON -->
-            <div class="interactive-card">
-                <div class="card-top">
-                    <div class="card-title">
-                        1. Dim Glacier Weapon (Base)
-                    </div>
-                    <div class="card-cost" id="cost_base">0</div>
-                </div>
-            </div>
-
-            <!-- SLOT 4 -->
-            <div class="interactive-card" id="card_s4">
-                <div class="card-top">
-                    <label class="card-title">
-                        <input type="checkbox" id="chk_s4" class="chk-big" checked onchange="updateSlot4()">
-                        2. Enchant Slot 4
-                    </label>
-                    <div class="card-cost" id="cost_s4">0</div>
-                </div>
-                <div class="card-body">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <label>Select Method:</label>
-                        <select id="sel_s4_method" class="method-select" onchange="updateSlot4()">
-                            <option value="coupon" selected>Use Coupon (x1)</option>
-                            <option value="normal">Normal Materials</option>
-                        </select>
-                    </div>
-                    <div class="mat-list" id="list_s4"></div>
-                </div>
-            </div>
-
-            <!-- SLOT 3 -->
-            <div class="interactive-card" id="card_s3">
-                <div class="card-top">
-                    <label class="card-title">
-                        <input type="checkbox" id="chk_s3" class="chk-big" checked onchange="updateSlot3()">
-                        3. Enchant Slot 3
-                    </label>
-                    <div class="card-cost" id="cost_s3">0</div>
-                </div>
-                <div class="card-body">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <label>Select Method:</label>
-                        <select id="sel_s3_method" class="method-select" onchange="updateSlot3()">
-                            <option value="coupon" selected>Use Coupon (x2)</option>
-                            <option value="normal">Normal Materials</option>
-                        </select>
-                    </div>
-                    <div class="mat-list" id="list_s3"></div>
-                </div>
-            </div>
-
-            <!-- SLOT 2 -->
-            <div class="interactive-card" id="card_s2">
-                <div class="card-top">
-                    <div class="card-title">
-                        4. Enchant Slot 2
-                        <select id="sel_s2_lv" class="method-select" style="margin-left:10px; font-weight:bold;" onchange="updateSlot2()">
-                            <option value="0">None (Lv 0)</option>
-                            <option value="1">Target: Level 1</option>
-                            <option value="2">Target: Level 2</option>
-                            <option value="3">Target: Level 3</option>
-                            <option value="4">Target: Level 4</option>
-                            <option value="5" selected>Target: Level 5 (Max)</option>
-                        </select>
-                    </div>
-                    <div class="card-cost" id="cost_s2">0</div>
-                </div>
-                <div class="card-body" id="body_s2">
-                    <table class="s2-table">
-                        <thead><tr><th>Level</th><th>Materials Required (Full Name)</th><th style="text-align:right">Cost</th></tr></thead>
-                        <tbody id="list_s2"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- REFINE -->
-            <div class="interactive-card">
-                <div class="card-top">
-                    <div class="card-title">5. Refinement (Upgrade)</div>
-                    <div class="card-cost" id="cost_refine">0</div>
-                </div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <div>
-                            <strong>Dim Glacier Weapon 9 Refine Cube</strong>
-                            <div style="font-size:11px; color:#888;">Instant +9 (Market Price)</div>
-                        </div>
-                        <div>
-                            <input type="number" id="qty_cube" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
-                            <span style="font-size:12px;">ea</span>
-                        </div>
-                    </div>
-                    <div class="input-group" style="margin-top:10px;">
-                        <div>
-                            <strong>Dim Glacier Refinement Device</strong>
-                            <div style="font-size:11px; color:var(--green);">Safety +1 (Auto Best Price: Craft/Market)</div>
-                        </div>
-                        <div>
-                            <input type="number" id="qty_device" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
-                            <span style="font-size:12px;">ea</span>
-                        </div>
-                    </div>
-                    <div class="input-group" style="margin-top:10px; border-top:1px dashed #eee; padding-top:10px;">
-                        <div>Manual Refine Budget (Ore/Fee)</div>
-                        <input type="text" id="manual_cost" value="0" style="width:100px;" onkeyup="formatInput(this)">
-                    </div>
-                </div>
-            </div>
-
-            <!-- GIMMICK -->
-            <div class="gimmick-box">
-                <div class="gimmick-title" id="gimmick_title">Player Type Analysis</div>
-                <div id="gimmick_msg">Calculating...</div>
-            </div>
-
-            <!-- TOTAL -->
-            <div class="grand-total">
-                <div style="font-size:14px; opacity:0.8;">Grand Total Budget</div>
-                <div style="font-size:42px; font-weight:bold; margin:5px 0;" id="total_zeny">0 Zeny</div>
-                <div style="font-size:24px; color:#f1c40f;" id="total_thb">0 THB</div>
-            </div>
+        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Raw Materials</div>
+        <div class="input-group"><label>Snow Flower Petal</label><input type="text" id="p_petal" value="20,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Amethyst Fragment</label><input type="text" id="p_amethyst" value="5,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="8,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Neutralized Magical Ore</label><input type="text" id="p_neu_ore" value="70,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Miasmal Spell</label><input type="text" id="p_miasmal" value="300,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Snow Flower Magic Stone</label><input type="text" id="p_sf_stone" value="22,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Shining Snow Flower Magic Stone</label><input type="text" id="p_shining_stone" value="125,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group" style="border-left:3px solid var(--orange); padding-left:5px;">
+          <label>Brilliant Snow Flower Magic Stone Extract</label>
+          <input type="text" id="p_brilliant" value="1,300,000" onkeyup="formatInput(this)">
         </div>
+
+        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Finished Goods</div>
+        <div class="input-group"><label>Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="270,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="2,400,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Glacier Extract</label><input type="text" id="m_glacier_extract" value="180,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Encroached Magical Crystal</label><input type="text" id="m_enc_crystal" value="1,650,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group"><label>Neutralized Magical Crystal</label><input type="text" id="m_neu_crystal" value="700,000" onkeyup="formatInput(this)"></div>
+        <div class="input-group" style="border-left:3px solid var(--green); padding-left:5px;">
+          <label>Dim Glacier Refinement Device</label>
+          <input type="text" id="m_device" value="30,000,000" onkeyup="formatInput(this)">
+        </div>
+
+        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Special</div>
+        <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" onkeyup="formatInput(this)"></div>
+
+        <!-- ✅ text changed -->
+        <div class="input-group">
+          <label style="color:var(--purple);">Slot 4 & 3 Dim Glacier Enchant Coupon</label>
+          <input type="text" id="p_coupon" value="14,500,000" onkeyup="formatInput(this)" style="border-color:var(--purple);">
+        </div>
+
+        <!-- ✅ text changed -->
+        <div class="input-group">
+          <label style="color:var(--orange);">Dim Glacier Weapon 9 Refine Cube</label>
+          <input type="text" id="m_cube9" value="8,500,000" onkeyup="formatInput(this)" style="border-color:var(--orange);">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">Best Price Analysis</div>
+        <table class="tb-best">
+          <tbody id="tb_compare"></tbody>
+        </table>
+      </div>
     </div>
 
-<script>
-    const fmt = n => n.toLocaleString('en-US', {maximumFractionDigits: 0});
+    <!-- RIGHT COLUMN: PLANNER -->
+    <div>
+      <!-- BASE WEAPON -->
+      <div class="interactive-card">
+        <div class="card-top">
+          <div class="card-title">
+            1. Dim Glacier Weapon (Base)
+          </div>
+          <div class="card-cost" id="cost_base">0</div>
+        </div>
+      </div>
+
+      <!-- SLOT 4 -->
+      <div class="interactive-card" id="card_s4">
+        <div class="card-top">
+          <label class="card-title">
+            <input type="checkbox" id="chk_s4" class="chk-big" checked onchange="updateSlot4()">
+            2. Enchant Slot 4
+          </label>
+          <div class="card-cost" id="cost_s4">0</div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <label>Select Method:</label>
+            <select id="sel_s4_method" class="method-select" onchange="updateSlot4()">
+              <option value="coupon" selected>Use Coupon (x1)</option>
+              <option value="normal">Normal Materials</option>
+            </select>
+          </div>
+          <div class="mat-list" id="list_s4"></div>
+        </div>
+      </div>
+
+      <!-- SLOT 3 -->
+      <div class="interactive-card" id="card_s3">
+        <div class="card-top">
+          <label class="card-title">
+            <input type="checkbox" id="chk_s3" class="chk-big" checked onchange="updateSlot3()">
+            3. Enchant Slot 3
+          </label>
+          <div class="card-cost" id="cost_s3">0</div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <label>Select Method:</label>
+            <select id="sel_s3_method" class="method-select" onchange="updateSlot3()">
+              <option value="coupon" selected>Use Coupon (x2)</option>
+              <option value="normal">Normal Materials</option>
+            </select>
+          </div>
+          <div class="mat-list" id="list_s3"></div>
+        </div>
+      </div>
+
+      <!-- SLOT 2 -->
+      <div class="interactive-card" id="card_s2">
+        <div class="card-top">
+          <div class="card-title">
+            4. Enchant Slot 2
+            <select id="sel_s2_lv" class="method-select" style="margin-left:10px; font-weight:bold;" onchange="updateSlot2()">
+              <option value="0">None (Lv 0)</option>
+              <option value="1">Target: Level 1</option>
+              <option value="2">Target: Level 2</option>
+              <option value="3">Target: Level 3</option>
+              <option value="4">Target: Level 4</option>
+              <option value="5" selected>Target: Level 5 (Max)</option>
+            </select>
+          </div>
+          <div class="card-cost" id="cost_s2">0</div>
+        </div>
+        <div class="card-body" id="body_s2">
+          <table class="s2-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Materials Required (Full Name)</th>
+                <th style="text-align:right">Cost</th>
+              </tr>
+            </thead>
+            <tbody id="list_s2"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- REFINE -->
+      <div class="interactive-card">
+        <div class="card-top">
+          <div class="card-title">5. Refinement (Upgrade)</div>
+          <div class="card-cost" id="cost_refine">0</div>
+        </div>
+        <div class="card-body">
+          <div class="input-group">
+            <div>
+              <!-- ✅ add data-item so hover highlight works -->
+              <strong class="item" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</strong>
+              <div style="font-size:11px; color:#888;">Instant +9 (Market Price)</div>
+            </div>
+            <div>
+              <input type="number" id="qty_cube" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
+              <span style="font-size:12px;">ea</span>
+            </div>
+          </div>
+
+          <div class="input-group" style="margin-top:10px;">
+            <div>
+              <strong class="item" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</strong>
+              <div style="font-size:11px; color:var(--green);">Safety +1 (Auto Best Price: Craft/Market)</div>
+            </div>
+            <div>
+              <input type="number" id="qty_device" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
+              <span style="font-size:12px;">ea</span>
+            </div>
+          </div>
+
+          <div class="input-group" style="margin-top:10px; border-top:1px dashed #eee; padding-top:10px;">
+            <div>Manual Refine Budget (Ore/Fee)</div>
+            <input type="text" id="manual_cost" value="0" style="width:100px;" onkeyup="formatInput(this)">
+          </div>
+        </div>
+      </div>
+
+      <!-- GIMMICK -->
+      <div class="gimmick-box">
+        <div class="gimmick-title" id="gimmick_title">Player Type Analysis</div>
+        <div id="gimmick_msg">Calculating...</div>
+      </div>
+
+      <!-- TOTAL -->
+      <div class="grand-total">
+        <div style="font-size:14px; opacity:0.8;">Grand Total Budget</div>
+        <div style="font-size:42px; font-weight:bold; margin:5px 0;" id="total_zeny">0 Zeny</div>
+        <div style="font-size:24px; color:#f1c40f;" id="total_thb">0 THB</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fmt = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
     const parse = str => Number(str.toString().replace(/,/g, '')) || 0;
 
     let DATA = {
-        prices: {},
-        s4_cost: 0,
-        s3_cost: 0,
-        s2_cost: 0,
-        refine_cost: 0
+      prices: {},
+      s4_cost: 0,
+      s3_cost: 0,
+      s2_cost: 0,
+      refine_cost: 0
     };
 
     function formatInput(elm) {
-        let val = parse(elm.value);
-        elm.value = fmt(val);
-        recalc();
+      let val = parse(elm.value);
+      elm.value = fmt(val);
+      recalc();
     }
 
     // Main Calculation Loop
     function recalc() {
-        readPrices();
-        updateSlot4(); // will call updateSlot3 -> updateSlot2 -> updateRefine -> Total
+      readPrices();
+      updateSlot4(); // will call updateSlot3 -> updateSlot2 -> updateRefine -> Total
     }
 
     function readPrices() {
-        const p_petal = parse(document.getElementById('p_petal').value);
-        const p_amethyst = parse(document.getElementById('p_amethyst').value);
-        const p_enc_ore = parse(document.getElementById('p_enc_ore').value);
-        const p_neu_ore = parse(document.getElementById('p_neu_ore').value);
-        const p_miasmal = parse(document.getElementById('p_miasmal').value);
-        const p_sf_stone = parse(document.getElementById('p_sf_stone').value);
-        const p_shining_stone = parse(document.getElementById('p_shining_stone').value);
-        const p_brilliant = parse(document.getElementById('p_brilliant').value);
+      const p_petal = parse(document.getElementById('p_petal').value);
+      const p_amethyst = parse(document.getElementById('p_amethyst').value);
+      const p_enc_ore = parse(document.getElementById('p_enc_ore').value);
+      const p_neu_ore = parse(document.getElementById('p_neu_ore').value);
+      const p_miasmal = parse(document.getElementById('p_miasmal').value);
+      const p_sf_stone = parse(document.getElementById('p_sf_stone').value);
+      const p_shining_stone = parse(document.getElementById('p_shining_stone').value);
+      const p_brilliant = parse(document.getElementById('p_brilliant').value);
 
-        const m_sf_extract = parse(document.getElementById('m_sf_extract').value);
-        const m_shining_extract = parse(document.getElementById('m_shining_extract').value);
-        const m_glacier_extract = parse(document.getElementById('m_glacier_extract').value);
-        const m_enc_crystal = parse(document.getElementById('m_enc_crystal').value);
-        const m_neu_crystal = parse(document.getElementById('m_neu_crystal').value);
-        const m_device = parse(document.getElementById('m_device').value);
+      const m_sf_extract = parse(document.getElementById('m_sf_extract').value);
+      const m_shining_extract = parse(document.getElementById('m_shining_extract').value);
+      const m_glacier_extract = parse(document.getElementById('m_glacier_extract').value);
+      const m_enc_crystal = parse(document.getElementById('m_enc_crystal').value);
+      const m_neu_crystal = parse(document.getElementById('m_neu_crystal').value);
+      const m_device = parse(document.getElementById('m_device').value);
 
-        const c_enc_crystal = (p_enc_ore * 15) + (p_petal * 30) + (p_amethyst * 150);
-        const c_neu_crystal = (p_neu_ore * 5) + (p_petal * 5) + (p_amethyst * 25);
-        const c_sf_extract = (p_sf_stone * 20) + (p_petal * 5) + (p_amethyst * 25);
-        const c_shining_extract = (p_shining_stone * 15) + (p_petal * 10) + (p_amethyst * 50);
-        const c_glacier_extract = (p_petal * 40) + (p_amethyst * 200);
+      const c_enc_crystal = (p_enc_ore * 15) + (p_petal * 30) + (p_amethyst * 150);
+      const c_neu_crystal = (p_neu_ore * 5) + (p_petal * 5) + (p_amethyst * 25);
+      const c_sf_extract = (p_sf_stone * 20) + (p_petal * 5) + (p_amethyst * 25);
+      const c_shining_extract = (p_shining_stone * 15) + (p_petal * 10) + (p_amethyst * 50);
+      const c_glacier_extract = (p_petal * 40) + (p_amethyst * 200);
 
-        const best = {};
-        const check = (name, craft, market) => {
-            const isCraft = craft < market;
-            best[name] = isCraft ? craft : market;
-            return `<tr><td>${name}</td><td class="num ${isCraft?'text-green':''}">${fmt(best[name])}</td><td><span class="${isCraft?'bg-green':'bg-orange'}">${isCraft?'Craft':'Market'}</span></td></tr>`;
-        };
+      const best = {};
+      const check = (name, craft, market) => {
+        const isCraft = craft < market;
+        best[name] = isCraft ? craft : market;
+        return `<tr>
+          <td><span class="item" data-item="${name}" data-copy="${name}">${name}</span></td>
+          <td class="num ${isCraft ? 'text-green' : ''}">${fmt(best[name])}</td>
+          <td><span class="${isCraft ? 'bg-green' : 'bg-orange'}">${isCraft ? 'Craft' : 'Market'}</span></td>
+        </tr>`;
+      };
 
-        let html = "";
-        html += check("Snow Flower Magic Stone Extract", c_sf_extract, m_sf_extract);
-        html += check("Shining Snow Flower Magic Stone Extract", c_shining_extract, m_shining_extract);
-        html += check("Glacier Extract", c_glacier_extract, m_glacier_extract);
-        html += check("Encroached Magical Crystal", c_enc_crystal, m_enc_crystal);
-        html += check("Neutralized Magical Crystal", c_neu_crystal, m_neu_crystal);
-        
-        const c_device = (10 * best["Encroached Magical Crystal"]) + (10 * best["Neutralized Magical Crystal"]) + p_miasmal;
-        html += check("Dim Glacier Refinement Device", c_device, m_device);
-        document.getElementById('tb_compare').innerHTML = html;
+      let html = "";
+      html += check("Snow Flower Magic Stone Extract", c_sf_extract, m_sf_extract);
+      html += check("Shining Snow Flower Magic Stone Extract", c_shining_extract, m_shining_extract);
+      html += check("Glacier Extract", c_glacier_extract, m_glacier_extract);
+      html += check("Encroached Magical Crystal", c_enc_crystal, m_enc_crystal);
+      html += check("Neutralized Magical Crystal", c_neu_crystal, m_neu_crystal);
 
-        DATA.prices = {
-            EXT: best["Snow Flower Magic Stone Extract"],
-            SHIN: best["Shining Snow Flower Magic Stone Extract"],
-            GLA: best["Glacier Extract"],
-            ENC: best["Encroached Magical Crystal"],
-            NEU: best["Neutralized Magical Crystal"],
-            BRIL: p_brilliant,
-            DEV: best["Dim Glacier Refinement Device"],
-            MIA: p_miasmal,
-            WEAPON: parse(document.getElementById('m_weapon').value),
-            COUPON: parse(document.getElementById('p_coupon').value),
-            CUBE: parse(document.getElementById('m_cube9').value)
-        };
+      const c_device = (10 * best["Encroached Magical Crystal"]) + (10 * best["Neutralized Magical Crystal"]) + p_miasmal;
+      html += check("Dim Glacier Refinement Device", c_device, m_device);
+      document.getElementById('tb_compare').innerHTML = html;
+
+      DATA.prices = {
+        EXT: best["Snow Flower Magic Stone Extract"],
+        SHIN: best["Shining Snow Flower Magic Stone Extract"],
+        GLA: best["Glacier Extract"],
+        ENC: best["Encroached Magical Crystal"],
+        NEU: best["Neutralized Magical Crystal"],
+        BRIL: p_brilliant,
+        DEV: best["Dim Glacier Refinement Device"],
+        MIA: p_miasmal,
+        WEAPON: parse(document.getElementById('m_weapon').value),
+        COUPON: parse(document.getElementById('p_coupon').value),
+        CUBE: parse(document.getElementById('m_cube9').value)
+      };
     }
 
     function getMatRow(name, qty) {
-        return `<div class="mat-row"><span class="mat-name">${name}</span><span class="mat-qty">x ${qty}</span></div>`;
+      return `<div class="mat-row">
+        <span class="mat-name item" data-item="${name}" data-copy="${name}">${name}</span>
+        <span class="mat-qty">x ${qty}</span>
+      </div>`;
     }
 
     function updateSlot4() {
-        const chk = document.getElementById('chk_s4');
-        const method = document.getElementById('sel_s4_method');
-        const p = DATA.prices;
-        
-        let cost = 0;
-        let html = "";
+      const chk = document.getElementById('chk_s4');
+      const method = document.getElementById('sel_s4_method');
+      const p = DATA.prices;
 
-        if (chk.checked) {
-            method.disabled = false;
-            document.getElementById('card_s4').classList.remove('disabled');
-            if (method.value === 'normal') {
-                cost = (10 * p.EXT) + (15 * p.SHIN) + (25 * p.BRIL);
-                html += getMatRow("Snow Flower Magic Stone Extract", 10);
-                html += getMatRow("Shining Snow Flower Magic Stone Extract", 15);
-                html += getMatRow("Brilliant Snow Flower Magic Stone Extract", 25);
-            } else {
-                cost = (10 * p.EXT) + (15 * p.SHIN) + (1 * p.COUPON);
-                html += getMatRow("Snow Flower Magic Stone Extract", 10);
-                html += getMatRow("Shining Snow Flower Magic Stone Extract", 15);
-                html += getMatRow("Slot 4 & 3 Dim Glacier Enchant Coupon", 1);
-            }
+      let cost = 0;
+      let html = "";
+
+      if (chk.checked) {
+        method.disabled = false;
+        document.getElementById('card_s4').classList.remove('disabled');
+        if (method.value === 'normal') {
+          cost = (10 * p.EXT) + (15 * p.SHIN) + (25 * p.BRIL);
+          html += getMatRow("Snow Flower Magic Stone Extract", 10);
+          html += getMatRow("Shining Snow Flower Magic Stone Extract", 15);
+          html += getMatRow("Brilliant Snow Flower Magic Stone Extract", 25);
         } else {
-            method.disabled = true;
-            document.getElementById('card_s4').classList.add('disabled');
+          cost = (10 * p.EXT) + (15 * p.SHIN) + (1 * p.COUPON);
+          html += getMatRow("Snow Flower Magic Stone Extract", 10);
+          html += getMatRow("Shining Snow Flower Magic Stone Extract", 15);
+          html += getMatRow("Slot 4 & 3 Dim Glacier Enchant Coupon", 1);
         }
+      } else {
+        method.disabled = true;
+        document.getElementById('card_s4').classList.add('disabled');
+      }
 
-        document.getElementById('cost_s4').innerText = fmt(cost);
-        document.getElementById('list_s4').innerHTML = html;
-        DATA.s4_cost = cost;
+      document.getElementById('cost_s4').innerText = fmt(cost);
+      document.getElementById('list_s4').innerHTML = html;
+      DATA.s4_cost = cost;
 
-        updateSlot3(); // Propagate change
+      updateSlot3(); // Propagate change
     }
 
     function updateSlot3() {
-        const chk_s4 = document.getElementById('chk_s4');
-        const chk = document.getElementById('chk_s3');
-        const method = document.getElementById('sel_s3_method');
-        const p = DATA.prices;
+      const chk_s4 = document.getElementById('chk_s4');
+      const chk = document.getElementById('chk_s3');
+      const method = document.getElementById('sel_s3_method');
+      const p = DATA.prices;
 
-        // Dependency
-        if (!chk_s4.checked) {
-            chk.checked = false;
-            chk.disabled = true;
+      // Dependency
+      if (!chk_s4.checked) {
+        chk.checked = false;
+        chk.disabled = true;
+      } else {
+        chk.disabled = false;
+      }
+
+      let cost = 0;
+      let html = "";
+
+      if (chk.checked) {
+        method.disabled = false;
+        document.getElementById('card_s3').classList.remove('disabled');
+        if (method.value === 'normal') {
+          cost = (15 * p.EXT) + (20 * p.SHIN) + (35 * p.BRIL);
+          html += getMatRow("Snow Flower Magic Stone Extract", 15);
+          html += getMatRow("Shining Snow Flower Magic Stone Extract", 20);
+          html += getMatRow("Brilliant Snow Flower Magic Stone Extract", 35);
         } else {
-            chk.disabled = false;
+          cost = (15 * p.EXT) + (20 * p.SHIN) + (2 * p.COUPON);
+          html += getMatRow("Snow Flower Magic Stone Extract", 15);
+          html += getMatRow("Shining Snow Flower Magic Stone Extract", 20);
+          html += getMatRow("Slot 4 & 3 Dim Glacier Enchant Coupon", 2);
         }
+      } else {
+        method.disabled = true;
+        document.getElementById('card_s3').classList.add('disabled');
+      }
 
-        let cost = 0;
-        let html = "";
+      document.getElementById('cost_s3').innerText = fmt(cost);
+      document.getElementById('list_s3').innerHTML = html;
+      DATA.s3_cost = cost;
 
-        if (chk.checked) {
-            method.disabled = false;
-            document.getElementById('card_s3').classList.remove('disabled');
-            if (method.value === 'normal') {
-                cost = (15 * p.EXT) + (20 * p.SHIN) + (35 * p.BRIL);
-                html += getMatRow("Snow Flower Magic Stone Extract", 15);
-                html += getMatRow("Shining Snow Flower Magic Stone Extract", 20);
-                html += getMatRow("Brilliant Snow Flower Magic Stone Extract", 35);
-            } else {
-                cost = (15 * p.EXT) + (20 * p.SHIN) + (2 * p.COUPON);
-                html += getMatRow("Snow Flower Magic Stone Extract", 15);
-                html += getMatRow("Shining Snow Flower Magic Stone Extract", 20);
-                html += getMatRow("Slot 4 & 3 Dim Glacier Enchant Coupon", 2);
-            }
-        } else {
-            method.disabled = true;
-            document.getElementById('card_s3').classList.add('disabled');
-        }
-
-        document.getElementById('cost_s3').innerText = fmt(cost);
-        document.getElementById('list_s3').innerHTML = html;
-        DATA.s3_cost = cost;
-
-        updateSlot2(); // Propagate change
+      updateSlot2(); // Propagate change
     }
 
     function updateSlot2() {
-        const chk_s3 = document.getElementById('chk_s3');
-        const sel = document.getElementById('sel_s2_lv');
-        
-        // Dependency
-        if (!chk_s3.checked) {
-            sel.value = "0";
-            sel.disabled = true;
-        } else {
-            sel.disabled = false;
+      const chk_s3 = document.getElementById('chk_s3');
+      const sel = document.getElementById('sel_s2_lv');
+
+      // Dependency
+      if (!chk_s3.checked) {
+        sel.value = "0";
+        sel.disabled = true;
+      } else {
+        sel.disabled = false;
+      }
+
+      const targetLv = parseInt(sel.value);
+      const p = DATA.prices;
+
+      const levels = [
+        { cost: 0, items: [] },
+        {
+          cost: (30*p.EXT) + (40*p.SHIN) + (60*p.BRIL) + (50*p.GLA),
+          items: [
+            { qty: 30, name: "Snow Flower Magic Stone Extract" },
+            { qty: 40, name: "Shining Snow Flower Magic Stone Extract" },
+            { qty: 60, name: "Brilliant Snow Flower Magic Stone Extract" },
+            { qty: 50, name: "Glacier Extract" },
+          ]
+        },
+        {
+          cost: (15*p.EXT) + (20*p.SHIN) + (30*p.BRIL) + (25*p.GLA) + (5*p.ENC) + (5*p.NEU),
+          items: [
+            { qty: 15, name: "Snow Flower Magic Stone Extract" },
+            { qty: 20, name: "Shining Snow Flower Magic Stone Extract" },
+            { qty: 30, name: "Brilliant Snow Flower Magic Stone Extract" },
+            { qty: 25, name: "Glacier Extract" },
+            { qty: 5,  name: "Encroached Magical Crystal" },
+            { qty: 5,  name: "Neutralized Magical Crystal" },
+          ]
+        },
+        {
+          cost: (20*p.EXT) + (30*p.SHIN) + (40*p.BRIL) + (35*p.GLA) + (7*p.ENC) + (7*p.NEU) + (1*p.MIA),
+          items: [
+            { qty: 20, name: "Snow Flower Magic Stone Extract" },
+            { qty: 30, name: "Shining Snow Flower Magic Stone Extract" },
+            { qty: 40, name: "Brilliant Snow Flower Magic Stone Extract" },
+            { qty: 35, name: "Glacier Extract" },
+            { qty: 7,  name: "Encroached Magical Crystal" },
+            { qty: 7,  name: "Neutralized Magical Crystal" },
+            { qty: 1,  name: "Miasmal Spell" },
+          ]
+        },
+        {
+          cost: (30*p.EXT) + (40*p.SHIN) + (50*p.BRIL) + (45*p.GLA) + (10*p.ENC) + (10*p.NEU) + (2*p.MIA),
+          items: [
+            { qty: 30, name: "Snow Flower Magic Stone Extract" },
+            { qty: 40, name: "Shining Snow Flower Magic Stone Extract" },
+            { qty: 50, name: "Brilliant Snow Flower Magic Stone Extract" },
+            { qty: 45, name: "Glacier Extract" },
+            { qty: 10, name: "Encroached Magical Crystal" },
+            { qty: 10, name: "Neutralized Magical Crystal" },
+            { qty: 2,  name: "Miasmal Spell" },
+          ]
+        },
+        {
+          cost: (40*p.EXT) + (50*p.SHIN) + (65*p.BRIL) + (70*p.GLA) + (15*p.ENC) + (15*p.NEU) + (3*p.MIA),
+          items: [
+            { qty: 40, name: "Snow Flower Magic Stone Extract" },
+            { qty: 50, name: "Shining Snow Flower Magic Stone Extract" },
+            { qty: 65, name: "Brilliant Snow Flower Magic Stone Extract" },
+            { qty: 70, name: "Glacier Extract" },
+            { qty: 15, name: "Encroached Magical Crystal" },
+            { qty: 15, name: "Neutralized Magical Crystal" },
+            { qty: 3,  name: "Miasmal Spell" },
+          ]
+        }
+      ];
+
+      let totalCost = 0;
+      let html = "";
+
+      if (targetLv > 0) {
+        document.getElementById('card_s2').classList.remove('disabled');
+        document.getElementById('body_s2').style.display = 'block';
+
+        for (let i = 1; i <= targetLv; i++) {
+          totalCost += levels[i].cost;
+
+          const itemsHtml = levels[i].items.map(d =>
+            `<span class="s2-item">- ${d.qty}x <span class="item" data-item="${d.name}" data-copy="${d.name}">${d.name}</span></span>`
+          ).join("");
+
+          html += `<tr>
+            <td style="font-weight:bold;">Lv ${i}</td>
+            <td>${itemsHtml}</td>
+            <td class="num">${fmt(levels[i].cost)}</td>
+          </tr>`;
         }
 
-        const targetLv = parseInt(sel.value);
-        const p = DATA.prices;
-        
-        const levels = [
-            { cost: 0, items: [] }, 
-            { 
-                cost: (30*p.EXT)+(40*p.SHIN)+(60*p.BRIL)+(50*p.GLA), 
-                desc: ["30x Snow Flower Magic Stone Extract", "40x Shining Snow Flower Magic Stone Extract", "60x Brilliant Snow Flower Magic Stone Extract", "50x Glacier Extract"] 
-            },
-            { 
-                cost: (15*p.EXT)+(20*p.SHIN)+(30*p.BRIL)+(25*p.GLA)+(5*p.ENC)+(5*p.NEU), 
-                desc: ["15x Snow Flower Magic Stone Extract", "20x Shining Snow Flower Magic Stone Extract", "30x Brilliant Snow Flower Magic Stone Extract", "25x Glacier Extract", "5x Encroached Magical Crystal", "5x Neutralized Magical Crystal"] 
-            },
-            { 
-                cost: (20*p.EXT)+(30*p.SHIN)+(40*p.BRIL)+(35*p.GLA)+(7*p.ENC)+(7*p.NEU)+(1*p.MIA), 
-                desc: ["20x Snow Flower Magic Stone Extract", "30x Shining Snow Flower Magic Stone Extract", "40x Brilliant Snow Flower Magic Stone Extract", "35x Glacier Extract", "7x Encroached Magical Crystal", "7x Neutralized Magical Crystal", "1x Miasmal Spell"] 
-            },
-            { 
-                cost: (30*p.EXT)+(40*p.SHIN)+(50*p.BRIL)+(45*p.GLA)+(10*p.ENC)+(10*p.NEU)+(2*p.MIA), 
-                desc: ["30x Snow Flower Magic Stone Extract", "40x Shining Snow Flower Magic Stone Extract", "50x Brilliant Snow Flower Magic Stone Extract", "45x Glacier Extract", "10x Encroached Magical Crystal", "10x Neutralized Magical Crystal", "2x Miasmal Spell"] 
-            },
-            { 
-                cost: (40*p.EXT)+(50*p.SHIN)+(65*p.BRIL)+(70*p.GLA)+(15*p.ENC)+(15*p.NEU)+(3*p.MIA), 
-                desc: ["40x Snow Flower Magic Stone Extract", "50x Shining Snow Flower Magic Stone Extract", "65x Brilliant Snow Flower Magic Stone Extract", "70x Glacier Extract", "15x Encroached Magical Crystal", "15x Neutralized Magical Crystal", "3x Miasmal Spell"] 
-            }
-        ];
+        html += `<tr style="background:#e8f6f3; font-weight:bold;">
+          <td colspan="2">Cumulative Cost (Lv 1 - ${targetLv})</td>
+          <td class="num text-green" style="font-size:16px;">${fmt(totalCost)}</td>
+        </tr>`;
+      } else {
+        document.getElementById('card_s2').classList.add('disabled');
+        document.getElementById('body_s2').style.display = 'none';
+      }
 
-        let totalCost = 0;
-        let html = "";
-        
-        if (targetLv > 0) {
-            document.getElementById('card_s2').classList.remove('disabled');
-            document.getElementById('body_s2').style.display = 'block';
-            
-            for (let i = 1; i <= targetLv; i++) {
-                totalCost += levels[i].cost;
-                const itemsHtml = levels[i].desc.map(x => `<span class="s2-item">- ${x}</span>`).join("");
-                html += `<tr>
-                    <td style="font-weight:bold;">Lv ${i}</td>
-                    <td>${itemsHtml}</td>
-                    <td class="num">${fmt(levels[i].cost)}</td>
-                </tr>`;
-            }
-            html += `<tr style="background:#e8f6f3; font-weight:bold;">
-                <td colspan="2">Cumulative Cost (Lv 1 - ${targetLv})</td>
-                <td class="num text-green" style="font-size:16px;">${fmt(totalCost)}</td>
-            </tr>`;
-        } else {
-            document.getElementById('card_s2').classList.add('disabled');
-            document.getElementById('body_s2').style.display = 'none';
-        }
+      document.getElementById('list_s2').innerHTML = html;
+      document.getElementById('cost_s2').innerText = fmt(totalCost);
+      DATA.s2_cost = totalCost;
 
-        document.getElementById('list_s2').innerHTML = html;
-        document.getElementById('cost_s2').innerText = fmt(totalCost);
-        DATA.s2_cost = totalCost;
-
-        updateRefine(); // Propagate change
+      updateRefine(); // Propagate change
     }
 
     function updateRefine() {
-        const q_cube = Number(document.getElementById('qty_cube').value);
-        const q_device = Number(document.getElementById('qty_device').value);
-        const m_manual = parse(document.getElementById('manual_cost').value);
-        
-        const cost = (q_cube * DATA.prices.CUBE) + (q_device * DATA.prices.DEV) + m_manual;
-        document.getElementById('cost_refine').innerText = fmt(cost);
-        DATA.refine_cost = cost;
+      const q_cube = Number(document.getElementById('qty_cube').value);
+      const q_device = Number(document.getElementById('qty_device').value);
+      const m_manual = parse(document.getElementById('manual_cost').value);
 
-        updateTotalAndGimmick();
+      const cost = (q_cube * DATA.prices.CUBE) + (q_device * DATA.prices.DEV) + m_manual;
+      document.getElementById('cost_refine').innerText = fmt(cost);
+      DATA.refine_cost = cost;
+
+      updateTotalAndGimmick();
     }
 
     function updateTotalAndGimmick() {
-        const base = DATA.prices.WEAPON;
-        document.getElementById('cost_base').innerText = fmt(base);
+      const base = DATA.prices.WEAPON;
+      document.getElementById('cost_base').innerText = fmt(base);
 
-        const total = base + DATA.s4_cost + DATA.s3_cost + DATA.s2_cost + DATA.refine_cost;
-        
-        const rate = parse(document.getElementById('rate_thb').value);
-        document.getElementById('total_zeny').innerText = fmt(total) + " Zeny";
-        document.getElementById('total_thb').innerText = fmt((total/1000000)*rate) + " THB";
+      const total = base + DATA.s4_cost + DATA.s3_cost + DATA.s2_cost + DATA.refine_cost;
 
-        const s4 = document.getElementById('chk_s4').checked;
-        const s3 = document.getElementById('chk_s3').checked;
-        const s2 = parseInt(document.getElementById('sel_s2_lv').value);
-        
-        let title = "";
-        let msg = "";
+      const rate = parse(document.getElementById('rate_thb').value);
+      document.getElementById('total_zeny').innerText = fmt(total) + " Zeny";
+      document.getElementById('total_thb').innerText = fmt((total/1000000)*rate) + " THB";
 
-        if (!s4) {
-            title = "The Minimalist (or The Weirdo?)";
-            msg = "คุณเป็นผู้เล่นที่แปลก! ไม่ออฟสกิล แล้วจะใช้อาวุธ Dim Glacier ทำมะเขืออะไรครับเนี่ย?";
-        } else if (s4 && !s3) {
-            title = "The Beginner";
-            msg = "คุณเป็นผู้เล่นหัดออฟ ออฟช่องสกิลเดียวก็แรงขึ้นนะ แต่ยังออฟสกิลได้อีกช่อง อย่าลืมทำต่อล่ะ!";
-        } else if (s3 && s2 === 0) {
-            title = "The Budget Player";
-            msg = "คุณเป็นผู้เล่นงบประหยัด ออฟแค่สกิล 2 ช่อง ก็เก็บเวลได้แล้ว สบายกระเป๋า!";
-        } else if (s2 >= 1 && s2 <= 3) {
-            title = "The Mid-Tier Fighter";
-            msg = "คุณเป็นผู้เล่นงบกลางๆ ออฟความแรงแค่นิดหน่อย Damage ก็ขึ้นมาเยอะแล้ว คุ้มค่าสุดๆ";
-        } else if (s2 === 4) {
-            title = "The High Roller";
-            msg = "คุณเป็นผู้เล่นงบสูง Lv 4 นี่ก็โหดมากแล้วนะ แทบจะสุดตารางแล้ว!";
-        } else if (s2 === 5) {
-            title = "THE WHALE (Godlike)";
-            msg = "คุณเป็นผู้เล่นงบสูงเสียดฟ้า! เอาซะสุด แรงเบิ้มๆ ไปเลยพี่ ใครก็ฉุดไม่อยู่แล้วจังหวะนี้!";
-        }
-        document.getElementById('gimmick_title').innerText = title;
-        document.getElementById('gimmick_msg').innerText = msg;
+      const s4 = document.getElementById('chk_s4').checked;
+      const s3 = document.getElementById('chk_s3').checked;
+      const s2 = parseInt(document.getElementById('sel_s2_lv').value);
+
+      let title = "";
+      let msg = "";
+
+      if (!s4) {
+        title = "The Minimalist (or The Weirdo?)";
+        msg = "คุณเป็นผู้เล่นที่แปลก! ไม่ออฟสกิล แล้วจะใช้อาวุธ Dim Glacier ทำมะเขืออะไรครับเนี่ย?";
+      } else if (s4 && !s3) {
+        title = "The Beginner";
+        msg = "คุณเป็นผู้เล่นหัดออฟ ออฟช่องสกิลเดียวก็แรงขึ้นนะ แต่ยังออฟสกิลได้อีกช่อง อย่าลืมทำต่อล่ะ!";
+      } else if (s3 && s2 === 0) {
+        title = "The Budget Player";
+        msg = "คุณเป็นผู้เล่นงบประหยัด ออฟแค่สกิล 2 ช่อง ก็เก็บเวลได้แล้ว สบายกระเป๋า!";
+      } else if (s2 >= 1 && s2 <= 3) {
+        title = "The Mid-Tier Fighter";
+        msg = "คุณเป็นผู้เล่นงบกลางๆ ออฟความแรงแค่นิดหน่อย Damage ก็ขึ้นมาเยอะแล้ว คุ้มค่าสุดๆ";
+      } else if (s2 === 4) {
+        title = "The High Roller";
+        msg = "คุณเป็นผู้เล่นงบสูง Lv 4 นี่ก็โหดมากแล้วนะ แทบจะสุดตารางแล้ว!";
+      } else if (s2 === 5) {
+        title = "THE WHALE (Godlike)";
+        msg = "คุณเป็นผู้เล่นงบสูงเสียดฟ้า! เอาซะสุด แรงเบิ้มๆ ไปเลยพี่ ใครก็ฉุดไม่อยู่แล้วจังหวะนี้!";
+      }
+      document.getElementById('gimmick_title').innerText = title;
+      document.getElementById('gimmick_msg').innerText = msg;
     }
 
+    // ===== Recipes tooltip data (มีสูตรถึงจะโชว์ tooltip) =====
+    const RECIPES = {
+      "Snow Flower Magic Stone Extract": [
+        { qty: 20, name: "Snow Flower Magic Stone" },
+        { qty: 5,  name: "Snow Flower Petal" },
+        { qty: 25, name: "Amethyst Fragment" },
+      ],
+      "Shining Snow Flower Magic Stone Extract": [
+        { qty: 15, name: "Shining Snow Flower Magic Stone" },
+        { qty: 10, name: "Snow Flower Petal" },
+        { qty: 50, name: "Amethyst Fragment" },
+      ],
+      "Glacier Extract": [
+        { qty: 40,  name: "Snow Flower Petal" },
+        { qty: 200, name: "Amethyst Fragment" },
+      ],
+      "Encroached Magical Crystal": [
+        { qty: 15,  name: "Encroached Magical Ore" },
+        { qty: 30,  name: "Snow Flower Petal" },
+        { qty: 150, name: "Amethyst Fragment" },
+      ],
+      "Neutralized Magical Crystal": [
+        { qty: 5,  name: "Neutralized Magical Ore" },
+        { qty: 5,  name: "Snow Flower Petal" },
+        { qty: 25, name: "Amethyst Fragment" },
+      ],
+      "Dim Glacier Refinement Device": [
+        { qty: 10, name: "Encroached Magical Crystal" },
+        { qty: 10, name: "Neutralized Magical Crystal" },
+        { qty: 1,  name: "Miasmal Spell" },
+      ],
+      // "Brilliant Snow Flower Magic Stone Extract": [...] // ไม่มีสูตร -> ไม่โชว์ tooltip
+    };
+
+    // ===== Items ที่ "ไม่มีคราฟต์" แต่ต้องการให้ hover แล้ว highlight ใน market price =====
+    const HOVER_HIGHLIGHT_ONLY = new Set([
+      "Brilliant Snow Flower Magic Stone Extract",
+      "Miasmal Spell",
+      "Dim Glacier Weapon 9 Refine Cube",
+      "Slot 4 & 3 Dim Glacier Enchant Coupon",
+    ]);
+
+    // ===== helpers: HTML escape + CSS escape =====
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
+    function cssEsc(s){
+      return (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/["\\]/g, '\\$&');
+    }
+
+    // ===== Tooltip + Toast + Copy =====
+    const tooltipEl = () => document.getElementById("craftTooltip");
+    const toastEl = () => document.getElementById("copyToast");
+
+    async function copyToClipboard(text){
+      try{
+        if (navigator.clipboard && window.isSecureContext){
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      }catch(e){}
+
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      ta.style.top = "0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+
+      let ok = false;
+      try{ ok = document.execCommand("copy"); }catch(e){}
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    let toastTimer = null;
+    function showToast(msg){
+      const el = toastEl();
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> el.classList.remove("show"), 900);
+    }
+
+    let activeItemEl = null;
+
+    function showTooltipFor(itemName, x, y){
+      const recipe = RECIPES[itemName];
+      const el = tooltipEl();
+      if (!el || !recipe) return;
+
+      const rows = recipe.map(r =>
+        `<div class="t-row"><span>${escapeHtml(r.name)}</span><strong>x ${r.qty}</strong></div>`
+      ).join("");
+
+      el.innerHTML = `<div class="t-title">Craft: ${escapeHtml(itemName)}</div>${rows}`;
+      el.style.display = "block";
+      positionTooltip(x, y);
+    }
+
+    function hideTooltip(){
+      const el = tooltipEl();
+      if (!el) return;
+      el.style.display = "none";
+    }
+
+    function positionTooltip(x, y){
+      const el = tooltipEl();
+      if (!el || el.style.display === "none") return;
+
+      const pad = 14;
+      const rect = el.getBoundingClientRect();
+      let left = x + pad;
+      let top  = y + pad;
+
+      if (left + rect.width > window.innerWidth - 8) left = x - rect.width - pad;
+      if (top + rect.height > window.innerHeight - 8) top = y - rect.height - pad;
+
+      el.style.left = `${Math.max(8, left)}px`;
+      el.style.top  = `${Math.max(8, top)}px`;
+    }
+
+    // ===== Market Price: auto make labels clickable + highlight ingredients =====
+    function enhanceMarketPriceSection(){
+      const card = document.getElementById('card_market');
+      if (!card) return;
+
+      card.querySelectorAll('.input-group').forEach(row => {
+        const input = row.querySelector('input');
+        const label = row.querySelector('label');
+        if (!label || !input) return;
+
+        // skip exchange rate row
+        if (input.id === 'rate_thb') return;
+
+        const name = label.textContent.trim();
+        if (!name) return;
+
+        row.classList.add('price-row');
+        row.dataset.itemRow = name;
+
+        if (!label.querySelector('[data-copy]')) {
+          label.innerHTML =
+            `<span class="item" data-item="${escapeHtml(name)}" data-copy="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+        }
+      });
+    }
+
+    function clearMarketHighlights(){
+      const card = document.getElementById('card_market');
+      if (!card) return;
+      card.querySelectorAll('.price-row.hl, .price-row.hl-src')
+        .forEach(el => el.classList.remove('hl','hl-src'));
+    }
+
+    function highlightMarketSelf(itemName){
+      clearMarketHighlights();
+      const card = document.getElementById('card_market');
+      if (!card) return;
+
+      card.querySelectorAll(`.price-row[data-item-row="${cssEsc(itemName)}"]`)
+        .forEach(el => el.classList.add('hl-src'));
+    }
+
+    function highlightMarketIngredients(itemName){
+      clearMarketHighlights();
+      const card = document.getElementById('card_market');
+      if (!card) return;
+
+      const recipe = RECIPES[itemName];
+      if (!recipe) return;
+
+      // highlight the hovered item row itself (if exists in market)
+      card.querySelectorAll(`.price-row[data-item-row="${cssEsc(itemName)}"]`)
+        .forEach(el => el.classList.add('hl-src'));
+
+      // highlight ingredient rows
+      recipe.forEach(r => {
+        card.querySelectorAll(`.price-row[data-item-row="${cssEsc(r.name)}"]`)
+          .forEach(el => el.classList.add('hl'));
+      });
+    }
+
+    // ===== Event delegation: click to copy =====
+    document.body.addEventListener("click", async (e) => {
+      const item = e.target.closest("[data-copy]");
+      if (!item) return;
+
+      const text = (item.dataset.copy || item.textContent || "").trim();
+      if (!text) return;
+
+      const ok = await copyToClipboard(text);
+      showToast(ok ? `Copied: ${text}` : `Copy failed`);
+    });
+
+    // Hover: show tooltip (if craftable) + highlight market rows
+    document.body.addEventListener("mouseover", (e) => {
+      const item = e.target.closest("[data-item]");
+      if (!item) return;
+
+      const name = item.dataset.item;
+
+      // craftable -> tooltip + ingredients highlight
+      if (RECIPES[name]) {
+        activeItemEl = item;
+        showTooltipFor(name, e.clientX, e.clientY);
+        highlightMarketIngredients(name);
+        return;
+      }
+
+      // non-craft but must highlight in market
+      if (HOVER_HIGHLIGHT_ONLY.has(name)) {
+        activeItemEl = item;
+        hideTooltip();
+        highlightMarketSelf(name);
+        return;
+      }
+
+      // default: clear
+      hideTooltip();
+      clearMarketHighlights();
+      activeItemEl = null;
+    });
+
+    document.body.addEventListener("mousemove", (e) => {
+      if (!activeItemEl) return;
+      positionTooltip(e.clientX, e.clientY);
+    });
+
+    document.body.addEventListener("mouseout", (e) => {
+      if (!activeItemEl) return;
+
+      if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest("[data-item]")) {
+        hideTooltip();
+        clearMarketHighlights();
+        activeItemEl = null;
+      }
+    });
+
     // Init
+    enhanceMarketPriceSection();
     recalc();
+  </script>
 
-</script>
-
+  <!-- Tooltip + Toast -->
+  <div id="craftTooltip" aria-hidden="true"></div>
+  <div id="copyToast" aria-hidden="true">Copied</div>
 </body>
 </html>
