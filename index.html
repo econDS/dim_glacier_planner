@@ -190,6 +190,8 @@
     .tb-best { width: 100%; font-size: 12px; border-collapse: collapse; }
     .tb-best td { padding: 4px; border-bottom: 1px solid #eee; }
     .num { text-align: right; font-family: monospace; font-weight: bold; }
+    .best-row { cursor: help; }
+    .best-row:hover { background: rgba(44,62,80,.04); }
 
     @media (max-width: 1100px) {
       .container { grid-template-columns: 1fr; }
@@ -663,7 +665,7 @@
       const check = (name, craft, market) => {
         const isCraft = craft < market;
         best[name] = isCraft ? craft : market;
-        return `<tr>
+        return `<tr class="best-row" data-best-item="${escapeHtml(name)}" data-best-craft="${craft}" data-best-market="${market}" data-best-chosen="${best[name]}">
           <td><span class="item" data-item="${name}" data-copy="${name}">${name}</span></td>
           <td class="num ${isCraft ? 'text-green' : ''}">${fmt(best[name])}</td>
           <td><span class="${isCraft ? 'bg-green' : 'bg-orange'}">${isCraft ? 'Craft' : 'Market'}</span></td>
@@ -1228,6 +1230,39 @@
       positionTooltip(x, y);
     }
 
+    function showBestPriceTooltip(itemName, craft, market, chosen, x, y){
+      const el = tooltipEl();
+      if (!el) return;
+
+      const chosenLabel = chosen === craft ? "Craft" : "Market";
+      const diff = Math.abs(craft - market);
+      const cheaperLabel = craft === market ? "equal" : (craft < market ? "Craft" : "Market");
+      const diffText = craft === market
+        ? "Craft and Market are equal"
+        : `${fmt(diff)} cheaper: ${cheaperLabel}`;
+
+      el.innerHTML = `
+        <div class="t-title">Best Price: ${escapeHtml(itemName)}</div>
+        <div class="t-sub">
+          <span>Craft</span>
+          <strong>${fmt(craft)}</strong>
+        </div>
+        <div class="t-sub">
+          <span>Market</span>
+          <strong>${fmt(market)}</strong>
+        </div>
+        <div class="t-sub" style="border-bottom:none; padding-bottom:0; margin-bottom:0;">
+          <span style="opacity:.9;">Selected</span>
+          <strong>${fmt(chosen)} (${chosenLabel})</strong>
+        </div>
+        <div style="opacity:.85; font-size:11px; margin-top:6px;">
+          ${escapeHtml(diffText)}
+        </div>
+      `;
+      el.style.display = "block";
+      positionTooltip(x, y);
+    }
+
     // ===== Event delegation: click to copy =====
     document.body.addEventListener("click", async (e) => {
       const item = e.target.closest("[data-copy]");
@@ -1242,6 +1277,20 @@
 
     // Hover: show tooltip (if craftable) + highlight market rows
     document.body.addEventListener("mouseover", (e) => {
+      const bestRow = e.target.closest("#tb_compare tr[data-best-item]");
+      if (bestRow) {
+        activeItemEl = bestRow;
+        showBestPriceTooltip(
+          bestRow.dataset.bestItem,
+          parse(bestRow.dataset.bestCraft),
+          parse(bestRow.dataset.bestMarket),
+          parse(bestRow.dataset.bestChosen),
+          e.clientX,
+          e.clientY
+        );
+        return;
+      }
+
       const item = e.target.closest("[data-item]");
       if (!item) return;
 
@@ -1277,7 +1326,9 @@
     document.body.addEventListener("mouseout", (e) => {
       if (!activeItemEl) return;
 
-      if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest("[data-item]")) {
+      const relatedBest = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest("#tb_compare tr[data-best-item]");
+      const relatedItem = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest("[data-item]");
+      if (!relatedBest && !relatedItem) {
         hideTooltip();
         clearMarketHighlights();
         activeItemEl = null;
