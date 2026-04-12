@@ -109,6 +109,15 @@
       color: var(--accent);
       cursor: pointer;
     }
+    .card-title-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      flex: 0 0 24px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.8);
+      box-shadow: inset 0 0 0 1px rgba(44,62,80,0.08);
+    }
     .card-cost {
       font-family: monospace;
       font-weight: bold;
@@ -154,6 +163,50 @@
     .s2-table th { text-align: left; background: #eee; padding: 8px; }
     .s2-table td { border-bottom: 1px solid #eee; padding: 8px; vertical-align: top; }
     .s2-item { display: block; margin-bottom: 2px; color: #666; font-size: 12px; }
+    .s2-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .s2-qty {
+      width: 42px;
+      flex: 0 0 42px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .tooltip-item-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tooltip-item-qty {
+      opacity: .75;
+      display: inline-flex;
+      align-items: center;
+    }
+    .consume-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+    }
+    .consume-list {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 14px;
+    }
+    .consume-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .consume-qty {
+      font-variant-numeric: tabular-nums;
+      color: #666;
+    }
 
     /* GIMMICK BOX */
     .gimmick-box {
@@ -203,6 +256,30 @@
       text-decoration: underline dotted;
     }
     .item:hover { color: var(--accent); }
+    .item-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .item-chip.item-chip-tight { gap: 6px; }
+    .item-icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      flex: 0 0 20px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.75);
+      box-shadow: inset 0 0 0 1px rgba(44,62,80,0.08);
+    }
+    .item-icon.item-icon-sm {
+      width: 18px;
+      height: 18px;
+      flex-basis: 18px;
+    }
+    .item-label {
+      min-width: 0;
+    }
 
     #craftTooltip{
       position: fixed;
@@ -223,6 +300,16 @@
       font-weight: 800;
       color: #f1c40f;
       margin-bottom: 6px;
+    }
+    #craftTooltip .t-title-line{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    #craftTooltip .t-title-prefix{
+      display: inline-flex;
+      align-items: center;
     }
     #craftTooltip .t-sub{
       opacity: .9;
@@ -377,7 +464,7 @@
           Last price update: <strong>12/04/2569</strong>
         </div>
         <div class="market-warning">
-          เว็บไซต์นี้ไม่ได้อัปเดตราคาให้อัตโนมัติ ผู้ใช้ต้องอัปเดตข้อมูลเอง และสามารถใช้ฟังก์ชัน import/export ช่วยจัดการข้อมูลได้
+          เว็บไซต์นี้ไม่ได้อัปเดตราคาให้อัตโนมัติ ผู้ใช้ต้องอัปเดตข้อมูลเอง และสามารถใช้ฟังก์ชัน import/export ในส่วน Data Management ช่วยจัดการข้อมูลได้
         </div>
         <div class="input-group">
           <label>Exchange Rate (1M = ? THB)</label>
@@ -456,6 +543,7 @@
       <div class="interactive-card">
         <div class="card-top">
           <div class="card-title">
+            <img class="card-title-icon" src="assets/img/Dim%20Glacier%20Weapon.png" alt="Dim Glacier Weapon" loading="lazy">
             1. Dim Glacier Weapon (Base)
           </div>
           <div class="card-cost" id="cost_base">0</div>
@@ -467,6 +555,7 @@
         <div class="card-top">
           <label class="card-title">
             <input type="checkbox" id="chk_s4" class="chk-big" checked onchange="updateSlot4()">
+            <img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="Enchant Slot 4" loading="lazy">
             2. Enchant Slot 4
           </label>
           <div class="card-cost" id="cost_s4">0</div>
@@ -488,6 +577,7 @@
         <div class="card-top">
           <label class="card-title">
             <input type="checkbox" id="chk_s3" class="chk-big" checked onchange="updateSlot3()">
+            <img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="Enchant Slot 3" loading="lazy">
             3. Enchant Slot 3
           </label>
           <div class="card-cost" id="cost_s3">0</div>
@@ -508,6 +598,7 @@
       <div class="interactive-card" id="card_s2">
         <div class="card-top">
           <div class="card-title">
+            <img class="card-title-icon" src="assets/img/slot_2_enchant.png" alt="Enchant Slot 2" loading="lazy">
             4. Enchant Slot 2
             <select id="sel_s2_lv" class="method-select" style="margin-left:10px; font-weight:bold;" onchange="updateSlot2()">
               <option value="0">None (Lv 0)</option>
@@ -543,7 +634,7 @@
         <div class="card-body">
           <div class="input-group">
             <div>
-              <strong class="item" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</strong>
+              <strong><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Weapon%209%20Refine%20Cube.png" alt="Dim Glacier Weapon 9 Refine Cube" loading="lazy"><span class="item item-label" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</span></span></strong>
               <div style="font-size:11px; color:#888;">Instant +9 (Market Price)</div>
             </div>
             <div>
@@ -554,12 +645,15 @@
 
           <div class="input-group" style="margin-top:10px;">
             <div>
-              <strong class="item" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</strong>
+              <strong><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Refinement%20Device.png" alt="Dim Glacier Refinement Device" loading="lazy"><span class="item item-label" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</span></span></strong>
               <div style="font-size:11px; color:var(--green);">Safety +1 (Auto Best Price: Craft/Market) + Add Consume Cost</div>
-              <div class="hint">
-                Consume ต่อกล่อง: 40x <span class="item" data-item="Snow Flower Petal" data-copy="Snow Flower Petal">Snow Flower Petal</span>,
-                10x <span class="item" data-item="Encroached Magical Crystal" data-copy="Encroached Magical Crystal">Encroached Magical Crystal</span>,
-                10x <span class="item" data-item="Neutralized Magical Crystal" data-copy="Neutralized Magical Crystal">Neutralized Magical Crystal</span>
+              <div class="hint consume-line">
+                <span>Consume ต่อกล่อง:</span>
+                <span class="consume-list">
+                  <span class="consume-item"><span class="consume-qty">40x</span><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Snow%20Flower%20Petal.png" alt="Snow Flower Petal" loading="lazy"><span class="item item-label" data-item="Snow Flower Petal" data-copy="Snow Flower Petal">Snow Flower Petal</span></span></span>
+                  <span class="consume-item"><span class="consume-qty">10x</span><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Encroached%20Magical%20Crystal.png" alt="Encroached Magical Crystal" loading="lazy"><span class="item item-label" data-item="Encroached Magical Crystal" data-copy="Encroached Magical Crystal">Encroached Magical Crystal</span></span></span>
+                  <span class="consume-item"><span class="consume-qty">10x</span><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Neutralized%20Magical%20Crystal.png" alt="Neutralized Magical Crystal" loading="lazy"><span class="item item-label" data-item="Neutralized Magical Crystal" data-copy="Neutralized Magical Crystal">Neutralized Magical Crystal</span></span></span>
+                </span>
               </div>
             </div>
             <div>
@@ -639,6 +733,25 @@
     let isApplyingState = false;
     let statusTimer = null;
     let suppressAutoSave = false;
+    const ITEM_IMAGES = {
+      "Amethyst Fragment": "assets/img/Amethyst Fragment.png",
+      "Brilliant Snow Flower Magic Stone Extract": "assets/img/Brilliant Snow Flower Magic Stone Extract.png",
+      "Dim Glacier Refinement Device": "assets/img/Dim Glacier Refinement Device.png",
+      "Dim Glacier Weapon": "assets/img/Dim Glacier Weapon.png",
+      "Dim Glacier Weapon 9 Refine Cube": "assets/img/Dim Glacier Weapon 9 Refine Cube.png",
+      "Encroached Magical Crystal": "assets/img/Encroached Magical Crystal.png",
+      "Encroached Magical Ore": "assets/img/Encroached Magical Ore.png",
+      "Glacier Extract": "assets/img/Glacier Extract.png",
+      "Miasmal Spell": "assets/img/Miasmal Spell.png",
+      "Neutralized Magical Crystal": "assets/img/Neutralized Magical Crystal.png",
+      "Neutralized Magical Ore": "assets/img/Neutralized Magical Ore.png",
+      "Shining Snow Flower Magic Stone Extract": "assets/img/Shining Snow Flower Magic Stone Extract.png",
+      "Shining Snow Flower Magic Stone": "assets/img/Shining Snow Flower Magic Stone.png",
+      "Slot 4 & 3 Dim Glacier Enchant Coupon": "assets/img/Slot 4 & 3 Dim Glacier Enchant Coupon.png",
+      "Snow Flower Magic Stone Extract": "assets/img/Snow Flower Magic Stone Extract.png",
+      "Snow Flower Magic Stone": "assets/img/Snow Flower Magic Stone.png",
+      "Snow Flower Petal": "assets/img/Snow Flower Petal.png"
+    };
 
 
     document.addEventListener('compositionstart', e => {
@@ -1281,7 +1394,7 @@
         const isCraft = craft < market;
         best[name] = isCraft ? craft : market;
         return `<tr class="best-row" data-best-item="${escapeHtml(name)}" data-best-craft="${craft}" data-best-market="${market}" data-best-chosen="${best[name]}">
-          <td><span class="item" data-item="${name}" data-copy="${name}">${name}</span></td>
+          <td>${renderItemLabel(name, { smallIcon: true, tight: true })}</td>
           <td class="num ${isCraft ? 'text-green' : ''}">${fmt(best[name])}</td>
           <td><span class="${isCraft ? 'bg-green' : 'bg-orange'}">${isCraft ? 'Craft' : 'Market'}</span></td>
         </tr>`;
@@ -1319,7 +1432,7 @@
 
     function getMatRow(name, qty) {
       return `<div class="mat-row">
-        <span class="mat-name item" data-item="${name}" data-copy="${name}">${name}</span>
+        <span class="mat-name">${renderItemLabel(name, { smallIcon: true, tight: true })}</span>
         <span class="mat-qty">x ${qty}</span>
       </div>`;
     }
@@ -1531,7 +1644,7 @@
         totalCost += levels[i].cost;
 
         const itemsHtml = levels[i].items.map(d =>
-          `<span class="s2-item">- ${d.qty}x <span class="item" data-item="${d.name}" data-copy="${d.name}">${d.name}</span></span>`
+          `<span class="s2-item"><span class="s2-line"><span class="s2-qty">- ${d.qty}x</span>${renderItemLabel(d.name, { smallIcon: true, tight: true })}</span></span>`
         ).join("");
 
         html += `<tr>
@@ -1658,6 +1771,27 @@
     function cssEsc(s){
       return (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/["\\]/g, '\\$&');
     }
+    function encodeAssetPath(path){
+      return String(path).split('/').map(part => encodeURIComponent(part)).join('/');
+    }
+    function getItemImageSrc(name){
+      const path = ITEM_IMAGES[name];
+      return path ? encodeAssetPath(path) : '';
+    }
+    function renderItemLabel(name, options = {}){
+      const escapedName = escapeHtml(name);
+      const iconSrc = getItemImageSrc(name);
+      const iconClass = options.smallIcon ? 'item-icon item-icon-sm' : 'item-icon';
+      const chipClass = options.tight ? 'item-chip item-chip-tight' : 'item-chip';
+      const itemClass = options.extraItemClass ? `item-label ${options.extraItemClass}` : 'item-label';
+      const textHtml = options.clickable === false
+        ? `<span class="${itemClass}">${escapedName}</span>`
+        : `<span class="item ${itemClass}" data-item="${escapedName}" data-copy="${escapedName}">${escapedName}</span>`;
+
+      if (!iconSrc) return textHtml;
+
+      return `<span class="${chipClass}"><img class="${iconClass}" src="${iconSrc}" alt="${escapedName}" loading="lazy">${textHtml}</span>`;
+    }
 
     // ===== Tooltip + Toast + Copy =====
     const tooltipEl = () => document.getElementById("craftTooltip");
@@ -1740,8 +1874,7 @@
         row.dataset.itemRow = name;
 
         if (!label.querySelector('[data-copy]')) {
-          label.innerHTML =
-            `<span class="item" data-item="${escapeHtml(name)}" data-copy="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+          label.innerHTML = renderItemLabel(name, { smallIcon: true, tight: true });
         }
       });
     }
@@ -1825,13 +1958,13 @@
         const pr = getMarketPriceByName(r.name);
         return `
           <div class="t-row">
-            <span>${escapeHtml(r.name)} <span style="opacity:.75;">(x ${r.qty})</span></span>
+            <span class="tooltip-item-line">${renderItemLabel(r.name, { clickable: false, smallIcon: true, tight: true })}<span class="tooltip-item-qty">(x ${r.qty})</span></span>
             <strong>${pr != null ? fmt(pr) : '-'}</strong>
           </div>`;
       }).join("");
 
       el.innerHTML = `
-        <div class="t-title">Craft: ${escapeHtml(itemName)}</div>
+        <div class="t-title"><span class="t-title-line"><span class="t-title-prefix">Craft:</span>${renderItemLabel(itemName, { clickable: false, smallIcon: true, tight: true })}</span></div>
         <div class="t-sub">
           <span style="opacity:.9;">ราคาตลาด</span>
           <strong>${selfPrice != null ? fmt(selfPrice) : '-'}</strong>
@@ -1961,3 +2094,5 @@
   <div id="copyToast" aria-hidden="true">Copied</div>
 </body>
 </html>
+
+
