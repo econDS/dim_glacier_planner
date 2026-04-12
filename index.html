@@ -281,6 +281,62 @@
       line-height: 1.35;
     }
 
+    .toolbar-card {
+      border: 1px solid rgba(41,128,185,.2);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+      margin-bottom: 14px;
+    }
+    .toolbar-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .toolbar-btn {
+      border: 1px solid rgba(44,62,80,.14);
+      background: #fff;
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .toolbar-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(41,128,185,.45);
+      box-shadow: 0 8px 18px rgba(41,128,185,.08);
+    }
+    .toolbar-btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .toolbar-meta {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+    #storage_status {
+      margin-top: 10px;
+      min-height: 18px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .market-warning {
+      margin: -4px 0 14px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(192,57,43,.18);
+      background: rgba(192,57,43,.06);
+      color: #c0392b;
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
     /* ===== PC-first: Sticky left column (Market/Best price stays visible) ===== */
     @media (min-width: 1101px) {
       .left-col{
@@ -319,6 +375,9 @@
         <div class="section-header">Market Prices (Zeny)</div>
         <div style="margin:-8px 0 14px; font-size:12px; color:#888;">
           Last price update: <strong>17/03/2569</strong>
+        </div>
+        <div class="market-warning">
+          เว็บไซต์นี้ไม่ได้อัปเดตราคาให้อัตโนมัติ ผู้ใช้ต้องอัปเดตข้อมูลเอง และสามารถใช้ฟังก์ชัน import/export ช่วยจัดการข้อมูลได้
         </div>
         <div class="input-group">
           <label>Exchange Rate (1M = ? THB)</label>
@@ -362,6 +421,22 @@
           <label style="color:var(--orange);">Dim Glacier Weapon 9 Refine Cube</label>
           <input type="text" id="m_cube9" value="22,000,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)" style="border-color:var(--orange);">
         </div>
+      </div>
+
+      <div class="card toolbar-card">
+        <div class="section-header">Data Management</div>
+        <div class="toolbar-actions">
+          <button type="button" class="toolbar-btn primary" id="btn_import">Import File</button>
+          <button type="button" class="toolbar-btn" id="btn_reset">Reset Data</button>
+          <button type="button" class="toolbar-btn" id="btn_export_json">Export JSON</button>
+          <button type="button" class="toolbar-btn" id="btn_export_csv">Export CSV</button>
+          <button type="button" class="toolbar-btn" id="btn_export_excel" style="grid-column:1 / -1;">Export Excel</button>
+        </div>
+        <div class="toolbar-meta">
+          บันทึกค่าอัตโนมัติลง localStorage ทุกครั้งที่แก้ไข และรองรับการนำเข้า/ส่งออก .json, .csv, .xlsx
+        </div>
+        <div id="storage_status">พร้อมใช้งาน</div>
+        <input type="file" id="file_import" accept=".json,.csv,.xlsx,.xls" hidden>
       </div>
 
       <div class="card">
@@ -517,9 +592,41 @@
     </div>
   </div>
 
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script>
     const fmt = n => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
     const parse = str => Number(str.toString().replace(/,/g, '')) || 0;
+    const STORAGE_KEY = 'dim-glacier-planner-state-v1';
+    const STORAGE_VERSION = 1;
+    const FIELD_DEFS = [
+      { id: 'rate_thb', type: 'decimal', label: 'Exchange Rate' },
+      { id: 'p_petal', type: 'number', label: 'Snow Flower Petal' },
+      { id: 'p_amethyst', type: 'number', label: 'Amethyst Fragment' },
+      { id: 'p_enc_ore', type: 'number', label: 'Encroached Magical Ore' },
+      { id: 'p_neu_ore', type: 'number', label: 'Neutralized Magical Ore' },
+      { id: 'p_miasmal', type: 'number', label: 'Miasmal Spell' },
+      { id: 'p_sf_stone', type: 'number', label: 'Snow Flower Magic Stone' },
+      { id: 'p_shining_stone', type: 'number', label: 'Shining Snow Flower Magic Stone' },
+      { id: 'p_brilliant', type: 'number', label: 'Brilliant Snow Flower Magic Stone Extract' },
+      { id: 'm_sf_extract', type: 'number', label: 'Snow Flower Magic Stone Extract' },
+      { id: 'm_shining_extract', type: 'number', label: 'Shining Snow Flower Magic Stone Extract' },
+      { id: 'm_glacier_extract', type: 'number', label: 'Glacier Extract' },
+      { id: 'm_enc_crystal', type: 'number', label: 'Encroached Magical Crystal' },
+      { id: 'm_neu_crystal', type: 'number', label: 'Neutralized Magical Crystal' },
+      { id: 'm_device', type: 'number', label: 'Dim Glacier Refinement Device' },
+      { id: 'm_weapon', type: 'number', label: 'Dim Glacier Weapon' },
+      { id: 'p_coupon', type: 'number', label: 'Slot 4 & 3 Dim Glacier Enchant Coupon' },
+      { id: 'm_cube9', type: 'number', label: 'Dim Glacier Weapon 9 Refine Cube' },
+      { id: 'chk_s4', type: 'checkbox', label: 'Enable Slot 4' },
+      { id: 'sel_s4_method', type: 'select', label: 'Slot 4 Method' },
+      { id: 'chk_s3', type: 'checkbox', label: 'Enable Slot 3' },
+      { id: 'sel_s3_method', type: 'select', label: 'Slot 3 Method' },
+      { id: 'sel_s2_lv', type: 'select', label: 'Slot 2 Target Level' },
+      { id: 'qty_cube', type: 'integer', label: 'Cube Quantity' },
+      { id: 'qty_device', type: 'integer', label: 'Device Quantity' },
+      { id: 'manual_cost', type: 'number', label: 'Manual Refine Budget' }
+    ];
+    const FIELD_MAP = Object.fromEntries(FIELD_DEFS.map(field => [field.id, field]));
 
     let DATA = {
       prices: {},
@@ -528,6 +635,10 @@
       s2_cost: 0,
       refine_cost: 0
     };
+    let saveTimer = null;
+    let isApplyingState = false;
+    let statusTimer = null;
+    let suppressAutoSave = false;
 
 
     document.addEventListener('compositionstart', e => {
@@ -544,6 +655,509 @@
         }
       }
     });
+
+    function setStorageStatus(message, isError = false){
+      const el = document.getElementById('storage_status');
+      if (!el) return;
+      el.textContent = message;
+      el.style.color = isError ? '#c0392b' : 'var(--accent)';
+      clearTimeout(statusTimer);
+      if (!isError) {
+        statusTimer = setTimeout(() => {
+          el.textContent = 'พร้อมใช้งาน';
+          el.style.color = 'var(--accent)';
+        }, 2600);
+      }
+    }
+
+    function formatValueByType(value, type){
+      if (type === 'checkbox') {
+        if (typeof value === 'string') {
+          const normalized = value.trim().toLowerCase();
+          return normalized === 'true' || normalized === '1' || normalized === 'yes';
+        }
+        return Boolean(value);
+      }
+      if (type === 'select') return String(value ?? '');
+      if (type === 'decimal') {
+        const num = Number(value);
+        return Number.isFinite(num)
+          ? num.toLocaleString('en-US', { maximumFractionDigits: 2 })
+          : '0';
+      }
+      const num = parse(value);
+      if (type === 'integer') return String(Math.max(0, Math.trunc(num)));
+      return fmt(num);
+    }
+
+    function collectStateValues(){
+      const values = {};
+      FIELD_DEFS.forEach(field => {
+        const el = document.getElementById(field.id);
+        if (!el) return;
+        values[field.id] = field.type === 'checkbox' ? el.checked : el.value;
+      });
+      return values;
+    }
+
+    function buildExportPayload(){
+      const values = collectStateValues();
+      return {
+        version: STORAGE_VERSION,
+        exportedAt: new Date().toISOString(),
+        app: 'Dim Glacier Ultimate Planner',
+        values,
+        fields: FIELD_DEFS.map(field => ({
+          id: field.id,
+          label: field.label,
+          type: field.type,
+          value: values[field.id]
+        }))
+      };
+    }
+
+    function applyStateValues(values, opts = {}){
+      if (!values || typeof values !== 'object') return;
+      isApplyingState = true;
+      suppressAutoSave = opts.persist === false;
+      FIELD_DEFS.forEach(field => {
+        if (!(field.id in values)) return;
+        const el = document.getElementById(field.id);
+        if (!el) return;
+        if (field.type === 'checkbox') {
+          el.checked = formatValueByType(values[field.id], field.type);
+        } else {
+          el.value = formatValueByType(values[field.id], field.type);
+        }
+      });
+      recalc();
+      isApplyingState = false;
+      suppressAutoSave = false;
+      if (opts.persist !== false) saveState();
+    }
+
+    function saveState(){
+      if (isApplyingState) return;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(buildExportPayload()));
+        setStorageStatus('บันทึกข้อมูลล่าสุดลงเครื่องแล้ว');
+      } catch (_) {
+        setStorageStatus('บันทึกลง localStorage ไม่สำเร็จ', true);
+      }
+    }
+
+    function scheduleSave(){
+      if (isApplyingState || suppressAutoSave) return;
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveState, 150);
+    }
+
+    function clearSavedState(){
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (_) {}
+    }
+
+    function getAllowedSelectValues(fieldId){
+      const el = document.getElementById(fieldId);
+      if (!el || el.tagName !== 'SELECT') return [];
+      return Array.from(el.options).map(option => option.value);
+    }
+
+    function isValidCheckboxValue(value){
+      if (typeof value === 'boolean') return true;
+      if (typeof value === 'number') return value === 0 || value === 1;
+      if (typeof value === 'string') {
+        const normalized = value.trim().toLowerCase();
+        return ['true', 'false', '1', '0', 'yes', 'no'].includes(normalized);
+      }
+      return false;
+    }
+
+    function normalizeForValidation(value, type){
+      if (type === 'checkbox') return formatValueByType(value, type);
+      if (type === 'select') return String(value ?? '');
+      if (type === 'decimal') {
+        const num = Number(String(value ?? '').replace(/,/g, ''));
+        return Number.isFinite(num) ? num : NaN;
+      }
+      if (type === 'integer' || type === 'number') {
+        return Number(String(value ?? '').replace(/,/g, ''));
+      }
+      return value;
+    }
+
+    function validateFieldValue(field, rawValue){
+      const errors = [];
+      const normalized = normalizeForValidation(rawValue, field.type);
+
+      if (field.type === 'checkbox') {
+        if (!isValidCheckboxValue(rawValue)) {
+          errors.push(`${field.label}: ต้องเป็น true/false หรือ 1/0 เท่านั้น`);
+        }
+        return { valid: errors.length === 0, errors, value: normalized };
+      }
+
+      if (field.type === 'select') {
+        const allowed = getAllowedSelectValues(field.id);
+        if (!allowed.includes(normalized)) {
+          errors.push(`${field.label}: ค่า "${rawValue}" ไม่อยู่ในตัวเลือกที่อนุญาต`);
+        }
+        return { valid: errors.length === 0, errors, value: normalized };
+      }
+
+      if (!Number.isFinite(normalized)) {
+        errors.push(`${field.label}: ต้องเป็นตัวเลข`);
+        return { valid: false, errors, value: rawValue };
+      }
+
+      if (normalized < 0) {
+        errors.push(`${field.label}: ห้ามติดลบ`);
+      }
+
+      if (field.type === 'integer' && !Number.isInteger(normalized)) {
+        errors.push(`${field.label}: ต้องเป็นจำนวนเต็ม`);
+      }
+
+      return { valid: errors.length === 0, errors, value: normalized };
+    }
+
+    function getPayloadValuesAndRows(payload){
+      if (!payload) return { values: null, rows: null, source: 'unknown' };
+      if (payload.values && typeof payload.values === 'object') {
+        return {
+          values: payload.values,
+          rows: Array.isArray(payload.fields) ? payload.fields : null,
+          source: 'export-object'
+        };
+      }
+      if (Array.isArray(payload.fields)) {
+        return {
+          values: payload.fields.reduce((acc, field) => {
+            if (field && field.id) acc[field.id] = field.value;
+            return acc;
+          }, {}),
+          rows: payload.fields,
+          source: 'fields-array'
+        };
+      }
+      if (Array.isArray(payload)) {
+        return {
+          values: payload.reduce((acc, row) => {
+            if (!row || typeof row !== 'object') return acc;
+            const id = row.id || row.ID;
+            const value = row.value ?? row.Value;
+            if (id) acc[id] = value;
+            return acc;
+          }, {}),
+          rows: payload,
+          source: 'table'
+        };
+      }
+      if (typeof payload === 'object') {
+        return { values: payload, rows: null, source: 'plain-object' };
+      }
+      return { values: null, rows: null, source: 'unknown' };
+    }
+
+    function validateImportedPayload(payload, options = {}){
+      const errors = [];
+      const warnings = [];
+      const { values, rows, source } = getPayloadValuesAndRows(payload);
+      if (!values || typeof values !== 'object') {
+        return { ok: false, errors: ['ไม่พบโครงสร้างข้อมูลที่รองรับ'], warnings, normalizedValues: null };
+      }
+
+      if (payload && typeof payload === 'object' && 'version' in payload && payload.version !== STORAGE_VERSION) {
+        warnings.push(`version ของไฟล์คือ ${payload.version} แต่ระบบรองรับ ${STORAGE_VERSION}`);
+      }
+
+      const unknownKeys = Object.keys(values).filter(key => !(key in FIELD_MAP));
+      if (unknownKeys.length) {
+        errors.push(`พบ field ที่ระบบไม่รู้จัก: ${unknownKeys.join(', ')}`);
+      }
+
+      const missingFields = FIELD_DEFS
+        .map(field => field.id)
+        .filter(id => !(id in values));
+      if (missingFields.length) {
+        errors.push(`ข้อมูลไม่ครบตาม template: ขาด ${missingFields.join(', ')}`);
+      }
+
+      if (rows) {
+        const rowMap = new Map();
+        rows.forEach(row => {
+          if (!row || typeof row !== 'object') return;
+          const id = row.id || row.ID;
+          if (id) rowMap.set(id, row);
+        });
+
+        FIELD_DEFS.forEach(field => {
+          const row = rowMap.get(field.id);
+          if (!row) return;
+          const rowLabel = row.label ?? row.Label;
+          const rowType = row.type ?? row.Type;
+          if (rowLabel != null && String(rowLabel) !== field.label) {
+            errors.push(`${field.id}: label ถูกแก้จาก "${field.label}" เป็น "${rowLabel}"`);
+          }
+          if (rowType != null && String(rowType) !== field.type) {
+            errors.push(`${field.id}: type ควรเป็น "${field.type}" ไม่ใช่ "${rowType}"`);
+          }
+        });
+
+        if (source === 'table') {
+          const malformedRows = rows.filter(row => row && typeof row === 'object' && !('id' in row || 'ID' in row));
+          if (malformedRows.length) {
+            errors.push('มีบางแถวในไฟล์ตารางที่ไม่มีคอลัมน์ id');
+          }
+        }
+      }
+
+      const normalizedValues = {};
+      FIELD_DEFS.forEach(field => {
+        if (!(field.id in values)) return;
+        const result = validateFieldValue(field, values[field.id]);
+        if (!result.valid) errors.push(...result.errors);
+        normalizedValues[field.id] = result.value;
+      });
+
+      if (!rows && !options.allowPlainObject) {
+        warnings.push('ไฟล์นี้ไม่มี metadata ของ template ระบบจึงตรวจได้เฉพาะ field/value');
+      }
+
+      return {
+        ok: errors.length === 0,
+        errors,
+        warnings,
+        normalizedValues
+      };
+    }
+
+    function showImportValidationFeedback(title, validation){
+      const lines = [title];
+      if (validation.errors.length) {
+        lines.push('');
+        lines.push('Errors:');
+        validation.errors.slice(0, 12).forEach((msg, idx) => {
+          lines.push(`${idx + 1}. ${msg}`);
+        });
+        if (validation.errors.length > 12) {
+          lines.push(`... และอีก ${validation.errors.length - 12} รายการ`);
+        }
+      }
+      if (validation.warnings.length) {
+        lines.push('');
+        lines.push('Warnings:');
+        validation.warnings.slice(0, 8).forEach((msg, idx) => {
+          lines.push(`${idx + 1}. ${msg}`);
+        });
+      }
+      window.alert(lines.join('\n'));
+    }
+
+    function normalizeImportedValues(payload){
+      const validation = validateImportedPayload(payload, { allowPlainObject: true });
+      return validation.ok ? validation.normalizedValues : null;
+    }
+
+    function loadStateFromStorage(){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        const parsed = JSON.parse(raw);
+        const validation = validateImportedPayload(parsed, { allowPlainObject: true });
+        if (!validation.ok) {
+          clearSavedState();
+          setStorageStatus('ข้อมูลใน localStorage ไม่ถูกต้อง ระบบจึงไม่โหลดค่าเดิม', true);
+          return false;
+        }
+        applyStateValues(validation.normalizedValues, { persist: false });
+        setStorageStatus('โหลดค่าล่าสุดจาก localStorage แล้ว');
+        return true;
+      } catch (_) {
+        setStorageStatus('อ่านข้อมูลจาก localStorage ไม่สำเร็จ', true);
+        return false;
+      }
+    }
+
+    function resetPlanner(){
+      const defaults = {};
+      FIELD_DEFS.forEach(field => {
+        const el = document.getElementById(field.id);
+        if (!el) return;
+        defaults[field.id] = field.type === 'checkbox' ? el.defaultChecked : el.defaultValue;
+      });
+      clearSavedState();
+      applyStateValues(defaults, { persist: true });
+      setStorageStatus('รีเซ็ตข้อมูลกลับค่าเริ่มต้นแล้ว');
+    }
+
+    function downloadBlob(blob, fileName){
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function getTimeStamp(){
+      const d = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+    }
+
+    function exportJson(){
+      const blob = new Blob([JSON.stringify(buildExportPayload(), null, 2)], { type: 'application/json;charset=utf-8' });
+      downloadBlob(blob, `dim-glacier-planner-${getTimeStamp()}.json`);
+      setStorageStatus('ส่งออก JSON เรียบร้อย');
+    }
+
+    function exportCsv(){
+      const rows = [
+        ['id', 'label', 'type', 'value'],
+        ...FIELD_DEFS.map(field => {
+          const el = document.getElementById(field.id);
+          const rawValue = field.type === 'checkbox' ? el.checked : el.value;
+          return [field.id, field.label, field.type, String(rawValue ?? '')];
+        })
+      ];
+      const csv = rows.map(row =>
+        row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')
+      ).join('\r\n');
+      downloadBlob(new Blob([csv], { type: 'text/csv;charset=utf-8' }), `dim-glacier-planner-${getTimeStamp()}.csv`);
+      setStorageStatus('ส่งออก CSV เรียบร้อย');
+    }
+
+    function exportExcel(){
+      if (!window.XLSX) {
+        setStorageStatus('ไม่พบไลบรารี Excel สำหรับการส่งออก', true);
+        return;
+      }
+      const rows = FIELD_DEFS.map(field => {
+        const el = document.getElementById(field.id);
+        return {
+          id: field.id,
+          label: field.label,
+          type: field.type,
+          value: field.type === 'checkbox' ? el.checked : el.value
+        };
+      });
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(rows);
+      XLSX.utils.book_append_sheet(wb, ws, 'PlannerData');
+      XLSX.writeFile(wb, `dim-glacier-planner-${getTimeStamp()}.xlsx`);
+      setStorageStatus('ส่งออก Excel เรียบร้อย');
+    }
+
+    function parseCsvLine(line){
+      const values = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (ch === ',' && !inQuotes) {
+          values.push(current);
+          current = '';
+        } else {
+          current += ch;
+        }
+      }
+      values.push(current);
+      return values;
+    }
+
+    function parseCsv(text){
+      const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/).filter(line => line.trim() !== '');
+      if (!lines.length) return [];
+      const headers = parseCsvLine(lines[0]).map(h => h.trim());
+      return lines.slice(1).map(line => {
+        const cols = parseCsvLine(line);
+        return headers.reduce((acc, header, idx) => {
+          acc[header] = cols[idx] ?? '';
+          return acc;
+        }, {});
+      });
+    }
+
+    function readWorkbookValues(arrayBuffer){
+      if (!window.XLSX) return null;
+      const wb = XLSX.read(arrayBuffer, { type: 'array' });
+      const sheetName = wb.SheetNames[0];
+      if (!sheetName) return null;
+      return XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { defval: '' });
+    }
+
+    async function importFile(file){
+      if (!file) return;
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      try {
+        let payload = null;
+        if (ext === 'json') {
+          payload = JSON.parse(await file.text());
+        } else if (ext === 'csv') {
+          payload = parseCsv(await file.text());
+        } else if (ext === 'xlsx' || ext === 'xls') {
+          if (!window.XLSX) throw new Error('Excel library unavailable');
+          payload = readWorkbookValues(await file.arrayBuffer());
+        } else {
+          throw new Error('Unsupported file type');
+        }
+
+        const validation = validateImportedPayload(payload, { allowPlainObject: true });
+        if (!validation.ok) {
+          showImportValidationFeedback(`นำเข้า ${file.name} ไม่สำเร็จ`, validation);
+          setStorageStatus(`นำเข้าไฟล์ ${file.name} ไม่สำเร็จ`, true);
+          return;
+        }
+
+        if (validation.warnings.length) {
+          showImportValidationFeedback(`ตรวจพบคำเตือนใน ${file.name}`, validation);
+        }
+
+        applyStateValues(validation.normalizedValues, { persist: true });
+        setStorageStatus(`นำเข้าข้อมูลจาก ${file.name} เรียบร้อย`);
+      } catch (error) {
+        window.alert(`นำเข้า ${file.name} ไม่สำเร็จ\n\n${error && error.message ? error.message : 'รูปแบบไฟล์ไม่ถูกต้อง'}`);
+        setStorageStatus(`นำเข้าไฟล์ ${file.name} ไม่สำเร็จ`, true);
+      }
+    }
+
+    function bindDataActions(){
+      FIELD_DEFS.forEach(field => {
+        const el = document.getElementById(field.id);
+        if (!el) return;
+        el.addEventListener('change', scheduleSave);
+        if (field.type !== 'checkbox' && field.type !== 'select') {
+          el.addEventListener('input', scheduleSave);
+        }
+      });
+      document.getElementById('btn_import').addEventListener('click', () => {
+        document.getElementById('file_import').click();
+      });
+      document.getElementById('btn_reset').addEventListener('click', () => {
+        if (window.confirm('ต้องการรีเซ็ตข้อมูลทั้งหมดกลับเป็นค่าเริ่มต้นหรือไม่?')) {
+          resetPlanner();
+        }
+      });
+      document.getElementById('btn_export_json').addEventListener('click', exportJson);
+      document.getElementById('btn_export_csv').addEventListener('click', exportCsv);
+      document.getElementById('btn_export_excel').addEventListener('click', exportExcel);
+      document.getElementById('file_import').addEventListener('change', async (e) => {
+        const [file] = e.target.files || [];
+        await importFile(file);
+        e.target.value = '';
+      });
+    }
 
     function sanitizeNumberTyping(elm){
       if (elm._isComposing) return;
@@ -636,6 +1250,7 @@
     function recalc() {
       readPrices();
       updateSlot4(); // will call updateSlot3 -> updateSlot2 -> updateRefine -> Total
+      scheduleSave();
     }
 
     function readPrices() {
@@ -1336,8 +1951,9 @@
     });
 
     // Init
+    bindDataActions();
     enhanceMarketPriceSection();
-    recalc();
+    if (!loadStateFromStorage()) recalc();
   </script>
 
   <!-- Tooltip + Toast -->
