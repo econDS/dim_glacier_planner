@@ -329,6 +329,21 @@
       padding-top: 6px;
       margin-top: 6px;
     }
+    #craftTooltip .t-summary{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.22);
+      font-weight: 700;
+    }
+    #craftTooltip .t-summary.text-green{
+      color: #8ff0b3;
+    }
+    #craftTooltip .t-summary.text-orange{
+      color: #ffcf99;
+    }
 
     #copyToast{
       position: fixed;
@@ -1909,6 +1924,24 @@
       return input ? parse(input.value) : null;
     }
 
+    function getRecursiveCraftCost(itemName, stack = new Set()){
+      if (stack.has(itemName)) return getMarketPriceByName(itemName);
+
+      const recipe = RECIPES[itemName];
+      if (!recipe) return getMarketPriceByName(itemName);
+
+      const nextStack = new Set(stack);
+      nextStack.add(itemName);
+
+      let total = 0;
+      for (const part of recipe) {
+        const unitCost = getRecursiveCraftCost(part.name, nextStack);
+        if (unitCost == null) return null;
+        total += part.qty * unitCost;
+      }
+      return total;
+    }
+
     function highlightMarketSelf(itemName){
       clearMarketHighlights();
       const card = document.getElementById('card_market');
@@ -1954,6 +1987,12 @@
       if (!el || !recipe) return;
 
       const selfPrice = getMarketPriceByName(itemName);
+      const craftPrice = getRecursiveCraftCost(itemName);
+      const diff = (selfPrice != null && craftPrice != null) ? selfPrice - craftPrice : null;
+      const craftSummaryClass = diff == null ? "" : (diff >= 0 ? "text-green" : "text-orange");
+      const craftSummaryLabel = diff == null
+        ? "Craft เอง"
+        : (diff >= 0 ? `Craft เอง (ถูกกว่า ${fmt(diff)})` : `Craft เอง (แพงกว่า ${fmt(Math.abs(diff))})`);
 
       const rows = recipe.map(r => {
         const pr = getMarketPriceByName(r.name);
@@ -1974,6 +2013,10 @@
           (ด้านล่างคือวัตถุดิบการการสร้าง ด้านขวาคือราคาตลาดต่อชิ้น ณ ตอนนี้)
         </div>
         ${rows}
+        <div class="t-summary ${craftSummaryClass}">
+          <span>${craftSummaryLabel}</span>
+          <strong>${craftPrice != null ? fmt(craftPrice) : '-'}</strong>
+        </div>
       `;
       el.style.display = "block";
       positionTooltip(x, y);
