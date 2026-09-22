@@ -455,16 +455,234 @@
       .left-col::-webkit-scrollbar-track{ background: transparent; }
     }
 
-    /* ===== Slot2 clue: pulse dropdown when Lv 0 ===== */
-    @keyframes pulseBorder {
-      0%   { box-shadow: 0 0 0 0 rgba(41,128,185,.35); }
-      70%  { box-shadow: 0 0 0 8px rgba(41,128,185,0); }
-      100% { box-shadow: 0 0 0 0 rgba(41,128,185,0); }
+    /* ===== Enchant Plan ===== */
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
     }
-    .select-attn{
-      border-color: var(--accent) !important;
-      animation: pulseBorder 1.2s infinite;
+    .preset-label { font-size: 12px; color: #888; margin-right: 2px; }
+    .preset-chip {
+      border: 1px solid rgba(41,128,185,.35);
+      background: #fff;
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
     }
+    .preset-chip:hover { background: #eaf2f8; }
+    .preset-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .stage-selects {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .stage-field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #555; font-weight: 700; }
+    .stage-field select { width: 100%; font-size: 13px; padding: 7px; }
+    @media (max-width: 520px) {
+      .stage-selects { grid-template-columns: 1fr; }
+    }
+
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      margin: 18px 0 6px;
+    }
+    .step-node {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 0;
+      padding: 0;
+      font-family: inherit;
+      cursor: pointer;
+      color: #999;
+    }
+    .step-node:disabled { cursor: default; }
+    .step-node::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      right: 50%;
+      width: 100%;
+      height: 4px;
+      background: #e3e6e8;
+      z-index: 0;
+    }
+    .step-node:first-child::before { display: none; }
+    .step-dot {
+      position: relative;
+      z-index: 1;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 2px solid #d5dadd;
+      box-sizing: border-box;
+      transition: transform .12s ease;
+    }
+    .step-dot img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: .45;
+    }
+    .step-badge {
+      position: absolute;
+      right: -6px;
+      bottom: -5px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 3px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1;
+      background: #fff;
+      border: 1.5px solid #d5dadd;
+      color: #aaa;
+    }
+    .step-node:not(:disabled):hover .step-dot { transform: scale(1.1); }
+    .step-label { font-size: 11px; line-height: 1.2; text-align: center; font-weight: 700; }
+    .step-node.done .step-dot { background: #eef0f1; border-color: #95a5a6; }
+    .step-node.done .step-dot img { filter: grayscale(.7); opacity: .7; }
+    .step-node.done .step-badge { background: #95a5a6; border-color: #95a5a6; color: #fff; }
+    .step-node.done::before { background: #95a5a6; }
+    .step-node.done { color: #7f8c8d; }
+    .step-node.todo .step-dot { background: #eaf2f8; border-color: var(--accent); }
+    .step-node.todo .step-dot img { filter: none; opacity: 1; }
+    .step-node.todo .step-badge { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .step-node.todo::before { background: var(--accent); }
+    .step-node.todo { color: var(--accent); }
+    .step-node.is-current:not(.done) .step-dot img { filter: none; opacity: 1; }
+    .step-node.is-target .step-dot { box-shadow: 0 0 0 4px rgba(41,128,185,.25); }
+    .step-node.is-current .step-dot { box-shadow: 0 0 0 4px rgba(149,165,166,.3); }
+    @media (max-width: 520px) {
+      .step-dot { width: 30px; height: 30px; }
+      .step-dot img { width: 20px; height: 20px; }
+      .step-badge { min-width: 14px; height: 14px; font-size: 9px; right: -5px; bottom: -4px; }
+      .step-node::before { top: 13px; }
+      .step-label { font-size: 9px; }
+    }
+
+    .stepper-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      font-size: 11px;
+      color: #777;
+      margin-bottom: 6px;
+      align-items: center;
+    }
+    .stepper-legend .lg {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: -1px;
+    }
+    .lg-done { background: #95a5a6; }
+    .lg-todo { background: var(--accent); }
+    .lg-skip { background: #fff; border: 2px solid #d5dadd; box-sizing: border-box; }
+
+    .method-row .card-title-icon { width: 20px; height: 20px; flex-basis: 20px; vertical-align: -5px; margin-right: 6px; }
+    .step-name { display: inline-flex; align-items: center; gap: 6px; }
+    .step-name .card-title-icon { width: 20px; height: 20px; flex-basis: 20px; }
+    .method-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: #f7f3fa;
+      border-left: 3px solid var(--purple);
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    /* ===== Shopping list ===== */
+    .view-toggle {
+      display: inline-flex;
+      border: 1px solid rgba(41,128,185,.35);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .view-btn {
+      border: 0;
+      background: #fff;
+      color: var(--accent);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .view-btn + .view-btn { border-left: 1px solid rgba(41,128,185,.35); }
+    .view-btn.active { background: var(--accent); color: #fff; }
+    #card_shop .card-top { flex-wrap: wrap; gap: 8px; }
+
+    .shop-summary {
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    .shop-summary b { color: var(--primary); }
+    .shop-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .shop-table td { padding: 7px 4px; border-bottom: 1px dashed #e0e0e0; vertical-align: middle; }
+    .shop-table .shop-qty {
+      text-align: right;
+      font-weight: 800;
+      font-size: 15px;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .shop-table .shop-cost { color: #888; font-size: 12px; }
+    .shop-table tr.shop-total td {
+      border-bottom: 0;
+      border-top: 2px solid #e8f6f3;
+      background: #e8f6f3;
+      font-weight: 800;
+    }
+    .shop-empty {
+      padding: 12px;
+      background: #fbfbff;
+      border: 1px dashed rgba(41,128,185,.45);
+      border-radius: 8px;
+      color: #555;
+    }
+    .shop-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .shop-foot .toolbar-btn { flex: 0 0 auto; }
+    .step-details { margin-top: 14px; }
+    .step-details summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 13px;
+    }
+    .interactive-card.owned .card-cost { color: #95a5a6; font-size: 14px; }
   </style>
 </head>
 
@@ -556,7 +774,7 @@
     <!-- RIGHT COLUMN: PLANNER -->
     <div>
       <!-- BASE WEAPON -->
-      <div class="interactive-card">
+      <div class="interactive-card" id="card_base">
         <div class="card-top">
           <div class="card-title">
             <img class="card-title-icon" src="assets/img/Dim%20Glacier%20Weapon.png" alt="Dim Glacier Weapon" loading="lazy">
@@ -566,85 +784,117 @@
         </div>
       </div>
 
-      <!-- SLOT 4 -->
-      <div class="interactive-card" id="card_s4">
-        <div class="card-top">
-          <label class="card-title">
-            <input type="checkbox" id="chk_s4" class="chk-big" checked onchange="updateSlot4()">
-            <img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="Enchant Slot 4" loading="lazy">
-            2. Enchant Slot 4
-          </label>
-          <div class="card-cost" id="cost_s4">0</div>
-        </div>
-        <div class="card-body">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <label>Select Method:</label>
-            <select id="sel_s4_method" class="method-select" onchange="updateSlot4()">
-              <option value="coupon" selected>Use Coupon (x1)</option>
-              <option value="normal">Normal Materials</option>
-            </select>
-          </div>
-          <div class="mat-list" id="list_s4"></div>
-        </div>
-      </div>
-
-      <!-- SLOT 3 -->
-      <div class="interactive-card" id="card_s3">
-        <div class="card-top">
-          <label class="card-title">
-            <input type="checkbox" id="chk_s3" class="chk-big" checked onchange="updateSlot3()">
-            <img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="Enchant Slot 3" loading="lazy">
-            3. Enchant Slot 3
-          </label>
-          <div class="card-cost" id="cost_s3">0</div>
-        </div>
-        <div class="card-body">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <label>Select Method:</label>
-            <select id="sel_s3_method" class="method-select" onchange="updateSlot3()">
-              <option value="coupon" selected>Use Coupon (x2)</option>
-              <option value="normal">Normal Materials</option>
-            </select>
-          </div>
-          <div class="mat-list" id="list_s3"></div>
-        </div>
-      </div>
-
-      <!-- SLOT 2 -->
-      <div class="interactive-card" id="card_s2">
+      <!-- ENCHANT PLAN -->
+      <div class="interactive-card" id="card_plan">
         <div class="card-top">
           <div class="card-title">
-            <img class="card-title-icon" src="assets/img/slot_2_enchant.png" alt="Enchant Slot 2" loading="lazy">
-            4. Enchant Slot 2
-            <select id="sel_s2_lv" class="method-select" style="margin-left:10px; font-weight:bold;" onchange="updateSlot2()">
-              <option value="0">None (Lv 0)</option>
-              <option value="1">Target: Level 1</option>
-              <option value="2">Target: Level 2</option>
-              <option value="3">Target: Level 3</option>
-              <option value="4">Target: Level 4</option>
-              <option value="5" selected>Target: Level 5 (Max)</option>
+            <img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="Enchant" loading="lazy">
+            2. Enchant Plan
+          </div>
+          <div class="card-cost" id="cost_enchant">0</div>
+        </div>
+        <div class="card-body">
+          <div class="preset-row">
+            <span class="preset-label">ทางลัด:</span>
+            <button type="button" class="preset-chip" data-cur="0" data-target="7">เริ่มใหม่ → ครบ Lv 5</button>
+            <button type="button" class="preset-chip" data-cur="0" data-target="2">เริ่มใหม่ → Slot 4 + 3</button>
+            <button type="button" class="preset-chip" data-cur="2" data-target="4">มี 4 + 3 → Slot 2 Lv 2</button>
+            <button type="button" class="preset-chip" data-cur="2" data-target="7">มี 4 + 3 → Slot 2 Lv 5</button>
+          </div>
+
+          <div class="stage-selects">
+            <label class="stage-field">
+              <span>ตอนนี้มีแล้ว</span>
+              <select id="sel_cur_stage" class="method-select" onchange="onStageChange('cur')">
+                <option value="0" selected>ยังไม่ได้ออฟ</option>
+                <option value="1">Slot 4</option>
+                <option value="2">Slot 4 + 3</option>
+                <option value="3">Slot 4 + 3 + Slot 2 Lv 1</option>
+                <option value="4">Slot 4 + 3 + Slot 2 Lv 2</option>
+                <option value="5">Slot 4 + 3 + Slot 2 Lv 3</option>
+                <option value="6">Slot 4 + 3 + Slot 2 Lv 4</option>
+                <option value="7">Slot 4 + 3 + Slot 2 Lv 5 (Max)</option>
+              </select>
+            </label>
+            <label class="stage-field">
+              <span>อยากไปถึง</span>
+              <select id="sel_target_stage" class="method-select" onchange="onStageChange('target')">
+                <option value="0">ไม่ออฟ</option>
+                <option value="1">Slot 4</option>
+                <option value="2">Slot 4 + 3</option>
+                <option value="3">Slot 4 + 3 + Slot 2 Lv 1</option>
+                <option value="4">Slot 4 + 3 + Slot 2 Lv 2</option>
+                <option value="5">Slot 4 + 3 + Slot 2 Lv 3</option>
+                <option value="6">Slot 4 + 3 + Slot 2 Lv 4</option>
+                <option value="7" selected>Slot 4 + 3 + Slot 2 Lv 5 (Max)</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="stepper" id="stage_stepper"></div>
+          <div class="stepper-legend">
+            <span><i class="lg lg-done"></i>มีแล้ว</span>
+            <span><i class="lg lg-todo"></i>ต้องทำ</span>
+            <span><i class="lg lg-skip"></i>ไม่ได้ทำ</span>
+            <span class="hint" style="margin:0;">กดที่จุดเพื่อเลือกเป้าหมาย</span>
+          </div>
+
+          <div class="method-row" id="row_s4_method">
+            <label for="sel_s4_method"><img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="" loading="lazy">Slot 4 ใช้:</label>
+            <select id="sel_s4_method" class="method-select" onchange="updateEnchant()">
+              <option value="normal" selected>Normal Materials</option>
+              <option value="coupon">Use Coupon (x1)</option>
             </select>
           </div>
-          <div class="card-cost" id="cost_s2">0</div>
+          <div class="method-row" id="row_s3_method">
+            <label for="sel_s3_method"><img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="" loading="lazy">Slot 3 ใช้:</label>
+            <select id="sel_s3_method" class="method-select" onchange="updateEnchant()">
+              <option value="normal" selected>Normal Materials</option>
+              <option value="coupon">Use Coupon (x2)</option>
+            </select>
+          </div>
         </div>
-        <div class="card-body" id="body_s2">
-          <table class="s2-table">
-            <thead>
-              <tr>
-                <th>Level</th>
-                <th>Materials Required (Full Name)</th>
-                <th style="text-align:right">Cost</th>
-              </tr>
-            </thead>
-            <tbody id="list_s2"></tbody>
+      </div>
+
+      <!-- SHOPPING LIST -->
+      <div class="interactive-card" id="card_shop">
+        <div class="card-top">
+          <div class="card-title">3. ต้องเตรียมทั้งหมด</div>
+          <div class="view-toggle" role="group" aria-label="รูปแบบรายการ">
+            <button type="button" class="view-btn active" data-view="finished">ของสำเร็จ</button>
+            <button type="button" class="view-btn" data-view="raw">แตกเป็นวัตถุดิบ</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="shop-summary" id="shop_summary"></div>
+          <table class="shop-table">
+            <tbody id="shop_list"></tbody>
           </table>
+          <div class="shop-foot">
+            <div class="hint" id="shop_note" style="margin:0;"></div>
+            <button type="button" class="toolbar-btn" id="btn_copy_shop">คัดลอกรายการ</button>
+          </div>
+
+          <details class="step-details">
+            <summary>ดูแยกทีละขั้น</summary>
+            <table class="s2-table">
+              <thead>
+                <tr>
+                  <th>ขั้น</th>
+                  <th>Materials Required</th>
+                  <th style="text-align:right">Cost</th>
+                </tr>
+              </thead>
+              <tbody id="list_steps"></tbody>
+            </table>
+          </details>
         </div>
       </div>
 
       <!-- REFINE -->
       <div class="interactive-card">
         <div class="card-top">
-          <div class="card-title">5. Refinement &amp; Upgrade</div>
+          <div class="card-title">4. Refinement &amp; Upgrade</div>
           <div class="card-cost" id="cost_refine">0</div>
         </div>
         <div class="card-body">
@@ -727,22 +977,21 @@
       { id: 'm_weapon', type: 'number', label: 'Dim Glacier Weapon' },
       { id: 'p_coupon', type: 'number', label: 'Slot 4 & 3 Dim Glacier Enchant Coupon' },
       { id: 'm_cube9', type: 'number', label: 'Dim Glacier Weapon 9 Refine Cube' },
-      { id: 'chk_s4', type: 'checkbox', label: 'Enable Slot 4' },
+      { id: 'sel_cur_stage', type: 'select', label: 'Current Enchant Stage' },
+      { id: 'sel_target_stage', type: 'select', label: 'Target Enchant Stage' },
       { id: 'sel_s4_method', type: 'select', label: 'Slot 4 Method' },
-      { id: 'chk_s3', type: 'checkbox', label: 'Enable Slot 3' },
       { id: 'sel_s3_method', type: 'select', label: 'Slot 3 Method' },
-      { id: 'sel_s2_lv', type: 'select', label: 'Slot 2 Target Level' },
       { id: 'qty_cube', type: 'integer', label: 'Cube Quantity' },
       { id: 'qty_device', type: 'integer', label: 'Device Quantity' },
       { id: 'manual_cost', type: 'number', label: 'Manual Refine Budget' }
     ];
     const FIELD_MAP = Object.fromEntries(FIELD_DEFS.map(field => [field.id, field]));
+    // ไฟล์/ค่าเก่า (ก่อนมี Enchant Plan) ใช้ checkbox Slot 4/3 + dropdown Slot 2 แทน stage
+    const LEGACY_STAGE_KEYS = ['chk_s4', 'chk_s3', 'sel_s2_lv'];
 
     let DATA = {
       prices: {},
-      s4_cost: 0,
-      s3_cost: 0,
-      s2_cost: 0,
+      enchant_cost: 0,
       refine_cost: 0
     };
     let saveTimer = null;
@@ -951,6 +1200,21 @@
       return { valid: errors.length === 0, errors, value: normalized };
     }
 
+    function migrateLegacyValues(values){
+      if (!values || typeof values !== 'object') return values;
+      if (!LEGACY_STAGE_KEYS.some(key => key in values)) return values;
+      const out = { ...values };
+      if (!('sel_cur_stage' in out) && !('sel_target_stage' in out)) {
+        const s4 = formatValueByType(values.chk_s4 ?? true, 'checkbox');
+        const s3 = formatValueByType(values.chk_s3 ?? true, 'checkbox');
+        const lv = Math.min(5, Math.max(0, parseInt(values.sel_s2_lv, 10) || 0));
+        out.sel_cur_stage = '0';
+        out.sel_target_stage = String(!s4 ? 0 : !s3 ? 1 : 2 + lv);
+      }
+      LEGACY_STAGE_KEYS.forEach(key => delete out[key]);
+      return out;
+    }
+
     function getPayloadValuesAndRows(payload){
       if (!payload) return { values: null, rows: null, source: 'unknown' };
       if (payload.values && typeof payload.values === 'object') {
@@ -992,7 +1256,9 @@
     function validateImportedPayload(payload, options = {}){
       const errors = [];
       const warnings = [];
-      const { values, rows, source } = getPayloadValuesAndRows(payload);
+      const extracted = getPayloadValuesAndRows(payload);
+      const { rows, source } = extracted;
+      const values = migrateLegacyValues(extracted.values);
       if (!values || typeof values !== 'object') {
         return { ok: false, errors: ['ไม่พบโครงสร้างข้อมูลที่รองรับ'], warnings, normalizedValues: null };
       }
@@ -1114,7 +1380,14 @@
       FIELD_DEFS.forEach(field => {
         const el = document.getElementById(field.id);
         if (!el) return;
-        defaults[field.id] = field.type === 'checkbox' ? el.defaultChecked : el.defaultValue;
+        if (field.type === 'checkbox') {
+          defaults[field.id] = el.defaultChecked;
+        } else if (el.tagName === 'SELECT') {
+          const opt = Array.from(el.options).find(o => o.defaultSelected) || el.options[0];
+          defaults[field.id] = opt ? opt.value : '';
+        } else {
+          defaults[field.id] = el.defaultValue;
+        }
       });
       clearSavedState();
       applyStateValues(defaults, { persist: true });
@@ -1378,7 +1651,7 @@
     // Main Calculation Loop
     function recalc() {
       readPrices();
-      updateSlot4(); // will call updateSlot3 -> updateSlot2 -> updateRefine -> Total
+      updateEnchant(); // -> updateRefine -> Total
       scheduleSave();
     }
 
@@ -1446,240 +1719,256 @@
       };
     }
 
-    function getMatRow(name, qty) {
-      return `<div class="mat-row">
-        <span class="mat-name">${renderItemLabel(name, { smallIcon: true, tight: true })}</span>
-        <span class="mat-qty">x ${qty}</span>
-      </div>`;
-    }
+    // ===== Enchant Plan: ลำดับการออฟเป็นเส้นเดียว 0 (ยังไม่ออฟ) -> 7 (Slot 2 Lv 5) =====
+    const MAX_STAGE = 7;
+    const STAGE_SHORT = ['เริ่ม', 'S4', 'S3', 'Lv1', 'Lv2', 'Lv3', 'Lv4', 'Lv5'];
+    const STAGE_NAMES = [
+      'ยังไม่ได้ออฟ', 'Enchant Slot 4', 'Enchant Slot 3',
+      'Slot 2 Lv 1', 'Slot 2 Lv 2', 'Slot 2 Lv 3', 'Slot 2 Lv 4', 'Slot 2 Lv 5'
+    ];
+    const STAGE_ICONS = [
+      'assets/img/Dim%20Glacier%20Weapon.png',
+      'assets/img/slot_34_enchant.png', 'assets/img/slot_34_enchant.png',
+      'assets/img/slot_2_enchant.png', 'assets/img/slot_2_enchant.png', 'assets/img/slot_2_enchant.png',
+      'assets/img/slot_2_enchant.png', 'assets/img/slot_2_enchant.png'
+    ];
+    // ชื่อ "สถานะ" (มีอะไรแล้วบ้าง) ใช้ตอนสรุป จาก -> ถึง
+    const STATE_NAMES = [
+      'ยังไม่ได้ออฟ', 'Slot 4', 'Slot 4 + 3',
+      'Slot 2 Lv 1', 'Slot 2 Lv 2', 'Slot 2 Lv 3', 'Slot 2 Lv 4', 'Slot 2 Lv 5'
+    ];
+    const PRICE_KEY_BY_ITEM = {
+      "Snow Flower Magic Stone Extract": 'EXT',
+      "Shining Snow Flower Magic Stone Extract": 'SHIN',
+      "Brilliant Snow Flower Magic Stone Extract": 'BRIL',
+      "Glacier Extract": 'GLA',
+      "Encroached Magical Crystal": 'ENC',
+      "Neutralized Magical Crystal": 'NEU',
+      "Miasmal Spell": 'MIA',
+      "Slot 4 & 3 Dim Glacier Enchant Coupon": 'COUPON'
+    };
+    let shopView = 'finished';
+    let shopCopyText = '';
 
-    function updateSlot4() {
-      const chk = document.getElementById('chk_s4');
-      const method = document.getElementById('sel_s4_method');
-      const p = DATA.prices;
+    // วัตถุดิบของแต่ละขั้น (index = stage ที่จะได้หลังทำขั้นนั้น)
+    function getStageSteps(){
+      const s4Normal = document.getElementById('sel_s4_method').value === 'normal';
+      const s3Normal = document.getElementById('sel_s3_method').value === 'normal';
+      const EXT = "Snow Flower Magic Stone Extract";
+      const SHIN = "Shining Snow Flower Magic Stone Extract";
+      const BRIL = "Brilliant Snow Flower Magic Stone Extract";
+      const GLA = "Glacier Extract";
+      const ENC = "Encroached Magical Crystal";
+      const NEU = "Neutralized Magical Crystal";
+      const MIA = "Miasmal Spell";
+      const COUPON = "Slot 4 & 3 Dim Glacier Enchant Coupon";
+      const s2 = (ext, shin, bril, gla, enc, neu, mia) => [
+        { qty: ext, name: EXT },
+        { qty: shin, name: SHIN },
+        { qty: bril, name: BRIL },
+        { qty: gla, name: GLA },
+        { qty: enc, name: ENC },
+        { qty: neu, name: NEU },
+        { qty: mia, name: MIA },
+      ].filter(d => d.qty > 0);
 
-      let cost = 0;
-      let html = "";
-
-      if (chk.checked) {
-        method.disabled = false;
-        document.getElementById('card_s4').classList.remove('disabled');
-        if (method.value === 'normal') {
-          cost = (10 * p.EXT) + (15 * p.SHIN) + (25 * p.BRIL);
-          html += getMatRow("Snow Flower Magic Stone Extract", 10);
-          html += getMatRow("Shining Snow Flower Magic Stone Extract", 15);
-          html += getMatRow("Brilliant Snow Flower Magic Stone Extract", 25);
-        } else {
-          cost = (10 * p.EXT) + (15 * p.SHIN) + (1 * p.COUPON);
-          html += getMatRow("Snow Flower Magic Stone Extract", 10);
-          html += getMatRow("Shining Snow Flower Magic Stone Extract", 15);
-          html += getMatRow("Slot 4 & 3 Dim Glacier Enchant Coupon", 1);
-        }
-      } else {
-        method.disabled = true;
-        document.getElementById('card_s4').classList.add('disabled');
-      }
-
-      document.getElementById('cost_s4').innerText = fmt(cost);
-      document.getElementById('list_s4').innerHTML = html;
-      DATA.s4_cost = cost;
-
-      updateSlot3(); // Propagate change
-    }
-
-    function updateSlot3() {
-      const chk_s4 = document.getElementById('chk_s4');
-      const chk = document.getElementById('chk_s3');
-      const method = document.getElementById('sel_s3_method');
-      const p = DATA.prices;
-
-      // Dependency
-      if (!chk_s4.checked) {
-        chk.checked = false;
-        chk.disabled = true;
-      } else {
-        chk.disabled = false;
-      }
-
-      let cost = 0;
-      let html = "";
-
-      if (chk.checked) {
-        method.disabled = false;
-        document.getElementById('card_s3').classList.remove('disabled');
-        if (method.value === 'normal') {
-          cost = (15 * p.EXT) + (20 * p.SHIN) + (35 * p.BRIL);
-          html += getMatRow("Snow Flower Magic Stone Extract", 15);
-          html += getMatRow("Shining Snow Flower Magic Stone Extract", 20);
-          html += getMatRow("Brilliant Snow Flower Magic Stone Extract", 35);
-        } else {
-          cost = (15 * p.EXT) + (20 * p.SHIN) + (2 * p.COUPON);
-          html += getMatRow("Snow Flower Magic Stone Extract", 15);
-          html += getMatRow("Shining Snow Flower Magic Stone Extract", 20);
-          html += getMatRow("Slot 4 & 3 Dim Glacier Enchant Coupon", 2);
-        }
-      } else {
-        method.disabled = true;
-        document.getElementById('card_s3').classList.add('disabled');
-      }
-
-      document.getElementById('cost_s3').innerText = fmt(cost);
-      document.getElementById('list_s3').innerHTML = html;
-      DATA.s3_cost = cost;
-
-      updateSlot2(); // Propagate change
-    }
-
-    function updateSlot2() {
-      const chk_s3 = document.getElementById('chk_s3');
-      const sel = document.getElementById('sel_s2_lv');
-      const card = document.getElementById('card_s2');
-      const body = document.getElementById('body_s2');
-
-      // Dependency
-      if (!chk_s3.checked) {
-        sel.value = "0";
-        sel.disabled = true;
-      } else {
-        sel.disabled = false;
-      }
-
-      const targetLv = parseInt(sel.value);
-      const p = DATA.prices;
-
-      const levels = [
-        { cost: 0, items: [] },
-        {
-          cost: (30*p.EXT) + (40*p.SHIN) + (60*p.BRIL) + (50*p.GLA),
-          items: [
-            { qty: 30, name: "Snow Flower Magic Stone Extract" },
-            { qty: 40, name: "Shining Snow Flower Magic Stone Extract" },
-            { qty: 60, name: "Brilliant Snow Flower Magic Stone Extract" },
-            { qty: 50, name: "Glacier Extract" },
-          ]
-        },
-        {
-          cost: (15*p.EXT) + (20*p.SHIN) + (30*p.BRIL) + (25*p.GLA) + (5*p.ENC) + (5*p.NEU),
-          items: [
-            { qty: 15, name: "Snow Flower Magic Stone Extract" },
-            { qty: 20, name: "Shining Snow Flower Magic Stone Extract" },
-            { qty: 30, name: "Brilliant Snow Flower Magic Stone Extract" },
-            { qty: 25, name: "Glacier Extract" },
-            { qty: 5,  name: "Encroached Magical Crystal" },
-            { qty: 5,  name: "Neutralized Magical Crystal" },
-          ]
-        },
-        {
-          cost: (20*p.EXT) + (30*p.SHIN) + (40*p.BRIL) + (35*p.GLA) + (7*p.ENC) + (7*p.NEU) + (1*p.MIA),
-          items: [
-            { qty: 20, name: "Snow Flower Magic Stone Extract" },
-            { qty: 30, name: "Shining Snow Flower Magic Stone Extract" },
-            { qty: 40, name: "Brilliant Snow Flower Magic Stone Extract" },
-            { qty: 35, name: "Glacier Extract" },
-            { qty: 7,  name: "Encroached Magical Crystal" },
-            { qty: 7,  name: "Neutralized Magical Crystal" },
-            { qty: 1,  name: "Miasmal Spell" },
-          ]
-        },
-        {
-          cost: (30*p.EXT) + (40*p.SHIN) + (50*p.BRIL) + (45*p.GLA) + (10*p.ENC) + (10*p.NEU) + (2*p.MIA),
-          items: [
-            { qty: 30, name: "Snow Flower Magic Stone Extract" },
-            { qty: 40, name: "Shining Snow Flower Magic Stone Extract" },
-            { qty: 50, name: "Brilliant Snow Flower Magic Stone Extract" },
-            { qty: 45, name: "Glacier Extract" },
-            { qty: 10, name: "Encroached Magical Crystal" },
-            { qty: 10, name: "Neutralized Magical Crystal" },
-            { qty: 2,  name: "Miasmal Spell" },
-          ]
-        },
-        {
-          cost: (40*p.EXT) + (50*p.SHIN) + (65*p.BRIL) + (70*p.GLA) + (15*p.ENC) + (15*p.NEU) + (3*p.MIA),
-          items: [
-            { qty: 40, name: "Snow Flower Magic Stone Extract" },
-            { qty: 50, name: "Shining Snow Flower Magic Stone Extract" },
-            { qty: 65, name: "Brilliant Snow Flower Magic Stone Extract" },
-            { qty: 70, name: "Glacier Extract" },
-            { qty: 15, name: "Encroached Magical Crystal" },
-            { qty: 15, name: "Neutralized Magical Crystal" },
-            { qty: 3,  name: "Miasmal Spell" },
-          ]
-        }
+      return [
+        null,
+        [{ qty: 10, name: EXT }, { qty: 15, name: SHIN }, s4Normal ? { qty: 25, name: BRIL } : { qty: 1, name: COUPON }],
+        [{ qty: 15, name: EXT }, { qty: 20, name: SHIN }, s3Normal ? { qty: 35, name: BRIL } : { qty: 2, name: COUPON }],
+        s2(30, 40, 60, 50, 0, 0, 0),
+        s2(15, 20, 30, 25, 5, 5, 0),
+        s2(20, 30, 40, 35, 7, 7, 1),
+        s2(30, 40, 50, 45, 10, 10, 2),
+        s2(40, 50, 65, 70, 15, 15, 3),
       ];
+    }
 
-      let totalCost = 0;
-      let html = "";
+    function getBestUnitPrice(name){
+      const key = PRICE_KEY_BY_ITEM[name];
+      return key ? (DATA.prices[key] || 0) : (getMarketPriceByName(name) || 0);
+    }
 
-      if (sel.disabled) {
-        card.classList.add('disabled');
-        sel.classList.remove('select-attn');
-        body.style.display = 'block';
-        html = `<tr>
-          <td colspan="3">
-            <div style="padding:10px; background:#fbfbfb; border:1px dashed #ddd; border-radius:8px;">
-              <b>Slot 2 ถูกล็อก</b><br/>
-              <span class="hint" style="font-size:12px; color:#666;">
-                ต้องเปิด <b>Enchant Slot 3</b> ก่อน ถึงจะเลือก Target Level ได้
-              </span>
-            </div>
-          </td>
+    function addQty(map, name, qty){
+      map.set(name, (map.get(name) || 0) + qty);
+    }
+
+    function expandToRaw(name, qty, map){
+      const recipe = RECIPES[name];
+      if (!recipe) return addQty(map, name, qty);
+      recipe.forEach(part => expandToRaw(part.name, part.qty * qty, map));
+    }
+
+    function getStageValues(){
+      const curSel = document.getElementById('sel_cur_stage');
+      const targetSel = document.getElementById('sel_target_stage');
+      const cur = Math.min(MAX_STAGE, Math.max(0, parseInt(curSel.value, 10) || 0));
+      const target = Math.max(cur, Math.min(MAX_STAGE, parseInt(targetSel.value, 10) || 0));
+      return { cur, target };
+    }
+
+    function setStages(cur, target){
+      document.getElementById('sel_cur_stage').value = String(cur);
+      document.getElementById('sel_target_stage').value = String(Math.max(cur, target));
+      recalc();
+    }
+
+    function onStageChange(which){
+      const cur = parseInt(document.getElementById('sel_cur_stage').value, 10) || 0;
+      let target = parseInt(document.getElementById('sel_target_stage').value, 10) || 0;
+      // เปลี่ยน "ตอนนี้" จนทับเป้าหมาย -> ดันเป้าหมายไปขั้นถัดไป
+      if (which === 'cur' && target <= cur) target = Math.min(MAX_STAGE, cur + 1);
+      setStages(cur, target);
+    }
+
+    function renderStepper(cur, target){
+      const html = STAGE_SHORT.map((short, i) => {
+        const cls = ['step-node'];
+        if (i <= cur && cur > 0) cls.push('done');
+        else if (i > cur && i <= target) cls.push('todo');
+        else if (i > target) cls.push('skip');
+        if (i === cur) cls.push('is-current');
+        if (i === target && target > cur) cls.push('is-target');
+        const badge = cls.includes('done') ? '✔' : String(i);
+        const disabled = i < cur ? 'disabled' : '';
+        const title = i < cur ? `${STAGE_NAMES[i]} (มีแล้ว)` : `ตั้งเป้าหมาย: ${STAGE_NAMES[i]}`;
+        return `<button type="button" class="${cls.join(' ')}" data-stage="${i}" ${disabled} title="${escapeHtml(title)}">
+          <span class="step-dot"><img src="${STAGE_ICONS[i]}" alt="" loading="lazy"><span class="step-badge">${badge}</span></span>
+          <span class="step-label">${short}</span>
+        </button>`;
+      }).join('');
+      document.getElementById('stage_stepper').innerHTML = html;
+    }
+
+    function syncStageControls(cur, target){
+      const curSel = document.getElementById('sel_cur_stage');
+      const targetSel = document.getElementById('sel_target_stage');
+      curSel.value = String(cur);
+      targetSel.value = String(target);
+      Array.from(targetSel.options).forEach(opt => {
+        opt.disabled = parseInt(opt.value, 10) < cur;
+      });
+
+      document.querySelectorAll('.preset-chip').forEach(chip => {
+        chip.classList.toggle('active',
+          Number(chip.dataset.cur) === cur && Number(chip.dataset.target) === target);
+      });
+
+      // เลือก Coupon/Normal ได้เฉพาะขั้นที่ยังต้องทำ
+      document.getElementById('row_s4_method').style.display = (cur < 1 && target >= 1) ? '' : 'none';
+      document.getElementById('row_s3_method').style.display = (cur < 2 && target >= 2) ? '' : 'none';
+    }
+
+    function renderItemsInline(items){
+      return items.map(d =>
+        `<span class="s2-item"><span class="s2-line"><span class="s2-qty">- ${d.qty}x</span>${renderItemLabel(d.name, { smallIcon: true, tight: true })}</span></span>`
+      ).join('');
+    }
+
+    function updateEnchant(){
+      const { cur, target } = getStageValues();
+      syncStageControls(cur, target);
+      renderStepper(cur, target);
+
+      const steps = getStageSteps();
+      const todo = [];
+      for (let i = cur + 1; i <= target; i++) todo.push(i);
+
+      // รวมยอดข้ามทุกขั้นที่ต้องทำ
+      const finished = new Map();
+      let enchantCost = 0;
+      let stepRows = '';
+      todo.forEach(i => {
+        const stepCost = steps[i].reduce((sum, d) => sum + d.qty * getBestUnitPrice(d.name), 0);
+        enchantCost += stepCost;
+        steps[i].forEach(d => addQty(finished, d.name, d.qty));
+        stepRows += `<tr>
+          <td style="font-weight:bold; white-space:nowrap;"><span class="step-name"><img class="card-title-icon" src="${STAGE_ICONS[i]}" alt="" loading="lazy">${STAGE_NAMES[i]}</span></td>
+          <td>${renderItemsInline(steps[i])}</td>
+          <td class="num">${fmt(stepCost)}</td>
         </tr>`;
-        document.getElementById('list_s2').innerHTML = html;
-        document.getElementById('cost_s2').innerText = fmt(0);
-        DATA.s2_cost = 0;
-        updateRefine();
-        return;
+      });
+
+      let list = finished;
+      if (shopView === 'raw') {
+        list = new Map();
+        finished.forEach((qty, name) => expandToRaw(name, qty, list));
       }
 
-      if (targetLv === 0) {
-        card.classList.remove('disabled');
-        sel.classList.add('select-attn');
-        body.style.display = 'block';
-        html = `<tr>
-          <td colspan="3">
-            <div style="padding:10px; background:#fbfbff; border:1px dashed rgba(41,128,185,.45); border-radius:8px;">
-              <b>ยังไม่ได้เลือก Target Level</b><br/>
-              <span class="hint" style="font-size:12px; color:#555;">
-                เลือก Target Level ที่ dropdown ด้านบนเพื่อแสดงรายการวัสดุ + ต้นทุน
-              </span>
-            </div>
-          </td>
+      const summaryEl = document.getElementById('shop_summary');
+      const listEl = document.getElementById('shop_list');
+      const noteEl = document.getElementById('shop_note');
+      const copyBtn = document.getElementById('btn_copy_shop');
+
+      if (!todo.length) {
+        summaryEl.innerHTML = '';
+        listEl.innerHTML = `<tr><td><div class="shop-empty">
+          <b>ไม่มีขั้นที่ต้องทำ</b><br/>
+          <span class="hint" style="font-size:12px; color:#555;">เลือก "อยากไปถึง" ให้สูงกว่า "ตอนนี้มีแล้ว" เพื่อดูรายการวัตถุดิบ</span>
+        </div></td></tr>`;
+        noteEl.textContent = '';
+        copyBtn.disabled = true;
+        stepRows = `<tr><td colspan="3" class="hint">-</td></tr>`;
+        shopCopyText = '';
+      } else {
+        const from = STATE_NAMES[cur];
+        const to = STATE_NAMES[target];
+        summaryEl.innerHTML = `จาก <b>${escapeHtml(from)}</b> → <b>${escapeHtml(to)}</b> · ต้องทำ ${todo.length} ขั้น (${todo.map(i => STAGE_SHORT[i]).join(', ')})`;
+
+        let rowsHtml = '';
+        let listTotal = 0;
+        const copyLines = [];
+        list.forEach((qty, name) => {
+          const unit = shopView === 'raw' ? (getMarketPriceByName(name) || 0) : getBestUnitPrice(name);
+          listTotal += unit * qty;
+          copyLines.push(`${name} x${fmt(qty)}`);
+          rowsHtml += `<tr>
+            <td>${renderItemLabel(name, { smallIcon: true, tight: true })}</td>
+            <td class="shop-qty">x ${fmt(qty)}</td>
+            <td class="num shop-cost">${fmt(unit * qty)}</td>
+          </tr>`;
+        });
+        rowsHtml += `<tr class="shop-total">
+          <td colspan="2">${shopView === 'raw' ? 'รวม (ถ้า Craft เองทั้งหมด)' : 'รวมค่า Enchant'}</td>
+          <td class="num text-green" style="font-size:15px;">${fmt(listTotal)}</td>
         </tr>`;
-        document.getElementById('list_s2').innerHTML = html;
-        document.getElementById('cost_s2').innerText = fmt(0);
-        DATA.s2_cost = 0;
-        updateRefine();
-        return;
+        listEl.innerHTML = rowsHtml;
+        noteEl.textContent = shopView === 'raw'
+          ? '* แตกทุกอย่างที่ Craft ได้ลงไปเป็นวัตถุดิบ ราคาใช้ราคาตลาดของวัตถุดิบแต่ละตัว'
+          : '* ราคาต่อชิ้นใช้ Best Price (Craft หรือ Market ที่ถูกกว่า)';
+        copyBtn.disabled = false;
+        shopCopyText = `Dim Glacier: ${from} -> ${to}\n` + copyLines.join('\n');
       }
 
-      sel.classList.remove('select-attn');
-      card.classList.remove('disabled');
-      body.style.display = 'block';
-
-      for (let i = 1; i <= targetLv; i++) {
-        totalCost += levels[i].cost;
-
-        const itemsHtml = levels[i].items.map(d =>
-          `<span class="s2-item"><span class="s2-line"><span class="s2-qty">- ${d.qty}x</span>${renderItemLabel(d.name, { smallIcon: true, tight: true })}</span></span>`
-        ).join("");
-
-        html += `<tr>
-          <td style="font-weight:bold;">Lv ${i}</td>
-          <td>${itemsHtml}</td>
-          <td class="num">${fmt(levels[i].cost)}</td>
-        </tr>`;
-      }
-
-      html += `<tr style="background:#e8f6f3; font-weight:bold;">
-        <td colspan="2">Cumulative Cost (Lv 1 - ${targetLv})</td>
-        <td class="num text-green" style="font-size:16px;">${fmt(totalCost)}</td>
-      </tr>`;
-
-      document.getElementById('list_s2').innerHTML = html;
-      document.getElementById('cost_s2').innerText = fmt(totalCost);
-      DATA.s2_cost = totalCost;
+      document.getElementById('list_steps').innerHTML = stepRows;
+      document.getElementById('cost_enchant').innerText = fmt(enchantCost);
+      DATA.enchant_cost = enchantCost;
 
       updateRefine(); // Propagate change
+    }
+
+    function bindEnchantPlan(){
+      document.getElementById('stage_stepper').addEventListener('click', e => {
+        const node = e.target.closest('[data-stage]');
+        if (!node || node.disabled) return;
+        const { cur } = getStageValues();
+        setStages(cur, Number(node.dataset.stage));
+      });
+      document.querySelectorAll('.preset-chip').forEach(chip => {
+        chip.addEventListener('click', () => setStages(Number(chip.dataset.cur), Number(chip.dataset.target)));
+      });
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          shopView = btn.dataset.view;
+          document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b === btn));
+          updateEnchant();
+        });
+      });
+      document.getElementById('btn_copy_shop').addEventListener('click', async () => {
+        if (!shopCopyText) return;
+        const ok = await copyToClipboard(shopCopyText);
+        showToast(ok ? 'คัดลอกรายการแล้ว' : 'Copy failed');
+      });
     }
 
     function updateRefine() {
@@ -1698,18 +1987,22 @@
     }
 
     function updateTotalAndGimmick() {
-      const base = DATA.prices.WEAPON;
-      document.getElementById('cost_base').innerText = fmt(base);
+      const { cur, target } = getStageValues();
+      // ออฟไปแล้วอย่างน้อย 1 ช่อง = มีตัวอาวุธอยู่แล้ว ไม่ต้องนับค่าอาวุธ
+      const ownsWeapon = cur > 0;
+      const base = ownsWeapon ? 0 : DATA.prices.WEAPON;
+      document.getElementById('cost_base').innerText = ownsWeapon ? 'มีแล้ว' : fmt(base);
+      document.getElementById('card_base').classList.toggle('owned', ownsWeapon);
 
-      const total = base + DATA.s4_cost + DATA.s3_cost + DATA.s2_cost + DATA.refine_cost;
+      const total = base + DATA.enchant_cost + DATA.refine_cost;
 
       const rate = parse(document.getElementById('rate_thb').value);
       document.getElementById('total_zeny').innerText = fmt(total) + " Zeny";
       document.getElementById('total_thb').innerText = fmt((total/1000000)*rate) + " THB";
 
-      const s4 = document.getElementById('chk_s4').checked;
-      const s3 = document.getElementById('chk_s3').checked;
-      const s2 = parseInt(document.getElementById('sel_s2_lv').value);
+      const s4 = target >= 1;
+      const s3 = target >= 2;
+      const s2 = Math.max(0, target - 2);
 
       let title = "";
       let msg = "";
@@ -2129,6 +2422,7 @@
 
     // Init
     bindDataActions();
+    bindEnchantPlan();
     enhanceMarketPriceSection();
     if (!loadStateFromStorage()) recalc();
   </script>
