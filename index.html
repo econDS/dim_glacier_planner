@@ -693,20 +693,20 @@
     <!-- LEFT COLUMN: SETTINGS -->
     <div class="left-col">
       <div class="card" id="card_market">
-        <div class="section-header">Market Prices (Zeny)</div>
+        <div class="section-header">ราคาตลาด (Zeny)</div>
         <div style="margin:-8px 0 14px; font-size:12px; color:#888;">
-          Last price update: <strong>12/04/2569</strong>
+          อัปเดตราคาล่าสุด: <strong>12/04/2569</strong>
         </div>
         <div class="market-warning">
-          เว็บไซต์นี้ไม่ได้อัปเดตราคาให้อัตโนมัติ ผู้ใช้ต้องอัปเดตข้อมูลเอง และสามารถใช้ฟังก์ชัน import/export ในส่วน Data Management ช่วยจัดการข้อมูลได้
+          เว็บไซต์นี้ไม่ได้อัปเดตราคาให้อัตโนมัติ ผู้ใช้ต้องอัปเดตข้อมูลเอง และสามารถใช้ฟังก์ชันนำเข้า/ส่งออกในส่วนจัดการข้อมูลช่วยจัดการข้อมูลได้
         </div>
         <div class="input-group">
-          <label>Exchange Rate (1M = ? THB)</label>
+          <label>อัตราแลกเปลี่ยน (1M = ? บาท)</label>
           <input type="text" id="rate_thb" value="7.4" inputmode="decimal"
                  oninput="sanitizeRateTyping(this)" onblur="normalizeRateOnBlur(this)">
         </div>
 
-        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Raw Materials</div>
+        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">วัตถุดิบ</div>
         <div class="input-group"><label>Snow Flower Petal</label><input type="text" id="p_petal" value="10,400" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group"><label>Amethyst Fragment</label><input type="text" id="p_amethyst" value="8,550" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group"><label>Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="1,200" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
@@ -719,7 +719,7 @@
           <input type="text" id="p_brilliant" value="1,740,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
         </div>
 
-        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Finished Goods</div>
+        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">ไอเทมสำเร็จรูป</div>
         <div class="input-group"><label>Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="500,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group"><label>Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="150,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group"><label>Glacier Extract</label><input type="text" id="m_glacier_extract" value="2,390,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
@@ -730,7 +730,7 @@
           <input type="text" id="m_device" value="22,450,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
         </div>
 
-        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">Special</div>
+        <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">รายการพิเศษ</div>
         <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
 
         <div class="input-group">
@@ -745,13 +745,13 @@
       </div>
 
       <div class="card toolbar-card">
-        <div class="section-header">Data Management</div>
+        <div class="section-header">จัดการข้อมูล</div>
         <div class="toolbar-actions">
-          <button type="button" class="toolbar-btn primary" id="btn_import">Import File</button>
-          <button type="button" class="toolbar-btn" id="btn_reset">Reset Data</button>
-          <button type="button" class="toolbar-btn" id="btn_export_json">Export JSON</button>
-          <button type="button" class="toolbar-btn" id="btn_export_csv">Export CSV</button>
-          <button type="button" class="toolbar-btn" id="btn_export_excel" style="grid-column:1 / -1;">Export Excel</button>
+          <button type="button" class="toolbar-btn primary" id="btn_import">นำเข้าไฟล์</button>
+          <button type="button" class="toolbar-btn" id="btn_reset">รีเซ็ตข้อมูล</button>
+          <button type="button" class="toolbar-btn" id="btn_export_json">ส่งออก JSON</button>
+          <button type="button" class="toolbar-btn" id="btn_export_csv">ส่งออก CSV</button>
+          <button type="button" class="toolbar-btn" id="btn_export_excel" style="grid-column:1 / -1;">ส่งออก Excel</button>
         </div>
         <div class="toolbar-meta">
           บันทึกค่าอัตโนมัติลง localStorage ทุกครั้งที่แก้ไข และรองรับการนำเข้า/ส่งออก .json, .csv, .xlsx
@@ -761,7 +761,7 @@
       </div>
 
       <div class="card">
-        <div class="section-header">Best Price Analysis</div>
+        <div class="section-header">วิเคราะห์ราคาที่คุ้มที่สุด</div>
         <table class="tb-best">
           <tbody id="tb_compare"></tbody>
         </table>
@@ -778,7 +778,7 @@
         <div class="card-top">
           <div class="card-title">
             <img class="card-title-icon" src="assets/img/Dim%20Glacier%20Weapon.png" alt="Dim Glacier Weapon" loading="lazy">
-            1. Dim Glacier Weapon (Base)
+            1. Dim Glacier Weapon (อาวุธตั้งต้น)
           </div>
           <div class="card-cost" id="cost_base">0</div>
         </div>
@@ -789,7 +789,7 @@
         <div class="card-top">
           <div class="card-title">
             <img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="Enchant" loading="lazy">
-            2. Enchant Plan
+            2. แผน Enchant
           </div>
           <div class="card-cost" id="cost_enchant">0</div>
         </div>
@@ -813,7 +813,7 @@
                 <option value="4">Slot 4 + 3 + Slot 2 Lv 2</option>
                 <option value="5">Slot 4 + 3 + Slot 2 Lv 3</option>
                 <option value="6">Slot 4 + 3 + Slot 2 Lv 4</option>
-                <option value="7">Slot 4 + 3 + Slot 2 Lv 5 (Max)</option>
+                <option value="7">Slot 4 + 3 + Slot 2 Lv 5 (สูงสุด)</option>
               </select>
             </label>
             <label class="stage-field">
@@ -826,7 +826,7 @@
                 <option value="4">Slot 4 + 3 + Slot 2 Lv 2</option>
                 <option value="5">Slot 4 + 3 + Slot 2 Lv 3</option>
                 <option value="6">Slot 4 + 3 + Slot 2 Lv 4</option>
-                <option value="7" selected>Slot 4 + 3 + Slot 2 Lv 5 (Max)</option>
+                <option value="7" selected>Slot 4 + 3 + Slot 2 Lv 5 (สูงสุด)</option>
               </select>
             </label>
           </div>
@@ -842,15 +842,15 @@
           <div class="method-row" id="row_s4_method">
             <label for="sel_s4_method"><img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="" loading="lazy">Slot 4 ใช้:</label>
             <select id="sel_s4_method" class="method-select" onchange="updateEnchant()">
-              <option value="normal" selected>Normal Materials</option>
-              <option value="coupon">Use Coupon (x1)</option>
+              <option value="normal" selected>วัตถุดิบปกติ</option>
+              <option value="coupon">ใช้ Coupon (x1)</option>
             </select>
           </div>
           <div class="method-row" id="row_s3_method">
             <label for="sel_s3_method"><img class="card-title-icon" src="assets/img/slot_34_enchant.png" alt="" loading="lazy">Slot 3 ใช้:</label>
             <select id="sel_s3_method" class="method-select" onchange="updateEnchant()">
-              <option value="normal" selected>Normal Materials</option>
-              <option value="coupon">Use Coupon (x2)</option>
+              <option value="normal" selected>วัตถุดิบปกติ</option>
+              <option value="coupon">ใช้ Coupon (x2)</option>
             </select>
           </div>
         </div>
@@ -881,8 +881,8 @@
               <thead>
                 <tr>
                   <th>ขั้น</th>
-                  <th>Materials Required</th>
-                  <th style="text-align:right">Cost</th>
+                  <th>วัตถุดิบที่ต้องใช้</th>
+                  <th style="text-align:right">ค่าใช้จ่าย</th>
                 </tr>
               </thead>
               <tbody id="list_steps"></tbody>
@@ -894,25 +894,25 @@
       <!-- REFINE -->
       <div class="interactive-card">
         <div class="card-top">
-          <div class="card-title">4. Refinement &amp; Upgrade</div>
+          <div class="card-title">4. การ Refine และ Upgrade</div>
           <div class="card-cost" id="cost_refine">0</div>
         </div>
         <div class="card-body">
           <div class="input-group">
             <div>
               <strong><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Weapon%209%20Refine%20Cube.png" alt="Dim Glacier Weapon 9 Refine Cube" loading="lazy"><span class="item item-label" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</span></span></strong>
-              <div style="font-size:11px; color:#888;">Instant +9 (Market Price)</div>
+              <div style="font-size:11px; color:#888;">+9 ทันที (ราคาตลาด)</div>
             </div>
             <div>
               <input type="number" id="qty_cube" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
-              <span style="font-size:12px;">ea</span>
+              <span style="font-size:12px;">ชิ้น</span>
             </div>
           </div>
 
           <div class="input-group" style="margin-top:10px;">
             <div>
               <strong><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Refinement%20Device.png" alt="Dim Glacier Refinement Device" loading="lazy"><span class="item item-label" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</span></span></strong>
-              <div style="font-size:11px; color:var(--green);">Safety +1 (Auto Best Price: Craft/Market) + Add Consume Cost</div>
+              <div style="font-size:11px; color:var(--green);">Safety +1 (Best Price อัตโนมัติ: Craft/Market) + รวมค่าใช้ตอนใช้งาน</div>
               <div class="hint consume-line">
                 <span>Consume ต่อกล่อง:</span>
                 <span class="consume-list">
@@ -924,12 +924,12 @@
             </div>
             <div>
               <input type="number" id="qty_device" value="0" min="0" style="width:50px; text-align:center;" onchange="updateRefine()" onkeyup="updateRefine()">
-              <span style="font-size:12px;">ea</span>
+              <span style="font-size:12px;">ชิ้น</span>
             </div>
           </div>
 
           <div class="input-group" style="margin-top:10px; border-top:1px dashed #eee; padding-top:10px;">
-            <div>Manual Refine Budget (Ore/Fee)</div>
+            <div>งบ Refine กำหนดเอง (แร่/ค่าธรรมเนียม)</div>
             <input type="text" id="manual_cost" value="0" inputmode="numeric"
                    style="width:100px;"
                    oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
@@ -939,13 +939,13 @@
 
       <!-- GIMMICK -->
       <div class="gimmick-box">
-        <div class="gimmick-title" id="gimmick_title">Player Type Analysis</div>
-        <div id="gimmick_msg">Calculating...</div>
+        <div class="gimmick-title" id="gimmick_title">วิเคราะห์สไตล์ผู้เล่น</div>
+        <div id="gimmick_msg">กำลังคำนวณ...</div>
       </div>
 
       <!-- TOTAL -->
       <div class="grand-total">
-        <div style="font-size:14px; opacity:0.8;">Grand Total Budget</div>
+        <div style="font-size:14px; opacity:0.8;">งบประมาณรวมทั้งหมด</div>
         <div style="font-size:42px; font-weight:bold; margin:5px 0;" id="total_zeny">0 Zeny</div>
         <div style="font-size:24px; color:#f1c40f;" id="total_thb">0 THB</div>
       </div>
@@ -986,6 +986,17 @@
       { id: 'manual_cost', type: 'number', label: 'Manual Refine Budget' }
     ];
     const FIELD_MAP = Object.fromEntries(FIELD_DEFS.map(field => [field.id, field]));
+    const FIELD_UI_LABELS = {
+      rate_thb: 'อัตราแลกเปลี่ยน',
+      sel_cur_stage: 'ขั้น Enchant ปัจจุบัน',
+      sel_target_stage: 'เป้าหมาย Enchant',
+      sel_s4_method: 'วิธีทำ Slot 4',
+      sel_s3_method: 'วิธีทำ Slot 3',
+      qty_cube: 'จำนวน Refine Cube',
+      qty_device: 'จำนวน Refinement Device',
+      manual_cost: 'งบ Refine กำหนดเอง'
+    };
+    const getFieldLabel = field => FIELD_UI_LABELS[field.id] || field.label;
     // ไฟล์/ค่าเก่า (ก่อนมี Enchant Plan) ใช้ checkbox Slot 4/3 + dropdown Slot 2 แทน stage
     const LEGACY_STAGE_KEYS = ['chk_s4', 'chk_s3', 'sel_s2_lv'];
 
@@ -1087,7 +1098,7 @@
         values,
         fields: FIELD_DEFS.map(field => ({
           id: field.id,
-          label: field.label,
+          label: getFieldLabel(field),
           type: field.type,
           value: values[field.id]
         }))
@@ -1171,7 +1182,7 @@
 
       if (field.type === 'checkbox') {
         if (!isValidCheckboxValue(rawValue)) {
-          errors.push(`${field.label}: ต้องเป็น true/false หรือ 1/0 เท่านั้น`);
+          errors.push(`${getFieldLabel(field)}: ต้องเป็น true/false หรือ 1/0 เท่านั้น`);
         }
         return { valid: errors.length === 0, errors, value: normalized };
       }
@@ -1179,22 +1190,22 @@
       if (field.type === 'select') {
         const allowed = getAllowedSelectValues(field.id);
         if (!allowed.includes(normalized)) {
-          errors.push(`${field.label}: ค่า "${rawValue}" ไม่อยู่ในตัวเลือกที่อนุญาต`);
+          errors.push(`${getFieldLabel(field)}: ค่า "${rawValue}" ไม่อยู่ในตัวเลือกที่อนุญาต`);
         }
         return { valid: errors.length === 0, errors, value: normalized };
       }
 
       if (!Number.isFinite(normalized)) {
-        errors.push(`${field.label}: ต้องเป็นตัวเลข`);
+        errors.push(`${getFieldLabel(field)}: ต้องเป็นตัวเลข`);
         return { valid: false, errors, value: rawValue };
       }
 
       if (normalized < 0) {
-        errors.push(`${field.label}: ห้ามติดลบ`);
+        errors.push(`${getFieldLabel(field)}: ห้ามติดลบ`);
       }
 
       if (field.type === 'integer' && !Number.isInteger(normalized)) {
-        errors.push(`${field.label}: ต้องเป็นจำนวนเต็ม`);
+        errors.push(`${getFieldLabel(field)}: ต้องเป็นจำนวนเต็ม`);
       }
 
       return { valid: errors.length === 0, errors, value: normalized };
@@ -1292,7 +1303,8 @@
           if (!row) return;
           const rowLabel = row.label ?? row.Label;
           const rowType = row.type ?? row.Type;
-          if (rowLabel != null && String(rowLabel) !== field.label) {
+          const acceptedLabels = [field.label, getFieldLabel(field)];
+          if (rowLabel != null && !acceptedLabels.includes(String(rowLabel))) {
             errors.push(`${field.id}: label ถูกแก้จาก "${field.label}" เป็น "${rowLabel}"`);
           }
           if (rowType != null && String(rowType) !== field.type) {
@@ -1332,7 +1344,7 @@
       const lines = [title];
       if (validation.errors.length) {
         lines.push('');
-        lines.push('Errors:');
+        lines.push('ข้อผิดพลาด:');
         validation.errors.slice(0, 12).forEach((msg, idx) => {
           lines.push(`${idx + 1}. ${msg}`);
         });
@@ -1342,7 +1354,7 @@
       }
       if (validation.warnings.length) {
         lines.push('');
-        lines.push('Warnings:');
+        lines.push('คำเตือน:');
         validation.warnings.slice(0, 8).forEach((msg, idx) => {
           lines.push(`${idx + 1}. ${msg}`);
         });
@@ -1423,7 +1435,7 @@
         ...FIELD_DEFS.map(field => {
           const el = document.getElementById(field.id);
           const rawValue = field.type === 'checkbox' ? el.checked : el.value;
-          return [field.id, field.label, field.type, String(rawValue ?? '')];
+          return [field.id, getFieldLabel(field), field.type, String(rawValue ?? '')];
         })
       ];
       const csv = rows.map(row =>
@@ -1442,7 +1454,7 @@
         const el = document.getElementById(field.id);
         return {
           id: field.id,
-          label: field.label,
+          label: getFieldLabel(field),
           type: field.type,
           value: field.type === 'checkbox' ? el.checked : el.value
         };
@@ -1509,10 +1521,10 @@
         } else if (ext === 'csv') {
           payload = parseCsv(await file.text());
         } else if (ext === 'xlsx' || ext === 'xls') {
-          if (!window.XLSX) throw new Error('Excel library unavailable');
+          if (!window.XLSX) throw new Error('ไม่พบไลบรารี Excel');
           payload = readWorkbookValues(await file.arrayBuffer());
         } else {
-          throw new Error('Unsupported file type');
+          throw new Error('ไม่รองรับชนิดไฟล์นี้');
         }
 
         const validation = validateImportedPayload(payload, { allowPlainObject: true });
@@ -1967,7 +1979,7 @@
       document.getElementById('btn_copy_shop').addEventListener('click', async () => {
         if (!shopCopyText) return;
         const ok = await copyToClipboard(shopCopyText);
-        showToast(ok ? 'คัดลอกรายการแล้ว' : 'Copy failed');
+        showToast(ok ? 'คัดลอกรายการแล้ว' : 'คัดลอกไม่สำเร็จ');
       });
     }
 
@@ -2008,22 +2020,22 @@
       let msg = "";
 
       if (!s4) {
-        title = "The Minimalist (or The Weirdo?)";
+        title = "สายประหยัดสุด (หรือสายแปลก?)";
         msg = "คุณเป็นผู้เล่นที่แปลก! ไม่ออฟสกิล แล้วจะใช้อาวุธ Dim Glacier ทำมะเขืออะไรครับเนี่ย?";
       } else if (s4 && !s3) {
-        title = "The Beginner";
+        title = "มือใหม่หัดออฟ";
         msg = "คุณเป็นผู้เล่นหัดออฟ ออฟช่องสกิลเดียวก็แรงขึ้นนะ แต่ยังออฟสกิลได้อีกช่อง อย่าลืมทำต่อล่ะ!";
       } else if (s3 && s2 === 0) {
-        title = "The Budget Player";
+        title = "ผู้เล่นงบประหยัด";
         msg = "คุณเป็นผู้เล่นงบประหยัด ออฟแค่สกิล 2 ช่อง ก็เก็บเวลได้แล้ว สบายกระเป๋า!";
       } else if (s2 >= 1 && s2 <= 3) {
-        title = "The Mid-Tier Fighter";
+        title = "นักสู้ระดับกลาง";
         msg = "คุณเป็นผู้เล่นงบกลางๆ ออฟความแรงแค่นิดหน่อย Damage ก็ขึ้นมาเยอะแล้ว คุ้มค่าสุดๆ";
       } else if (s2 === 4) {
-        title = "The High Roller";
+        title = "สายเปย์ระดับสูง";
         msg = "คุณเป็นผู้เล่นงบสูง Lv 4 นี่ก็โหดมากแล้วนะ แทบจะสุดตารางแล้ว!";
       } else if (s2 === 5) {
-        title = "THE WHALE (Godlike)";
+        title = "สายเปย์ขั้นสุด (Godlike)";
         msg = "คุณเป็นผู้เล่นงบสูงเสียดฟ้า! เอาซะสุด แรงเบิ้มๆ ไปเลยพี่ ใครก็ฉุดไม่อยู่แล้วจังหวะนี้!";
       }
       document.getElementById('gimmick_title').innerText = title;
@@ -2303,7 +2315,7 @@
           <strong>${selfPrice != null ? fmt(selfPrice) : '-'}</strong>
         </div>
         <div style="opacity:.85; font-size:11px; margin-bottom:6px;">
-          (ด้านล่างคือวัตถุดิบการการสร้าง ด้านขวาคือราคาตลาดต่อชิ้น ณ ตอนนี้)
+          (ด้านล่างคือวัตถุดิบสำหรับ Craft ด้านขวาคือราคาตลาดต่อชิ้น ณ ตอนนี้)
         </div>
         ${rows}
         <div class="t-summary ${craftSummaryClass}">
@@ -2321,13 +2333,13 @@
 
       const chosenLabel = chosen === craft ? "Craft" : "Market";
       const diff = Math.abs(craft - market);
-      const cheaperLabel = craft === market ? "equal" : (craft < market ? "Craft" : "Market");
+      const cheaperLabel = craft === market ? "เท่ากัน" : (craft < market ? "Craft" : "Market");
       const diffText = craft === market
-        ? "Craft and Market are equal"
-        : `${fmt(diff)} cheaper: ${cheaperLabel}`;
+        ? "ราคา Craft และ Market เท่ากัน"
+        : `${fmt(diff)} ถูกกว่า: ${cheaperLabel}`;
 
       el.innerHTML = `
-        <div class="t-title">Best Price: ${escapeHtml(itemName)}</div>
+        <div class="t-title">ราคาที่คุ้มที่สุด: ${escapeHtml(itemName)}</div>
         <div class="t-sub">
           <span>Craft</span>
           <strong>${fmt(craft)}</strong>
@@ -2337,7 +2349,7 @@
           <strong>${fmt(market)}</strong>
         </div>
         <div class="t-sub" style="border-bottom:none; padding-bottom:0; margin-bottom:0;">
-          <span style="opacity:.9;">Selected</span>
+          <span style="opacity:.9;">รายการที่เลือก</span>
           <strong>${fmt(chosen)} (${chosenLabel})</strong>
         </div>
         <div style="opacity:.85; font-size:11px; margin-top:6px;">
@@ -2357,7 +2369,7 @@
       if (!text) return;
 
       const ok = await copyToClipboard(text);
-      showToast(ok ? `Copied: ${text}` : `Copy failed`);
+      showToast(ok ? `คัดลอกแล้ว: ${text}` : `คัดลอกไม่สำเร็จ`);
     });
 
     // Hover: show tooltip (if craftable) + highlight market rows
@@ -2429,8 +2441,6 @@
 
   <!-- Tooltip + Toast -->
   <div id="craftTooltip" aria-hidden="true"></div>
-  <div id="copyToast" aria-hidden="true">Copied</div>
+  <div id="copyToast" aria-hidden="true">คัดลอกแล้ว</div>
 </body>
 </html>
-
-
