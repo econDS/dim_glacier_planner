@@ -66,7 +66,9 @@ function failure(name,error) { report.failures.push({name,message:error.message|
 async function check(name,task,page) { try { const value=await task(); report.checks.push({name,status:'passed'}); console.log('PASS',name); return value; } catch(error) { failure(name,error); if(page&&!page.isClosed()) await capture(page,'failure-'+name,false).catch(()=>{}); return undefined; } finally { save(); } }
 async function top(page) {
   await page.evaluate(()=>{ for(const e of document.querySelectorAll('.container, .container *')) if(e.scrollLeft||e.scrollTop) e.scrollTo({left:0,top:0,behavior:'instant'}); window.scrollTo({left:0,top:0,behavior:'instant'}); });
-  await page.waitForFunction(()=>scrollX===0&&scrollY===0);
+  // Late reload scroll anchoring can move Chromium a few pixels after the first scroll.
+  // Repeat the real scroll action while retaining the exact zero-position assertion.
+  await page.waitForFunction(()=>{if(scrollX===0&&scrollY===0)return true;window.scrollTo({left:0,top:0,behavior:'instant'});return false;});
   await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
 }
 async function capture(page,name,settle=true) { if(settle) await top(page); const file=name.replace(/[^a-zA-Z0-9._-]/g,'-')+'.png'; await page.screenshot({path:path.join(OUTPUT,file),fullPage:false,animations:'disabled'}); report.screenshots.push({name,file,viewport:page.viewportSize(),...await page.evaluate(()=>({scrollX,scrollY})),url:normalize(page.url()),sha256:sha(fs.readFileSync(path.join(OUTPUT,file)))}); }
