@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "7794dc7a1381c9a8aac2fc728d305b779a099ebc",
+  "parentCommit": "911afcf30986e310e5cca233a678aebd3212ca1e",
+  "baseSubject": "ui: localize planner interface in Thai",
+  "parentSubject": "feat: add enchant planning and shopping list",
+  "publishing": {
+    "root": ".",
+    "entry": "index.html",
+    "url": "https://econds.github.io/dim_glacier_planner/",
+    "originalPreviewCommand": "python -m http.server 8765",
+    "originalTestCommands": [],
+    "originalTestNote": "No package.json, test files, or CI workflow at the baseline commit."
+  },
+  "files": {
+    "assets/img/Amethyst Fragment.png": "50387f226c062f9b4b4a938b9fa34fe096616b1534d70eb7f961665506a6dbf3",
+    "assets/img/Brilliant Snow Flower Magic Stone Extract.png": "df41a055826eddc372e81c162a4eccd3cce2a9745b3e61621f040d4a90382d12",
+    "assets/img/Dim Glacier Refinement Device.png": "310ccc75dd77f64b85c94c748df49e53831ab34d3d98778f5241d71e7eb3084f",
+    "assets/img/Dim Glacier Weapon 9 Refine Cube.png": "bafd6491dbe7cb3efaa44d0f2264863fd13da49318b4621f038ec5929bae7a1b",
+    "assets/img/Dim Glacier Weapon.png": "4fc243fb2612b36389e72215dffd47f1d0c23f371f1c9a121be8b396a386fce0",
+    "assets/img/Encroached Magical Crystal.png": "92e9cc188b3ce98fe83f41558a9b05a3b730268095f8143286f1b0d2a6dfdf11",
+    "assets/img/Encroached Magical Ore.png": "ea32efc978cc0eb0868830db6f0f5071dd53a8dedf2cc5c29ce22b7efa2a4649",
+    "assets/img/Glacier Extract.png": "a20b474e1e9563c2831590d8558ac7f1e8cdc4b2d83e0ceadc555e61a3b7ae19",
+    "assets/img/Miasmal Spell.png": "b155869d7a3782fdc432bf06dd3682a0dabf090019d64bb29011032b482c4cce",
+    "assets/img/Neutralized Magical Crystal.png": "69f446231fda16dfda6a405a2e6b8e31098b476b7eed5fabd4dc55d84d54738a",
+    "assets/img/Neutralized Magical Ore.png": "80f20bf79a9b304cbfc7d668b24a77f6a7b3b211711cce56735cb3ef66669eaa",
+    "assets/img/Shining Snow Flower Magic Stone Extract.png": "bdb22bb1f5d2fcdcde33060675a6cbacef5f7cc0353fddb1659cf97e535feba3",
+    "assets/img/Shining Snow Flower Magic Stone.png": "cbc53caf28f4ccc3a13c401758252ddda859b4634dc153578c4566226d92c6c5",
+    "assets/img/Slot 4 & 3 Dim Glacier Enchant Coupon.png": "9bec684de585e345e82448dfbcf763ea0959bd510896f84fa91b1b81c5838702",
+    "assets/img/Snow Flower Magic Stone Extract.png": "5cf683d30ed5d7312594a2ab649123b38417463827d7f7b94092b57bc18bc91e",
+    "assets/img/Snow Flower Magic Stone.png": "ccb1d683a3bffb86bd926a24764fad8b372762557ac61f271ae9f56847fcc478",
+    "assets/img/Snow Flower Petal.png": "621afb952817a050c7ca88bcf67f5bbadba8d20fb841975cb5ae7701b7e87fcf",
+    "assets/img/slot_2_enchant.png": "f0bc325e88c0ed8cb07265c13ae39f1466c80c163b1d3c5d75d99b06a7c69aff",
+    "assets/img/slot_34_enchant.png": "fc4adb6c37267f5ac7ac5d2d868d9ea64689dc309c746eb6a73caad4fb060038",
+    "index.html": "7761ae4e57c901e630a42577a59ef9ea46fbb15359e28acb7bc7310f1f9d23df"
+  },
+  "index": {
+    "sha256": "7761ae4e57c901e630a42577a59ef9ea46fbb15359e28acb7bc7310f1f9d23df",
+    "separatorNormalizedSha256": "b5685198609c6d2e9f588f01699e5b9b3bfeb512ea8b6d2c3692efbab87ec722",
+    "inlineStyles": [
+      {
+        "attributes": "",
+        "sha256": "dfa76ef7357338d6c2c5d2f8be5cbf35bae9ad1de9811f99fb7ba25bc4441c07"
+      }
+    ],
+    "scripts": [
+      {
+        "attributes": " src=\"https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js\"",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": "",
+        "sha256": "af1fda174a8c9b30244813f8af2de8631fe0567461c0ef322c2ddae3a5a6bdfe"
+      }
+    ],
+    "language": "th",
+    "title": "Dim Glacier Ultimate Planner",
+    "bodyFirstElement": "h1",
+    "hasSkipLink": false,
+    "hasHeaderElement": false
+  },
+  "theme": {
+    "mode": "fixed-light",
+    "bodyBackground": "#f4f7f6",
+    "cardBackground": "#ffffff",
+    "textColor": "#2c3e50",
+    "accent": "#2980b9",
+    "darkModeToggle": false,
+    "prefersColorSchemeSupport": false
+  },
+  "storage": {
+    "keys": [
+      "dim-glacier-planner-state-v1"
+    ],
+    "version": 1,
+    "scope": "localStorage",
+    "debounceMs": 150,
+    "fields": [
+      {
+        "id": "rate_thb",
+        "type": "decimal",
+        "label": "Exchange Rate"
+      },
+      {
+        "id": "p_petal",
+        "type": "number",
+        "label": "Snow Flower Petal"
+      },
+      {
+        "id": "p_amethyst",
+        "type": "number",
+        "label": "Amethyst Fragment"
+      },
+      {
+        "id": "p_enc_ore",
+        "type": "number",
+        "label": "Encroached Magical Ore"
+      },
+      {
+        "id": "p_neu_ore",
+        "type": "number",
+        "label": "Neutralized Magical Ore"
+      },
+      {
+        "id": "p_miasmal",
+        "type": "number",
+        "label": "Miasmal Spell"
+      },
+      {
+        "id": "p_sf_stone",
+        "type": "number",
+        "label": "Snow Flower Magic Stone"
+      },
+      {
+        "id": "p_shining_stone",
+        "type": "number",
+        "label": "Shining Snow Flower Magic Stone"
+      },
+      {
+        "id": "p_brilliant",
+        "type": "number",
+        "label": "Brilliant Snow Flower Magic Stone Extract"
+      },
+      {
+        "id": "m_sf_extract",
+        "type": "number",
+        "label": "Snow Flower Magic Stone Extract"
+      },
+      {
+        "id": "m_shining_extract",
+        "type": "number",
+        "label": "Shining Snow Flower Magic Stone Extract"
+      },
+      {
+        "id": "m_glacier_extract",
+        "type": "number",
+        "label": "Glacier Extract"
+      },
+      {
+        "id": "m_enc_crystal",
+        "type": "number",
+        "label": "Encroached Magical Crystal"
+      },
+      {
+        "id": "m_neu_crystal",
+        "type": "number",
+        "label": "Neutralized Magical Crystal"
+      },
+      {
+        "id": "m_device",
+        "type": "number",
+        "label": "Dim Glacier Refinement Device"
+      },
+      {
+        "id": "m_weapon",
+        "type": "number",
+        "label": "Dim Glacier Weapon"
+      },
+      {
+        "id": "p_coupon",
+        "type": "number",
+        "label": "Slot 4 & 3 Dim Glacier Enchant Coupon"
+      },
+      {
+        "id": "m_cube9",
+        "type": "number",
+        "label": "Dim Glacier Weapon 9 Refine Cube"
+      },
+      {
+        "id": "sel_cur_stage",
+        "type": "select",
+        "label": "Current Enchant Stage"
+      },
+      {
+        "id": "sel_target_stage",
+        "type": "select",
+        "label": "Target Enchant Stage"
+      },
+      {
+        "id": "sel_s4_method",
+        "type": "select",
+        "label": "Slot 4 Method"
+      },
+      {
+        "id": "sel_s3_method",
+        "type": "select",
+        "label": "Slot 3 Method"
+      },
+      {
+        "id": "qty_cube",
+        "type": "integer",
+        "label": "Cube Quantity"
+      },
+      {
+        "id": "qty_device",
+        "type": "integer",
+        "label": "Device Quantity"
+      },
+      {
+        "id": "manual_cost",
+        "type": "number",
+        "label": "Manual Refine Budget"
+      }
+    ],
+    "legacyStageKeys": [
+      "chk_s4",
+      "chk_s3",
+      "sel_s2_lv"
+    ],
+    "legacyMigration": "When neither current nor target stage is set, map legacy checkboxes/level to current 0 and target 0..7; drop legacy keys.",
+    "exportPayloadKeys": [
+      "version",
+      "exportedAt",
+      "app",
+      "values",
+      "fields"
+    ],
+    "shopViewPersisted": false
+  },
+  "fileSupport": {
+    "json": [
+      "import",
+      "export"
+    ],
+    "csv": [
+      "import",
+      "export"
+    ],
+    "xlsx": [
+      "import",
+      "export"
+    ],
+    "xls": [
+      "import"
+    ],
+    "excelDependency": "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js",
+    "excelExportSheet": "PlannerData",
+    "excelImportSheet": "first worksheet",
+    "tabularColumns": [
+      "id",
+      "label",
+      "type",
+      "value"
+    ],
+    "filePrefix": "dim-glacier-planner-",
+    "importValidation": [
+      "all25fieldsrequired",
+      "unknownfieldsrejected",
+      "selectvaluesvalidated",
+      "negativevaluesrejected",
+      "integerquantitiesvalidated",
+      "typeandlabelmetadatawhenpresentvalidated",
+      "versionmismatchwarnsonly",
+      "EnglishorThaiUIlabelaccepted"
+    ],
+    "spreadsheetUnavailable": "Excel export reports Thai status; Excel import shows Thai alert/status; other functionality remains available."
+  },
+  "features": {
+    "stageRange": [
+      0,
+      7
+    ],
+    "defaults": {
+      "sel_cur_stage": "0",
+      "sel_target_stage": "7",
+      "sel_s4_method": "normal",
+      "sel_s3_method": "normal",
+      "qty_cube": "0",
+      "qty_device": "0",
+      "manual_cost": "0",
+      "rate_thb": "7.4"
+    },
+    "enchantMethods": [
+      "normal",
+      "coupon"
+    ],
+    "presets": [
+      [
+        0,
+        7
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        7
+      ]
+    ],
+    "shoppingViews": [
+      "finished",
+      "raw"
+    ],
+    "stepDetails": true,
+    "shoppingClipboard": true,
+    "itemClipboard": true,
+    "marketTooltips": true,
+    "resetConfirmation": "native confirm",
+    "importValidationDialog": "native alert",
+    "eventOrDiscountModes": [],
+    "shareUrl": false,
+    "urlQueryReaderOrWriter": false,
+    "urlHashReaderOrWriter": false,
+    "historyMutation": false
+  },
+  "formulaNotes": {
+    "bestUnitPrice": "minimum of recipe acquisition cost and entered market price; ties select Market",
+    "base": "current stage > 0 means weapon already owned and base cost zero",
+    "enchant": "sum required steps current+1 through target, each material quantity times best unit price",
+    "refine": "qty_cube*CUBE + qty_device*(DEV+DEV_USE) + manual_cost",
+    "deviceUse": "40 petals + 10 best Encroached Crystals + 10 best Neutralized Crystals per device",
+    "total": "base + enchant + refine",
+    "thb": "(total / 1000000) * rate, display rounded to integer",
+    "rawView": "recursively expand craft recipes and use raw market price; does not change Enchant total"
+  },
+  "navigation": {
+    "bundleVersion": "1.2.0",
+    "toolId": "dim-glacier",
+    "theme": "light",
+    "portalUrl": "https://econds.github.io/ro_tools_portal/",
+    "assetDirectory": "assets/ro-suite/1.2.0",
+    "optionalRemoteCatalogEnabled": false,
+    "sourceCommit": "a3966bdda412f05b0756b5d139915e44894c0ee0",
+    "files": {
+      "nav.js": "d75be916445feb4febeaada437841a1b3be68db16a00673198c78fd6f6c8dc5f",
+      "catalog.snapshot.json": "800bb9c9d2b52a7fbae58e436b05529e69820fee3627d199da545a6f5e28f7dd",
+      "nav.lock.json": "3b0350135ba5f455b38799c7940492938a209e8e0a6570a5126cb40c36127358"
+    },
+    "releaseTagCommit": "df029e59f433d0a44be26798733df7a64bd049d4"
+  },
+  "defaultArithmeticOracle": {
+    "evidence": "independently computed from original source formulas and markup defaults; not a browser observation",
+    "bestPrices": {
+      "EXT": 415750,
+      "SHIN": 150000,
+      "GLA": 2126000,
+      "ENC": 1200000,
+      "NEU": 365750,
+      "DEV": 15997500,
+      "DEV_USE": 16073500
+    },
+    "stageCosts": [
+      49907500,
+      70136250,
+      229172500,
+      122415000,
+      168125250,
+      217480000,
+      310556250
+    ],
+    "totalZeny": 1167842750,
+    "displayThb": 8642,
+    "presetTotalZeny": {
+      "0->2": 120093750,
+      "2->4": 351587500,
+      "2->7": 1047749000
+    },
+    "oneDeviceRefineZeny": 32071000
+  }
+}
