@@ -55,7 +55,7 @@ jobs:
           BASE_SHA: 7794dc7a1381c9a8aac2fc728d305b779a099ebc
           BASE_ROOT: ${{ runner.temp }}/dim-base
         run: |
-          if ! grep -q '<ro-suite-nav ' index.html; then export BASELINE_ONLY=1; fi
+          grep -q '<ro-suite-nav ' index.html
           node tests/dim-nav.browser.cjs 2>&1 | tee qa-artifacts/browser-tests.log
       - name: Upload logs, reports, sample files, and screenshots even after failures
         if: always()

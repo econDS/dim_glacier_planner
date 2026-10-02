@@ -54,9 +54,9 @@ The reviewed release tag resolves to commit `df029e59f433d0a44be26798733df7a64bd
 
 ## Browser regression scope
 
-The browser harness is `tests/dim-nav.browser.cjs`; CI installs QA-only Playwright `1.55.1` outside the publishing root and archives the exact baseline Git tree into a separate directory. The workflow supplies `BASE_ROOT`, `BASE_SHA`, `SOURCE_SHA`, and `QA_OUTPUT`. Before production edits, it sets `BASELINE_ONLY=1`; after integration it compares current behavior with the same immutable baseline. The harness uses genuine clipboard and SheetJS behavior with real exported/imported files, including an import-only XLS fixture. Destination navigation interception verifies link targets only, not remote availability. Genuine XLSX tests fail if the SheetJS CDN is unavailable. Logs, screenshots, sample files, source SHA, and reports are uploaded even after failures. A not-run browser result remains a blocker, not a pass.
+The browser harness is `tests/dim-nav.browser.cjs`; CI installs QA-only Playwright `1.55.1` outside the publishing root and archives the exact baseline Git tree into a separate directory. The workflow supplies `BASE_ROOT`, `BASE_SHA`, `SOURCE_SHA`, and `QA_OUTPUT`. The historical QA-only commit set `BASELINE_ONLY=1` before production edits. The final workflow requires the integration to be present and compares current behavior with the same immutable baseline; removing navigation cannot silently turn final CI into baseline-only mode. The harness uses genuine clipboard and SheetJS behavior with real exported/imported files, including an import-only XLS fixture. Destination navigation interception verifies link targets only, not remote availability. Genuine XLSX tests fail if the SheetJS CDN is unavailable. Logs, screenshots, sample files, source SHA, and reports are uploaded even after failures. A not-run browser result remains a blocker, not a pass.
 
-Browser checks should exercise the following actual features and compare baseline/current output:
+Browser checks exercise the following actual features and compare baseline/current output:
 
 - 25 state fields, market prices, exchange rate, formatted numeric typing/blur, Thai input composition, and recalculation
 - Current/target stages `0..7`; presets `0→7`, `0→2`, `2→4`, `2→7`; stage stepper; target clamping; owned-weapon behavior
@@ -64,7 +64,7 @@ Browser checks should exercise the following actual features and compare baselin
 - Finished/raw shopping lists, individual stage details, shopping/item clipboard, best-price table and ingredient tooltips
 - Refine Cube count, Refinement Device count, and manual budget; include device acquisition and per-use consume costs
 - Autosave/reload, native reset confirmation cancel/accept, malformed saved data, and unrelated localStorage preservation
-- Supported file import/export and malformed import; both Excel available and unavailable branches
+- Supported real file import/export, baseline-file compatibility, and malformed import; Excel uses the real original SheetJS CDN
 - Mobile/desktop geometry, keyboard focus/Escape/Tab, repeated menu open/close, navigation failure fallback, and Thai UI visibility
 
 ### Storage and file support
@@ -103,3 +103,5 @@ Before any production edit, QA-only commit `c9b455c109d65637ca6d6cc5289a0cd83f83
 [Baseline evidence artifact](https://github.com/econDS/dim_glacier_planner/actions/runs/36965110368/artifacts/11209189035) contains the full inputs/results, native clipboard output, original and legacy import samples, source hashes, network inventory, and four viewport screenshots. ZIP SHA-256: `ba0f8987cc484f1748501b2c4b4fcf5dd5af0473c5e3f91c57a2b7be3cf663a7`. The mobile screenshot was visually inspected before integration.
 
 Local Chromium could not create its process singleton socket (`Operation not permitted`), so browser evidence comes from the authorized PR-only CI rather than a claimed local browser run. No production changes were made until the successful baseline artifact was retrieved and verified.
+
+The first integrated run passed navigation, geometry, calculation, clipboard, own-file round trips, legacy migration, and network checks, but failed five cross-baseline imports while polling a transient success message. The original 150ms autosave can replace that message. The QA-only fix records real status mutations from before file selection, requires the exact filename-bearing success transition, and still compares all imported inputs and outputs. Production import/storage code is unchanged. Additional checks preserve custom prices, owned Enchant stage, shopping view, and Refine budget through repeated menu toggles, reload, and every suite destination followed by Back.

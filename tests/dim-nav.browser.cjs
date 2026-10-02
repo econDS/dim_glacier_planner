@@ -157,8 +157,15 @@ function parseCsv(bytes) { const input=bytes.toString('utf8').replace(/^\uFEFF/,
 function rowsToValues(rows) { return Object.fromEntries(rows.map(r=>[r.id,String(r.value).replace(/,/g,'')])); }
 function normalizedValues(v) { return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,String(x).replace(/,/g,'')])); }
 async function importUpload(page,s,file) {
-  const chooser=page.waitForEvent('filechooser');await page.locator('#btn_import').click();await(await chooser).setFiles(file);await page.waitForFunction(expected=>document.getElementById('storage_status').textContent===expected,`นำเข้าข้อมูลจาก ${path.basename(file)} เรียบร้อย`);
+  const expectedStatus=`นำเข้าข้อมูลจาก ${path.basename(file)} เรียบร้อย`;
+  // Observe real status mutations rather than polling a transient status: the existing
+  // 150ms input autosave can legitimately replace success before a polling frame.
+  // This passive observer neither changes status nor substitutes any import behavior.
+  await page.evaluate(()=>{const node=document.getElementById('storage_status');const statuses=[];const observer=new MutationObserver(()=>statuses.push(node.textContent));observer.observe(node,{childList:true,characterData:true,subtree:true});window.__dimImportObservation={statuses,observer};});
+  try{const chooser=page.waitForEvent('filechooser');await page.locator('#btn_import').click();await(await chooser).setFiles(file);await page.waitForFunction(expected=>window.__dimImportObservation.statuses.includes(expected),expectedStatus);}
+  finally{const observed=await page.evaluate(()=>{const x=window.__dimImportObservation;const statuses=x?.statuses||[];x?.observer.disconnect();delete window.__dimImportObservation;return statuses;});(s.importObservations||=[]).push({file:path.basename(file),expectedStatus,observed});}
 }
+
 async function formatRoundTrips(page,s,base) {
   await reset(page,s);await fill(page,{rate_thb:19.25,p_petal:12345,p_amethyst:6789,m_weapon:999999,sel_cur_stage:'2',sel_target_stage:'6',qty_cube:2,qty_device:1,manual_cost:4321098});
   s.formats={};const original=await snapshot(page);s.roundTripOriginal=original;
@@ -186,6 +193,27 @@ async function formatRoundTrips(page,s,base) {
   await check(s.id+'-invalid-import-no-state-loss',async()=>{
     const before=await snapshot(page);const file=path.join(OUTPUT,s.id+'-invalid-import.json');fs.writeFileSync(file,JSON.stringify({version:1,app:'Dim Glacier Ultimate Planner',values:{p_petal:-1}}));
     const dialogEvent=page.waitForEvent('dialog');const importAction=page.locator('#file_import').setInputFiles(file);const dialog=await dialogEvent;s.dialogs.push({type:dialog.type(),message:dialog.message(),action:'dismiss invalid import alert'});assert.equal(dialog.type(),'alert');await dialog.dismiss();await importAction;assert.deepEqual(await snapshot(page),before);await sentinel(page,s);
+  },page);
+}
+async function customStateNavigation(page,s,base) {
+  await check(s.id+'-custom-state-navigation-and-reload',async()=>{
+    assert(s.formats.json,'Real custom JSON export is required');await importUpload(page,s,path.join(OUTPUT,s.formats.json.file));
+    const before=await snapshot(page);assert(before.owned);assert.equal(before.inputs.sel_cur_stage,'2');assert.equal(before.inputs.sel_target_stage,'6');assert.equal(before.inputs.qty_cube,'2');assert.equal(before.inputs.qty_device,'1');assert.equal(before.inputs.manual_cost,'4,321,098');
+    s.customStateNavigation={before,actions:[]};
+    const unchanged=async(label,expected)=>{const result=await snapshot(page);assert.deepEqual(result,expected,label);await sentinel(page,s);s.customStateNavigation.actions.push(label);};
+    if(s.kind==='normal'){
+      const button=page.locator('ro-suite-nav .bar button');
+      await button.focus();await page.keyboard.press('Enter');assert.equal(await button.getAttribute('aria-expanded'),'true');await unchanged('custom state while Enter menu open',before);await page.keyboard.press('Escape');assert.equal(await button.getAttribute('aria-expanded'),'false');await unchanged('custom state after Escape',before);
+      await page.keyboard.press('Space');assert.equal(await button.getAttribute('aria-expanded'),'true');await page.keyboard.press('Space');assert.equal(await button.getAttribute('aria-expanded'),'false');await unchanged('custom state after Space toggle pair',before);
+      await button.click();await button.click();assert.equal(await button.getAttribute('aria-expanded'),'false');await unchanged('custom state after repeated click pair',before);
+    }
+    await page.locator('[data-view="raw"]').click();const raw=await snapshot(page);s.customStateNavigation.raw=raw;
+    if(s.kind==='normal'){const button=page.locator('ro-suite-nav .bar button');await button.click();await unchanged('raw shopping while menu open',raw);await button.click();await unchanged('raw shopping after menu closes',raw);}
+    // The genuine app does not persist its raw/finished view. Restore finished before
+    // reload so all persisted planner state can be compared without inventing a feature.
+    await page.locator('[data-view="finished"]').click();await unchanged('finished view restored without changing custom plan',before);
+    if(s.kind==='fallback'){const link=page.locator('ro-suite-nav a');await link.focus();await Promise.all([page.waitForURL(PORTAL),page.keyboard.press('Enter')]);assert.equal(await page.title(),'Dim QA destination');await page.goBack({waitUntil:'networkidle'});await settled(page);await unchanged('custom state after blocked-script Portal and Back',before);assert.equal(await page.locator('ro-suite-nav').evaluate(e=>!!e.shadowRoot),false);}
+    await page.reload({waitUntil:'networkidle'});await settled(page);await unchanged('custom state after reload',before);s.customStateNavigation.afterReload=await snapshot(page);if(base){assert.deepEqual(before,base.customStateNavigation.before);assert.deepEqual(raw,base.customStateNavigation.raw);assert.deepEqual(s.customStateNavigation.afterReload,base.customStateNavigation.afterReload);}
   },page);
 }
 async function legacyMigration(page,s,base) {
@@ -218,8 +246,8 @@ async function fallback(page,s,base) {
   const host=page.locator('ro-suite-nav'),link=host.locator('a');assert.equal(await host.count(),1);assert.equal(await host.evaluate(e=>!!e.shadowRoot),false);assert(s.blockedRequests.length>0,'Actual nav.js request blocked');assert(s.blockedRequests.every(x=>x===s.navScriptUrl));assert.equal(await link.count(),1);assert(await link.isVisible());assert.equal(await link.getAttribute('href'),PORTAL);await top(page);const box=await link.boundingBox();assert(box.width>=44&&box.height>=44);assert(box.x>=0&&box.x+box.width<=s.width+1);assert(box.y>=0&&box.y+box.height<=900);const g=await geometry(page);compareGeometry(g,base.geometry,'script-blocked fallback');s.fallback={box,geometry:g,blockedRequests:s.blockedRequests};await capture(page,s.id+'-fallback-visible');await page.keyboard.press('Tab');assert(await link.evaluate(e=>document.activeElement===e));await Promise.all([page.waitForURL(PORTAL),page.keyboard.press('Enter')]);assert.equal(await page.title(),'Dim QA destination');await page.goBack({waitUntil:'networkidle'});await settled(page);assert.equal(await host.evaluate(e=>!!e.shadowRoot),false);s.fallback.keyboard=['Tab fallback','Enter exact Portal','Back preserves blocked script and calculator'];
 }
 async function destinations(page,s) {
-  s.navigation.destinationInteractions=[];
-  for(const destination of DESTINATIONS){await check(s.id+'-destination-'+DESTINATIONS.indexOf(destination),async()=>{const host=page.locator('ro-suite-nav');await host.locator('.bar button').waitFor();if(destination!==PORTAL)await host.locator('.bar button').click();const link=destination===PORTAL?host.locator('.bar > a'):host.locator(`#tools a[href="${destination}"]`);await link.focus();await Promise.all([page.waitForURL(destination),page.keyboard.press('Enter')]);assert.equal(await page.title(),'Dim QA destination');await page.goBack({waitUntil:'networkidle'});await settled(page);await sentinel(page,s);s.navigation.destinationInteractions.push({destination,activation:'Enter',interceptedLocally:true});},page);}
+  s.navigation.destinationInteractions=[];await importUpload(page,s,path.join(OUTPUT,s.formats.json.file));
+  for(const destination of DESTINATIONS){await check(s.id+'-destination-'+DESTINATIONS.indexOf(destination),async()=>{const before=await snapshot(page);const host=page.locator('ro-suite-nav');await host.locator('.bar button').waitFor();if(destination!==PORTAL)await host.locator('.bar button').click();const link=destination===PORTAL?host.locator('.bar > a'):host.locator(`#tools a[href="${destination}"]`);await link.focus();await Promise.all([page.waitForURL(destination),page.keyboard.press('Enter')]);assert.equal(await page.title(),'Dim QA destination');await page.goBack({waitUntil:'networkidle'});await settled(page);await sentinel(page,s);const after=await snapshot(page);assert.deepEqual(after,before,'Every real suite destination and Back retains custom inputs, prices, inventory, Enchant, shopping and Refine results');s.navigation.destinationInteractions.push({destination,activation:'Enter',interceptedLocally:true,before,after});},page);}
 }
 async function runScenario(server,width,kind,base) {
   const id=`${kind}-${width}-light`;const s=report.scenarios[id]={id,kind,width,theme:'light',url:server.url,cases:{},dialogs:[],blockedRequests:[],network:{requests:[],responses:[],failedRequests:[],badResponses:[],console:[],pageErrors:[]}};
@@ -234,7 +262,7 @@ async function runScenario(server,width,kind,base) {
     await check(id+'-initial-inventory-geometry',async()=>{s.initial=await snapshot(page);assert.equal(Object.keys(s.initial.inputs).length,25);s.geometry=await geometry(page);s.title=await page.title();s.theme=await page.evaluate(()=>({body:getComputedStyle(document.body).backgroundColor,card:getComputedStyle(document.querySelector('.card')).backgroundColor,toggles:[...document.querySelectorAll('button,input,select')].filter(e=>!e.closest('ro-suite-nav')&&/theme|dark|light/i.test([e.id,e.getAttribute('aria-label')].join(' '))).map(e=>e.id)}));assert.equal(s.theme.body,'rgb(244, 247, 246)');assert.equal(s.theme.card,'rgb(255, 255, 255)');assert.deepEqual(s.theme.toggles,[]);if(base){assert.deepEqual(s.initial,base.initial);assert.deepEqual(s.theme,base.theme);compareGeometry(s.geometry,base.geometry,'collapsed nav');}await capture(page,id+'-initial');},page);
     if(kind==='normal')await check(id+'-navigation',()=>navigation(page,s,base),page);
     if(kind==='fallback')await check(id+'-fallback',()=>fallback(page,s,base),page);
-    await functional(page,s,base);await formatRoundTrips(page,s,base);await legacyMigration(page,s,base);
+    await functional(page,s,base);await formatRoundTrips(page,s,base);await customStateNavigation(page,s,base);await legacyMigration(page,s,base);
     if(kind==='normal'&&(width===390||width===1440))await destinations(page,s);
     await check(id+'-os-dark-preference-keeps-actual-light-theme',async()=>{await page.emulateMedia({colorScheme:'dark'});const styles=await page.evaluate(()=>({body:getComputedStyle(document.body).backgroundColor,card:getComputedStyle(document.querySelector('.card')).backgroundColor,nav:document.querySelector('ro-suite-nav')?.getAttribute('theme')||null}));assert.equal(styles.body,'rgb(244, 247, 246)');assert.equal(styles.card,'rgb(255, 255, 255)');if(kind!=='baseline')assert.equal(styles.nav,'light');s.osDarkPreference=styles;await page.emulateMedia({colorScheme:'light'});},page);
     await check(id+'-final-sentinel-query-hash',async()=>{s.storageFinal=await sentinel(page,s);},page);
