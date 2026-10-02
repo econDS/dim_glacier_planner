@@ -1,0 +1,33 @@
+{
+  "first": "#sel_cur_stage",
+  "result": ".grand-total",
+  "cue": ".first-run-guide",
+  "ready": "#total_zeny",
+  "themes": [
+    "light"
+  ],
+  "cases": [
+    {
+      "name": "default",
+      "fields": {}
+    },
+    {
+      "name": "level3-to5",
+      "fields": {
+        "sel_cur_stage": 5,
+        "sel_target_stage": 7
+      }
+    },
+    {
+      "name": "custom-price-refine",
+      "fields": {
+        "p_petal": 12345,
+        "rate_thb": 8,
+        "qty_cube": 1,
+        "qty_device": 2,
+        "manual_cost": 1234567
+      }
+    }
+  ],
+  "repo": "dim_glacier_planner"
+}

@@ -1,0 +1,320 @@
+{
+  "baseCommit": "53f41ce9878cd139c14679879b80850cd2df6f1e",
+  "headCommit": "local-candidate",
+  "indexSHA256": "6cf2d65380e1b925b741e714badfa0731b84818104522a8ba6efb8b0a79a481d",
+  "repo": "dim_glacier_planner",
+  "checks": [
+    {
+      "width": 360,
+      "colorScheme": "light",
+      "status": "PASS",
+      "checks": "first cue, original or lower overflow, unique IDs, native labels, minimum path, view-only state/output invariants"
+    },
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "status": "PASS",
+      "checks": "first cue, original or lower overflow, unique IDs, native labels, minimum path, view-only state/output invariants"
+    },
+    {
+      "width": 768,
+      "colorScheme": "light",
+      "status": "PASS",
+      "checks": "first cue, original or lower overflow, unique IDs, native labels, minimum path, view-only state/output invariants"
+    },
+    {
+      "width": 1440,
+      "colorScheme": "light",
+      "status": "PASS",
+      "checks": "first cue, original or lower overflow, unique IDs, native labels, minimum path, view-only state/output invariants"
+    }
+  ],
+  "geometry": [
+    {
+      "kind": "before",
+      "width": 360,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 2489.125,
+        "height": 33,
+        "width": 288
+      },
+      "result": {
+        "y": 2167.125,
+        "height": 195,
+        "width": 320
+      },
+      "cue": null,
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "before",
+      "width": 390,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 2322.125,
+        "height": 33,
+        "width": 318
+      },
+      "result": {
+        "y": 2048.125,
+        "height": 195,
+        "width": 350
+      },
+      "cue": null,
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "before",
+      "width": 768,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 2090.46875,
+        "height": 33,
+        "width": 343
+      },
+      "result": {
+        "y": 1876.46875,
+        "height": 147,
+        "width": 728
+      },
+      "cue": null,
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "before",
+      "width": 1440,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 377.75,
+        "height": 33,
+        "width": 459
+      },
+      "result": {
+        "y": 733,
+        "height": 147,
+        "width": 960
+      },
+      "cue": null,
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "after",
+      "width": 360,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 803.75,
+        "height": 33,
+        "width": 288
+      },
+      "result": {
+        "y": 1135.546875,
+        "height": 195,
+        "width": 320
+      },
+      "cue": {
+        "y": 225.75,
+        "height": 240,
+        "width": 320
+      },
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "after",
+      "width": 390,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 734.75,
+        "height": 33,
+        "width": 318
+      },
+      "result": {
+        "y": 1066.546875,
+        "height": 195,
+        "width": 350
+      },
+      "cue": {
+        "y": 225.75,
+        "height": 219,
+        "width": 350
+      },
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "after",
+      "width": 768,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 556.75,
+        "height": 33,
+        "width": 343
+      },
+      "result": {
+        "y": 831.9375,
+        "height": 147,
+        "width": 728
+      },
+      "cue": {
+        "y": 163.75,
+        "height": 163,
+        "width": 728
+      },
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    },
+    {
+      "kind": "after",
+      "width": 1440,
+      "colorScheme": "light",
+      "firstInput": {
+        "y": 556.75,
+        "height": 33,
+        "width": 459
+      },
+      "result": {
+        "y": 831.9375,
+        "height": 147,
+        "width": 960
+      },
+      "cue": {
+        "y": 163.75,
+        "height": 163,
+        "width": 1400
+      },
+      "overflow": 0,
+      "visibleInputs": 25,
+      "openDetails": 0
+    }
+  ],
+  "cases": {
+    "before": [
+      {
+        "name": "default",
+        "input": {},
+        "output": {
+          "cost_base": "50,000",
+          "cost_enchant": "1,167,792,750",
+          "cost_refine": "0",
+          "total_zeny": "1,167,842,750 Zeny",
+          "total_thb": "8,642 THB",
+          "shop_list": "Snow Flower Magic Stone Extract x 160 66,520,000 Shining Snow Flower Magic Stone Extract x 215 32,250,000 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Glacier Extract x 225 478,350,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,532,750 Miasmal Spell x 6 2,040,000 รวมค่า Enchant 1,167,792,750",
+          "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 25xBrilliant Snow Flower Magic Stone Extract 49,907,500 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 35xBrilliant Snow Flower Magic Stone Extract 70,136,250 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 229,172,500 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250"
+        }
+      },
+      {
+        "name": "level3-to5",
+        "input": {
+          "sel_cur_stage": 5,
+          "sel_target_stage": 7
+        },
+        "output": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "528,036,250",
+          "cost_refine": "0",
+          "total_zeny": "528,036,250 Zeny",
+          "total_thb": "3,907 THB",
+          "shop_list": "Snow Flower Magic Stone Extract x 70 29,102,500 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 115 200,100,000 Glacier Extract x 115 244,490,000 Encroached Magical Crystal x 25 30,000,000 Neutralized Magical Crystal x 25 9,143,750 Miasmal Spell x 5 1,700,000 รวมค่า Enchant 528,036,250",
+          "list_steps": "Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250"
+        }
+      },
+      {
+        "name": "custom-price-refine",
+        "input": {
+          "p_petal": 12345,
+          "rate_thb": 8,
+          "qty_cube": 1,
+          "qty_device": 2,
+          "manual_cost": 1234567
+        },
+        "output": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "537,907,125",
+          "cost_refine": "115,921,167",
+          "total_zeny": "653,828,292 Zeny",
+          "total_thb": "5,231 THB",
+          "shop_list": "Snow Flower Magic Stone Extract x 70 29,783,250 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 115 200,100,000 Glacier Extract x 115 253,437,000 Encroached Magical Crystal x 25 30,000,000 Neutralized Magical Crystal x 25 9,386,875 Miasmal Spell x 5 1,700,000 รวมค่า Enchant 537,907,125",
+          "list_steps": "Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 221,370,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 316,537,125"
+        }
+      }
+    ],
+    "after": [
+      {
+        "name": "default",
+        "input": {},
+        "output": {
+          "cost_base": "50,000",
+          "cost_enchant": "1,167,792,750",
+          "cost_refine": "0",
+          "total_zeny": "1,167,842,750 Zeny",
+          "total_thb": "8,642 THB",
+          "shop_list": "Snow Flower Magic Stone Extract x 160 66,520,000 Shining Snow Flower Magic Stone Extract x 215 32,250,000 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Glacier Extract x 225 478,350,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,532,750 Miasmal Spell x 6 2,040,000 รวมค่า Enchant 1,167,792,750",
+          "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 25xBrilliant Snow Flower Magic Stone Extract 49,907,500 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 35xBrilliant Snow Flower Magic Stone Extract 70,136,250 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 229,172,500 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250"
+        }
+      },
+      {
+        "name": "level3-to5",
+        "input": {
+          "sel_cur_stage": 5,
+          "sel_target_stage": 7
+        },
+        "output": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "528,036,250",
+          "cost_refine": "0",
+          "total_zeny": "528,036,250 Zeny",
+          "total_thb": "3,907 THB",
+          "shop_list": "Snow Flower Magic Stone Extract x 70 29,102,500 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 115 200,100,000 Glacier Extract x 115 244,490,000 Encroached Magical Crystal x 25 30,000,000 Neutralized Magical Crystal x 25 9,143,750 Miasmal Spell x 5 1,700,000 รวมค่า Enchant 528,036,250",
+          "list_steps": "Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250"
+        }
+      },
+      {
+        "name": "custom-price-refine",
+        "input": {
+          "p_petal": 12345,
+          "rate_thb": 8,
+          "qty_cube": 1,
+          "qty_device": 2,
+          "manual_cost": 1234567
+        },
+        "output": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "537,907,125",
+          "cost_refine": "115,921,167",
+          "total_zeny": "653,828,292 Zeny",
+          "total_thb": "5,231 THB",
+          "shop_list": "Snow Flower Magic Stone Extract x 70 29,783,250 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 115 200,100,000 Glacier Extract x 115 253,437,000 Encroached Magical Crystal x 25 30,000,000 Neutralized Magical Crystal x 25 9,386,875 Miasmal Spell x 5 1,700,000 รวมค่า Enchant 537,907,125",
+          "list_steps": "Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 221,370,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 316,537,125"
+        }
+      }
+    ]
+  },
+  "screenshots": [
+    "before-360-light.png",
+    "before-390-light.png",
+    "before-768-light.png",
+    "before-1440-light.png",
+    "after-360-light.png",
+    "after-390-light.png",
+    "after-768-light.png",
+    "after-1440-light.png"
+  ],
+  "limitations": [
+    "Chromium emulation, not physical devices or WebKit/Firefox",
+    "No user study or usability score",
+    "View changes do not claim game-data verification"
+  ],
+  "status": "PASS"
+}

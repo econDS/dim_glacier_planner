@@ -1,0 +1,28 @@
+{
+  "baseCommit": "53f41ce9878cd139c14679879b80850cd2df6f1e",
+  "indexSha256": "ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6",
+  "minimumInputs": 2,
+  "beforeMobileOrder": [
+    "18 price/rate fields",
+    "import/export",
+    "price comparison",
+    "base weapon",
+    "Enchant target",
+    "shopping",
+    "Refine",
+    "total"
+  ],
+  "afterMobileOrder": [
+    "start cue + not-live warning",
+    "base weapon",
+    "Enchant target",
+    "total",
+    "shopping",
+    "optional Refine",
+    "price metadata + not-live warning + closed18fields",
+    "import/export",
+    "price comparison"
+  ],
+  "storage": "dim-glacier-planner-state-v1",
+  "navVersion": "1.3.0"
+}
