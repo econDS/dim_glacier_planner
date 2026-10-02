@@ -1,0 +1,24 @@
+/* Nav-only integration: matches .container; original 20px body padding is retained. */
+ro-suite-nav[tool-id="dim-glacier"] {
+  display: block;
+  --ro-suite-content-max-width: 1400px;
+  --ro-suite-inline-padding: 0px;
+}
+/* The original light-DOM Portal link remains usable without the module. */
+ro-suite-nav[tool-id="dim-glacier"] > nav {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--ro-suite-content-max-width);
+  min-height: 52px;
+  margin-inline: auto;
+  padding: 4px var(--ro-suite-inline-padding);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+ro-suite-nav[tool-id="dim-glacier"] > nav > a {
+  box-sizing: border-box;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 0;
+}
