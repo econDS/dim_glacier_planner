@@ -1,0 +1,19 @@
+✔ committed visual evidence matches the verified production source and original PNG bytes (3.231796ms)
+✔ baseline provenance is frozen to the latest Thai-UI source and its parent (0.151193ms)
+✔ all original application DOM and Thai UI are unchanged except nav separator blank lines (1.249873ms)
+✔ original inline calculation/import/export/storage JavaScript and original CSS retain exact bytes (0.905475ms)
+✔ all original image assets retain exact bytes (0.594586ms)
+✔ storage schema, import/export directions, original event modes and share URL capabilities are preserved (1.877599ms)
+✔ navigation is either completely absent for pre-edit QA or strictly integrated ahead of original h1 (0.431887ms)
+✔ fallback CSS cannot leak into calculator/global styling (0.191743ms)
+✔ vendored navigation artifacts are exact immutable 1.2.0 bytes with matching lock and catalog identity (0.551654ms)
+✔ CI remains a same-repository feature-branch PR check with read-only credentials and no publishing (0.481731ms)
+✔ 1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback (4.158261ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 97.458882

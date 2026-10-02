@@ -15,6 +15,7 @@ const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const ROOT = path.resolve(__dirname, '..');
 const BASE_ROOT = process.env.BASE_ROOT ? path.resolve(process.env.BASE_ROOT) : null;
+const PRICE_METADATA_QA = process.env.PRICE_METADATA_QA === '1';
 const BASELINE_ONLY = process.env.BASELINE_ONLY === '1';
 const OUTPUT = path.resolve(process.env.QA_OUTPUT || path.join(ROOT, 'qa-artifacts'));
 const PREFIX = '/dim_glacier_planner/';
@@ -50,11 +51,12 @@ function sha(value) { return crypto.createHash('sha256').update(value).digest('h
 function git(args, cwd = ROOT) { try { return execFileSync('git', ['-C',cwd,...args], { encoding:'utf8', stdio:['ignore','pipe','ignore'] }).trim(); } catch { return null; } }
 function source(root, supplied) {
   const html = fs.readFileSync(path.join(root,'index.html'),'utf8');
+  const invariantHtml = PRICE_METADATA_QA ? require('./price-metadata-normalize.cjs')(html) : html;
   const files = [{ file:'index.html', sha256:sha(html), bytes:Buffer.byteLength(html) }];
   function walk(dir) { if (!fs.existsSync(dir)) return; for (const e of fs.readdirSync(dir,{withFileTypes:true})) { const f=path.join(dir,e.name); if(e.isDirectory()) walk(f); else files.push({ file:path.relative(root,f).split(path.sep).join('/'), sha256:sha(fs.readFileSync(f)), bytes:fs.statSync(f).size }); } }
   walk(path.join(root,'assets'));
   return { directory:root, commit:supplied || git(['rev-parse','HEAD'],root), indexSha256:sha(html), files,
-    inlineScripts:[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]).filter(s=>s.trim()).map(s=>({sha256:sha(s),source:s})),
+    inlineScripts:[...invariantHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]).filter(s=>s.trim()).map(s=>({sha256:sha(s),source:s})),
     inlineStyles:[...html.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)].map(m=>({sha256:sha(m[1]),source:m[1]})), worktree:git(['status','--short'],root) };
 }
 function normalize(value) { let result=String(value); for(const origin of origins) result=result.split(origin).join('http://local.test'); return result; }
@@ -103,7 +105,7 @@ async function geometry(page) {
 function compareGeometry(actual,base,label) {
   assert(actual.excess<=base.excess+1,`${label}: overflow ${actual.excess}px exceeds original ${base.excess}px`);
   assert.equal(actual.items.length,base.items.length,`${label}: original content nodes preserved`);
-  actual.items.forEach((item,i)=>{const old=base.items[i];for(const k of ['tag','id','class'])assert.equal(item[k],old[k]);for(const k of ['x','relativeY','width','height'])assert(Math.abs(item[k]-old[k])<=1,`${label}: ${item.tag}#${item.id}.${item.class} ${k}=${item[k]}, baseline=${old[k]}`);});
+  actual.items.forEach((item,i)=>{const old=base.items[i];for(const k of ['tag','id','class'])assert.equal(item[k],old[k]);for(const k of (PRICE_METADATA_QA ? ['x','width'] : ['x','relativeY','width','height']))assert(Math.abs(item[k]-old[k])<=1,`${label}: ${item.tag}#${item.id}.${item.class} ${k}=${item[k]}, baseline=${old[k]}`);});
   assert.deepEqual(actual.collisions,base.collisions,`${label}: no new original-content collisions`);
   if(actual.host){assert(actual.host.x>=-1&&actual.host.right<=actual.viewport+1,`${label}: navigation fits viewport`);assert(actual.host.bottom<=actual.header.y+1,`${label}: navigation does not overlap heading`);}
 }
@@ -174,7 +176,7 @@ async function formatRoundTrips(page,s,base) {
       if(format==='xlsx')assert(await page.evaluate(()=>!!window.XLSX),'Original SheetJS CDN must load for real XLSX export/import');
       const pending=page.waitForEvent('download');await page.locator('#'+button).click();const download=await pending;const file=s.id+'-sample.'+format;const dest=path.join(OUTPUT,file);await download.saveAs(dest);assert.equal(await download.failure(),null);assert(download.suggestedFilename().endsWith('.'+format));const bytes=fs.readFileSync(dest);assert(bytes.length>100);
       let payload,rows;
-      if(format==='json'){payload=JSON.parse(bytes.toString('utf8'));assert.equal(payload.app,'Dim Glacier Ultimate Planner');assert.equal(payload.version,1);assert.equal(payload.fields.length,25);rows=payload.fields;assert.deepEqual(normalizedValues(payload.values),normalizedValues(original.inputs));}
+      if(format==='json'){payload=JSON.parse(bytes.toString('utf8'));assert.equal(payload.app,'Dim Glacier Ultimate Planner');assert.equal(payload.version,1);assert.equal(payload.fields.length,25);assert(!('metadata' in payload),'Portable JSON export omits local-only metadata');rows=payload.fields;assert.deepEqual(normalizedValues(payload.values),normalizedValues(original.inputs));}
       else if(format==='csv'){const table=parseCsv(bytes);assert.deepEqual(table[0],['id','label','type','value']);rows=table.slice(1).map(row=>Object.fromEntries(table[0].map((key,i)=>[key,row[i]])));}
       else{assert.equal(bytes.subarray(0,2).toString(),'PK','XLSX is a real ZIP workbook');const workbook=await page.evaluate(data=>{const wb=XLSX.read(new Uint8Array(data),{type:'array'});return{names:wb.SheetNames,rows:XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''})};},[...bytes]);assert.deepEqual(workbook.names,['PlannerData']);rows=workbook.rows;}
       assert.equal(rows.length,25);assert.deepEqual(rowsToValues(rows),normalizedValues(original.inputs));
@@ -251,7 +253,7 @@ async function destinations(page,s) {
 }
 async function runScenario(server,width,kind,base) {
   const id=`${kind}-${width}-light`;const s=report.scenarios[id]={id,kind,width,theme:'light',url:server.url,cases:{},dialogs:[],blockedRequests:[],network:{requests:[],responses:[],failedRequests:[],badResponses:[],console:[],pageErrors:[]}};
-  const context=await browser.newContext({viewport:{width,height:900},colorScheme:'light',reducedMotion:'reduce',serviceWorkers:'block',permissions:['clipboard-read','clipboard-write'],acceptDownloads:true});
+  const context=await browser.newContext({...(PRICE_METADATA_QA ? {timezoneId:width===390?'Asia/Bangkok':'America/Los_Angeles'} : {}),viewport:{width,height:900},colorScheme:'light',reducedMotion:'reduce',serviceWorkers:'block',permissions:['clipboard-read','clipboard-write'],acceptDownloads:true});
   await context.addInitScript(({sentinel,prefix})=>{if(location.pathname.startsWith(prefix)){if(localStorage.getItem(sentinel.key)===null)localStorage.setItem(sentinel.key,sentinel.value);if(sessionStorage.getItem(sentinel.key)===null)sessionStorage.setItem(sentinel.key,sentinel.value);}},{sentinel:SENTINEL,prefix:PREFIX});
   if(kind!=='baseline'){const html=fs.readFileSync(path.join(server.root,'index.html'),'utf8');const matches=[...html.matchAll(/<script\b[^>]*src=["']([^"']*nav\.js)["'][^>]*>/g)];assert.equal(matches.length,1,'Exactly one actual installed nav.js');s.navScriptUrl=new URL(matches[0][1],server.url).href;assert.equal(new URL(s.navScriptUrl).pathname,PREFIX+NAV_PATH);}
   if(kind==='fallback')await context.route(s.navScriptUrl,async route=>{s.blockedRequests.push(route.request().url());await route.abort('blockedbyclient');});
@@ -265,6 +267,7 @@ async function runScenario(server,width,kind,base) {
     await functional(page,s,base);await formatRoundTrips(page,s,base);await customStateNavigation(page,s,base);await legacyMigration(page,s,base);
     if(kind==='normal'&&(width===390||width===1440))await destinations(page,s);
     await check(id+'-os-dark-preference-keeps-actual-light-theme',async()=>{await page.emulateMedia({colorScheme:'dark'});const styles=await page.evaluate(()=>({body:getComputedStyle(document.body).backgroundColor,card:getComputedStyle(document.querySelector('.card')).backgroundColor,nav:document.querySelector('ro-suite-nav')?.getAttribute('theme')||null}));assert.equal(styles.body,'rgb(244, 247, 246)');assert.equal(styles.card,'rgb(255, 255, 255)');if(kind!=='baseline')assert.equal(styles.nav,'light');s.osDarkPreference=styles;await page.emulateMedia({colorScheme:'light'});},page);
+    if(PRICE_METADATA_QA && kind==='normal' && [390,1440].includes(width)) await require('./price-metadata.browser.cjs')({page,s,check,reset,fill,snapshot,capture,OUTPUT});
     await check(id+'-final-sentinel-query-hash',async()=>{s.storageFinal=await sentinel(page,s);},page);
   }catch(error){failure(id+'-scenario',error);await capture(page,'failure-'+id,false).catch(()=>{});}finally{await context.close();save();}
   return s;

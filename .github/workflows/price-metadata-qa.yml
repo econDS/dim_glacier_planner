@@ -1,0 +1,68 @@
+name: Dim Glacier price metadata and labels QA
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+concurrency:
+  group: dim-price-qa-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  navigation-qa:
+    if: github.head_ref == 'fix/price-metadata-accessibility' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22.14.0'
+      - name: Prepare failure-safe evidence and immutable baseline
+        run: |
+          mkdir -p qa-artifacts "$RUNNER_TEMP/dim-base"
+          printf '%s\n' '{"status":"not-run","reason":"See setup logs if Chromium did not start"}' > qa-artifacts/report.json
+          git rev-parse HEAD > qa-artifacts/source-commit.txt
+          git diff --name-status 927e6b1d25a8ab59aa4a67b08acf9db26119d916 HEAD > qa-artifacts/changed-files.txt
+          git log --format='%H %s' 927e6b1d25a8ab59aa4a67b08acf9db26119d916..HEAD > qa-artifacts/feature-commits.txt
+          sha256sum index.html > qa-artifacts/sha256sums.txt
+          if test -d assets/ro-suite/1.2.0; then sha256sum assets/ro-suite/1.2.0/* >> qa-artifacts/sha256sums.txt; fi
+          cp qa/price-metadata/baseline.json qa-artifacts/source-baseline.json
+          git merge-base --is-ancestor 911afcf30986e310e5cca233a678aebd3212ca1e HEAD
+          git merge-base --is-ancestor 927e6b1d25a8ab59aa4a67b08acf9db26119d916 HEAD
+          git archive 927e6b1d25a8ab59aa4a67b08acf9db26119d916 index.html assets | tar -x -C "$RUNNER_TEMP/dim-base"
+      - name: Original-source invariants and integration checks
+        run: node --test tests/*.test.cjs 2>&1 | tee qa-artifacts/static-tests.log
+      - name: Install pinned QA-only browser tooling
+        id: browser-tools
+        if: always()
+        run: |
+          npm install --prefix "$RUNNER_TEMP/dim-nav-qa" --no-save --package-lock=false --ignore-scripts playwright@1.55.1 2>&1 | tee qa-artifacts/browser-install.log
+          node "$RUNNER_TEMP/dim-nav-qa/node_modules/playwright/cli.js" install --with-deps chromium 2>&1 | tee -a qa-artifacts/browser-install.log
+      - name: Real browser baseline and regression QA
+        if: always() && steps.browser-tools.outcome == 'success'
+        env:
+          NODE_PATH: ${{ runner.temp }}/dim-nav-qa/node_modules
+          PRICE_METADATA_QA: '1'
+          QA_OUTPUT: ${{ github.workspace }}/qa-artifacts
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_SHA: 927e6b1d25a8ab59aa4a67b08acf9db26119d916
+          BASE_ROOT: ${{ runner.temp }}/dim-base
+        run: |
+          grep -q '<ro-suite-nav ' index.html
+          node tests/dim-nav.browser.cjs 2>&1 | tee qa-artifacts/browser-tests.log
+      - name: Upload logs, reports, sample files, and screenshots even after failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: dim-price-qa-${{ github.event.pull_request.head.sha }}
+          path: qa-artifacts/
+          if-no-files-found: warn
+          retention-days: 90

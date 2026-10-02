@@ -1,0 +1,114 @@
+[
+  {
+    "before": "อัปเดตราคาล่าสุด: <strong>12/04/2569</strong>",
+    "after": "ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n          <div>ราคาของคุณแก้ไขล่าสุด: <span id=\"price_last_modified\">—</span></div>"
+  },
+  {
+    "before": "<label>อัตราแลกเปลี่ยน (1M = ? บาท)</label>",
+    "after": "<label for=\"rate_thb\">อัตราแลกเปลี่ยน (1M = ? บาท)</label>"
+  },
+  {
+    "before": "<label>Snow Flower Petal</label>",
+    "after": "<label for=\"p_petal\">Snow Flower Petal</label>"
+  },
+  {
+    "before": "<label>Amethyst Fragment</label>",
+    "after": "<label for=\"p_amethyst\">Amethyst Fragment</label>"
+  },
+  {
+    "before": "<label>Encroached Magical Ore</label>",
+    "after": "<label for=\"p_enc_ore\">Encroached Magical Ore</label>"
+  },
+  {
+    "before": "<label>Neutralized Magical Ore</label>",
+    "after": "<label for=\"p_neu_ore\">Neutralized Magical Ore</label>"
+  },
+  {
+    "before": "<label>Miasmal Spell</label>",
+    "after": "<label for=\"p_miasmal\">Miasmal Spell</label>"
+  },
+  {
+    "before": "<label>Snow Flower Magic Stone</label>",
+    "after": "<label for=\"p_sf_stone\">Snow Flower Magic Stone</label>"
+  },
+  {
+    "before": "<label>Shining Snow Flower Magic Stone</label>",
+    "after": "<label for=\"p_shining_stone\">Shining Snow Flower Magic Stone</label>"
+  },
+  {
+    "before": "<label>Brilliant Snow Flower Magic Stone Extract</label>",
+    "after": "<label for=\"p_brilliant\">Brilliant Snow Flower Magic Stone Extract</label>"
+  },
+  {
+    "before": "<label>Snow Flower Magic Stone Extract</label>",
+    "after": "<label for=\"m_sf_extract\">Snow Flower Magic Stone Extract</label>"
+  },
+  {
+    "before": "<label>Shining Snow Flower Magic Stone Extract</label>",
+    "after": "<label for=\"m_shining_extract\">Shining Snow Flower Magic Stone Extract</label>"
+  },
+  {
+    "before": "<label>Glacier Extract</label>",
+    "after": "<label for=\"m_glacier_extract\">Glacier Extract</label>"
+  },
+  {
+    "before": "<label>Encroached Magical Crystal</label>",
+    "after": "<label for=\"m_enc_crystal\">Encroached Magical Crystal</label>"
+  },
+  {
+    "before": "<label>Neutralized Magical Crystal</label>",
+    "after": "<label for=\"m_neu_crystal\">Neutralized Magical Crystal</label>"
+  },
+  {
+    "before": "<label>Dim Glacier Refinement Device</label>",
+    "after": "<label for=\"m_device\">Dim Glacier Refinement Device</label>"
+  },
+  {
+    "before": "<label style=\"color:var(--accent); font-weight:bold;\">Dim Glacier Weapon</label>",
+    "after": "<label for=\"m_weapon\" style=\"color:var(--accent); font-weight:bold;\">Dim Glacier Weapon</label>"
+  },
+  {
+    "before": "<label style=\"color:var(--purple);\">Slot 4 & 3 Dim Glacier Enchant Coupon</label>",
+    "after": "<label for=\"p_coupon\" style=\"color:var(--purple);\">Slot 4 & 3 Dim Glacier Enchant Coupon</label>"
+  },
+  {
+    "before": "<label style=\"color:var(--orange);\">Dim Glacier Weapon 9 Refine Cube</label>",
+    "after": "<label for=\"m_cube9\" style=\"color:var(--orange);\">Dim Glacier Weapon 9 Refine Cube</label>"
+  },
+  {
+    "before": "<strong><span class=\"item-chip item-chip-tight\"><img class=\"item-icon item-icon-sm\" src=\"assets/img/Dim%20Glacier%20Weapon%209%20Refine%20Cube.png\" alt=\"Dim Glacier Weapon 9 Refine Cube\" loading=\"lazy\"><span class=\"item item-label\" data-item=\"Dim Glacier Weapon 9 Refine Cube\" data-copy=\"Dim Glacier Weapon 9 Refine Cube\">Dim Glacier Weapon 9 Refine Cube</span></span></strong>",
+    "after": "<strong><label for=\"qty_cube\"><span class=\"item-chip item-chip-tight\"><img class=\"item-icon item-icon-sm\" src=\"assets/img/Dim%20Glacier%20Weapon%209%20Refine%20Cube.png\" alt=\"Dim Glacier Weapon 9 Refine Cube\" loading=\"lazy\"><span class=\"item item-label\" data-item=\"Dim Glacier Weapon 9 Refine Cube\" data-copy=\"Dim Glacier Weapon 9 Refine Cube\">Dim Glacier Weapon 9 Refine Cube</span></span></label></strong>"
+  },
+  {
+    "before": "<strong><span class=\"item-chip item-chip-tight\"><img class=\"item-icon item-icon-sm\" src=\"assets/img/Dim%20Glacier%20Refinement%20Device.png\" alt=\"Dim Glacier Refinement Device\" loading=\"lazy\"><span class=\"item item-label\" data-item=\"Dim Glacier Refinement Device\" data-copy=\"Dim Glacier Refinement Device\">Dim Glacier Refinement Device</span></span></strong>",
+    "after": "<strong><label for=\"qty_device\"><span class=\"item-chip item-chip-tight\"><img class=\"item-icon item-icon-sm\" src=\"assets/img/Dim%20Glacier%20Refinement%20Device.png\" alt=\"Dim Glacier Refinement Device\" loading=\"lazy\"><span class=\"item item-label\" data-item=\"Dim Glacier Refinement Device\" data-copy=\"Dim Glacier Refinement Device\">Dim Glacier Refinement Device</span></span></label></strong>"
+  },
+  {
+    "before": "<div>งบ Refine กำหนดเอง (แร่/ค่าธรรมเนียม)</div>",
+    "after": "<label for=\"manual_cost\">งบ Refine กำหนดเอง (แร่/ค่าธรรมเนียม)</label>"
+  },
+  {
+    "before": "    function setStorageStatus(message, isError = false){",
+    "after": "    // Price metadata is local-only; portable export formats and calculation state stay unchanged.\n    const PRICE_FIELD_IDS = FIELD_DEFS.filter(field =>\n      field.id === 'rate_thb' || field.id.startsWith('p_') || field.id.startsWith('m_')\n    ).map(field => field.id);\n    let priceLastModified = null;\n    let previousPriceValues = {};\n\n    function validPriceTimestamp(value){\n      if (typeof value !== 'string' || !/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/.test(value)) return null;\n      const time = new Date(value);\n      return Number.isFinite(time.getTime()) && time.toISOString() === value ? value : null;\n    }\n\n    function formatPriceTimestamp(value){\n      const valid = validPriceTimestamp(value);\n      if (!valid) return '—';\n      const date = new Date(valid);\n      try {\n        // No timeZone option: use the browser's local timezone.\n        const parts = new Intl.DateTimeFormat('th-TH-u-ca-buddhist-nu-latn', {\n          day: 'numeric', month: 'short', year: 'numeric',\n          hour: '2-digit', minute: '2-digit', hourCycle: 'h23'\n        }).formatToParts(date);\n        const part = type => parts.find(item => item.type === type)?.value;\n        if (['day','month','year','hour','minute'].every(part)) {\n          return `${part('day')} ${part('month')} ${part('year')} ${part('hour')}:${part('minute')}`;\n        }\n      } catch (_) {}\n      const months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];\n      const pad = number => String(number).padStart(2, '0');\n      return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear() + 543} ${pad(date.getHours())}:${pad(date.getMinutes())}`;\n    }\n\n    function renderPriceMetadata(){\n      document.getElementById('price_last_modified').textContent = formatPriceTimestamp(priceLastModified);\n    }\n\n    function rememberPriceValues(){\n      previousPriceValues = Object.fromEntries(PRICE_FIELD_IDS.map(id =>\n        [id, parse(document.getElementById(id).value)]\n      ));\n    }\n\n    function trackPriceEdit(event){\n      const input = event.target;\n      if (isApplyingState || input._isComposing || !PRICE_FIELD_IDS.includes(input.id)) return;\n      const value = parse(input.value);\n      if (value === previousPriceValues[input.id]) return;\n      previousPriceValues[input.id] = value;\n      priceLastModified = new Date().toISOString();\n      renderPriceMetadata();\n      scheduleSave();\n    }\n\n    function bindPriceMetadata(){\n      rememberPriceValues();\n      renderPriceMetadata();\n      PRICE_FIELD_IDS.forEach(id => {\n        const input = document.getElementById(id);\n        // Run after existing formatting/calculation handlers; comma-only changes do not count.\n        for (const event of ['input', 'change', 'blur']) input.addEventListener(event, trackPriceEdit);\n      });\n      document.addEventListener('compositionend', trackPriceEdit);\n    }\n\n    function setStorageStatus(message, isError = false){"
+  },
+  {
+    "before": "localStorage.setItem(STORAGE_KEY, JSON.stringify(buildExportPayload()));",
+    "after": "const payload = buildExportPayload();\n        if (priceLastModified) payload.metadata = { priceLastModified };\n        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));"
+  },
+  {
+    "before": "        applyStateValues(validation.normalizedValues, { persist: false });",
+    "after": "        priceLastModified = validPriceTimestamp(parsed.metadata?.priceLastModified);\n        applyStateValues(validation.normalizedValues, { persist: false });"
+  },
+  {
+    "before": "      clearSavedState();\n      applyStateValues(defaults, { persist: true });",
+    "after": "      clearSavedState();\n      priceLastModified = null;\n      applyStateValues(defaults, { persist: true });\n      rememberPriceValues();\n      renderPriceMetadata();"
+  },
+  {
+    "before": "        applyStateValues(validation.normalizedValues, { persist: true });",
+    "after": "        applyStateValues(validation.normalizedValues, { persist: false });\n        if (PRICE_FIELD_IDS.some(id => Object.prototype.hasOwnProperty.call(validation.normalizedValues, id))) {\n          priceLastModified = new Date().toISOString();\n        }\n        rememberPriceValues();\n        renderPriceMetadata();\n        saveState();"
+  },
+  {
+    "before": "    if (!loadStateFromStorage()) recalc();",
+    "after": "    if (!loadStateFromStorage()) recalc();\n    bindPriceMetadata();"
+  }
+]
