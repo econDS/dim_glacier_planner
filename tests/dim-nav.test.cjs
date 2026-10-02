@@ -14,6 +14,23 @@ const hosts = [...html.matchAll(/<ro-suite-nav\b([^>]*)>([\s\S]*?)<\/ro-suite-na
 const navScripts = [...html.matchAll(/<script\b[^>]*src="\.\/assets\/ro-suite\/1\.2\.0\/nav\.js"[^>]*>[\s\S]*?<\/script>/g)];
 const navStyles = [...html.matchAll(/<style\b[^>]*id="ro-suite-nav-fallback"[^>]*>[\s\S]*?<\/style>/g)];
 const integrated = hosts.length > 0;
+test('committed visual evidence matches the verified production source and original PNG bytes', () => {
+  const file = path.join(root, 'qa/ro-suite-nav/evidence-summary.json');
+  if (!fs.existsSync(file) || !integrated) return;
+  const evidence = JSON.parse(fs.readFileSync(file, 'utf8'));
+  assert.equal(evidence.status, 'passed');
+  assert.deepEqual(evidence.failures, []);
+  assert.equal(evidence.sourceIndexSha256, sha256(html));
+  assert.equal(evidence.subpath, '/dim_glacier_planner/');
+  assert.equal(evidence.screenshots.length, 3);
+  for (const shot of evidence.screenshots) {
+    const bytes = read(`qa/ro-suite-nav/screenshots/${shot.file}`);
+    assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+    assert.equal(sha256(bytes), shot.sha256, shot.file);
+    assert.equal(shot.scrollX, 0);
+    assert.equal(shot.scrollY, 0);
+  }
+});
 const normalizeSeparators = value => value.split('\n').filter(line => line.trim() !== '').join('\n');
 function withoutNavigation() {
   let original = html;

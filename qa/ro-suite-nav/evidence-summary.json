@@ -1,0 +1,682 @@
+{
+  "sourceCommit": "8e628efa200f6f4d75e80ab22e4b2ab0edf2cc3f",
+  "baseCommit": "7794dc7a1381c9a8aac2fc728d305b779a099ebc",
+  "sourceIndexSha256": "cceebd6182a1da1dc71c64a18b7d2646ab7d4b26146f88e44b47741201d060f4",
+  "workflowRun": "https://github.com/econDS/dim_glacier_planner/actions/runs/36966145050",
+  "artifact": "https://github.com/econDS/dim_glacier_planner/actions/runs/36966145050/artifacts/11209716465",
+  "artifactZipSha256": "f214ae0c6119d23af2832f2d5e51664733652a1d94b39c1d2aee557d5942e44c",
+  "reportSha256": "775ac526172ed4bb848a61264b5094691aff6e90d1549a53dc674f7e52cad1f0",
+  "status": "passed",
+  "browserChecks": 428,
+  "sourceChecksAtThisRun": 9,
+  "failures": [],
+  "playwrightVersion": "1.55.1",
+  "browserVersion": "140.0.7339.186",
+  "subpath": "/dim_glacier_planner/",
+  "screenshots": [
+    {
+      "name": "normal-390-light-menu-open",
+      "file": "normal-390-light-menu-open.png",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "scrollX": 0,
+      "scrollY": 0,
+      "url": "http://local.test/dim_glacier_planner/?qa=preserve%20me&repeat=a&repeat=b#qa-sentinel",
+      "sha256": "214edc88b0403f4455f16a4c90ca11903b3c0ee815f742ee5f22d70650dbd14a"
+    },
+    {
+      "name": "fallback-390-light-fallback-visible",
+      "file": "fallback-390-light-fallback-visible.png",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "scrollX": 0,
+      "scrollY": 0,
+      "url": "http://local.test/dim_glacier_planner/?qa=preserve%20me&repeat=a&repeat=b#qa-sentinel",
+      "sha256": "a543e33eda2525af2ba337f0614930e91b2c3a7633fe5d1c4c2015e3b00b024e"
+    },
+    {
+      "name": "normal-1440-light-menu-open",
+      "file": "normal-1440-light-menu-open.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollX": 0,
+      "scrollY": 0,
+      "url": "http://local.test/dim_glacier_planner/?qa=preserve%20me&repeat=a&repeat=b#qa-sentinel",
+      "sha256": "46affc483f3c2bd84b46a5bd7ec82746eb9f494e7045172b16c2b60cea62443a"
+    }
+  ],
+  "scenarios": {
+    "baseline-360-light": {
+      "kind": "baseline",
+      "width": 360,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [],
+      "importSuccessTransitionsObserved": 11
+    },
+    "baseline-390-light": {
+      "kind": "baseline",
+      "width": 390,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [],
+      "importSuccessTransitionsObserved": 11
+    },
+    "baseline-768-light": {
+      "kind": "baseline",
+      "width": 768,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [],
+      "importSuccessTransitionsObserved": 11
+    },
+    "baseline-1440-light": {
+      "kind": "baseline",
+      "width": 1440,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [],
+      "importSuccessTransitionsObserved": 11
+    },
+    "normal-360-light": {
+      "kind": "normal",
+      "width": 360,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "custom state while Enter menu open",
+        "custom state after Escape",
+        "custom state after Space toggle pair",
+        "custom state after repeated click pair",
+        "raw shopping while menu open",
+        "raw shopping after menu closes",
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 14
+    },
+    "fallback-360-light": {
+      "kind": "fallback",
+      "width": 360,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after blocked-script Portal and Back",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 14
+    },
+    "normal-390-light": {
+      "kind": "normal",
+      "width": 390,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "custom state while Enter menu open",
+        "custom state after Escape",
+        "custom state after Space toggle pair",
+        "custom state after repeated click pair",
+        "raw shopping while menu open",
+        "raw shopping after menu closes",
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 15
+    },
+    "fallback-390-light": {
+      "kind": "fallback",
+      "width": 390,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after blocked-script Portal and Back",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 14
+    },
+    "normal-768-light": {
+      "kind": "normal",
+      "width": 768,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "custom state while Enter menu open",
+        "custom state after Escape",
+        "custom state after Space toggle pair",
+        "custom state after repeated click pair",
+        "raw shopping while menu open",
+        "raw shopping after menu closes",
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 14
+    },
+    "fallback-768-light": {
+      "kind": "fallback",
+      "width": 768,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after blocked-script Portal and Back",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 14
+    },
+    "normal-1440-light": {
+      "kind": "normal",
+      "width": 1440,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "custom state while Enter menu open",
+        "custom state after Escape",
+        "custom state after Space toggle pair",
+        "custom state after repeated click pair",
+        "raw shopping while menu open",
+        "raw shopping after menu closes",
+        "finished view restored without changing custom plan",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 15
+    },
+    "fallback-1440-light": {
+      "kind": "fallback",
+      "width": 1440,
+      "theme": "fixed-light",
+      "inputOutputCases": 16,
+      "documentOverflowPixels": 0,
+      "measuredContainerCollisions": [],
+      "formats": [
+        "json",
+        "csv",
+        "xlsx",
+        "xls"
+      ],
+      "legacyImports": [
+        "no-slot4",
+        "slot4-only",
+        "slot2-level3",
+        "storageReload"
+      ],
+      "customStateNavigationActions": [
+        "finished view restored without changing custom plan",
+        "custom state after blocked-script Portal and Back",
+        "custom state after reload"
+      ],
+      "baselineImportFormats": [
+        "json",
+        "csv",
+        "xlsx"
+      ],
+      "importSuccessTransitionsObserved": 14
+    }
+  },
+  "releaseAssetHttp": [
+    {
+      "file": "assets/ro-suite/1.2.0/nav.js",
+      "url": "http://local.test/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+      "status": 200,
+      "bytes": 11274,
+      "sha256": "d75be916445feb4febeaada437841a1b3be68db16a00673198c78fd6f6c8dc5f",
+      "expectedSha256": "d75be916445feb4febeaada437841a1b3be68db16a00673198c78fd6f6c8dc5f"
+    },
+    {
+      "file": "assets/ro-suite/1.2.0/catalog.snapshot.json",
+      "url": "http://local.test/dim_glacier_planner/assets/ro-suite/1.2.0/catalog.snapshot.json",
+      "status": 200,
+      "bytes": 1395,
+      "sha256": "800bb9c9d2b52a7fbae58e436b05529e69820fee3627d199da545a6f5e28f7dd",
+      "expectedSha256": "800bb9c9d2b52a7fbae58e436b05529e69820fee3627d199da545a6f5e28f7dd"
+    },
+    {
+      "file": "assets/ro-suite/1.2.0/nav.lock.json",
+      "url": "http://local.test/dim_glacier_planner/assets/ro-suite/1.2.0/nav.lock.json",
+      "status": 200,
+      "bytes": 1595,
+      "sha256": "3b0350135ba5f455b38799c7940492938a209e8e0a6570a5126cb40c36127358",
+      "expectedSha256": "3b0350135ba5f455b38799c7940492938a209e8e0a6570a5126cb40c36127358"
+    }
+  ],
+  "networkComparison": {
+    "baselineUnion": {
+      "pageErrors": [],
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Brilliant%20Snow%20Flower%20Magic%20Stone%20Extract.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Dim%20Glacier%20Weapon.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Encroached%20Magical%20Crystal.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Glacier%20Extract.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Miasmal%20Spell.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Neutralized%20Magical%20Crystal.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Shining%20Snow%20Flower%20Magic%20Stone%20Extract.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/Snow%20Flower%20Magic%20Stone%20Extract.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/slot_2_enchant.png",
+        "net::ERR_ABORTED http://local.test/dim_glacier_planner/assets/img/slot_34_enchant.png"
+      ],
+      "badResponses": []
+    },
+    "scenarios": {
+      "normal-360-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [],
+        "newExternalRequests": []
+      },
+      "fallback-360-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "newExternalRequests": []
+      },
+      "normal-390-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [],
+        "newExternalRequests": []
+      },
+      "fallback-390-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "newExternalRequests": []
+      },
+      "normal-768-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [],
+        "newExternalRequests": []
+      },
+      "fallback-768-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "newExternalRequests": []
+      },
+      "normal-1440-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [],
+        "newExternalRequests": []
+      },
+      "fallback-1440-light": {
+        "novel": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "badResponses": []
+        },
+        "expectedBlockedNavErrors": [
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "url": "http://127.0.0.1:42661/dim_glacier_planner/assets/ro-suite/1.2.0/nav.js",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "newExternalRequests": []
+      }
+    },
+    "policy": "Exact measured baseline signature allowance. Only exact deliberately aborted nav.js failure excluded; no blanket third-party/CDN or console suppression."
+  },
+  "preEditBaseline": {
+    "sourceCommit": "c9b455c109d65637ca6d6cc5289a0cd83f831dfb",
+    "workflowRun": "https://github.com/econDS/dim_glacier_planner/actions/runs/36965110368",
+    "artifact": "https://github.com/econDS/dim_glacier_planner/actions/runs/36965110368/artifacts/11209189035",
+    "browserChecks": 125,
+    "indexSha256": "7761ae4e57c901e630a42577a59ef9ea46fbb15359e28acb7bc7310f1f9d23df"
+  },
+  "limitations": [
+    "All calculations, input events, file downloads/imports, dialogs and clipboard operations use the real application in Chromium; no formula, export or browser API is replaced.",
+    "Only top-level navigation to the five exact suite destinations is intercepted with a local destination page. Link activation and destinations are verified; remote destination availability is not claimed.",
+    "SheetJS 0.20.3 loads from the original live CDN. Excel tests fail if it is unavailable. An import-only XLS fixture is serialized using that real SheetJS library because the app does not export XLS.",
+    "Network errors are retained verbatim and compared with explicit baseline signatures; only failures tied to the intentionally aborted exact nav.js request are excluded.",
+    "The original page may overflow on small screens. Geometry permits only measured original overflow, never new overflow; content geometry is relative to the original heading to allow the new normal-flow header.",
+    "Chromium on Linux with emulated viewports only; Firefox, WebKit/Safari, physical devices, and screen-reader speech not tested.",
+    "No deployed-site change or test is claimed. The existing fixed/sticky total summary is preserved; no navigation-specific collision adjustment was necessary."
+  ],
+  "finalHeadNote": "This evidence-only commit adds screenshots, evidence metadata, documentation, and an evidence-integrity test without changing production. The PR must link a fresh passing CI run and newly generated screenshot artifact for its exact final head."
+}

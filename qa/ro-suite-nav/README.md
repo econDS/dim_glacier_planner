@@ -105,3 +105,28 @@ Before any production edit, QA-only commit `c9b455c109d65637ca6d6cc5289a0cd83f83
 Local Chromium could not create its process singleton socket (`Operation not permitted`), so browser evidence comes from the authorized PR-only CI rather than a claimed local browser run. No production changes were made until the successful baseline artifact was retrieved and verified.
 
 The first integrated run passed navigation, geometry, calculation, clipboard, own-file round trips, legacy migration, and network checks, but failed five cross-baseline imports while polling a transient success message. The original 150ms autosave can replace that message. The QA-only fix records real status mutations from before file selection, requires the exact filename-bearing success transition, and still compares all imported inputs and outputs. Production import/storage code is unchanged. Additional checks preserve custom prices, owned Enchant stage, shopping view, and Refine budget through repeated menu toggles, reload, and every suite destination followed by Back.
+
+## Verified integration evidence
+
+Source `8e628efa200f6f4d75e80ab22e4b2ab0edf2cc3f` passed [run 36966145050](https://github.com/econDS/dim_glacier_planner/actions/runs/36966145050): **428 browser checks and 9 source checks**, zero failures, across original/installed/actual-script-blocked modes at 360/390/768/1440. The [full artifact](https://github.com/econDS/dim_glacier_planner/actions/runs/36966145050/artifacts/11209716465) contains 20 real screenshots, all input/output cases and actual file samples, 158 observed import-success transitions, checksums, logs, and network inventory. [Evidence summary](evidence-summary.json).
+
+- Four Craft cases, five Enchant cases, four Refine cases, exchange units and numeric formatting per scenario
+- Native shopping/item clipboard; finished/raw views; complete custom-state equality across repeated menu keyboard/click interactions, reload, and suite navigation/Back
+- Real JSON/CSV/XLSX round trips, real XLS import, actual baseline-download compatibility, invalid import/reset cancellation, legacy JSON and storage migrations
+- No new document overflow, layout-container collision, console/page/network error, or persistent key; only exact deliberately blocked nav.js requests are expected failures
+- Tab/Enter/Space/Escape and focus return, current-tool identity/aria-current, planned Grade & Refine without a link, all visible nav controls/fallback at least 44×44
+- All three immutable assets returned HTTP 200 and exact expected bytes from `/dim_glacier_planner/assets/ro-suite/1.2.0/`
+
+### Reviewed real screenshots
+
+These original, uncropped Chromium PNGs were captured from the passing source above at settled scroll X/Y=0 and were visually reviewed:
+
+- [390px light-theme menu open](screenshots/normal-390-light-menu-open.png)
+- [1440px light-theme menu open](screenshots/normal-1440-light-menu-open.png)
+- [390px blocked-script fallback with visible Portal link](screenshots/fallback-390-light-fallback-visible.png)
+
+There is only one actual application theme; OS-dark preference was also tested and the app/nav stayed light. The later evidence commit changes no production files and adds an image/evidence-integrity source test. A fresh CI run for that exact final head is linked in the PR, with newly generated screenshots and reports.
+
+### Remaining limits
+
+Only Chromium on Linux with emulated viewports was exercised. Firefox, WebKit/Safari, physical devices, and screen-reader speech were not tested. Exact suite destination navigation is locally intercepted, so it verifies link activation, URLs, and Back/state preservation rather than remote destination content; the real Portal separately returned HTTP 200. Optional remote catalog fetching is unconfigured. The pre-existing fixed/sticky total summary remains as in baseline; no navigation-specific collision fix was needed. No deployed-site test is claimed and the PR remains draft, without merge, deployment, or Pages changes.
