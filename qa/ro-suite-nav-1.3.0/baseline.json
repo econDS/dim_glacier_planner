@@ -1,0 +1,13 @@
+{
+  "baseCommit": "347409bbae997a6567a8c29e0c219c523349995b",
+  "capturedBeforeEdit": true,
+  "indexPath": "index.html",
+  "indexSha256": "cceebd6182a1da1dc71c64a18b7d2646ab7d4b26146f88e44b47741201d060f4",
+  "navVersion": "1.2.0",
+  "theme": "light",
+  "toolId": "dim-glacier",
+  "publishingRoot": ".",
+  "publicPath": "/dim_glacier_planner/",
+  "gitStatus": "clean",
+  "originalTests": 10
+}

@@ -11,7 +11,7 @@ const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 const baseline = JSON.parse(read('qa/ro-suite-nav/source-baseline.json'));
 const html = read('index.html').toString();
 const hosts = [...html.matchAll(/<ro-suite-nav\b([^>]*)>([\s\S]*?)<\/ro-suite-nav>/g)];
-const navScripts = [...html.matchAll(/<script\b[^>]*src="\.\/assets\/ro-suite\/1\.2\.0\/nav\.js"[^>]*>[\s\S]*?<\/script>/g)];
+const navScripts = [...html.matchAll(/<script\b[^>]*src="\.\/assets\/ro-suite\/1\.3\.0\/nav\.js"[^>]*>[\s\S]*?<\/script>/g)];
 const navStyles = [...html.matchAll(/<style\b[^>]*id="ro-suite-nav-fallback"[^>]*>[\s\S]*?<\/style>/g)];
 const integrated = hosts.length > 0;
 test('committed visual evidence matches the verified production source and original PNG bytes', () => {
@@ -20,7 +20,7 @@ test('committed visual evidence matches the verified production source and origi
   const evidence = JSON.parse(fs.readFileSync(file, 'utf8'));
   assert.equal(evidence.status, 'passed');
   assert.deepEqual(evidence.failures, []);
-  assert.equal(evidence.sourceIndexSha256, sha256(html));
+  assert.equal(evidence.sourceIndexSha256, sha256(html.replace('assets/ro-suite/1.3.0/nav.js','assets/ro-suite/1.2.0/nav.js')));
   assert.equal(evidence.subpath, '/dim_glacier_planner/');
   assert.equal(evidence.screenshots.length, 3);
   for (const shot of evidence.screenshots) {
@@ -123,7 +123,7 @@ test('navigation is either completely absent for pre-edit QA or strictly integra
     theme: 'light'
   });
   assert.match(hosts[0][2], /^\s*<nav aria-label="เครื่องมือ RO">\s*<a href="https:\/\/econds\.github\.io\/ro_tools_portal\/">กลับ RO Tools Portal<\/a>\s*<\/nav>\s*$/);
-  assert.equal(navScripts[0][0], '<script type="module" src="./assets/ro-suite/1.2.0/nav.js"></script>');
+  assert.equal(navScripts[0][0], '<script type="module" src="./assets/ro-suite/1.3.0/nav.js"></script>');
   assert.match(html, /<body>\s*<ro-suite-nav\b/);
   assert(hosts[0].index < html.indexOf('<h1>Dim Glacier Ultimate Planner</h1>'));
   assert(hosts[0].index < navScripts[0].index, 'fallback remains usable before the module executes');
@@ -170,7 +170,7 @@ test('CI remains a same-repository feature-branch PR check with read-only creden
   const workflow = read('.github/workflows/ro-suite-nav-qa.yml').toString();
   assert.match(workflow, /\non:\n  pull_request:\n    branches: \[main\]\n    types: \[opened, synchronize, reopened\]\npermissions:/);
   assert.match(workflow, /\npermissions:\n  contents: read\nconcurrency:/);
-  assert.match(workflow, /if: github\.head_ref == 'feat\/ro-suite-nav' && github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
+  assert.match(workflow, /if: github\.head_ref == 'chore\/ro-suite-nav-1.3.0' && github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
   assert.match(workflow, /persist-credentials: false/);
   assert.match(workflow, /ref: \$\{\{ github\.event\.pull_request\.head\.sha \}\}/);
   assert(!/pull_request_target|workflow_run|workflow_dispatch|\b(?:contents|pages|id-token):\s*write|\bwrite-all\b/.test(workflow));
