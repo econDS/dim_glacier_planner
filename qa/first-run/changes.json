@@ -54,5 +54,13 @@
   [
     "    function scrollMarketRowIntoView(rowEl){\n      if (!rowEl) return;",
     "    function scrollMarketRowIntoView(rowEl){\n      if (!rowEl) return;\n      // Preserve the existing hover-to-price workflow through the new disclosure.\n      const disclosure = rowEl.closest('details');\n      if (disclosure) disclosure.open = true;"
+  ],
+  [
+    ".first-run-guide a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 12px; color: var(--accent);",
+    ".first-run-guide a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 12px; color: var(--primary);"
+  ],
+  [
+    ".first-run-prices > summary { min-height: 44px; align-content: center; cursor: pointer; font-weight: 700; color: var(--accent);",
+    ".first-run-prices > summary { min-height: 44px; align-content: center; cursor: pointer; font-weight: 700; color: var(--primary);"
   ]
 ]
