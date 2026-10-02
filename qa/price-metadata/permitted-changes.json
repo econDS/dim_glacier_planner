@@ -105,7 +105,7 @@
   },
   {
     "before": "        applyStateValues(validation.normalizedValues, { persist: true });",
-    "after": "        if (PRICE_FIELD_IDS.some(id => Object.prototype.hasOwnProperty.call(validation.normalizedValues, id))) {\n          priceLastModified = new Date().toISOString();\n        }\n        applyStateValues(validation.normalizedValues, { persist: true });\n        rememberPriceValues();\n        renderPriceMetadata();"
+    "after": "        applyStateValues(validation.normalizedValues, { persist: false });\n        if (PRICE_FIELD_IDS.some(id => Object.prototype.hasOwnProperty.call(validation.normalizedValues, id))) {\n          priceLastModified = new Date().toISOString();\n        }\n        rememberPriceValues();\n        renderPriceMetadata();\n        saveState();"
   },
   {
     "before": "    if (!loadStateFromStorage()) recalc();",

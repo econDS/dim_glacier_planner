@@ -68,5 +68,33 @@
   ],
   "defaultPriceDate": "12/04/2569",
   "reset": "Restores every FIELD_DEFS control to markup default, removes and rewrites same storage key",
-  "baselineTests": "node --test tests/*.test.cjs: 11 passed"
+  "baselineTests": "node --test tests/*.test.cjs: 11 passed",
+  "priorBrowserBaselineProvenance": {
+    "note": "Actual prior nav-rollout baseline evidence predates this task. A new immutable main archive is replayed before candidate checks in this task CI; no claim that its new browser replay ran before implementation.",
+    "sourceCommit": "7794dc7a1381c9a8aac2fc728d305b779a099ebc",
+    "reportSource": "qa/ro-suite-nav-1.3.0/evidence-summary.json on main; full prior QA artifact",
+    "cases": {
+      "craft-default": {
+        "cost_base": "50,000",
+        "cost_enchant": "1,167,792,750",
+        "cost_refine": "0",
+        "total_zeny": "1,167,842,750 Zeny",
+        "total_thb": "8,642 THB"
+      },
+      "refine-mixed-manual-budget": {
+        "cost_base": "50,000",
+        "cost_enchant": "1,167,792,750",
+        "cost_refine": "197,447,567",
+        "total_zeny": "1,365,290,317 Zeny",
+        "total_thb": "10,103 THB"
+      },
+      "enchant-owned-lv3-to-lv5": {
+        "cost_base": "มีแล้ว",
+        "cost_enchant": "528,036,250",
+        "cost_refine": "0",
+        "total_zeny": "528,036,250 Zeny",
+        "total_thb": "3,907 THB"
+      }
+    }
+  }
 }

@@ -253,7 +253,7 @@ async function destinations(page,s) {
 }
 async function runScenario(server,width,kind,base) {
   const id=`${kind}-${width}-light`;const s=report.scenarios[id]={id,kind,width,theme:'light',url:server.url,cases:{},dialogs:[],blockedRequests:[],network:{requests:[],responses:[],failedRequests:[],badResponses:[],console:[],pageErrors:[]}};
-  const context=await browser.newContext({viewport:{width,height:900},colorScheme:'light',reducedMotion:'reduce',serviceWorkers:'block',permissions:['clipboard-read','clipboard-write'],acceptDownloads:true});
+  const context=await browser.newContext({...(PRICE_METADATA_QA ? {timezoneId:width===390?'Asia/Bangkok':'America/Los_Angeles'} : {}),viewport:{width,height:900},colorScheme:'light',reducedMotion:'reduce',serviceWorkers:'block',permissions:['clipboard-read','clipboard-write'],acceptDownloads:true});
   await context.addInitScript(({sentinel,prefix})=>{if(location.pathname.startsWith(prefix)){if(localStorage.getItem(sentinel.key)===null)localStorage.setItem(sentinel.key,sentinel.value);if(sessionStorage.getItem(sentinel.key)===null)sessionStorage.setItem(sentinel.key,sentinel.value);}},{sentinel:SENTINEL,prefix:PREFIX});
   if(kind!=='baseline'){const html=fs.readFileSync(path.join(server.root,'index.html'),'utf8');const matches=[...html.matchAll(/<script\b[^>]*src=["']([^"']*nav\.js)["'][^>]*>/g)];assert.equal(matches.length,1,'Exactly one actual installed nav.js');s.navScriptUrl=new URL(matches[0][1],server.url).href;assert.equal(new URL(s.navScriptUrl).pathname,PREFIX+NAV_PATH);}
   if(kind==='fallback')await context.route(s.navScriptUrl,async route=>{s.blockedRequests.push(route.request().url());await route.abort('blockedbyclient');});

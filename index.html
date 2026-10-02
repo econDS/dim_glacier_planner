@@ -1625,12 +1625,13 @@
           showImportValidationFeedback(`ตรวจพบคำเตือนใน ${file.name}`, validation);
         }
 
+        applyStateValues(validation.normalizedValues, { persist: false });
         if (PRICE_FIELD_IDS.some(id => Object.prototype.hasOwnProperty.call(validation.normalizedValues, id))) {
           priceLastModified = new Date().toISOString();
         }
-        applyStateValues(validation.normalizedValues, { persist: true });
         rememberPriceValues();
         renderPriceMetadata();
+        saveState();
         setStorageStatus(`นำเข้าข้อมูลจาก ${file.name} เรียบร้อย`);
       } catch (error) {
         window.alert(`นำเข้า ${file.name} ไม่สำเร็จ\n\n${error && error.message ? error.message : 'รูปแบบไฟล์ไม่ถูกต้อง'}`);
