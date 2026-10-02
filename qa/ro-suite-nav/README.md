@@ -95,3 +95,11 @@ There is no event/discount mode and no application share-URL feature. The applic
 ## Rollback
 
 Remove only the navigation host, local module, separate fallback style, and `assets/ro-suite/1.2.0/` when rolling back this integration. Preserve all original calculator code, Thai UI, storage schema, prices, formulas, original images, and publishing path. Re-run the source invariants after rollback; the pristine-source branch of the suite must pass.
+
+## Observed pre-integration browser baseline
+
+Before any production edit, QA-only commit `c9b455c109d65637ca6d6cc5289a0cd83f831dfb` passed [run 36965110368](https://github.com/econDS/dim_glacier_planner/actions/runs/36965110368): 125 browser checks plus 9 source checks. The original HTML hash remained `7761ae4e57c901e630a42577a59ef9ea46fbb15359e28acb7bc7310f1f9d23df`. Chromium was `140.0.7339.186`, Playwright `1.55.1`. All four widths had zero measured document overflow and no content collisions. Console errors, warnings, page errors, failed requests, and HTTP errors were empty. Real SheetJS-backed XLSX round trips and XLS import succeeded.
+
+[Baseline evidence artifact](https://github.com/econDS/dim_glacier_planner/actions/runs/36965110368/artifacts/11209189035) contains the full inputs/results, native clipboard output, original and legacy import samples, source hashes, network inventory, and four viewport screenshots. ZIP SHA-256: `ba0f8987cc484f1748501b2c4b4fcf5dd5af0473c5e3f91c57a2b7be3cf663a7`. The mobile screenshot was visually inspected before integration.
+
+Local Chromium could not create its process singleton socket (`Operation not permitted`), so browser evidence comes from the authorized PR-only CI rather than a claimed local browser run. No production changes were made until the successful baseline artifact was retrieved and verified.
