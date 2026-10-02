@@ -684,9 +684,24 @@
     }
     .interactive-card.owned .card-cost { color: #95a5a6; font-size: 14px; }
   </style>
+  <style id="ro-suite-nav-fallback">
+    ro-suite-nav > nav > a {
+      display: inline-flex;
+      align-items: center;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  </style>
 </head>
 
 <body>
+  <ro-suite-nav tool-id="dim-glacier" theme="light" portal-url="https://econds.github.io/ro_tools_portal/">
+    <nav aria-label="เครื่องมือ RO">
+      <a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a>
+    </nav>
+  </ro-suite-nav>
+  <script type="module" src="./assets/ro-suite/1.2.0/nav.js"></script>
+
   <h1>Dim Glacier Ultimate Planner</h1>
 
   <div class="container">
