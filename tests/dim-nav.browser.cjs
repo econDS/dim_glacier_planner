@@ -51,7 +51,8 @@ function sha(value) { return crypto.createHash('sha256').update(value).digest('h
 function git(args, cwd = ROOT) { try { return execFileSync('git', ['-C',cwd,...args], { encoding:'utf8', stdio:['ignore','pipe','ignore'] }).trim(); } catch { return null; } }
 function source(root, supplied) {
   const html = fs.readFileSync(path.join(root,'index.html'),'utf8');
-  const invariantHtml = PRICE_METADATA_QA ? require('./price-metadata-normalize.cjs')(html) : html;
+  const presentationBase = require('../qa/first-run/normalize.cjs')(html);
+  const invariantHtml = PRICE_METADATA_QA ? require('./price-metadata-normalize.cjs')(presentationBase) : presentationBase;
   const files = [{ file:'index.html', sha256:sha(html), bytes:Buffer.byteLength(html) }];
   function walk(dir) { if (!fs.existsSync(dir)) return; for (const e of fs.readdirSync(dir,{withFileTypes:true})) { const f=path.join(dir,e.name); if(e.isDirectory()) walk(f); else files.push({ file:path.relative(root,f).split(path.sep).join('/'), sha256:sha(fs.readFileSync(f)), bytes:fs.statSync(f).size }); } }
   walk(path.join(root,'assets'));

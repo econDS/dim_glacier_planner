@@ -50,5 +50,9 @@
   [
     "    #card_plan, #card_market { scroll-margin-top: 16px; }",
     "    .first-run-planner > .grand-total { position: static; margin-bottom: 20px; }\n    #card_plan, #card_market { scroll-margin-top: 16px; }"
+  ],
+  [
+    "    function scrollMarketRowIntoView(rowEl){\n      if (!rowEl) return;",
+    "    function scrollMarketRowIntoView(rowEl){\n      if (!rowEl) return;\n      // Preserve the existing hover-to-price workflow through the new disclosure.\n      const disclosure = rowEl.closest('details');\n      if (disclosure) disclosure.open = true;"
   ]
 ]

@@ -2324,6 +2324,9 @@
 
     function scrollMarketRowIntoView(rowEl){
       if (!rowEl) return;
+      // Preserve the existing hover-to-price workflow through the new disclosure.
+      const disclosure = rowEl.closest('details');
+      if (disclosure) disclosure.open = true;
       const scroller = document.querySelector('.left-col');
       if (!scroller) return;
 

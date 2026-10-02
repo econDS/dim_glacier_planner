@@ -4,7 +4,7 @@
 Clean default branch at `53f41ce9878cd139c14679879b80850cd2df6f1e` archived before edits. Existing unit checks passed on untouched source. Before browser evidence uses that immutable archive, never the candidate with features removed. See `baseline.json` for structural inventory and `local-first-run-results.json` for exact source hash, widths, measured geometry and three before/after output cases.
 
 ## Changes
-Planner now precedes settings in DOM/mobile while desktop retains the original two-column arrangement. Market price metadata and warning stay visible outside a new native price disclosure. Exact total card moves ahead of shopping and optional Refine. Its old sticky-bottom placement overlapped the newly earlier planner during actual mobile QA, so only that moved total is made static. All21 associated numeric labels and price timestamp behavior remain unchanged.
+Planner now precedes settings in DOM/mobile while desktop retains the original two-column arrangement. Market price metadata and warning stay visible outside a new native price disclosure. Exact total card moves ahead of shopping and optional Refine. Its old sticky-bottom placement overlapped the newly earlier planner during actual mobile QA, so only that moved total is made static. The existing hover-to-market-row workflow opens the native price disclosure before its original scroll logic. All 21 associated numeric labels and price timestamp behavior remain unchanged.
 
 ## Actual verification
 - `node --test tests/*.test.*`: 19 tests (final result also in CI)

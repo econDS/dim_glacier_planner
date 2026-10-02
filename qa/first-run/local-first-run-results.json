@@ -1,7 +1,7 @@
 {
   "baseCommit": "53f41ce9878cd139c14679879b80850cd2df6f1e",
   "headCommit": "local-candidate",
-  "indexSHA256": "6cf2d65380e1b925b741e714badfa0731b84818104522a8ba6efb8b0a79a481d",
+  "indexSHA256": "7b20567599a753dfa4349fe0fb7ad7525779d13d1f2c9973b16cb314e034afac",
   "repo": "dim_glacier_planner",
   "checks": [
     {
