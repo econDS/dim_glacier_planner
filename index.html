@@ -710,51 +710,52 @@
       <div class="card" id="card_market">
         <div class="section-header">ราคาตลาด (Zeny)</div>
         <div style="margin:-8px 0 14px; font-size:12px; color:#888;">
-          อัปเดตราคาล่าสุด: <strong>12/04/2569</strong>
+          ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+          <div>ราคาของคุณแก้ไขล่าสุด: <span id="price_last_modified">—</span></div>
         </div>
         <div class="market-warning">
           เว็บไซต์นี้ไม่ได้อัปเดตราคาให้อัตโนมัติ ผู้ใช้ต้องอัปเดตข้อมูลเอง และสามารถใช้ฟังก์ชันนำเข้า/ส่งออกในส่วนจัดการข้อมูลช่วยจัดการข้อมูลได้
         </div>
         <div class="input-group">
-          <label>อัตราแลกเปลี่ยน (1M = ? บาท)</label>
+          <label for="rate_thb">อัตราแลกเปลี่ยน (1M = ? บาท)</label>
           <input type="text" id="rate_thb" value="7.4" inputmode="decimal"
                  oninput="sanitizeRateTyping(this)" onblur="normalizeRateOnBlur(this)">
         </div>
 
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">วัตถุดิบ</div>
-        <div class="input-group"><label>Snow Flower Petal</label><input type="text" id="p_petal" value="10,400" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Amethyst Fragment</label><input type="text" id="p_amethyst" value="8,550" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="1,200" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Neutralized Magical Ore</label><input type="text" id="p_neu_ore" value="20,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Miasmal Spell</label><input type="text" id="p_miasmal" value="340,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Snow Flower Magic Stone</label><input type="text" id="p_sf_stone" value="7,500" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Shining Snow Flower Magic Stone</label><input type="text" id="p_shining_stone" value="27,500" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_petal">Snow Flower Petal</label><input type="text" id="p_petal" value="10,400" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_amethyst">Amethyst Fragment</label><input type="text" id="p_amethyst" value="8,550" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_enc_ore">Encroached Magical Ore</label><input type="text" id="p_enc_ore" value="1,200" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_neu_ore">Neutralized Magical Ore</label><input type="text" id="p_neu_ore" value="20,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_miasmal">Miasmal Spell</label><input type="text" id="p_miasmal" value="340,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_sf_stone">Snow Flower Magic Stone</label><input type="text" id="p_sf_stone" value="7,500" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="p_shining_stone">Shining Snow Flower Magic Stone</label><input type="text" id="p_shining_stone" value="27,500" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group" style="border-left:3px solid var(--orange); padding-left:5px;">
-          <label>Brilliant Snow Flower Magic Stone Extract</label>
+          <label for="p_brilliant">Brilliant Snow Flower Magic Stone Extract</label>
           <input type="text" id="p_brilliant" value="1,740,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
         </div>
 
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">ไอเทมสำเร็จรูป</div>
-        <div class="input-group"><label>Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="500,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="150,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Glacier Extract</label><input type="text" id="m_glacier_extract" value="2,390,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Encroached Magical Crystal</label><input type="text" id="m_enc_crystal" value="1,200,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
-        <div class="input-group"><label>Neutralized Magical Crystal</label><input type="text" id="m_neu_crystal" value="380,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="m_sf_extract">Snow Flower Magic Stone Extract</label><input type="text" id="m_sf_extract" value="500,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="m_shining_extract">Shining Snow Flower Magic Stone Extract</label><input type="text" id="m_shining_extract" value="150,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="m_glacier_extract">Glacier Extract</label><input type="text" id="m_glacier_extract" value="2,390,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="m_enc_crystal">Encroached Magical Crystal</label><input type="text" id="m_enc_crystal" value="1,200,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="m_neu_crystal">Neutralized Magical Crystal</label><input type="text" id="m_neu_crystal" value="380,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
         <div class="input-group" style="border-left:3px solid var(--green); padding-left:5px;">
-          <label>Dim Glacier Refinement Device</label>
+          <label for="m_device">Dim Glacier Refinement Device</label>
           <input type="text" id="m_device" value="22,450,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
         </div>
 
         <div style="margin:15px 0 5px; font-weight:bold; font-size:12px; color:#888;">รายการพิเศษ</div>
-        <div class="input-group"><label style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
+        <div class="input-group"><label for="m_weapon" style="color:var(--accent); font-weight:bold;">Dim Glacier Weapon</label><input type="text" id="m_weapon" value="50,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)"></div>
 
         <div class="input-group">
-          <label style="color:var(--purple);">Slot 4 & 3 Dim Glacier Enchant Coupon</label>
+          <label for="p_coupon" style="color:var(--purple);">Slot 4 & 3 Dim Glacier Enchant Coupon</label>
           <input type="text" id="p_coupon" value="35,500,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)" style="border-color:var(--purple);">
         </div>
 
         <div class="input-group">
-          <label style="color:var(--orange);">Dim Glacier Weapon 9 Refine Cube</label>
+          <label for="m_cube9" style="color:var(--orange);">Dim Glacier Weapon 9 Refine Cube</label>
           <input type="text" id="m_cube9" value="50,000,000" inputmode="numeric" oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)" style="border-color:var(--orange);">
         </div>
       </div>
@@ -915,7 +916,7 @@
         <div class="card-body">
           <div class="input-group">
             <div>
-              <strong><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Weapon%209%20Refine%20Cube.png" alt="Dim Glacier Weapon 9 Refine Cube" loading="lazy"><span class="item item-label" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</span></span></strong>
+              <strong><label for="qty_cube"><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Weapon%209%20Refine%20Cube.png" alt="Dim Glacier Weapon 9 Refine Cube" loading="lazy"><span class="item item-label" data-item="Dim Glacier Weapon 9 Refine Cube" data-copy="Dim Glacier Weapon 9 Refine Cube">Dim Glacier Weapon 9 Refine Cube</span></span></label></strong>
               <div style="font-size:11px; color:#888;">+9 ทันที (ราคาตลาด)</div>
             </div>
             <div>
@@ -926,7 +927,7 @@
 
           <div class="input-group" style="margin-top:10px;">
             <div>
-              <strong><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Refinement%20Device.png" alt="Dim Glacier Refinement Device" loading="lazy"><span class="item item-label" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</span></span></strong>
+              <strong><label for="qty_device"><span class="item-chip item-chip-tight"><img class="item-icon item-icon-sm" src="assets/img/Dim%20Glacier%20Refinement%20Device.png" alt="Dim Glacier Refinement Device" loading="lazy"><span class="item item-label" data-item="Dim Glacier Refinement Device" data-copy="Dim Glacier Refinement Device">Dim Glacier Refinement Device</span></span></label></strong>
               <div style="font-size:11px; color:var(--green);">Safety +1 (Best Price อัตโนมัติ: Craft/Market) + รวมค่าใช้ตอนใช้งาน</div>
               <div class="hint consume-line">
                 <span>Consume ต่อกล่อง:</span>
@@ -944,7 +945,7 @@
           </div>
 
           <div class="input-group" style="margin-top:10px; border-top:1px dashed #eee; padding-top:10px;">
-            <div>งบ Refine กำหนดเอง (แร่/ค่าธรรมเนียม)</div>
+            <label for="manual_cost">งบ Refine กำหนดเอง (แร่/ค่าธรรมเนียม)</label>
             <input type="text" id="manual_cost" value="0" inputmode="numeric"
                    style="width:100px;"
                    oninput="sanitizeNumberTyping(this)" onblur="formatOnBlur(this)">
@@ -1060,6 +1061,71 @@
       }
     });
 
+    // Price metadata is local-only; portable export formats and calculation state stay unchanged.
+    const PRICE_FIELD_IDS = FIELD_DEFS.filter(field =>
+      field.id === 'rate_thb' || field.id.startsWith('p_') || field.id.startsWith('m_')
+    ).map(field => field.id);
+    let priceLastModified = null;
+    let previousPriceValues = {};
+
+    function validPriceTimestamp(value){
+      if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)) return null;
+      const time = new Date(value);
+      return Number.isFinite(time.getTime()) && time.toISOString() === value ? value : null;
+    }
+
+    function formatPriceTimestamp(value){
+      const valid = validPriceTimestamp(value);
+      if (!valid) return '—';
+      const date = new Date(valid);
+      try {
+        // No timeZone option: use the browser's local timezone.
+        const parts = new Intl.DateTimeFormat('th-TH-u-ca-buddhist-nu-latn', {
+          day: 'numeric', month: 'short', year: 'numeric',
+          hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+        }).formatToParts(date);
+        const part = type => parts.find(item => item.type === type)?.value;
+        if (['day','month','year','hour','minute'].every(part)) {
+          return `${part('day')} ${part('month')} ${part('year')} ${part('hour')}:${part('minute')}`;
+        }
+      } catch (_) {}
+      const months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+      const pad = number => String(number).padStart(2, '0');
+      return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear() + 543} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    }
+
+    function renderPriceMetadata(){
+      document.getElementById('price_last_modified').textContent = formatPriceTimestamp(priceLastModified);
+    }
+
+    function rememberPriceValues(){
+      previousPriceValues = Object.fromEntries(PRICE_FIELD_IDS.map(id =>
+        [id, parse(document.getElementById(id).value)]
+      ));
+    }
+
+    function trackPriceEdit(event){
+      const input = event.target;
+      if (isApplyingState || input._isComposing || !PRICE_FIELD_IDS.includes(input.id)) return;
+      const value = parse(input.value);
+      if (value === previousPriceValues[input.id]) return;
+      previousPriceValues[input.id] = value;
+      priceLastModified = new Date().toISOString();
+      renderPriceMetadata();
+      scheduleSave();
+    }
+
+    function bindPriceMetadata(){
+      rememberPriceValues();
+      renderPriceMetadata();
+      PRICE_FIELD_IDS.forEach(id => {
+        const input = document.getElementById(id);
+        // Run after existing formatting/calculation handlers; comma-only changes do not count.
+        for (const event of ['input', 'change', 'blur']) input.addEventListener(event, trackPriceEdit);
+      });
+      document.addEventListener('compositionend', trackPriceEdit);
+    }
+
     function setStorageStatus(message, isError = false){
       const el = document.getElementById('storage_status');
       if (!el) return;
@@ -1143,7 +1209,9 @@
     function saveState(){
       if (isApplyingState) return;
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(buildExportPayload()));
+        const payload = buildExportPayload();
+        if (priceLastModified) payload.metadata = { priceLastModified };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
         setStorageStatus('บันทึกข้อมูลล่าสุดลงเครื่องแล้ว');
       } catch (_) {
         setStorageStatus('บันทึกลง localStorage ไม่สำเร็จ', true);
@@ -1393,6 +1461,7 @@
           setStorageStatus('ข้อมูลใน localStorage ไม่ถูกต้อง ระบบจึงไม่โหลดค่าเดิม', true);
           return false;
         }
+        priceLastModified = validPriceTimestamp(parsed.metadata?.priceLastModified);
         applyStateValues(validation.normalizedValues, { persist: false });
         setStorageStatus('โหลดค่าล่าสุดจาก localStorage แล้ว');
         return true;
@@ -1417,7 +1486,10 @@
         }
       });
       clearSavedState();
+      priceLastModified = null;
       applyStateValues(defaults, { persist: true });
+      rememberPriceValues();
+      renderPriceMetadata();
       setStorageStatus('รีเซ็ตข้อมูลกลับค่าเริ่มต้นแล้ว');
     }
 
@@ -1553,7 +1625,12 @@
           showImportValidationFeedback(`ตรวจพบคำเตือนใน ${file.name}`, validation);
         }
 
+        if (PRICE_FIELD_IDS.some(id => Object.prototype.hasOwnProperty.call(validation.normalizedValues, id))) {
+          priceLastModified = new Date().toISOString();
+        }
         applyStateValues(validation.normalizedValues, { persist: true });
+        rememberPriceValues();
+        renderPriceMetadata();
         setStorageStatus(`นำเข้าข้อมูลจาก ${file.name} เรียบร้อย`);
       } catch (error) {
         window.alert(`นำเข้า ${file.name} ไม่สำเร็จ\n\n${error && error.message ? error.message : 'รูปแบบไฟล์ไม่ถูกต้อง'}`);
@@ -2452,6 +2529,7 @@
     bindEnchantPlan();
     enhanceMarketPriceSection();
     if (!loadStateFromStorage()) recalc();
+    bindPriceMetadata();
   </script>
 
   <!-- Tooltip + Toast -->
