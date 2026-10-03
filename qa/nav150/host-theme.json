@@ -1,0 +1,52 @@
+{
+  "theme": "Fixed light; theme=\"light\" on nav; no host dark palette",
+  "layout": "assets/ro-suite/nav140-host.css:1-24; max 1400px; zero nav gutters inside existing body 20px padding",
+  "modes": {
+    "light": {
+      "tokens": {
+        "surface": "#ffffff",
+        "surface-hover": "#eaf2f8",
+        "text": "#2c3e50",
+        "muted": "#555555",
+        "border": "#e0e0e0",
+        "accent": "#2c3e50",
+        "focus": "#2980b9",
+        "font-family": "'Sarabun', 'Segoe UI', Tahoma, sans-serif"
+      },
+      "sources": [
+        "index.html:10-26",
+        "index.html:67-70",
+        "index.html:96-97",
+        "index.html:478",
+        "index.html:702"
+      ],
+      "minimum_contrast_against_surface_and_hover": {
+        "text": 9.704,
+        "muted": 6.587,
+        "accent": 9.704,
+        "focus": 3.8
+      },
+      "source_urls": [
+        "https://github.com/econDS/dim_glacier_planner/blob/986b7d5cac0e163ccfc41b39e6f91ef02925489a/index.html#L10-L26",
+        "https://github.com/econDS/dim_glacier_planner/blob/986b7d5cac0e163ccfc41b39e6f91ef02925489a/index.html#L67-L70",
+        "https://github.com/econDS/dim_glacier_planner/blob/986b7d5cac0e163ccfc41b39e6f91ef02925489a/index.html#L96-L97",
+        "https://github.com/econDS/dim_glacier_planner/blob/986b7d5cac0e163ccfc41b39e6f91ef02925489a/index.html#L478",
+        "https://github.com/econDS/dim_glacier_planner/blob/986b7d5cac0e163ccfc41b39e6f91ef02925489a/index.html#L702"
+      ]
+    }
+  },
+  "bindings": {
+    "surface": "var(--card-bg)",
+    "surface-hover": "#eaf2f8",
+    "text": "var(--primary)",
+    "muted": "#555",
+    "border": "var(--border)",
+    "accent": "var(--primary)",
+    "focus": "var(--accent)",
+    "font-family": "'Sarabun', 'Segoe UI', Tahoma, sans-serif"
+  },
+  "notes": "Host blue accent #2980b9 yields only 3.80:1 on hover and 4.30:1 on white, so use actual primary slate for accent text and retain blue for focus. No invented new color.",
+  "commit": "986b7d5cac0e163ccfc41b39e6f91ef02925489a",
+  "branch": "main",
+  "clean": true
+}

@@ -1,0 +1,26 @@
+/* Host-owned palette from existing app CSS. No shadow-DOM overrides or geometry changes. */
+ro-suite-nav[tool-id="dim-glacier"] {
+  --ro-suite-surface: var(--card-bg);
+  --ro-suite-surface-hover: #eaf2f8;
+  --ro-suite-text: var(--primary);
+  --ro-suite-muted: #555;
+  --ro-suite-border: var(--border);
+  --ro-suite-accent: var(--primary);
+  --ro-suite-focus: var(--accent);
+  --ro-suite-font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
+}
+ro-suite-nav[tool-id="dim-glacier"] > nav {
+  color: var(--ro-suite-text);
+  font-family: var(--ro-suite-font-family);
+}
+ro-suite-nav[tool-id="dim-glacier"] > nav > a {
+  color: var(--ro-suite-accent);
+  font-family: var(--ro-suite-font-family);
+}
+ro-suite-nav[tool-id="dim-glacier"] > nav > a:hover {
+  background: var(--ro-suite-surface-hover);
+}
+ro-suite-nav[tool-id="dim-glacier"] > nav > a:focus-visible {
+  outline: 3px solid var(--ro-suite-focus);
+  outline-offset: 2px;
+}
