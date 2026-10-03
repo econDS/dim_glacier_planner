@@ -10,6 +10,7 @@ ro-suite-nav[tool-id="dim-glacier"] {
   --ro-suite-font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif;
 }
 ro-suite-nav[tool-id="dim-glacier"] > nav {
+  background: var(--ro-suite-surface);
   color: var(--ro-suite-text);
   font-family: var(--ro-suite-font-family);
 }

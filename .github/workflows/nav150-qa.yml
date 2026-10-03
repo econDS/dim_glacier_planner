@@ -34,7 +34,7 @@ jobs:
           git archive 986b7d5cac0e163ccfc41b39e6f91ef02925489a | tar -x -C "$RUNNER_TEMP/nav140-base"
           git archive 53f41ce9878cd139c14679879b80850cd2df6f1e | tar -x -C "$RUNNER_TEMP/first-run-base"
           cp qa/nav140/baseline*.json qa-artifacts/
-          sha256sum assets/ro-suite/1.4.0/* assets/ro-suite/1.4.1/* assets/ro-suite/1.5.0/* > qa-artifacts/release-sha256.txt
+          sha256sum assets/ro-suite/1.4.0/* assets/ro-suite/1.4.1/* assets/ro-suite/1.5.0/* assets/ro-suite/1.5.1/* > qa-artifacts/release-sha256.txt
       - name: All original and new source tests
         run: node --test tests/*.test.* 2>&1 | tee qa-artifacts/source-tests.log
       - name: Install pinned QA-only real browser
