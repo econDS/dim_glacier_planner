@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
-const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
+const html=require('../qa/nav140/normalize.cjs')(fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8'));
 const baseline=JSON.parse(fs.readFileSync(require('node:path').join(__dirname,'../qa/price-metadata/baseline.json')));
 const helper=html.slice(html.indexOf('    // Price metadata is local-only'),html.indexOf('    function setStorageStatus'));
 const fieldDefs=html.match(/const FIELD_DEFS = (\[[\s\S]*?\n    \]);/)[1];
