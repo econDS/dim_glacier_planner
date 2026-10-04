@@ -1,0 +1,107 @@
+    /* First-run UI cohesion: presentation only (no palette, formula, data or script changes).
+       Hierarchy: current/target planner + result > price refinement > data utilities. */
+    :root { --muted: #5f6b73; }
+    h1 { font-size: 26px; margin: 10px 0 14px; }
+    @media (max-width: 520px) { h1 { font-size: 21px; margin: 2px 0 10px; } }
+    button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* start cue: one compact strip instead of a second hero */
+    .first-run-guide { margin-bottom: 14px; padding: 8px 14px; border-left: 4px solid var(--accent); }
+    .first-run-guide { display: flex; flex-wrap: wrap; align-items: center; gap: 0 18px; }
+    .first-run-guide strong { font-size: 15px; }
+    .first-run-guide p { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
+    .first-run-guide a { min-height: 44px; padding: 6px 14px 6px 0; font-size: 13px; }
+    @media (max-width: 1100px) { .first-run-guide a[href="#card_plan"] { display: none; } .first-run-guide a { min-height: 40px; } .first-run-guide strong, .first-run-guide p { flex-basis: 100%; } }
+
+    /* desktop: planner + result are the main pair; prices/tools are a narrower secondary rail */
+    @media (min-width: 1101px) {
+      .container { grid-template-columns: minmax(0, 1fr) 360px; }
+      .container > .first-run-planner { grid-column: 1; }
+      .container > .left-col { grid-column: 2; padding-right: 4px; }
+    }
+
+    /* card rhythm + cost hierarchy (the grand total is the one main cost) */
+    .interactive-card { margin-bottom: 16px; }
+    .card { margin-bottom: 14px; }
+    .interactive-card .card-cost { font-size: 15px; color: var(--muted); }
+    .section-header { font-size: 13px; color: var(--muted); padding-bottom: 6px; margin-bottom: 10px; }
+    .hint { color: var(--muted); }
+    #card_base { margin-bottom: 12px; }
+    #card_base .card-top { padding: 8px 15px; }
+    #card_base .card-title { font-size: 14px; }
+    @media (max-width: 520px) { #card_base .card-title { font-size: 13px; gap: 8px; } }
+
+    /* primary start point: current -> target */
+    #card_plan { border-width: 2px; box-shadow: 0 4px 14px rgba(41,128,185,.12); }
+    #card_plan .card-title { font-size: 17px; }
+    .stage-selects { gap: 12px; padding: 12px; background: #f5f9fc; border: 1px solid #cfe0ec; border-radius: 8px; }
+    .stage-field { font-size: 14px; color: var(--primary); }
+    .stage-field select { min-height: 44px; font-size: 14px; border-color: var(--accent); }
+
+    /* presets: quiet shortcuts under the two controls */
+    .preset-row { margin: 12px 0 4px; }
+    .preset-label { color: var(--muted); }
+    .preset-chip { min-height: 32px; font-weight: 600; }
+    .preset-chip.active { background: #eaf2f8; color: var(--primary); border: 2px solid var(--accent); padding: 4px 10px; font-weight: 800; }
+    .preset-chip.active::before { content: "\2713\00a0"; }
+    @media (max-width: 520px) {
+      .preset-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+      .preset-label { grid-column: 1 / -1; }
+      .preset-chip { min-height: 40px; padding: 4px 6px; text-align: center; }
+      .preset-chip.active { padding: 3px 5px; }
+    }
+
+    /* stepper: state is readable without colour (check badge, dashed skip, underline = now, arrow = target) */
+    .stepper { margin: 14px 0 4px; }
+    .step-node { color: var(--muted); }
+    .step-badge { color: var(--muted); }
+    .step-node:not(:disabled):hover .step-dot { transform: none; box-shadow: 0 0 0 3px rgba(41,128,185,.2); }
+    .step-node.skip .step-dot { border-style: dashed; }
+    .step-node.skip .step-label { font-weight: 600; }
+    .step-node.done { color: #4d5b5e; }
+    .step-node.done .step-dot { border-color: #4d5b5e; }
+    .step-node.done .step-badge { background: #4d5b5e; border-color: #4d5b5e; color: #fff; }
+    .step-node.is-target .step-dot { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--accent); }
+    .step-node.is-current .step-dot { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #4d5b5e; }
+    .step-node.is-current .step-label { text-decoration: underline; text-underline-offset: 3px; }
+    .step-node.is-target .step-label { font-weight: 800; }
+    .step-node.is-target .step-label::before { content: "\25B8"; }
+    .step-node:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+    .stepper-legend { color: var(--muted); }
+    .lg-skip { border-style: dashed; }
+    .method-row { margin-top: 8px; }
+    .method-row .method-select { min-height: 36px; }
+
+    /* result: total first, shopping list scans by name / qty / cost */
+    .first-run-planner > .grand-total { padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(41,128,185,.22); }
+    #total_zeny { font-size: clamp(28px, 8.5vw, 42px) !important; overflow-wrap: anywhere; }
+    #card_shop { border-width: 2px; }
+    #card_shop .card-title { font-size: 17px; }
+    .shop-summary { color: var(--muted); }
+    .shop-table .shop-qty { width: 1%; padding: 7px 14px; }
+    .shop-table .shop-cost { width: 1%; padding-left: 12px; white-space: nowrap; color: var(--muted); }
+    .shop-table tr.shop-total td { font-size: 14px; }
+    .view-btn { min-height: 36px; }
+    .view-btn.active::before { content: "\2713\00a0"; }
+
+    /* refine: optional add-on after the enchant plan */
+    #card_refine { border-color: var(--border); margin-bottom: 14px; }
+    #card_refine .card-top { background: #f6f8f9; padding: 10px 15px; }
+    #card_refine .card-title { font-size: 14px; color: var(--primary); }
+    #card_refine .card-cost { font-size: 14px; }
+    .gimmick-box { margin-bottom: 0; }
+
+    /* prices: a refinement step, assumptions stay visible */
+    #card_market { padding: 14px 16px; }
+    .price-meta { display: flex; flex-wrap: wrap; gap: 0 14px; margin: 0 0 8px; font-size: 12px; color: var(--muted); }
+    .market-warning { margin: 0 0 10px; padding: 6px 10px; }
+    .first-run-prices > summary { display: list-item; list-style-position: inside; box-sizing: border-box; min-height: 44px; padding: 11px 12px; margin-bottom: 0; border: 1px solid rgba(41,128,185,.4); border-radius: 6px; background: #fff; color: var(--accent); }
+    .first-run-prices[open] > summary { margin-bottom: 12px; }
+
+    /* data tools: utility, lowest visual weight */
+    .toolbar-card { margin-bottom: 0; background: #fff; border-color: var(--border); }
+    .toolbar-card .toolbar-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .toolbar-card .toolbar-btn, .toolbar-card .toolbar-btn.primary { min-height: 40px; padding: 6px 12px; background: #fff; color: var(--primary); border-color: var(--border); font-weight: 600; }
+    .toolbar-card .toolbar-btn:hover { transform: none; box-shadow: none; border-color: rgba(41,128,185,.45); }
+    .toolbar-card .toolbar-meta { color: var(--muted); }
+    #storage_status { margin-top: 6px; font-weight: 600; }
