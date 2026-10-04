@@ -1,0 +1,58 @@
+name: UI cohesion regression QA
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+concurrency:
+  group: ui-cohesion-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  ui-cohesion-qa:
+    if: startsWith(github.head_ref, 'claude/glacier-planner-ui-cohesion') && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.14.0'
+      - name: Immutable before sources
+        run: |
+          mkdir -p qa-artifacts "$RUNNER_TEMP/ui-base" "$RUNNER_TEMP/first-run-base"
+          git archive a381113466710a31680d9728433de1ffff9e3413 | tar -x -C "$RUNNER_TEMP/ui-base"
+          git archive 53f41ce9878cd139c14679879b80850cd2df6f1e | tar -x -C "$RUNNER_TEMP/first-run-base"
+      - name: All source tests
+        run: node --test tests/*.test.* 2>&1 | tee qa-artifacts/source-tests.log
+      - name: Install pinned QA-only Chromium
+        id: browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/ui-tools" --no-save --package-lock=false --ignore-scripts playwright@1.55.1
+          node "$RUNNER_TEMP/ui-tools/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Browser regression, first-run guard and UI-cohesion before/after
+        if: steps.browser.outcome == 'success'
+        env:
+          NODE_PATH: ${{ runner.temp }}/ui-tools/node_modules
+          BASE_SHA: 53f41ce9878cd139c14679879b80850cd2df6f1e
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+          RO_QA_COMMIT: ${{ github.event.pull_request.head.sha }}
+          PRICE_METADATA_QA: '1'
+        run: |
+          BASE_ROOT="$RUNNER_TEMP/first-run-base" QA_OUTPUT="$GITHUB_WORKSPACE/qa-artifacts/regression" RO_QA_OUTPUT="$GITHUB_WORKSPACE/qa-artifacts/regression" node tests/dim-nav.browser.cjs 2>&1 | tee qa-artifacts/browser-regression.log
+          BASE_ROOT="$RUNNER_TEMP/first-run-base" QA_OUTPUT="$GITHUB_WORKSPACE/qa-artifacts/first-run" node tests/first-run.browser.cjs 2>&1 | tee qa-artifacts/first-run.log
+          BASE_ROOT="$RUNNER_TEMP/ui-base" QA_OUTPUT="$GITHUB_WORKSPACE/qa-artifacts/ui-cohesion" node tests/ui-cohesion.browser.cjs 2>&1 | tee qa-artifacts/ui-cohesion.log
+      - name: Upload logs and reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ui-cohesion-${{ github.event.pull_request.head.sha }}
+          path: qa-artifacts/
+          retention-days: 30

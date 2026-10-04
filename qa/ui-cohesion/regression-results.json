@@ -1,0 +1,533 @@
+{
+ "cases": [
+  {
+   "name": "A default 0->7, no refine",
+   "identical": true,
+   "total_zeny": "1,167,842,750 Zeny",
+   "total_thb": "8,642 THB",
+   "cost_enchant": "1,167,792,750",
+   "cost_refine": "0",
+   "before": {
+    "name": "A default 0->7, no refine",
+    "finished": {
+     "cost_base": "50,000",
+     "cost_enchant": "1,167,792,750",
+     "cost_refine": "0",
+     "total_zeny": "1,167,842,750 Zeny",
+     "total_thb": "8,642 THB",
+     "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 5 · ต้องทำ 7 ขั้น (S4, S3, Lv1, Lv2, Lv3, Lv4, Lv5)",
+     "shop_list": "Snow Flower Magic Stone Extract x 160 66,520,000 Shining Snow Flower Magic Stone Extract x 215 32,250,000 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Glacier Extract x 225 478,350,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,532,750 Miasmal Spell x 6 2,040,000 รวมค่า Enchant 1,167,792,750",
+     "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 25xBrilliant Snow Flower Magic Stone Extract 49,907,500 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 35xBrilliant Snow Flower Magic Stone Extract 70,136,250 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 229,172,500 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250",
+     "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 3,200 24,000,000 Snow Flower Petal x 13,245 137,748,000 Amethyst Fragment x 66,225 566,223,750 Shining Snow Flower Magic Stone x 3,225 88,687,500 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,040,000 รวม (ถ้า Craft เองทั้งหมด) 1,353,765,250"
+    }
+   },
+   "after": {
+    "name": "A default 0->7, no refine",
+    "finished": {
+     "cost_base": "50,000",
+     "cost_enchant": "1,167,792,750",
+     "cost_refine": "0",
+     "total_zeny": "1,167,842,750 Zeny",
+     "total_thb": "8,642 THB",
+     "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 5 · ต้องทำ 7 ขั้น (S4, S3, Lv1, Lv2, Lv3, Lv4, Lv5)",
+     "shop_list": "Snow Flower Magic Stone Extract x 160 66,520,000 Shining Snow Flower Magic Stone Extract x 215 32,250,000 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Glacier Extract x 225 478,350,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,532,750 Miasmal Spell x 6 2,040,000 รวมค่า Enchant 1,167,792,750",
+     "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 25xBrilliant Snow Flower Magic Stone Extract 49,907,500 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 35xBrilliant Snow Flower Magic Stone Extract 70,136,250 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 229,172,500 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250",
+     "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 3,200 24,000,000 Snow Flower Petal x 13,245 137,748,000 Amethyst Fragment x 66,225 566,223,750 Shining Snow Flower Magic Stone x 3,225 88,687,500 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,040,000 รวม (ถ้า Craft เองทั้งหมด) 1,353,765,250"
+    }
+   }
+  },
+  {
+   "name": "B1 2->7, custom prices (+ coupon selects hidden at stage 2)",
+   "identical": true,
+   "total_zeny": "1,067,286,700 Zeny",
+   "total_thb": "8,538 THB",
+   "cost_enchant": "1,067,286,700",
+   "cost_refine": "0",
+   "before": {
+    "name": "B1 2->7, custom prices (+ coupon selects hidden at stage 2)",
+    "finished": {
+     "cost_base": "มีแล้ว",
+     "cost_enchant": "1,067,286,700",
+     "cost_refine": "0",
+     "total_zeny": "1,067,286,700 Zeny",
+     "total_thb": "8,538 THB",
+     "shop_summary": "จาก Slot 4 + 3 → Slot 2 Lv 5 · ต้องทำ 5 ขั้น (Lv1, Lv2, Lv3, Lv4, Lv5)",
+     "shop_list": "Snow Flower Magic Stone Extract x 135 57,439,125 Shining Snow Flower Magic Stone Extract x 180 27,000,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Glacier Extract x 225 495,855,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,892,575 Miasmal Spell x 6 2,400,000 รวมค่า Enchant 1,067,286,700",
+     "list_steps": "Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 171,170,825 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 221,490,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 316,717,125",
+     "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,154,750 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 2,700 20,250,000 Snow Flower Petal x 12,770 157,645,650 Amethyst Fragment x 63,850 545,917,500 Shining Snow Flower Magic Stone x 2,700 74,250,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,400,000 รวม (ถ้า Craft เองทั้งหมด) 1,231,129,150"
+    }
+   },
+   "after": {
+    "name": "B1 2->7, custom prices (+ coupon selects hidden at stage 2)",
+    "finished": {
+     "cost_base": "มีแล้ว",
+     "cost_enchant": "1,067,286,700",
+     "cost_refine": "0",
+     "total_zeny": "1,067,286,700 Zeny",
+     "total_thb": "8,538 THB",
+     "shop_summary": "จาก Slot 4 + 3 → Slot 2 Lv 5 · ต้องทำ 5 ขั้น (Lv1, Lv2, Lv3, Lv4, Lv5)",
+     "shop_list": "Snow Flower Magic Stone Extract x 135 57,439,125 Shining Snow Flower Magic Stone Extract x 180 27,000,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Glacier Extract x 225 495,855,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,892,575 Miasmal Spell x 6 2,400,000 รวมค่า Enchant 1,067,286,700",
+     "list_steps": "Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 171,170,825 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 221,490,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 316,717,125",
+     "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,154,750 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 2,700 20,250,000 Snow Flower Petal x 12,770 157,645,650 Amethyst Fragment x 63,850 545,917,500 Shining Snow Flower Magic Stone x 2,700 74,250,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,400,000 รวม (ถ้า Craft เองทั้งหมด) 1,231,129,150"
+    }
+   }
+  },
+  {
+   "name": "B2 0->4, custom prices, coupon route for Slot 4 + 3",
+   "identical": true,
+   "total_zeny": "433,845,625 Zeny",
+   "total_thb": "3,471 THB",
+   "cost_enchant": "433,795,625",
+   "cost_refine": "0",
+   "before": {
+    "name": "B2 0->4, custom prices, coupon route for Slot 4 + 3",
+    "finished": {
+     "cost_base": "50,000",
+     "cost_enchant": "433,795,625",
+     "cost_refine": "0",
+     "total_zeny": "433,845,625 Zeny",
+     "total_thb": "3,471 THB",
+     "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 2 · ต้องทำ 4 ขั้น (S4, S3, Lv1, Lv2)",
+     "shop_list": "Snow Flower Magic Stone Extract x 70 29,783,250 Shining Snow Flower Magic Stone Extract x 95 14,250,000 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Glacier Extract x 75 165,285,000 Encroached Magical Crystal x 5 6,000,000 Neutralized Magical Crystal x 5 1,877,375 รวมค่า Enchant 433,795,625",
+     "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 1xSlot 4 & 3 Dim Glacier Enchant Coupon 26,504,750 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 2xSlot 4 & 3 Dim Glacier Enchant Coupon 49,382,125 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500",
+     "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,094,750 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 1,400 10,500,000 Snow Flower Petal x 4,475 55,243,875 Amethyst Fragment x 22,375 191,306,250 Shining Snow Flower Magic Stone x 1,425 39,187,500 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Encroached Magical Ore x 75 90,000 Neutralized Magical Ore x 25 500,000 รวม (ถ้า Craft เองทั้งหมด) 513,427,625"
+    }
+   },
+   "after": {
+    "name": "B2 0->4, custom prices, coupon route for Slot 4 + 3",
+    "finished": {
+     "cost_base": "50,000",
+     "cost_enchant": "433,795,625",
+     "cost_refine": "0",
+     "total_zeny": "433,845,625 Zeny",
+     "total_thb": "3,471 THB",
+     "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 2 · ต้องทำ 4 ขั้น (S4, S3, Lv1, Lv2)",
+     "shop_list": "Snow Flower Magic Stone Extract x 70 29,783,250 Shining Snow Flower Magic Stone Extract x 95 14,250,000 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Glacier Extract x 75 165,285,000 Encroached Magical Crystal x 5 6,000,000 Neutralized Magical Crystal x 5 1,877,375 รวมค่า Enchant 433,795,625",
+     "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 1xSlot 4 & 3 Dim Glacier Enchant Coupon 26,504,750 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 2xSlot 4 & 3 Dim Glacier Enchant Coupon 49,382,125 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500",
+     "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,094,750 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 1,400 10,500,000 Snow Flower Petal x 4,475 55,243,875 Amethyst Fragment x 22,375 191,306,250 Shining Snow Flower Magic Stone x 1,425 39,187,500 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Encroached Magical Ore x 75 90,000 Neutralized Magical Ore x 25 500,000 รวม (ถ้า Craft เองทั้งหมด) 513,427,625"
+    }
+   }
+  },
+  {
+   "name": "C 3->6 with refine qty > 0",
+   "identical": true,
+   "total_zeny": "705,467,817 Zeny",
+   "total_thb": "5,220 THB",
+   "cost_enchant": "508,020,250",
+   "cost_refine": "197,447,567",
+   "before": {
+    "name": "C 3->6 with refine qty > 0",
+    "finished": {
+     "cost_base": "มีแล้ว",
+     "cost_enchant": "508,020,250",
+     "cost_refine": "197,447,567",
+     "total_zeny": "705,467,817 Zeny",
+     "total_thb": "5,220 THB",
+     "shop_summary": "จาก Slot 2 Lv 1 → Slot 2 Lv 4 · ต้องทำ 3 ขั้น (Lv2, Lv3, Lv4)",
+     "shop_list": "Snow Flower Magic Stone Extract x 65 27,023,750 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Glacier Extract x 105 223,230,000 Encroached Magical Crystal x 22 26,400,000 Neutralized Magical Crystal x 22 8,046,500 Miasmal Spell x 3 1,020,000 รวมค่า Enchant 508,020,250",
+     "list_steps": "Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000",
+     "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 1,300 9,750,000 Snow Flower Petal x 6,195 64,428,000 Amethyst Fragment x 30,975 264,836,250 Shining Snow Flower Magic Stone x 1,350 37,125,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Encroached Magical Ore x 330 396,000 Neutralized Magical Ore x 110 2,200,000 Miasmal Spell x 3 1,020,000 รวม (ถ้า Craft เองทั้งหมด) 588,555,250"
+    }
+   },
+   "after": {
+    "name": "C 3->6 with refine qty > 0",
+    "finished": {
+     "cost_base": "มีแล้ว",
+     "cost_enchant": "508,020,250",
+     "cost_refine": "197,447,567",
+     "total_zeny": "705,467,817 Zeny",
+     "total_thb": "5,220 THB",
+     "shop_summary": "จาก Slot 2 Lv 1 → Slot 2 Lv 4 · ต้องทำ 3 ขั้น (Lv2, Lv3, Lv4)",
+     "shop_list": "Snow Flower Magic Stone Extract x 65 27,023,750 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Glacier Extract x 105 223,230,000 Encroached Magical Crystal x 22 26,400,000 Neutralized Magical Crystal x 22 8,046,500 Miasmal Spell x 3 1,020,000 รวมค่า Enchant 508,020,250",
+     "list_steps": "Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000",
+     "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+    },
+    "rawView": {
+     "shop_list": "Snow Flower Magic Stone x 1,300 9,750,000 Snow Flower Petal x 6,195 64,428,000 Amethyst Fragment x 30,975 264,836,250 Shining Snow Flower Magic Stone x 1,350 37,125,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Encroached Magical Ore x 330 396,000 Neutralized Magical Ore x 110 2,200,000 Miasmal Spell x 3 1,020,000 รวม (ถ้า Craft เองทั้งหมด) 588,555,250"
+    }
+   }
+  }
+ ],
+ "probes": {
+  "before": [
+   {
+    "width": 360,
+    "overflow": 0,
+    "curTop": 787,
+    "targetTop": 853,
+    "stepperTop": 904,
+    "totalTop": 1141,
+    "marketTop": 2606,
+    "toolsTop": 2891,
+    "presetRows": 3,
+    "small": [
+     {
+      "t": "preset-chip active:เริ่มใหม่ → ครบ Lv",
+      "w": 132,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:เริ่มใหม่ → Slot 4",
+      "w": 136,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+      "w": 141,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+      "w": 141,
+      "h": 31
+     },
+     {
+      "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "view-btn active:ของสำเร็จ",
+      "w": 72,
+      "h": 31
+     },
+     {
+      "t": "view-btn:แตกเป็นวัตถุดิบ",
+      "w": 102,
+      "h": 31
+     }
+    ],
+    "unlabeled": [
+     "file_import"
+    ],
+    "stepperNames": true,
+    "tabOrder": [
+     "RO-SUITE-NAV",
+     "RO-SUITE-NAV",
+     "A",
+     "A",
+     "chip7",
+     "chip2",
+     "chip4",
+     "chip7",
+     "sel_cur_stage",
+     "sel_target_stage",
+     "step0",
+     "step1",
+     "step2",
+     "step3"
+    ],
+    "chipFocusOutline": "auto"
+   },
+   {
+    "width": 390,
+    "overflow": 0,
+    "curTop": 748,
+    "targetTop": 814,
+    "stepperTop": 865,
+    "totalTop": 1082,
+    "marketTop": 2492,
+    "toolsTop": 2777,
+    "presetRows": 3,
+    "small": [
+     {
+      "t": "preset-chip active:เริ่มใหม่ → ครบ Lv",
+      "w": 132,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:เริ่มใหม่ → Slot 4",
+      "w": 136,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+      "w": 141,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+      "w": 141,
+      "h": 31
+     },
+     {
+      "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "view-btn active:ของสำเร็จ",
+      "w": 72,
+      "h": 31
+     },
+     {
+      "t": "view-btn:แตกเป็นวัตถุดิบ",
+      "w": 102,
+      "h": 31
+     }
+    ],
+    "unlabeled": [
+     "file_import"
+    ],
+    "stepperNames": true,
+    "tabOrder": [
+     "RO-SUITE-NAV",
+     "RO-SUITE-NAV",
+     "A",
+     "A",
+     "chip7",
+     "chip2",
+     "chip4",
+     "chip7",
+     "sel_cur_stage",
+     "sel_target_stage",
+     "step0",
+     "step1",
+     "step2",
+     "step3"
+    ],
+    "chipFocusOutline": "auto"
+   },
+   {
+    "width": 1440,
+    "overflow": 0,
+    "curTop": 547,
+    "targetTop": 547,
+    "stepperTop": 598,
+    "totalTop": 823,
+    "marketTop": 329,
+    "toolsTop": 598,
+    "presetRows": 1,
+    "small": [
+     {
+      "t": "preset-chip active:เริ่มใหม่ → ครบ Lv",
+      "w": 132,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:เริ่มใหม่ → Slot 4",
+      "w": 136,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+      "w": 141,
+      "h": 31
+     },
+     {
+      "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+      "w": 141,
+      "h": 31
+     },
+     {
+      "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "view-btn active:ของสำเร็จ",
+      "w": 72,
+      "h": 31
+     },
+     {
+      "t": "view-btn:แตกเป็นวัตถุดิบ",
+      "w": 102,
+      "h": 31
+     }
+    ],
+    "unlabeled": [
+     "file_import"
+    ],
+    "stepperNames": true,
+    "tabOrder": [
+     "RO-SUITE-NAV",
+     "RO-SUITE-NAV",
+     "A",
+     "A",
+     "chip7",
+     "chip2",
+     "chip4",
+     "chip7",
+     "sel_cur_stage",
+     "sel_target_stage",
+     "step0",
+     "step1",
+     "step2",
+     "step3"
+    ],
+    "chipFocusOutline": "auto"
+   }
+  ],
+  "after": [
+   {
+    "width": 360,
+    "overflow": 0,
+    "curTop": 442,
+    "targetTop": 524,
+    "stepperTop": 718,
+    "totalTop": 947,
+    "marketTop": 2434,
+    "toolsTop": 3049,
+    "presetRows": 2,
+    "small": [
+     {
+      "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     }
+    ],
+    "unlabeled": [
+     "file_import"
+    ],
+    "stepperNames": true,
+    "tabOrder": [
+     "RO-SUITE-NAV",
+     "RO-SUITE-NAV",
+     "A",
+     "sel_cur_stage",
+     "sel_target_stage",
+     "chip7",
+     "chip2",
+     "chip4",
+     "chip7",
+     "step0",
+     "step1",
+     "step2",
+     "step3",
+     "step4"
+    ],
+    "chipFocusOutline": "solid"
+   },
+   {
+    "width": 390,
+    "overflow": 0,
+    "curTop": 406,
+    "targetTop": 488,
+    "stepperTop": 682,
+    "totalTop": 911,
+    "marketTop": 2233,
+    "toolsTop": 2826,
+    "presetRows": 2,
+    "small": [
+     {
+      "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     }
+    ],
+    "unlabeled": [
+     "file_import"
+    ],
+    "stepperNames": true,
+    "tabOrder": [
+     "RO-SUITE-NAV",
+     "RO-SUITE-NAV",
+     "A",
+     "sel_cur_stage",
+     "sel_target_stage",
+     "chip7",
+     "chip2",
+     "chip4",
+     "chip7",
+     "step0",
+     "step1",
+     "step2",
+     "step3",
+     "step4"
+    ],
+    "chipFocusOutline": "solid"
+   },
+   {
+    "width": 1440,
+    "overflow": 0,
+    "curTop": 385,
+    "targetTop": 385,
+    "stepperTop": 500,
+    "totalTop": 716,
+    "marketTop": 216,
+    "toolsTop": 795,
+    "presetRows": 1,
+    "small": [
+     {
+      "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     },
+     {
+      "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+      "w": 123,
+      "h": 29
+     }
+    ],
+    "unlabeled": [
+     "file_import"
+    ],
+    "stepperNames": true,
+    "tabOrder": [
+     "RO-SUITE-NAV",
+     "RO-SUITE-NAV",
+     "A",
+     "A",
+     "sel_cur_stage",
+     "sel_target_stage",
+     "chip7",
+     "chip2",
+     "chip4",
+     "chip7",
+     "step0",
+     "step1",
+     "step2",
+     "step3"
+    ],
+    "chipFocusOutline": "solid"
+   }
+  ]
+ },
+ "status": "PASS"
+}

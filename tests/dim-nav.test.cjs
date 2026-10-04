@@ -9,7 +9,7 @@ const root = path.resolve(__dirname, '..');
 const read = relative => fs.readFileSync(path.join(root, relative));
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 const baseline = JSON.parse(read('qa/ro-suite-nav/source-baseline.json'));
-const html = require('./price-metadata-normalize.cjs')(require('../qa/first-run/normalize.cjs')(require('../qa/nav140/normalize.cjs')(read('index.html').toString())));
+const html = require('./price-metadata-normalize.cjs')(require('../qa/first-run/normalize.cjs')(require('../qa/nav140/normalize.cjs')(require('../qa/ui-cohesion/normalize.cjs')(read('index.html').toString()))));
 const hosts = [...html.matchAll(/<ro-suite-nav\b([^>]*)>([\s\S]*?)<\/ro-suite-nav>/g)];
 const navScripts = [...html.matchAll(/<script\b[^>]*src="\.\/assets\/ro-suite\/1\.3\.0\/nav\.js"[^>]*>[\s\S]*?<\/script>/g)];
 const navStyles = [...html.matchAll(/<style\b[^>]*id="ro-suite-nav-fallback"[^>]*>[\s\S]*?<\/style>/g)];

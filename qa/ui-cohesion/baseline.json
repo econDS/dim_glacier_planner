@@ -1,0 +1,6 @@
+{
+  "baseCommit": "a381113466710a31680d9728433de1ffff9e3413",
+  "indexSha256": "8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b",
+  "style": "ui-cohesion",
+  "protectedIds": ["sel_cur_stage", "sel_target_stage", "stage_stepper", "total_zeny", "total_thb", "shop_list", "list_steps", "cost_base", "cost_enchant", "cost_refine", "default_price_date", "price_last_modified", "market-price-details", "btn_import", "btn_reset", "btn_export_json", "btn_export_csv", "btn_export_excel", "storage_status", "file_import"]
+}
