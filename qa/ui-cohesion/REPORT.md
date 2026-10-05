@@ -25,4 +25,5 @@ Presentation-only pass on top of the first-run flow. No formula, price, storage,
 
 ## Follow-up: page frame
 - Full-bleed shared nav (host-side margin/padding only; nav component and its host CSS untouched) and a slim title band (icon + h1 + one-line subtitle) replace the centred bare `<h1>`. Screenshots: `screenshots/frame-1440.png`, `frame-390.png`.
-- Not done: loading Sarabun. It would add a third-party font request (and fail the nav suite's network-clean checks); the stack still falls back to system fonts.
+- Fonts: Sarabun (OFL) is bundled in `assets/fonts/sarabun` (Thai + Latin, 400/600/700/800, `font-display: swap`) and loaded via `@font-face` in the ui-cohesion block, so there is no third-party font request. Body size 14→15px to offset Sarabun's small x-height; buttons/selects now inherit the font.
+- Test harness: `ui-cohesion.browser.cjs` now uses a fresh browser context per case (state could leak between cases and cause an intermittent mismatch).
