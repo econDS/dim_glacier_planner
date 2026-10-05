@@ -11,7 +11,7 @@ Presentation-only pass on top of the first-run flow. No formula, price, storage,
 - Start cue is one compact strip (duplicate "pick 2 fields" line removed; not-live-price line kept). The "#card_plan" skip link is hidden under 1100px where the planner is directly below.
 - Current/target selects sit in a tinted group with larger labels and 44px selects; presets moved under them, outlined and quiet; active preset = tinted + check + 2px border (not fill-only). Mobile presets are a 2×2 grid (3 rows → 2).
 - Stepper states: done = check badge, todo = solid accent, skipped = dashed, current = underlined label, target = `▸` marker; legend updated. Hover scale removed, ring weight reduced, label/badge contrast raised.
-- Desktop columns swapped: planner + result left (main pair), narrow 360px sticky price/tools rail right. Mobile order is unchanged except tools now come after the best-price table.
+- Desktop columns swapped: planner + result left (main pair), narrow 380px sticky price/tools rail right. Mobile order is unchanged except tools now come after the best-price table.
 - Per-card costs are muted (15px); the grand total is the only large figure (`clamp`ed so it never overflows at 360px).
 - Shopping list: columns size to content, cost darkened for contrast, active view toggle has a check mark.
 - Refine: `id="card_refine"` added; neutral border/header and smaller title so it reads as an optional add-on.

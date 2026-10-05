@@ -24,7 +24,7 @@
 
     /* desktop: planner + result are the main pair; prices/tools are a narrower secondary rail */
     @media (min-width: 1101px) {
-      .container { grid-template-columns: minmax(0, 1fr) 360px; }
+      .container { grid-template-columns: minmax(0, 1fr) 380px; }
       .container > .first-run-planner { grid-column: 1; }
       .container > .left-col { grid-column: 2; padding-right: 4px; }
     }
