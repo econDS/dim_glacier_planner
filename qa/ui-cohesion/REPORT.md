@@ -22,3 +22,7 @@ Presentation-only pass on top of the first-run flow. No formula, price, storage,
 ## Known limits
 - `cdn.sheetjs.com` is blocked in the authoring sandbox, so the XLSX/XLS parts of `tests/dim-nav.browser.cjs` could not run here (50 identical failures before and after). Run it in CI.
 - White text on the existing accent `#2980b9` is 4.3:1 (below AA for small text); left as-is to keep the palette.
+
+## Follow-up: page frame
+- Full-bleed shared nav (host-side margin/padding only; nav component and its host CSS untouched) and a slim title band (icon + h1 + one-line subtitle) replace the centred bare `<h1>`. Screenshots: `screenshots/frame-1440.png`, `frame-390.png`.
+- Not done: loading Sarabun. It would add a third-party font request (and fail the nav suite's network-clean checks); the stack still falls back to system fonts.
