@@ -768,11 +768,11 @@
     @media (max-width: 520px) { #card_base .card-title { font-size: 13px; gap: 8px; } }
 
     /* primary start point: current -> target */
-    #card_plan { border-width: 2px; box-shadow: 0 4px 14px rgba(41,128,185,.12); }
+    #card_plan, #card_shop { border-top: 3px solid var(--accent); box-shadow: 0 4px 14px rgba(41,128,185,.12); }
     #card_plan .card-title { font-size: 17px; }
     .stage-selects { gap: 12px; padding: 12px; background: #f5f9fc; border: 1px solid #cfe0ec; border-radius: 8px; }
     .stage-field { font-size: 14px; color: var(--primary); }
-    .stage-field select { min-height: 44px; font-size: 14px; border-color: var(--accent); }
+    .stage-field select { min-height: 44px; font-size: 14px; }
 
     /* presets: quiet shortcuts under the two controls */
     .preset-row { margin: 12px 0 4px; }
@@ -811,7 +811,6 @@
     /* result: total first, shopping list scans by name / qty / cost */
     .first-run-planner > .grand-total { padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(41,128,185,.22); }
     #total_zeny { font-size: clamp(28px, 8.5vw, 42px) !important; overflow-wrap: anywhere; }
-    #card_shop { border-width: 2px; }
     #card_shop .card-title { font-size: 17px; }
     .shop-summary { color: var(--muted); }
     .shop-table .shop-qty { width: 1%; padding: 7px 14px; }
@@ -823,7 +822,7 @@
     .view-btn.active::before { content: "\2713\00a0"; }
 
     /* refine: optional add-on after the enchant plan */
-    #card_refine { border-color: var(--border); margin-bottom: 14px; }
+    #card_refine { margin-bottom: 14px; }
     #card_refine .card-top { background: #f6f8f9; padding: 10px 15px; }
     #card_refine .card-title { font-size: 14px; color: var(--primary); }
     #card_refine .card-cost { font-size: 14px; }
@@ -853,6 +852,18 @@
     .site-head h1 { grid-column: auto; text-align: left; margin: 0; font-size: 24px; line-height: 1.2; }
     .site-head p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
     @media (max-width: 520px) { .site-head-in { padding: 10px 20px; gap: 10px; } .site-head-icon { width: 36px; height: 36px; } .site-head h1 { font-size: 18px; } .site-head p { font-size: 12px; } }
+
+    /* one border system: hairline cards, uniform controls, emphasis from a top bar + soft shadow */
+    :root { --edge: #e0e0e0; --control-edge: #c5d0d8; }
+    .card, .interactive-card, .first-run-guide, .gimmick-box { border-radius: 10px; }
+    .interactive-card { border-color: var(--edge); }
+    .card-top { border-bottom-color: var(--edge); }
+    .input-group input, .method-select, .toolbar-btn, .toolbar-card .toolbar-btn, .toolbar-card .toolbar-btn.primary, .first-run-prices > summary { border: 1px solid var(--control-edge); border-radius: 8px; }
+    .stage-selects { border-color: var(--edge); }
+    .view-toggle { border-color: var(--control-edge); border-radius: 8px; }
+    .input-group input:hover, .method-select:hover, .toolbar-btn:hover, .toolbar-card .toolbar-btn:hover { border-color: var(--accent); }
+    .input-group input:focus-visible, .method-select:focus-visible { border-color: var(--accent); }
+    .first-run-prices > summary { border-color: rgba(41,128,185,.4); }
   </style>
   <link rel="stylesheet" href="./assets/ro-suite/nav140-host.css">
   <link rel="stylesheet" href="./assets/ro-suite/theme-host.css">
