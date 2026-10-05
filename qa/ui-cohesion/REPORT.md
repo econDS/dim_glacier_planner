@@ -25,5 +25,5 @@ Presentation-only pass on top of the first-run flow. No formula, price, storage,
 
 ## Follow-up: page frame
 - Full-bleed shared nav (host-side margin/padding only; nav component and its host CSS untouched) and a slim title band (icon + h1 + one-line subtitle) replace the centred bare `<h1>`. Screenshots: `screenshots/frame-1440.png`, `frame-390.png`.
-- Fonts: Sarabun (OFL) is bundled in `assets/fonts/sarabun` (Thai + Latin, 400/600/700/800, `font-display: swap`) and loaded via `@font-face` in the ui-cohesion block, so there is no third-party font request. Body size 14→15px to offset Sarabun's small x-height; buttons/selects now inherit the font.
+- Fonts: IBM Plex Sans Thai (body) and Bai Jamjuree (headings, costs, total) — the same pair the Reform page uses — are bundled in `assets/fonts/` (OFL, Thai + Latin, `font-display: swap`), so there is no third-party font request. The pinned shared-nav host stack names `'Sarabun'`; a `'Sarabun'` `@font-face` alias pointing at the Plex files keeps the nav in the same face without touching nav/host CSS or its audit. Body size is 15px.
 - Test harness: `ui-cohesion.browser.cjs` now uses a fresh browser context per case (state could leak between cases and cause an intermittent mismatch).
