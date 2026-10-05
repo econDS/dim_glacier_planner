@@ -157,3 +157,14 @@
     .input-group input:hover, .method-select:hover, .toolbar-btn:hover, .toolbar-card .toolbar-btn:hover { border-color: var(--accent); }
     .input-group input:focus-visible, .method-select:focus-visible { border-color: var(--accent); }
     .first-run-prices > summary { border-color: rgba(41,128,185,.4); }
+
+    /* glacier look: cooler page tone, frosted total card, ice-blue closing note (same blue family as the accent) */
+    :root { --bg: #eef4f8; }
+    .first-run-planner > .grand-total {
+      background-color: var(--accent);
+      background-image: radial-gradient(120% 150% at 100% 0%, rgba(255,255,255,.24), rgba(255,255,255,0) 55%), linear-gradient(135deg, #2980b9 0%, #2f8fc9 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 6px 18px rgba(41,128,185,.25);
+    }
+    .grand-total > div:first-child { opacity: 1 !important; font-weight: 600; }
+    .gimmick-box { background: linear-gradient(135deg, #1f4e6b 0%, #2c6a8f 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 4px 12px rgba(31,78,107,.25); }
+    .gimmick-title { color: #d6ecf8; }

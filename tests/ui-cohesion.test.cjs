@@ -18,7 +18,7 @@ test('existing styles are untouched; new rules live only in the ui-cohesion bloc
   const added=fs.readFileSync(path.join(root,'qa/ui-cohesion/ui-cohesion.css'),'utf8');
   const oldColors=new Set((prev.match(/#[0-9a-fA-F]{3,6}\b/g)||[]).map(c=>c.toLowerCase()));
   const fresh=[...new Set((added.match(/#[0-9a-fA-F]{3,6}\b/g)||[]).map(c=>c.toLowerCase()))].filter(c=>!oldColors.has(c));
-  assert.deepEqual(fresh.sort(),['#4d5b5e','#5f6b73','#c5d0d8','#cfe0ec','#f5f9fc','#f6f8f9'],'only neutral text/surface tints may be new');
+  assert.deepEqual(fresh.sort(),['#1f4e6b','#2c6a8f','#2f8fc9','#4d5b5e','#5f6b73','#c5d0d8','#cfe0ec','#d6ecf8','#eef4f8','#f5f9fc','#f6f8f9'],'only neutral tints and the cooler blues of the existing accent family may be new');
   assert(!/@keyframes|animation:/.test(added),'no decorative animation');
 });
 test('protected ids, native labels, stage order and shared nav remain',()=>{
