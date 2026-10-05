@@ -13,14 +13,16 @@ const CASES=[
  {name:'C 3->6 with refine qty > 0',fields:{sel_cur_stage:3,sel_target_stage:6,qty_cube:2,qty_device:3,manual_cost:1234567}}
 ];
 async function run(browser,url){
- const ctx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});const p=await ctx.newPage();await p.route(/cdn\.sheetjs/,r=>r.abort());
- await p.goto(url);await p.locator('#total_zeny').waitFor();await p.waitForTimeout(300);const res=[];
- const snap=()=>p.evaluate(()=>{const t=id=>document.getElementById(id).textContent.replace(/\s+/g,' ').trim();return Object.fromEntries(['cost_base','cost_enchant','cost_refine','total_zeny','total_thb','shop_summary','shop_list','list_steps','tb_compare'].map(i=>[i,t(i)]))});
- for(const c of CASES){await p.evaluate(()=>{localStorage.clear()});await p.reload();await p.locator('#total_zeny').waitFor();
+ const res=[];
+ const snap=p=>p.evaluate(()=>{const t=id=>document.getElementById(id).textContent.replace(/\s+/g,' ').trim();return Object.fromEntries(['cost_base','cost_enchant','cost_refine','total_zeny','total_thb','shop_summary','shop_list','list_steps','tb_compare'].map(i=>[i,t(i)]))});
+ for(const c of CASES){ // fresh context per case: no state can leak between cases
+  const ctx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});const p=await ctx.newPage();await p.route(/cdn\.sheetjs/,r=>r.abort());
+  await p.goto(url);await p.locator('#total_zeny').waitFor();await p.waitForTimeout(300);
   for(const [id,v] of Object.entries(c.fields)){await p.evaluate(()=>document.querySelectorAll('details').forEach(d=>d.open=true));const el=p.locator('#'+id);if(await el.evaluate(x=>x.tagName)==='SELECT'){if(await el.isVisible())await el.selectOption(String(v));}else{await el.fill(String(v));await el.press('Tab');}}
-  await p.waitForTimeout(250);const finished=await snap();await p.locator('[data-view="raw"]').click();const raw=await snap();await p.locator('[data-view="finished"]').click();
-  res.push({name:c.name,finished,rawView:{shop_list:raw.shop_list},storage:await p.evaluate(()=>Object.fromEntries(Object.entries(localStorage).map(([k,v])=>{try{const o=JSON.parse(v);delete o.exportedAt;if(o.metadata)o.metadata={priceStamped:!!o.metadata.priceLastModified};return[k,o]}catch{return[k,v]}})))});}
- await ctx.close();return res;}
+  await p.waitForTimeout(600);const finished=await snap(p);await p.locator('[data-view="raw"]').click();const raw=await snap(p);await p.locator('[data-view="finished"]').click();
+  res.push({name:c.name,finished,rawView:{shop_list:raw.shop_list},storage:await p.evaluate(()=>Object.fromEntries(Object.entries(localStorage).map(([k,v])=>{try{const o=JSON.parse(v);delete o.exportedAt;if(o.metadata)o.metadata={priceStamped:!!o.metadata.priceLastModified};return[k,o]}catch{return[k,v]}})))});
+  await ctx.close();}
+ return res;}
 async function probes(browser,url){
  const out=[];
  for(const w of [360,390,1440]){const ctx=await browser.newContext({viewport:{width:w,height:w>800?900:844},reducedMotion:'reduce'});const p=await ctx.newPage();await p.route(/cdn\.sheetjs/,r=>r.abort());await p.goto(url);await p.locator('#total_zeny').waitFor();await p.waitForTimeout(300);
@@ -36,7 +38,7 @@ async function probes(browser,url){
  return out;}
 (async()=>{const b=await chromium.launch(),sb=await serve(BASE),sc=await serve(ROOT),report={};
  try{const before=await run(b,sb.url),after=await run(b,sc.url);report.cases=before.map((x,i)=>({name:x.name,identical:JSON.stringify(x)===JSON.stringify(after[i]),total_zeny:x.finished.total_zeny,total_thb:x.finished.total_thb,cost_enchant:x.finished.cost_enchant,cost_refine:x.finished.cost_refine,before:x,after:after[i]}));
-  for(const c of report.cases)assert(c.identical,'unchanged output: '+c.name);
+  for(const c of report.cases)assert(c.identical,'unchanged output: '+c.name+' '+JSON.stringify(Object.keys(c.before).filter(k=>JSON.stringify(c.before[k])!==JSON.stringify(c.after[k])).map(k=>{const x=String(JSON.stringify(c.before[k])),y=String(JSON.stringify(c.after[k]));let n=0;while(n<x.length&&x[n]===y[n])n++;return[k,'@'+n,x.slice(Math.max(0,n-40),n+60),y.slice(Math.max(0,n-40),n+60)]})));
   report.probes={before:await probes(b,sb.url),after:await probes(b,sc.url)};report.status='PASS';}
  catch(e){report.status='FAIL';report.error=e.stack;process.exitCode=1}
  finally{await b.close();sb.s.close();sc.s.close();fs.writeFileSync(path.join(OUT,'ui-cohesion-report.json'),JSON.stringify(report,null,2));console.log(report.status,report.error||'');}})();

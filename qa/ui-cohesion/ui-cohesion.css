@@ -1,8 +1,37 @@
     /* First-run UI cohesion: presentation only (no palette, formula, data or script changes).
        Hierarchy: current/target planner + result > price refinement > data utilities. */
+    /* Fonts are bundled locally (OFL, assets/fonts); no third-party font request.
+       Body: IBM Plex Sans Thai; display/numbers: Bai Jamjuree. The 'Sarabun' alias keeps the pinned shared-nav
+       host font stack ('Sarabun', ...) rendering in the same face as the page. */
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-400-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-500-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-600-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-700-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'IBM Plex Sans Thai'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Bai Jamjuree'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/bai-jamjuree/bai-jamjuree-thai-500-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Bai Jamjuree'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/bai-jamjuree/bai-jamjuree-thai-600-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Bai Jamjuree'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/bai-jamjuree/bai-jamjuree-thai-700-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Bai Jamjuree'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/bai-jamjuree/bai-jamjuree-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Bai Jamjuree'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/bai-jamjuree/bai-jamjuree-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Bai Jamjuree'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/bai-jamjuree/bai-jamjuree-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-400-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-500-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-600-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-thai-700-normal.woff2') format('woff2'); unicode-range: U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Sarabun'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/ibm-plex-sans-thai/ibm-plex-sans-thai-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    :root { --font-body: 'IBM Plex Sans Thai', 'Sarabun', 'Segoe UI', Tahoma, sans-serif; --font-display: 'Bai Jamjuree', 'IBM Plex Sans Thai', 'Segoe UI', Tahoma, sans-serif; }
+    body { font-family: var(--font-body); }
+    h1, .card-title, .section-header, .card-cost, .grand-total, .shop-table tr.shop-total td, .step-label { font-family: var(--font-display); }
+    #total_zeny, #total_thb, .card-cost { font-variant-numeric: tabular-nums; }
     :root { --muted: #5f6b73; }
-    h1 { font-size: 26px; margin: 10px 0 14px; }
-    @media (max-width: 520px) { h1 { font-size: 21px; margin: 2px 0 10px; } }
+    button, select, textarea { font-family: inherit; }
+    body { font-size: 15px; }
     button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
     /* start cue: one compact strip instead of a second hero */
@@ -15,7 +44,7 @@
 
     /* desktop: planner + result are the main pair; prices/tools are a narrower secondary rail */
     @media (min-width: 1101px) {
-      .container { grid-template-columns: minmax(0, 1fr) 360px; }
+      .container { grid-template-columns: minmax(0, 1fr) 380px; }
       .container > .first-run-planner { grid-column: 1; }
       .container > .left-col { grid-column: 2; padding-right: 4px; }
     }
@@ -27,16 +56,16 @@
     .section-header { font-size: 13px; color: var(--muted); padding-bottom: 6px; margin-bottom: 10px; }
     .hint { color: var(--muted); }
     #card_base { margin-bottom: 12px; }
-    #card_base .card-top { padding: 8px 15px; }
+    #card_base .card-top { padding: 8px 15px; gap: 10px; }
     #card_base .card-title { font-size: 14px; }
     @media (max-width: 520px) { #card_base .card-title { font-size: 13px; gap: 8px; } }
 
     /* primary start point: current -> target */
-    #card_plan { border-width: 2px; box-shadow: 0 4px 14px rgba(41,128,185,.12); }
+    #card_plan, #card_shop { border-top: 3px solid var(--accent); box-shadow: 0 4px 14px rgba(41,128,185,.12); }
     #card_plan .card-title { font-size: 17px; }
     .stage-selects { gap: 12px; padding: 12px; background: #f5f9fc; border: 1px solid #cfe0ec; border-radius: 8px; }
     .stage-field { font-size: 14px; color: var(--primary); }
-    .stage-field select { min-height: 44px; font-size: 14px; border-color: var(--accent); }
+    .stage-field select { min-height: 44px; font-size: 14px; }
 
     /* presets: quiet shortcuts under the two controls */
     .preset-row { margin: 12px 0 4px; }
@@ -75,17 +104,18 @@
     /* result: total first, shopping list scans by name / qty / cost */
     .first-run-planner > .grand-total { padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(41,128,185,.22); }
     #total_zeny { font-size: clamp(28px, 8.5vw, 42px) !important; overflow-wrap: anywhere; }
-    #card_shop { border-width: 2px; }
     #card_shop .card-title { font-size: 17px; }
     .shop-summary { color: var(--muted); }
     .shop-table .shop-qty { width: 1%; padding: 7px 14px; }
     .shop-table .shop-cost { width: 1%; padding-left: 12px; white-space: nowrap; color: var(--muted); }
     .shop-table tr.shop-total td { font-size: 14px; }
+    .shop-table td { line-height: 1.35; }
+    @media (max-width: 520px) { .shop-table .shop-qty { padding: 7px 8px; } .shop-table .shop-cost { padding-left: 6px; } }
     .view-btn { min-height: 36px; }
     .view-btn.active::before { content: "\2713\00a0"; }
 
     /* refine: optional add-on after the enchant plan */
-    #card_refine { border-color: var(--border); margin-bottom: 14px; }
+    #card_refine { margin-bottom: 14px; }
     #card_refine .card-top { background: #f6f8f9; padding: 10px 15px; }
     #card_refine .card-title { font-size: 14px; color: var(--primary); }
     #card_refine .card-cost { font-size: 14px; }
@@ -95,7 +125,7 @@
     #card_market { padding: 14px 16px; }
     .price-meta { display: flex; flex-wrap: wrap; gap: 0 14px; margin: 0 0 8px; font-size: 12px; color: var(--muted); }
     .market-warning { margin: 0 0 10px; padding: 6px 10px; }
-    .first-run-prices > summary { display: list-item; list-style-position: inside; box-sizing: border-box; min-height: 44px; padding: 11px 12px; margin-bottom: 0; border: 1px solid rgba(41,128,185,.4); border-radius: 6px; background: #fff; color: var(--accent); }
+    .first-run-prices > summary { display: list-item; list-style-position: inside; box-sizing: border-box; min-height: 44px; padding: 11px 12px; margin-bottom: 0; border: 1px solid rgba(41,128,185,.4); border-radius: 6px; background: #fff; color: var(--accent); font-size: 14px; }
     .first-run-prices[open] > summary { margin-bottom: 12px; }
 
     /* data tools: utility, lowest visual weight */
@@ -105,3 +135,43 @@
     .toolbar-card .toolbar-btn:hover { transform: none; box-shadow: none; border-color: rgba(41,128,185,.45); }
     .toolbar-card .toolbar-meta { color: var(--muted); }
     #storage_status { margin-top: 6px; font-weight: 600; }
+
+    /* page frame: full-bleed nav + slim title band (nav component itself is untouched) */
+    body { padding-top: 0; }
+    ro-suite-nav[tool-id="dim-glacier"][theme] { margin-inline: -20px; background: var(--card-bg); --ro-suite-inline-padding: 20px; --ro-suite-content-max-width: 1440px; }
+    .site-head { margin: 0 -20px 16px; background: linear-gradient(180deg, #fff 0%, #f5f9fc 100%); border-bottom: 1px solid var(--border); }
+    .site-head-in { box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 14px; }
+    .site-head-icon { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; background: #fff; box-shadow: inset 0 0 0 1px rgba(44,62,80,.1); }
+    .site-head h1 { grid-column: auto; text-align: left; margin: 0; font-size: 24px; line-height: 1.2; }
+    .site-head p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+    @media (max-width: 520px) { .site-head-in { padding: 10px 20px; gap: 10px; } .site-head-icon { width: 36px; height: 36px; } .site-head h1 { font-size: 18px; } .site-head p { font-size: 12px; } }
+
+    /* one border system: hairline cards, uniform controls, emphasis from a top bar + soft shadow */
+    :root { --edge: #e0e0e0; --control-edge: #c5d0d8; }
+    .card, .interactive-card, .first-run-guide, .gimmick-box { border-radius: 10px; }
+    .interactive-card { border-color: var(--edge); }
+    .card-top { border-bottom-color: var(--edge); }
+    .input-group input, .method-select, .toolbar-btn, .toolbar-card .toolbar-btn, .toolbar-card .toolbar-btn.primary, .first-run-prices > summary { border: 1px solid var(--control-edge); border-radius: 8px; }
+    .stage-selects { border-color: var(--edge); }
+    .view-toggle { border-color: var(--control-edge); border-radius: 8px; }
+    .input-group input:hover, .method-select:hover, .toolbar-btn:hover, .toolbar-card .toolbar-btn:hover { border-color: var(--accent); }
+    .input-group input:focus-visible, .method-select:focus-visible { border-color: var(--accent); }
+    .first-run-prices > summary { border-color: rgba(41,128,185,.4); }
+
+    /* glacier look: cooler page tone, frosted total card, ice-blue closing note (same blue family as the accent) */
+    :root { --bg: #eef4f8; }
+    .first-run-planner > .grand-total {
+      background-color: var(--accent);
+      background-image: radial-gradient(120% 150% at 100% 0%, rgba(255,255,255,.24), rgba(255,255,255,0) 55%), linear-gradient(135deg, #2980b9 0%, #2f8fc9 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 6px 18px rgba(41,128,185,.25);
+    }
+    .grand-total > div:first-child { opacity: 1 !important; font-weight: 600; }
+    .gimmick-box { background: linear-gradient(135deg, #1f4e6b 0%, #2c6a8f 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 4px 12px rgba(31,78,107,.25); }
+    .gimmick-title { color: #d6ecf8; }
+
+    /* crystal pattern: faint inline-SVG snowflakes (decorative only, no extra request, static) */
+    .site-head { background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22 viewBox=%220 0 160 160%22%3E%3Cpath d=%22M80.0 80.0L80.0 10.0M80.0 41.5L62.8 27.1M80.0 41.5L97.2 27.1M80.0 24.0L69.3 15.0M80.0 24.0L90.7 15.0M80.0 80.0L140.6 45.0M113.3 60.8L117.2 38.7M113.3 60.8L134.4 68.4M128.5 52.0L130.9 38.2M128.5 52.0L141.7 56.8M80.0 80.0L140.6 115.0M113.3 99.2L134.4 91.6M113.3 99.2L117.2 121.3M128.5 108.0L141.7 103.2M128.5 108.0L130.9 121.8M80.0 80.0L80.0 150.0M80.0 118.5L97.2 132.9M80.0 118.5L62.8 132.9M80.0 136.0L90.7 145.0M80.0 136.0L69.3 145.0M80.0 80.0L19.4 115.0M46.7 99.2L42.8 121.3M46.7 99.2L25.6 91.6M31.5 108.0L29.1 121.8M31.5 108.0L18.3 103.2M80.0 80.0L19.4 45.0M46.7 60.7L25.6 68.4M46.7 60.7L42.8 38.7M31.5 52.0L18.3 56.8M31.5 52.0L29.1 38.2%22 fill=%22none%22 stroke=%22%232980b9%22 stroke-opacity=%22.14%22 stroke-width=%222.2%22 stroke-linecap=%22round%22/%3E%3C/svg%3E"), linear-gradient(180deg, #fff 0%, #f5f9fc 100%); background-repeat: no-repeat; background-position: right 28px center, 0 0; background-size: 110px 110px, auto; }
+    .first-run-planner > .grand-total { background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22 viewBox=%220 0 140 140%22%3E%3Cpath d=%22M40.0 42.0L40.0 16.0M40.0 27.7L33.6 22.4M40.0 27.7L46.4 22.4M40.0 21.2L36.0 17.9M40.0 21.2L44.0 17.9M40.0 42.0L62.5 29.0M52.4 34.9L53.8 26.7M52.4 34.9L60.2 37.7M58.0 31.6L58.9 26.5M58.0 31.6L62.9 33.4M40.0 42.0L62.5 55.0M52.4 49.1L60.2 46.3M52.4 49.1L53.8 57.3M58.0 52.4L62.9 50.6M58.0 52.4L58.9 57.5M40.0 42.0L40.0 68.0M40.0 56.3L46.4 61.6M40.0 56.3L33.6 61.6M40.0 62.8L44.0 66.1M40.0 62.8L36.0 66.1M40.0 42.0L17.5 55.0M27.6 49.1L26.2 57.3M27.6 49.1L19.8 46.3M22.0 52.4L21.1 57.5M22.0 52.4L17.1 50.6M40.0 42.0L17.5 29.0M27.6 34.8L19.8 37.7M27.6 34.8L26.2 26.7M22.0 31.6L17.1 33.4M22.0 31.6L21.1 26.5%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-opacity=%22.16%22 stroke-width=%221.4%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M106.0 98.0L106.0 83.0M106.0 89.8L102.3 86.7M106.0 89.8L109.7 86.7M106.0 86.0L103.7 84.1M106.0 86.0L108.3 84.1M106.0 98.0L119.0 90.5M113.1 93.9L114.0 89.1M113.1 93.9L117.7 95.5M116.4 92.0L116.9 89.0M116.4 92.0L119.2 93.0M106.0 98.0L119.0 105.5M113.1 102.1L117.7 100.5M113.1 102.1L114.0 106.9M116.4 104.0L119.2 103.0M116.4 104.0L116.9 107.0M106.0 98.0L106.0 113.0M106.0 106.2L109.7 109.3M106.0 106.2L102.3 109.3M106.0 110.0L108.3 111.9M106.0 110.0L103.7 111.9M106.0 98.0L93.0 105.5M98.9 102.1L98.0 106.9M98.9 102.1L94.3 100.5M95.6 104.0L95.1 107.0M95.6 104.0L92.8 103.0M106.0 98.0L93.0 90.5M98.9 93.9L94.3 95.5M98.9 93.9L98.0 89.1M95.6 92.0L92.8 93.0M95.6 92.0L95.1 89.0%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-opacity=%22.16%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E%3C/svg%3E"), radial-gradient(120% 150% at 100% 0%, rgba(255,255,255,.24), rgba(255,255,255,0) 55%), linear-gradient(135deg, #2980b9 0%, #2f8fc9 100%); background-size: 140px 140px, auto, auto; opacity: 1; }
+    .gimmick-box { background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22 viewBox=%220 0 140 140%22%3E%3Cpath d=%22M40.0 42.0L40.0 16.0M40.0 27.7L33.6 22.4M40.0 27.7L46.4 22.4M40.0 21.2L36.0 17.9M40.0 21.2L44.0 17.9M40.0 42.0L62.5 29.0M52.4 34.9L53.8 26.7M52.4 34.9L60.2 37.7M58.0 31.6L58.9 26.5M58.0 31.6L62.9 33.4M40.0 42.0L62.5 55.0M52.4 49.1L60.2 46.3M52.4 49.1L53.8 57.3M58.0 52.4L62.9 50.6M58.0 52.4L58.9 57.5M40.0 42.0L40.0 68.0M40.0 56.3L46.4 61.6M40.0 56.3L33.6 61.6M40.0 62.8L44.0 66.1M40.0 62.8L36.0 66.1M40.0 42.0L17.5 55.0M27.6 49.1L26.2 57.3M27.6 49.1L19.8 46.3M22.0 52.4L21.1 57.5M22.0 52.4L17.1 50.6M40.0 42.0L17.5 29.0M27.6 34.8L19.8 37.7M27.6 34.8L26.2 26.7M22.0 31.6L17.1 33.4M22.0 31.6L21.1 26.5%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-opacity=%22.16%22 stroke-width=%221.4%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M106.0 98.0L106.0 83.0M106.0 89.8L102.3 86.7M106.0 89.8L109.7 86.7M106.0 86.0L103.7 84.1M106.0 86.0L108.3 84.1M106.0 98.0L119.0 90.5M113.1 93.9L114.0 89.1M113.1 93.9L117.7 95.5M116.4 92.0L116.9 89.0M116.4 92.0L119.2 93.0M106.0 98.0L119.0 105.5M113.1 102.1L117.7 100.5M113.1 102.1L114.0 106.9M116.4 104.0L119.2 103.0M116.4 104.0L116.9 107.0M106.0 98.0L106.0 113.0M106.0 106.2L109.7 109.3M106.0 106.2L102.3 109.3M106.0 110.0L108.3 111.9M106.0 110.0L103.7 111.9M106.0 98.0L93.0 105.5M98.9 102.1L98.0 106.9M98.9 102.1L94.3 100.5M95.6 104.0L95.1 107.0M95.6 104.0L92.8 103.0M106.0 98.0L93.0 90.5M98.9 93.9L94.3 95.5M98.9 93.9L98.0 89.1M95.6 92.0L92.8 93.0M95.6 92.0L95.1 89.0%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-opacity=%22.16%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E%3C/svg%3E"), linear-gradient(135deg, #1f4e6b 0%, #2c6a8f 100%); background-size: 140px 140px, auto; }
+    .site-head-in { position: relative; }
+    @media (max-width: 520px) { .site-head { background-size: 70px 70px, auto; background-position: right 8px center, 0 0; } }
