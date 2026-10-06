@@ -168,6 +168,8 @@
     .grand-total > div:first-child { opacity: 1 !important; font-weight: 600; }
     .gimmick-box { background: linear-gradient(135deg, #1f4e6b 0%, #2c6a8f 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 4px 12px rgba(31,78,107,.25); }
     .gimmick-title { color: #d6ecf8; }
+    /* THB total: yellow on a deep-blue chip (~5.4:1) instead of directly on the gradient (2.2-2.6:1) */
+    #total_thb { display: inline-block; background: #1f4e6b; padding: 2px 14px; border-radius: 8px; }
 
     /* crystal pattern: faint inline-SVG snowflakes (decorative only, no extra request, static) */
     .site-head { background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22 viewBox=%220 0 160 160%22%3E%3Cpath d=%22M80.0 80.0L80.0 10.0M80.0 41.5L62.8 27.1M80.0 41.5L97.2 27.1M80.0 24.0L69.3 15.0M80.0 24.0L90.7 15.0M80.0 80.0L140.6 45.0M113.3 60.8L117.2 38.7M113.3 60.8L134.4 68.4M128.5 52.0L130.9 38.2M128.5 52.0L141.7 56.8M80.0 80.0L140.6 115.0M113.3 99.2L134.4 91.6M113.3 99.2L117.2 121.3M128.5 108.0L141.7 103.2M128.5 108.0L130.9 121.8M80.0 80.0L80.0 150.0M80.0 118.5L97.2 132.9M80.0 118.5L62.8 132.9M80.0 136.0L90.7 145.0M80.0 136.0L69.3 145.0M80.0 80.0L19.4 115.0M46.7 99.2L42.8 121.3M46.7 99.2L25.6 91.6M31.5 108.0L29.1 121.8M31.5 108.0L18.3 103.2M80.0 80.0L19.4 45.0M46.7 60.7L25.6 68.4M46.7 60.7L42.8 38.7M31.5 52.0L18.3 56.8M31.5 52.0L29.1 38.2%22 fill=%22none%22 stroke=%22%232980b9%22 stroke-opacity=%22.14%22 stroke-width=%222.2%22 stroke-linecap=%22round%22/%3E%3C/svg%3E"), linear-gradient(180deg, #fff 0%, #f5f9fc 100%); background-repeat: no-repeat; background-position: right 28px center, 0 0; background-size: 110px 110px, auto; }
