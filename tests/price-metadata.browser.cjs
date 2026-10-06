@@ -6,7 +6,7 @@ module.exports=async ({page,s,check,reset,fill,snapshot,capture,OUTPUT})=>{
  const persist=()=>page.waitForTimeout(200);
  const metadata=()=>page.locator('#price_last_modified').textContent();
  const run=(name,fn)=>check(s.id+'-price-metadata-'+name,fn,page);
- await run('fresh-reset-default-date',async()=>{await reset(page,s);assert.equal(await stamp(),null);assert.equal(await metadata(),'—');assert.equal(await page.locator('#default_price_date').textContent(),'12 เม.ย. 2569');await persist();assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).metadata||null,key),null);s.priceDefaults=await snapshot(page);});
+ await run('fresh-reset-default-date',async()=>{await reset(page,s);assert.equal(await stamp(),null);assert.equal(await metadata(),'—');assert.equal(await page.locator('#default_price_date').textContent(),'6 ต.ค. 2569');await persist();assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).metadata||null,key),null);s.priceDefaults=await snapshot(page);});
  await run('all-labels-and-click-focus',async()=>{
   const result=await page.evaluate(()=>{const all=[...document.querySelectorAll('[id]')].map(e=>e.id);const fields=[...document.querySelectorAll('input[type=text],input[type=number]')].map(e=>({id:e.id,labels:[...e.labels].map(l=>({for:l.htmlFor,text:l.textContent.trim()})),inputmode:e.inputMode,type:e.type}));return{duplicates:all.filter((id,i)=>all.indexOf(id)!==i),dangling:[...document.querySelectorAll('label[for]')].filter(l=>!l.control).map(l=>l.htmlFor),fields};});
   assert.deepEqual(result.duplicates,[]);assert.deepEqual(result.dangling,[]);assert.equal(result.fields.length,21);
