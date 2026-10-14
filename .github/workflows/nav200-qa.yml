@@ -1,0 +1,25 @@
+name: Dynamic navigation v2
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  dynamic-navigation:
+    if: github.head_ref == 'feat/dynamic-ro-suite-nav' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.14.0'
+      - run: node --test tests/nav200.test.cjs tests/nav150.test.cjs
+      - run: npm install --prefix "$RUNNER_TEMP/nav200" --no-save --package-lock=false --ignore-scripts playwright@1.55.1
+      - run: node "$RUNNER_TEMP/nav200/node_modules/playwright/cli.js" install --with-deps chromium
+      - run: node tests/nav200.browser.cjs
+        env:
+          NODE_PATH: ${{ runner.temp }}/nav200/node_modules
