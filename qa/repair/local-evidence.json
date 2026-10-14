@@ -1,0 +1,29 @@
+{
+  "baseCommit": "6d42e8af4deccab6f4c94debe99284c0b2073606",
+  "implementationCommit": "af861dca077de8cd6b07fa80e963720d4a3f31b2",
+  "rawCandidateHtmlSha256": "2692491a3c9bcc5c723995866258b74f27ab2c8d69a5003f82c6d899f53bd284",
+  "source": {
+    "passed": 41,
+    "failed": 0
+  },
+  "importExport": {
+    "viewports": [
+      320,
+      390,
+      1440
+    ],
+    "rejectionsPerViewport": 26,
+    "localSheetJSVersion": "0.18.5",
+    "productionSheetJS": "0.20.3 required by CI"
+  },
+  "reports": {
+    "first-run": {
+      "status": "PASS",
+      "sha256": "92e43e1e59a3ff3707e22314e5a2a74cc4786744f3d5987fade7aefa1c64ef75"
+    },
+    "ui-cohesion": {
+      "status": "PASS",
+      "sha256": "a16f60a78f3f97a41ba6f0917d43f202ee899689aead7d63ee269e278d6a25e7"
+    }
+  }
+}

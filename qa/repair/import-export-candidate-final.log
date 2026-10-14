@@ -1,0 +1,3 @@
+PASS 320px: JSON/CSV/XLSX round-trip, genuine BIFF8 XLS import, all fields/totals/persistence, 26 malformed/partial/invalid atomic rejections, cancellation/version warning/script failure; parser 0.18.5
+PASS 390px: JSON/CSV/XLSX round-trip, genuine BIFF8 XLS import, all fields/totals/persistence, 26 malformed/partial/invalid atomic rejections, cancellation/version warning/script failure; parser 0.18.5
+PASS 1440px: JSON/CSV/XLSX round-trip, genuine BIFF8 XLS import, all fields/totals/persistence, 26 malformed/partial/invalid atomic rejections, cancellation/version warning/script failure; parser 0.18.5

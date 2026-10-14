@@ -1,0 +1,9 @@
+AssertionError [ERR_ASSERTION]: null-number.json: user sees rejection
+    at /workspace/dim_glacier_planner/tests/import-export.browser.cjs:104:7 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
