@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+const fixture=require('../qa/repair/browser-fixture.cjs');
 /* Real-browser, QA-only runner. No production dependencies or substituted calculator behavior.
  * npm install --prefix "$RUNNER_TEMP/dim-qa" --no-save --package-lock=false --ignore-scripts playwright@1.55.1
  * NODE_PATH="$RUNNER_TEMP/dim-qa/node_modules" BASELINE_ONLY=1 QA_OUTPUT=qa-baseline node tests/dim-nav.browser.cjs
@@ -20,7 +21,9 @@ const BASELINE_ONLY = process.env.BASELINE_ONLY === '1';
 const OUTPUT = path.resolve(process.env.QA_OUTPUT || path.join(ROOT, 'qa-artifacts'));
 const PREFIX = '/dim_glacier_planner/';
 const SUFFIX = '?qa=preserve%20me&repeat=a&repeat=b#qa-sentinel';
-const WIDTHS = [320, 360, 390, 430, 768, 1440];
+const ALL_WIDTHS = [320, 360, 390, 430, 768, 1440];
+const WIDTHS = process.env.QA_WIDTHS ? process.env.QA_WIDTHS.split(',').map(Number) : ALL_WIDTHS;
+assert(WIDTHS.length && WIDTHS.every(w=>ALL_WIDTHS.includes(w)) && new Set(WIDTHS).size===WIDTHS.length, 'Only explicit historical viewport shards');
 const THEMES = ['light']; // Actual source has one fixed light theme and no theme toggle.
 const PIN = '1.55.1';
 const STORAGE_KEY = 'dim-glacier-planner-state-v1';
@@ -38,12 +41,12 @@ let browser;
 fs.mkdirSync(OUTPUT, { recursive: true });
 const report = {
   schemaVersion: 1, mode: BASELINE_ONLY ? 'baseline-only' : 'baseline-versus-final', startedAt: new Date().toISOString(),
-  subpath: PREFIX, widths: WIDTHS, themes: THEMES, sources: {}, checks: [], failures: [], screenshots: [], scenarios: {}, releaseAssetHttp: [],
+  subpath: PREFIX, widths: WIDTHS, themes: THEMES, sheetjsFixture:process.env.QA_XLSX_SCRIPT?{sha256:sha(fs.readFileSync(process.env.QA_XLSX_SCRIPT)),path:process.env.QA_XLSX_SCRIPT}:null,sources: {}, checks: [], failures: [], screenshots: [], scenarios: {}, releaseAssetHttp: [],
   featureInventory: { craft: 'Automatic Craft vs Market selection for six items; material prices are editable', enchant: 'Current and target stages 0–7, four presets, clickable stepper, normal/coupon methods', inventory: 'Owned weapon and completed Enchant stages; no per-item quantity inventory exists', refine: 'Cube quantity, device quantity including consume costs, manual budget', exchange: 'THB per 1,000,000 Zeny; displayed THB is rounded to an integer', shopping: 'Finished/raw views and native clipboard; view selection is not persisted', formats: { json: ['export','import'], csv: ['export','import'], xlsx: ['export','import'], xls: ['import'] }, themes: 'Fixed light only; operating-system dark preference is tested separately without inventing a theme toggle', absentFeatures: ['No theme toggle', 'No event/discount mode', 'No separate quantity-inventory interface', 'No share-URL interface'] },
   limitations: [
     'All calculations, input events, file downloads/imports, dialogs and clipboard operations use the real application in Chromium; no formula, export or browser API is replaced.',
     'Only top-level navigation to the five exact suite destinations is intercepted with a local destination page. Link activation and destinations are verified; remote destination availability is not claimed.',
-    'SheetJS 0.20.3 loads from the original live CDN. Excel tests fail if it is unavailable. An import-only XLS fixture is serialized using that real SheetJS library because the app does not export XLS.',
+    'SheetJS loads from the original CDN or QA_XLSX_SCRIPT exact-endpoint fixture; actual runtime version and file hash are recorded. Local alternative versions do not establish production-version coverage. XLS uses the real library to serialize BIFF8 because the app does not export XLS.',
     'Network errors are retained verbatim and compared with explicit baseline signatures; only failures tied to the intentionally aborted exact nav.js request are excluded.',
     'The original page may overflow on small screens. Geometry permits only measured original overflow, never new overflow; content geometry is relative to the original heading to allow the new normal-flow header.'
   ]
@@ -57,7 +60,7 @@ function source(root, supplied) {
   const files = [{ file:'index.html', sha256:sha(html), bytes:Buffer.byteLength(html) }];
   function walk(dir) { if (!fs.existsSync(dir)) return; for (const e of fs.readdirSync(dir,{withFileTypes:true})) { const f=path.join(dir,e.name); if(e.isDirectory()) walk(f); else files.push({ file:path.relative(root,f).split(path.sep).join('/'), sha256:sha(fs.readFileSync(f)), bytes:fs.statSync(f).size }); } }
   walk(path.join(root,'assets'));
-  return { directory:root, commit:supplied || git(['rev-parse','HEAD'],root), indexSha256:sha(html), files,
+  return { directory:root, commit:supplied || git(['rev-parse','HEAD'],root), indexSha256:sha(html), fixture:fixture.provenance(path.join(root,'index.html')), files,
     inlineScripts:[...invariantHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]).filter(s=>s.trim()).map(s=>({sha256:sha(s),source:s})),
     inlineStyles:[...html.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)].map(m=>({sha256:sha(m[1]),source:m[1]})), worktree:git(['status','--short'],root) };
 }
@@ -81,7 +84,7 @@ async function serve(root,label) {
     const target=path.resolve(root,relative);if(!target.startsWith(root+path.sep)){response.writeHead(403).end();return;}
     if(!fs.existsSync(target)||!fs.statSync(target).isFile()){response.writeHead(404).end('Not found');return;}
     const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg'};
-    response.writeHead(200,{'Content-Type':types[path.extname(target)]||'application/octet-stream','Cache-Control':'no-store'});fs.createReadStream(target).pipe(response);
+    response.writeHead(200,{'Content-Type':types[path.extname(target)]||'application/octet-stream','Cache-Control':'no-store'});if(path.extname(target)==='.html')response.end(fixture.html(target));else fs.createReadStream(target).pipe(response);
   });
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});servers.push(server);
   const origin=`http://127.0.0.1:${server.address().port}`;origins.add(origin);return{root,label,origin,url:origin+PREFIX+SUFFIX};
@@ -282,6 +285,7 @@ async function runScenario(server,width,kind,base) {
   const context=await browser.newContext({...(PRICE_METADATA_QA ? {timezoneId:width===390?'Asia/Bangkok':'America/Los_Angeles'} : {}),viewport:{width,height:900},colorScheme:'light',reducedMotion:'reduce',serviceWorkers:'block',permissions:['clipboard-read','clipboard-write'],acceptDownloads:true});
   await context.addInitScript(({sentinel,prefix})=>{if(location.pathname.startsWith(prefix)){if(localStorage.getItem(sentinel.key)===null)localStorage.setItem(sentinel.key,sentinel.value);if(sessionStorage.getItem(sentinel.key)===null)sessionStorage.setItem(sentinel.key,sentinel.value);}},{sentinel:SENTINEL,prefix:PREFIX});
   if(kind!=='baseline'){const html=fs.readFileSync(path.join(server.root,'index.html'),'utf8');const matches=[...html.matchAll(/<script\b[^>]*src=["']([^"']*nav\.js)["'][^>]*>/g)];assert.equal(matches.length,1,'Exactly one actual installed nav.js');s.navScriptUrl=new URL(matches[0][1],server.url).href;assert.equal(new URL(s.navScriptUrl).pathname,PREFIX+NAV_PATH);}
+  await fixture.network(context);
   if(kind==='fallback')await context.route(s.navScriptUrl,async route=>{s.blockedRequests.push(route.request().url());await route.abort('blockedbyclient');});
   await context.route('https://econds.github.io/**',async route=>{const r=route.request();if(r.isNavigationRequest()&&r.resourceType()==='document'&&DESTINATIONS.includes(r.url()))await route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><title>Dim QA destination</title><p>Exact suite destination reached</p>'});else await route.continue();});
   await context.route(CATALOG_URL,route=>route.fulfill({contentType:'application/json',body:fs.readFileSync(path.join(ROOT,'assets/ro-suite/2.0.0/catalog.snapshot.json'),'utf8')}));
@@ -290,7 +294,7 @@ async function runScenario(server,width,kind,base) {
   const reload=page.reload.bind(page);page.reload=async(...args)=>{const response=await reload(...args);await revealMarket(page);return response;};
   try{
     await page.goto(server.url,{waitUntil:'networkidle',timeout:45000});await settled(page);
-    await check(id+'-initial-inventory-geometry',async()=>{s.initial=await snapshot(page);assert.equal(Object.keys(s.initial.inputs).length,25);s.geometry=await geometry(page);s.title=await page.title();s.theme=await page.evaluate(()=>({body:getComputedStyle(document.body).backgroundColor,card:getComputedStyle(document.querySelector('.card')).backgroundColor,toggles:[...document.querySelectorAll('button,input,select')].filter(e=>!e.closest('ro-suite-nav')&&/theme|dark|light/i.test([e.id,e.getAttribute('aria-label')].join(' '))).map(e=>e.id)}));assert.equal(s.theme.body,kind==='baseline'?'rgb(244, 247, 246)':'rgb(238, 244, 248)');assert.equal(s.theme.card,'rgb(255, 255, 255)');assert.deepEqual(s.theme.toggles,[]);if(base){assert.deepEqual(s.initial,base.initial);assert.deepEqual({...s.theme,body:null},{...base.theme,body:null});compareGeometry(s.geometry,base.geometry,'collapsed nav');}await capture(page,id+'-initial');},page);
+    await check(id+'-initial-inventory-geometry',async()=>{s.sheetjs=await page.evaluate(()=>window.XLSX?.version||null);if(process.env.QA_EXPECT_XLSX_VERSION)assert.equal(s.sheetjs,process.env.QA_EXPECT_XLSX_VERSION);s.initial=await snapshot(page);assert.equal(Object.keys(s.initial.inputs).length,25);s.geometry=await geometry(page);s.title=await page.title();s.theme=await page.evaluate(()=>({body:getComputedStyle(document.body).backgroundColor,card:getComputedStyle(document.querySelector('.card')).backgroundColor,toggles:[...document.querySelectorAll('button,input,select')].filter(e=>!e.closest('ro-suite-nav')&&/theme|dark|light/i.test([e.id,e.getAttribute('aria-label')].join(' '))).map(e=>e.id)}));assert.equal(s.theme.body,kind==='baseline'?'rgb(244, 247, 246)':'rgb(238, 244, 248)');assert.equal(s.theme.card,'rgb(255, 255, 255)');assert.deepEqual(s.theme.toggles,[]);if(base){assert.deepEqual(s.initial,base.initial);assert.deepEqual({...s.theme,body:null},{...base.theme,body:null});compareGeometry(s.geometry,base.geometry,'collapsed nav');}await capture(page,id+'-initial');},page);
     if(kind==='normal')await check(id+'-navigation',()=>navigation(page,s,base),page);
     if(kind==='fallback')await check(id+'-fallback',()=>fallback(page,s,base),page);
     await functional(page,s,base);await formatRoundTrips(page,s,base);await customStateNavigation(page,s,base);await legacyMigration(page,s,base);

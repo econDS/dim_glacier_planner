@@ -1,0 +1,89 @@
+name: Dim complete regression repair
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+concurrency:
+  group: dim-repair-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  complete-regression:
+    if: github.head_ref == 'fix/dim-regressions' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.14.0'
+      - name: Source provenance and complete historical suite
+        run: |
+          mkdir -p qa-artifacts
+          git rev-parse HEAD > qa-artifacts/source-commit.txt
+          node --test --test-reporter=tap tests/*.test.cjs | tee qa-artifacts/source.tap
+      - name: Install pinned browser and production SheetJS
+        run: |
+          npm install --prefix "$RUNNER_TEMP/dim-tools" --no-save --package-lock=false --ignore-scripts playwright@1.55.1 xlsx@0.18.5
+          node "$RUNNER_TEMP/dim-tools/node_modules/playwright/cli.js" install --with-deps chromium
+          curl --fail --location --retry 2 https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js --output "$RUNNER_TEMP/sheetjs-0.20.3.js"
+          node -e 'const vm=require("node:vm"),fs=require("node:fs"),c={};vm.runInNewContext(fs.readFileSync(process.argv[1],"utf8"),c);if(c.XLSX.version!=="0.20.3")throw Error(c.XLSX.version);console.log(c.XLSX.version)' "$RUNNER_TEMP/sheetjs-0.20.3.js" | tee qa-artifacts/sheetjs-version.txt
+          sha256sum "$RUNNER_TEMP/sheetjs-0.20.3.js" > qa-artifacts/sheetjs-sha256.txt
+          mkdir -p "$RUNNER_TEMP/first-base" "$RUNNER_TEMP/ui-base" "$RUNNER_TEMP/nav-base"
+          git archive 7794dc7a1381c9a8aac2fc728d305b779a099ebc | tar -x -C "$RUNNER_TEMP/nav-base"
+          git archive 53f41ce9878cd139c14679879b80850cd2df6f1e | tar -x -C "$RUNNER_TEMP/first-base"
+          git archive a381113466710a31680d9728433de1ffff9e3413 | tar -x -C "$RUNNER_TEMP/ui-base"
+      - name: Raw current import-export and persistence
+        env:
+          NODE_PATH: ${{ runner.temp }}/dim-tools/node_modules
+          QA_XLSX_SCRIPT: ${{ runner.temp }}/sheetjs-0.20.3.js
+          QA_OUTPUT: qa-artifacts/import-export
+        run: node tests/import-export.browser.cjs | tee qa-artifacts/import-export.log
+      - name: Historical calculation, metadata and navigation matrix
+        env:
+          NODE_PATH: ${{ runner.temp }}/dim-tools/node_modules
+          QA_XLSX_SCRIPT: ${{ runner.temp }}/sheetjs-0.20.3.js
+          BASE_ROOT: ${{ runner.temp }}/nav-base
+          BASE_SHA: 7794dc7a1381c9a8aac2fc728d305b779a099ebc
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+          PRICE_METADATA_QA: '1'
+          QA_EXPECT_XLSX_VERSION: '0.20.3'
+          QA_OUTPUT: qa-artifacts/historical
+        run: |
+          failures=0
+          pids=()
+          for width in 320 360 390 430 768 1440; do
+            QA_WIDTHS="$width" QA_OUTPUT="qa-artifacts/historical-$width" node tests/dim-nav.browser.cjs > "qa-artifacts/historical-$width.log" 2>&1 &
+            pids+=("$!")
+          done
+          for pid in "${pids[@]}"; do
+            wait "$pid" || failures=1
+          done
+          exit "$failures"
+      - name: First run and layout comparisons
+        env:
+          NODE_PATH: ${{ runner.temp }}/dim-tools/node_modules
+          QA_XLSX_SCRIPT: ${{ runner.temp }}/sheetjs-0.20.3.js
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          BASE_ROOT="$RUNNER_TEMP/first-base" QA_OUTPUT=qa-artifacts/first-run node tests/first-run.browser.cjs > qa-artifacts/first-run.log
+          BASE_ROOT="$RUNNER_TEMP/ui-base" QA_OUTPUT=qa-artifacts/ui-cohesion node tests/ui-cohesion.browser.cjs > qa-artifacts/ui-cohesion.log
+      - name: Dynamic navigation failure and catalog matrix
+        env:
+          NODE_PATH: ${{ runner.temp }}/dim-tools/node_modules
+        run: node tests/nav200.browser.cjs | tee qa-artifacts/nav200.log
+      - name: Preserve reports and browser downloads
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: dim-repair-${{ github.event.pull_request.head.sha }}
+          path: qa-artifacts/
+          retention-days: 30

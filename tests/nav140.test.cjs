@@ -4,7 +4,24 @@ const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p
 const baseline=JSON.parse(read('qa/nav140/baseline.json')),html=require('../qa/nav150/normalize.cjs')(require('../qa/ui-cohesion/normalize.cjs')(read('index.html').toString())),normalize=require('../qa/nav140/normalize.cjs');
 test('nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte',()=>{
  assert.equal(hash(normalize(html)),baseline.files['index.html']);
- for(const [file,expected]of Object.entries(baseline.files))if(!baseline.allowedModifiedFiles.includes(file))assert.equal(hash(read(file)),expected,file);
+ for(const [file,expected]of Object.entries(baseline.files))if(!baseline.allowedModifiedFiles.includes(file)){
+  let bytes=read(file);
+  if(file==='tests/first-run.browser.cjs'){
+   let text=bytes.toString();
+   for(const [before,after] of [...require('../qa/repair/first-run-harness-changes.json')].reverse()){
+    assert.equal(text.split(after).length-1,1,'exact reviewed browser harness repair');
+    text=text.replace(after,()=>before);
+   }
+   bytes=Buffer.from(text);
+  }
+  if(file==='tests/price-metadata.browser.cjs'){
+   // f9942d9 updated this exact date assertion alongside the approved label.
+   const text=bytes.toString(),after="textContent(),'6 ต.ค. 2569')";
+   assert.equal(text.split(after).length-1,1,'one exact updated date assertion');
+   bytes=Buffer.from(text.replace(after,"textContent(),'12 เม.ย. 2569')"));
+  }
+  assert.equal(hash(bytes),expected,file);
+ }
  for(const [before,after]of JSON.parse(read('qa/nav140/changes.json'))){assert.equal(html.split(after).length-1,1,after);assert.notEqual(before,after);}
  assert.throws(()=>normalize(html.replace('./assets/ro-suite/nav140-host.css','./assets/ro-suite/unapproved.css')),'normalizer must reject an unrelated stylesheet edit');
 });

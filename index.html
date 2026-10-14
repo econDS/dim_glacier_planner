@@ -1473,6 +1473,11 @@
 
     function validateFieldValue(field, rawValue){
       const errors = [];
+      if (['number', 'integer', 'decimal'].includes(field.type) &&
+          !((typeof rawValue === 'number' && Number.isFinite(rawValue)) ||
+            (typeof rawValue === 'string' && rawValue.trim() !== ''))) {
+        return { valid: false, errors: [`${getFieldLabel(field)}: ต้องเป็นตัวเลข`], value: rawValue };
+      }
       const normalized = normalizeForValidation(rawValue, field.type);
 
       if (field.type === 'checkbox') {
@@ -1590,7 +1595,10 @@
         rows.forEach(row => {
           if (!row || typeof row !== 'object') return;
           const id = row.id || row.ID;
-          if (id) rowMap.set(id, row);
+          if (id) {
+            if (rowMap.has(id)) errors.push(`พบ field ซ้ำใน template: ${id}`);
+            rowMap.set(id, row);
+          }
         });
 
         FIELD_DEFS.forEach(field => {
@@ -1769,22 +1777,30 @@
       const values = [];
       let current = '';
       let inQuotes = false;
+      let closedQuote = false;
       for (let i = 0; i < line.length; i++) {
         const ch = line[i];
         if (ch === '"') {
           if (inQuotes && line[i + 1] === '"') {
             current += '"';
             i++;
+          } else if (inQuotes) {
+            inQuotes = false;
+            closedQuote = true;
           } else {
-            inQuotes = !inQuotes;
+            if (current !== '' || closedQuote) throw new Error('รูปแบบเครื่องหมายคำพูด CSV ไม่ถูกต้อง');
+            inQuotes = true;
           }
         } else if (ch === ',' && !inQuotes) {
           values.push(current);
           current = '';
+          closedQuote = false;
         } else {
+          if (closedQuote) throw new Error('พบข้อมูลหลังเครื่องหมายคำพูดปิด CSV');
           current += ch;
         }
       }
+      if (inQuotes) throw new Error('เครื่องหมายคำพูด CSV ปิดไม่ครบ');
       values.push(current);
       return values;
     }
@@ -1793,10 +1809,14 @@
       const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/).filter(line => line.trim() !== '');
       if (!lines.length) return [];
       const headers = parseCsvLine(lines[0]).map(h => h.trim());
+      if (headers.some(h => !h) || new Set(headers).size !== headers.length) {
+        throw new Error('หัวคอลัมน์ CSV ว่างหรือซ้ำ');
+      }
       return lines.slice(1).map(line => {
         const cols = parseCsvLine(line);
+        if (cols.length !== headers.length) throw new Error('จำนวนคอลัมน์ CSV ไม่ครบตามหัวตาราง');
         return headers.reduce((acc, header, idx) => {
-          acc[header] = cols[idx] ?? '';
+          acc[header] = cols[idx];
           return acc;
         }, {});
       });
