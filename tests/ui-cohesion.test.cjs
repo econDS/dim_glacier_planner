@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const root=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const root=path.resolve(__dirname,'..'),html=require('../qa/nav200/normalize.cjs')(fs.readFileSync(path.join(root,'index.html'),'utf8'));
 const normalize=require('../qa/ui-cohesion/normalize.cjs'),base=require('../qa/ui-cohesion/baseline.json'),changes=require('../qa/ui-cohesion/changes.json');
 const scripts=h=>[...h.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
 test('only the reviewed presentation delta: reversing it reproduces the previous index byte for byte',()=>{
