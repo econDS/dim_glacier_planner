@@ -1,0 +1,196 @@
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+          <div>ราค
+
+0 !== 1
+
+    at module.exports (/workspace/dim_glacier_planner/tests/price-metadata-normalize.cjs:8:12)
+    at Object.<anonymous> (/workspace/dim_glacier_planner/tests/dim-nav.test.cjs:12:55)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+✖ tests/dim-nav.test.cjs (97.936391ms)
+✖ only exact first-run HTML/CSS delta; entire calculation and persistence implementation unchanged (8.30733ms)
+✔ new disclosure text uses an existing dark token with AA contrast on its light card (0.47707ms)
+✖ 1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback (23.408404ms)
+✖ nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte (4.513139ms)
+✔ nav140 exact immutable source bundle, catalog and lock; old releases remain frozen (1.93946ms)
+✔ nav140 host CSS is scoped and derives the real app shell without altering app CSS (0.826779ms)
+✔ nav140 QA is pinned, same-repository read-only PR validation without publication (0.600688ms)
+✔ 1.4.1 accessibility patch is exact and keeps the 1.4.0 release immutable (0.818566ms)
+✔ nav150 public tokens map exactly to audited host colors and font (1.361277ms)
+✔ nav150 exact pinned release integrity and unchanged catalog (15.366735ms)
+✔ theme QA runs on rollout draft PR with read-only permission (0.444211ms)
+✔ original 1.5.0 release remains byte-identical (0.342057ms)
+✔ raw candidate installs one local v2 component with stable identity and script-failure Portal fallback (1.653487ms)
+✔ only production HTML change is approved script version; all historical assets remain byte-identical (6.101818ms)
+✔ immutable v2 artifact integrity and exact central endpoint (1.051709ms)
+✖ only exact reviewed metadata/labels edits; old default inputs, styles, business logic and nav reconstruct unchanged (7.30779ms)
+✔ all 21 numeric fields have explicit labels; labels and IDs are valid and unique (0.65509ms)
+✔ fresh metadata blank; all 18 price fields stamp on effective edits, including rate (21.67173ms)
+✔ non-price fields, unchanged values, commas and composing input do not stamp (1.239563ms)
+✔ invalid, missing or noncanonical stored timestamps gracefully display a dash (0.697644ms)
+✔ date formatting has Thai Buddhist year and a graceful Intl fallback using local components (2.453451ms)
+✖ all original export functions, parser, formulas and default prices remain exact bytes (19.62609ms)
+✖ only the reviewed presentation delta: reversing it reproduces the previous index byte for byte (14.899068ms)
+✔ inline scripts (formulas, prices, storage, import/export) are untouched (4.166795ms)
+✔ existing styles are untouched; new rules live only in the ui-cohesion block and add no new palette (3.224111ms)
+✔ protected ids, native labels, stage order and shared nav remain (2.165822ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 20
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 314.683384
+
+✖ failing tests:
+
+test at tests/dim-nav.test.cjs:1:1
+✖ tests/dim-nav.test.cjs (97.936391ms)
+  'test failed'
+
+test at tests/first-run.test.cjs:1:293
+✖ only exact first-run HTML/CSS delta; entire calculation and persistence implementation unchanged (8.30733ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'
+  - 'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'
+  
+      at TestContext.<anonymous> (/workspace/dim_glacier_planner/tests/first-run.test.cjs:1:409)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67',
+    expected: 'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/nav130-rollout.test.cjs:6:1
+✖ 1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback (23.408404ms)
+  AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+            <div>ราค
+  
+  0 !== 1
+  
+      at module.exports (/workspace/dim_glacier_planner/tests/price-metadata-normalize.cjs:8:12)
+      at TestContext.<anonymous> (/workspace/dim_glacier_planner/tests/nav130-rollout.test.cjs:11:54)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/nav140.test.cjs:5:1
+✖ nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte (4.513139ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'
+  - '8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'
+  
+      at TestContext.<anonymous> (/workspace/dim_glacier_planner/tests/nav140.test.cjs:6:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6',
+    expected: '8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/price-metadata.test.cjs:7:1
+✖ only exact reviewed metadata/labels edits; old default inputs, styles, business logic and nav reconstruct unchanged (7.30779ms)
+  AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+            <div>ราค
+  
+  0 !== 1
+  
+      at module.exports (/workspace/dim_glacier_planner/tests/price-metadata-normalize.cjs:8:12)
+      at TestContext.<anonymous> (/workspace/dim_glacier_planner/tests/price-metadata.test.cjs:7:185)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/price-metadata.test.cjs:13:1
+✖ all original export functions, parser, formulas and default prices remain exact bytes (19.62609ms)
+  AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+            <div>ราค
+  
+  0 !== 1
+  
+      at module.exports (/workspace/dim_glacier_planner/tests/price-metadata-normalize.cjs:8:12)
+      at TestContext.<anonymous> (/workspace/dim_glacier_planner/tests/price-metadata.test.cjs:13:155)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/ui-cohesion.test.cjs:6:1
+✖ only the reviewed presentation delta: reversing it reproduces the previous index byte for byte (14.899068ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'
+  - '8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'
+  
+      at TestContext.<anonymous> (/workspace/dim_glacier_planner/tests/ui-cohesion.test.cjs:7:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c',
+    expected: '8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

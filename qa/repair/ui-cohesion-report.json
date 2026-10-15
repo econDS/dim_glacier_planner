@@ -1,0 +1,2004 @@
+{
+  "fixtures": {
+    "before": {
+      "originalSha256": "8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b",
+      "servedFixtureSha256": "8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b",
+      "policy": "Only exact reviewed market inputs; current date retained; production bytes untouched"
+    },
+    "after": {
+      "originalSha256": "2692491a3c9bcc5c723995866258b74f27ab2c8d69a5003f82c6d899f53bd284",
+      "servedFixtureSha256": "f1907dae194631f29ad3fae97335a6fec394952514c455be00506d26b70bb555",
+      "policy": "Only exact reviewed market inputs; current date retained; production bytes untouched"
+    }
+  },
+  "cases": [
+    {
+      "name": "A default 0->7, no refine",
+      "identical": true,
+      "total_zeny": "1,167,842,750 Zeny",
+      "total_thb": "8,642 THB",
+      "cost_enchant": "1,167,792,750",
+      "cost_refine": "0",
+      "before": {
+        "name": "A default 0->7, no refine",
+        "finished": {
+          "cost_base": "50,000",
+          "cost_enchant": "1,167,792,750",
+          "cost_refine": "0",
+          "total_zeny": "1,167,842,750 Zeny",
+          "total_thb": "8,642 THB",
+          "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 5 · ต้องทำ 7 ขั้น (S4, S3, Lv1, Lv2, Lv3, Lv4, Lv5)",
+          "shop_list": "Snow Flower Magic Stone Extract x 160 66,520,000 Shining Snow Flower Magic Stone Extract x 215 32,250,000 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Glacier Extract x 225 478,350,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,532,750 Miasmal Spell x 6 2,040,000 รวมค่า Enchant 1,167,792,750",
+          "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 25xBrilliant Snow Flower Magic Stone Extract 49,907,500 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 35xBrilliant Snow Flower Magic Stone Extract 70,136,250 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 229,172,500 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250",
+          "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 3,200 24,000,000 Snow Flower Petal x 13,245 137,748,000 Amethyst Fragment x 66,225 566,223,750 Shining Snow Flower Magic Stone x 3,225 88,687,500 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,040,000 รวม (ถ้า Craft เองทั้งหมด) 1,353,765,250"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "7.4",
+              "p_petal": "10,400",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "340,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,390,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "35,500,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "0",
+              "sel_target_stage": "7",
+              "sel_s4_method": "normal",
+              "sel_s3_method": "normal",
+              "qty_cube": "0",
+              "qty_device": "0",
+              "manual_cost": "0"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "7.4"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "10,400"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "340,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,390,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "35,500,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "0"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "7"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      },
+      "after": {
+        "name": "A default 0->7, no refine",
+        "finished": {
+          "cost_base": "50,000",
+          "cost_enchant": "1,167,792,750",
+          "cost_refine": "0",
+          "total_zeny": "1,167,842,750 Zeny",
+          "total_thb": "8,642 THB",
+          "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 5 · ต้องทำ 7 ขั้น (S4, S3, Lv1, Lv2, Lv3, Lv4, Lv5)",
+          "shop_list": "Snow Flower Magic Stone Extract x 160 66,520,000 Shining Snow Flower Magic Stone Extract x 215 32,250,000 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Glacier Extract x 225 478,350,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,532,750 Miasmal Spell x 6 2,040,000 รวมค่า Enchant 1,167,792,750",
+          "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 25xBrilliant Snow Flower Magic Stone Extract 49,907,500 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 35xBrilliant Snow Flower Magic Stone Extract 70,136,250 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 229,172,500 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 310,556,250",
+          "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 3,200 24,000,000 Snow Flower Petal x 13,245 137,748,000 Amethyst Fragment x 66,225 566,223,750 Shining Snow Flower Magic Stone x 3,225 88,687,500 Brilliant Snow Flower Magic Stone Extract x 305 530,700,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,040,000 รวม (ถ้า Craft เองทั้งหมด) 1,353,765,250"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "7.4",
+              "p_petal": "10,400",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "340,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,390,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "35,500,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "0",
+              "sel_target_stage": "7",
+              "sel_s4_method": "normal",
+              "sel_s3_method": "normal",
+              "qty_cube": "0",
+              "qty_device": "0",
+              "manual_cost": "0"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "7.4"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "10,400"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "340,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,390,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "35,500,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "0"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "7"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "B1 2->7, custom prices (+ coupon selects hidden at stage 2)",
+      "identical": true,
+      "total_zeny": "1,067,286,700 Zeny",
+      "total_thb": "8,538 THB",
+      "cost_enchant": "1,067,286,700",
+      "cost_refine": "0",
+      "before": {
+        "name": "B1 2->7, custom prices (+ coupon selects hidden at stage 2)",
+        "finished": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "1,067,286,700",
+          "cost_refine": "0",
+          "total_zeny": "1,067,286,700 Zeny",
+          "total_thb": "8,538 THB",
+          "shop_summary": "จาก Slot 4 + 3 → Slot 2 Lv 5 · ต้องทำ 5 ขั้น (Lv1, Lv2, Lv3, Lv4, Lv5)",
+          "shop_list": "Snow Flower Magic Stone Extract x 135 57,439,125 Shining Snow Flower Magic Stone Extract x 180 27,000,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Glacier Extract x 225 495,855,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,892,575 Miasmal Spell x 6 2,400,000 รวมค่า Enchant 1,067,286,700",
+          "list_steps": "Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 171,170,825 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 221,490,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 316,717,125",
+          "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,154,750 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 2,700 20,250,000 Snow Flower Petal x 12,770 157,645,650 Amethyst Fragment x 63,850 545,917,500 Shining Snow Flower Magic Stone x 2,700 74,250,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,400,000 รวม (ถ้า Craft เองทั้งหมด) 1,231,129,150"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "8",
+              "p_petal": "12,345",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "400,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,500,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "30,000,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "2",
+              "sel_target_stage": "7",
+              "sel_s4_method": "normal",
+              "sel_s3_method": "normal",
+              "qty_cube": "0",
+              "qty_device": "0",
+              "manual_cost": "0"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "8"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "12,345"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "400,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,500,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "30,000,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "2"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "7"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "0"
+              }
+            ],
+            "metadata": {
+              "priceStamped": true
+            }
+          }
+        }
+      },
+      "after": {
+        "name": "B1 2->7, custom prices (+ coupon selects hidden at stage 2)",
+        "finished": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "1,067,286,700",
+          "cost_refine": "0",
+          "total_zeny": "1,067,286,700 Zeny",
+          "total_thb": "8,538 THB",
+          "shop_summary": "จาก Slot 4 + 3 → Slot 2 Lv 5 · ต้องทำ 5 ขั้น (Lv1, Lv2, Lv3, Lv4, Lv5)",
+          "shop_list": "Snow Flower Magic Stone Extract x 135 57,439,125 Shining Snow Flower Magic Stone Extract x 180 27,000,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Glacier Extract x 225 495,855,000 Encroached Magical Crystal x 37 44,400,000 Neutralized Magical Crystal x 37 13,892,575 Miasmal Spell x 6 2,400,000 รวมค่า Enchant 1,067,286,700",
+          "list_steps": "Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 171,170,825 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 221,490,000 Slot 2 Lv 5 - 40xSnow Flower Magic Stone Extract- 50xShining Snow Flower Magic Stone Extract- 65xBrilliant Snow Flower Magic Stone Extract- 70xGlacier Extract- 15xEncroached Magical Crystal- 15xNeutralized Magical Crystal- 3xMiasmal Spell 316,717,125",
+          "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,154,750 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 2,700 20,250,000 Snow Flower Petal x 12,770 157,645,650 Amethyst Fragment x 63,850 545,917,500 Shining Snow Flower Magic Stone x 2,700 74,250,000 Brilliant Snow Flower Magic Stone Extract x 245 426,300,000 Encroached Magical Ore x 555 666,000 Neutralized Magical Ore x 185 3,700,000 Miasmal Spell x 6 2,400,000 รวม (ถ้า Craft เองทั้งหมด) 1,231,129,150"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "8",
+              "p_petal": "12,345",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "400,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,500,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "30,000,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "2",
+              "sel_target_stage": "7",
+              "sel_s4_method": "normal",
+              "sel_s3_method": "normal",
+              "qty_cube": "0",
+              "qty_device": "0",
+              "manual_cost": "0"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "8"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "12,345"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "400,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,500,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "30,000,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "2"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "7"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "0"
+              }
+            ],
+            "metadata": {
+              "priceStamped": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "B2 0->4, custom prices, coupon route for Slot 4 + 3",
+      "identical": true,
+      "total_zeny": "433,845,625 Zeny",
+      "total_thb": "3,471 THB",
+      "cost_enchant": "433,795,625",
+      "cost_refine": "0",
+      "before": {
+        "name": "B2 0->4, custom prices, coupon route for Slot 4 + 3",
+        "finished": {
+          "cost_base": "50,000",
+          "cost_enchant": "433,795,625",
+          "cost_refine": "0",
+          "total_zeny": "433,845,625 Zeny",
+          "total_thb": "3,471 THB",
+          "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 2 · ต้องทำ 4 ขั้น (S4, S3, Lv1, Lv2)",
+          "shop_list": "Snow Flower Magic Stone Extract x 70 29,783,250 Shining Snow Flower Magic Stone Extract x 95 14,250,000 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Glacier Extract x 75 165,285,000 Encroached Magical Crystal x 5 6,000,000 Neutralized Magical Crystal x 5 1,877,375 รวมค่า Enchant 433,795,625",
+          "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 1xSlot 4 & 3 Dim Glacier Enchant Coupon 26,504,750 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 2xSlot 4 & 3 Dim Glacier Enchant Coupon 49,382,125 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500",
+          "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,094,750 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 1,400 10,500,000 Snow Flower Petal x 4,475 55,243,875 Amethyst Fragment x 22,375 191,306,250 Shining Snow Flower Magic Stone x 1,425 39,187,500 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Encroached Magical Ore x 75 90,000 Neutralized Magical Ore x 25 500,000 รวม (ถ้า Craft เองทั้งหมด) 513,427,625"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "8",
+              "p_petal": "12,345",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "340,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,390,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "20,000,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "0",
+              "sel_target_stage": "4",
+              "sel_s4_method": "coupon",
+              "sel_s3_method": "coupon",
+              "qty_cube": "0",
+              "qty_device": "0",
+              "manual_cost": "0"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "8"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "12,345"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "340,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,390,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "20,000,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "0"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "4"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "coupon"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "coupon"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "0"
+              }
+            ],
+            "metadata": {
+              "priceStamped": true
+            }
+          }
+        }
+      },
+      "after": {
+        "name": "B2 0->4, custom prices, coupon route for Slot 4 + 3",
+        "finished": {
+          "cost_base": "50,000",
+          "cost_enchant": "433,795,625",
+          "cost_refine": "0",
+          "total_zeny": "433,845,625 Zeny",
+          "total_thb": "3,471 THB",
+          "shop_summary": "จาก ยังไม่ได้ออฟ → Slot 2 Lv 2 · ต้องทำ 4 ขั้น (S4, S3, Lv1, Lv2)",
+          "shop_list": "Snow Flower Magic Stone Extract x 70 29,783,250 Shining Snow Flower Magic Stone Extract x 95 14,250,000 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Glacier Extract x 75 165,285,000 Encroached Magical Crystal x 5 6,000,000 Neutralized Magical Crystal x 5 1,877,375 รวมค่า Enchant 433,795,625",
+          "list_steps": "Enchant Slot 4 - 10xSnow Flower Magic Stone Extract- 15xShining Snow Flower Magic Stone Extract- 1xSlot 4 & 3 Dim Glacier Enchant Coupon 26,504,750 Enchant Slot 3 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 2xSlot 4 & 3 Dim Glacier Enchant Coupon 49,382,125 Slot 2 Lv 1 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 60xBrilliant Snow Flower Magic Stone Extract- 50xGlacier Extract 233,354,250 Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 124,554,500",
+          "tb_compare": "Snow Flower Magic Stone Extract 425,475 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,203,800 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 375,475 Craft Dim Glacier Refinement Device 16,094,750 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 1,400 10,500,000 Snow Flower Petal x 4,475 55,243,875 Amethyst Fragment x 22,375 191,306,250 Shining Snow Flower Magic Stone x 1,425 39,187,500 Slot 4 & 3 Dim Glacier Enchant Coupon x 3 60,000,000 Brilliant Snow Flower Magic Stone Extract x 90 156,600,000 Encroached Magical Ore x 75 90,000 Neutralized Magical Ore x 25 500,000 รวม (ถ้า Craft เองทั้งหมด) 513,427,625"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "8",
+              "p_petal": "12,345",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "340,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,390,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "20,000,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "0",
+              "sel_target_stage": "4",
+              "sel_s4_method": "coupon",
+              "sel_s3_method": "coupon",
+              "qty_cube": "0",
+              "qty_device": "0",
+              "manual_cost": "0"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "8"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "12,345"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "340,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,390,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "20,000,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "0"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "4"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "coupon"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "coupon"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "0"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "0"
+              }
+            ],
+            "metadata": {
+              "priceStamped": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "C 3->6 with refine qty > 0",
+      "identical": true,
+      "total_zeny": "705,467,817 Zeny",
+      "total_thb": "5,220 THB",
+      "cost_enchant": "508,020,250",
+      "cost_refine": "197,447,567",
+      "before": {
+        "name": "C 3->6 with refine qty > 0",
+        "finished": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "508,020,250",
+          "cost_refine": "197,447,567",
+          "total_zeny": "705,467,817 Zeny",
+          "total_thb": "5,220 THB",
+          "shop_summary": "จาก Slot 2 Lv 1 → Slot 2 Lv 4 · ต้องทำ 3 ขั้น (Lv2, Lv3, Lv4)",
+          "shop_list": "Snow Flower Magic Stone Extract x 65 27,023,750 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Glacier Extract x 105 223,230,000 Encroached Magical Crystal x 22 26,400,000 Neutralized Magical Crystal x 22 8,046,500 Miasmal Spell x 3 1,020,000 รวมค่า Enchant 508,020,250",
+          "list_steps": "Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000",
+          "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 1,300 9,750,000 Snow Flower Petal x 6,195 64,428,000 Amethyst Fragment x 30,975 264,836,250 Shining Snow Flower Magic Stone x 1,350 37,125,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Encroached Magical Ore x 330 396,000 Neutralized Magical Ore x 110 2,200,000 Miasmal Spell x 3 1,020,000 รวม (ถ้า Craft เองทั้งหมด) 588,555,250"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "7.4",
+              "p_petal": "10,400",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "340,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,390,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "35,500,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "3",
+              "sel_target_stage": "6",
+              "sel_s4_method": "normal",
+              "sel_s3_method": "normal",
+              "qty_cube": "2",
+              "qty_device": "3",
+              "manual_cost": "1,234,567"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "7.4"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "10,400"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "340,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,390,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "35,500,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "3"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "6"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "2"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "3"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "1,234,567"
+              }
+            ]
+          }
+        }
+      },
+      "after": {
+        "name": "C 3->6 with refine qty > 0",
+        "finished": {
+          "cost_base": "มีแล้ว",
+          "cost_enchant": "508,020,250",
+          "cost_refine": "197,447,567",
+          "total_zeny": "705,467,817 Zeny",
+          "total_thb": "5,220 THB",
+          "shop_summary": "จาก Slot 2 Lv 1 → Slot 2 Lv 4 · ต้องทำ 3 ขั้น (Lv2, Lv3, Lv4)",
+          "shop_list": "Snow Flower Magic Stone Extract x 65 27,023,750 Shining Snow Flower Magic Stone Extract x 90 13,500,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Glacier Extract x 105 223,230,000 Encroached Magical Crystal x 22 26,400,000 Neutralized Magical Crystal x 22 8,046,500 Miasmal Spell x 3 1,020,000 รวมค่า Enchant 508,020,250",
+          "list_steps": "Slot 2 Lv 2 - 15xSnow Flower Magic Stone Extract- 20xShining Snow Flower Magic Stone Extract- 30xBrilliant Snow Flower Magic Stone Extract- 25xGlacier Extract- 5xEncroached Magical Crystal- 5xNeutralized Magical Crystal 122,415,000 Slot 2 Lv 3 - 20xSnow Flower Magic Stone Extract- 30xShining Snow Flower Magic Stone Extract- 40xBrilliant Snow Flower Magic Stone Extract- 35xGlacier Extract- 7xEncroached Magical Crystal- 7xNeutralized Magical Crystal- 1xMiasmal Spell 168,125,250 Slot 2 Lv 4 - 30xSnow Flower Magic Stone Extract- 40xShining Snow Flower Magic Stone Extract- 50xBrilliant Snow Flower Magic Stone Extract- 45xGlacier Extract- 10xEncroached Magical Crystal- 10xNeutralized Magical Crystal- 2xMiasmal Spell 217,480,000",
+          "tb_compare": "Snow Flower Magic Stone Extract 415,750 Craft Shining Snow Flower Magic Stone Extract 150,000 Market Glacier Extract 2,126,000 Craft Encroached Magical Crystal 1,200,000 Market Neutralized Magical Crystal 365,750 Craft Dim Glacier Refinement Device 15,997,500 Craft"
+        },
+        "rawView": {
+          "shop_list": "Snow Flower Magic Stone x 1,300 9,750,000 Snow Flower Petal x 6,195 64,428,000 Amethyst Fragment x 30,975 264,836,250 Shining Snow Flower Magic Stone x 1,350 37,125,000 Brilliant Snow Flower Magic Stone Extract x 120 208,800,000 Encroached Magical Ore x 330 396,000 Neutralized Magical Ore x 110 2,200,000 Miasmal Spell x 3 1,020,000 รวม (ถ้า Craft เองทั้งหมด) 588,555,250"
+        },
+        "storage": {
+          "dim-glacier-planner-state-v1": {
+            "version": 1,
+            "app": "Dim Glacier Ultimate Planner",
+            "values": {
+              "rate_thb": "7.4",
+              "p_petal": "10,400",
+              "p_amethyst": "8,550",
+              "p_enc_ore": "1,200",
+              "p_neu_ore": "20,000",
+              "p_miasmal": "340,000",
+              "p_sf_stone": "7,500",
+              "p_shining_stone": "27,500",
+              "p_brilliant": "1,740,000",
+              "m_sf_extract": "500,000",
+              "m_shining_extract": "150,000",
+              "m_glacier_extract": "2,390,000",
+              "m_enc_crystal": "1,200,000",
+              "m_neu_crystal": "380,000",
+              "m_device": "22,450,000",
+              "m_weapon": "50,000",
+              "p_coupon": "35,500,000",
+              "m_cube9": "50,000,000",
+              "sel_cur_stage": "3",
+              "sel_target_stage": "6",
+              "sel_s4_method": "normal",
+              "sel_s3_method": "normal",
+              "qty_cube": "2",
+              "qty_device": "3",
+              "manual_cost": "1,234,567"
+            },
+            "fields": [
+              {
+                "id": "rate_thb",
+                "label": "อัตราแลกเปลี่ยน",
+                "type": "decimal",
+                "value": "7.4"
+              },
+              {
+                "id": "p_petal",
+                "label": "Snow Flower Petal",
+                "type": "number",
+                "value": "10,400"
+              },
+              {
+                "id": "p_amethyst",
+                "label": "Amethyst Fragment",
+                "type": "number",
+                "value": "8,550"
+              },
+              {
+                "id": "p_enc_ore",
+                "label": "Encroached Magical Ore",
+                "type": "number",
+                "value": "1,200"
+              },
+              {
+                "id": "p_neu_ore",
+                "label": "Neutralized Magical Ore",
+                "type": "number",
+                "value": "20,000"
+              },
+              {
+                "id": "p_miasmal",
+                "label": "Miasmal Spell",
+                "type": "number",
+                "value": "340,000"
+              },
+              {
+                "id": "p_sf_stone",
+                "label": "Snow Flower Magic Stone",
+                "type": "number",
+                "value": "7,500"
+              },
+              {
+                "id": "p_shining_stone",
+                "label": "Shining Snow Flower Magic Stone",
+                "type": "number",
+                "value": "27,500"
+              },
+              {
+                "id": "p_brilliant",
+                "label": "Brilliant Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "1,740,000"
+              },
+              {
+                "id": "m_sf_extract",
+                "label": "Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "500,000"
+              },
+              {
+                "id": "m_shining_extract",
+                "label": "Shining Snow Flower Magic Stone Extract",
+                "type": "number",
+                "value": "150,000"
+              },
+              {
+                "id": "m_glacier_extract",
+                "label": "Glacier Extract",
+                "type": "number",
+                "value": "2,390,000"
+              },
+              {
+                "id": "m_enc_crystal",
+                "label": "Encroached Magical Crystal",
+                "type": "number",
+                "value": "1,200,000"
+              },
+              {
+                "id": "m_neu_crystal",
+                "label": "Neutralized Magical Crystal",
+                "type": "number",
+                "value": "380,000"
+              },
+              {
+                "id": "m_device",
+                "label": "Dim Glacier Refinement Device",
+                "type": "number",
+                "value": "22,450,000"
+              },
+              {
+                "id": "m_weapon",
+                "label": "Dim Glacier Weapon",
+                "type": "number",
+                "value": "50,000"
+              },
+              {
+                "id": "p_coupon",
+                "label": "Slot 4 & 3 Dim Glacier Enchant Coupon",
+                "type": "number",
+                "value": "35,500,000"
+              },
+              {
+                "id": "m_cube9",
+                "label": "Dim Glacier Weapon 9 Refine Cube",
+                "type": "number",
+                "value": "50,000,000"
+              },
+              {
+                "id": "sel_cur_stage",
+                "label": "ขั้น Enchant ปัจจุบัน",
+                "type": "select",
+                "value": "3"
+              },
+              {
+                "id": "sel_target_stage",
+                "label": "เป้าหมาย Enchant",
+                "type": "select",
+                "value": "6"
+              },
+              {
+                "id": "sel_s4_method",
+                "label": "วิธีทำ Slot 4",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "sel_s3_method",
+                "label": "วิธีทำ Slot 3",
+                "type": "select",
+                "value": "normal"
+              },
+              {
+                "id": "qty_cube",
+                "label": "จำนวน Refine Cube",
+                "type": "integer",
+                "value": "2"
+              },
+              {
+                "id": "qty_device",
+                "label": "จำนวน Refinement Device",
+                "type": "integer",
+                "value": "3"
+              },
+              {
+                "id": "manual_cost",
+                "label": "งบ Refine กำหนดเอง",
+                "type": "number",
+                "value": "1,234,567"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "probes": {
+    "before": [
+      {
+        "width": 360,
+        "overflow": 0,
+        "curTop": 759,
+        "targetTop": 824,
+        "stepperTop": 875,
+        "totalTop": 1091,
+        "marketTop": 2538,
+        "toolsTop": 2820,
+        "presetRows": 3,
+        "small": [
+          {
+            "t": "preset-chip active:เริ่มใหม่ → ครบ Lv",
+            "w": 125,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:เริ่มใหม่ → Slot 4",
+            "w": 130,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+            "w": 140,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+            "w": 140,
+            "h": 30
+          },
+          {
+            "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+            "w": 118,
+            "h": 29
+          },
+          {
+            "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+            "w": 118,
+            "h": 29
+          },
+          {
+            "t": "view-btn active:ของสำเร็จ",
+            "w": 67,
+            "h": 30
+          },
+          {
+            "t": "view-btn:แตกเป็นวัตถุดิบ",
+            "w": 96,
+            "h": 30
+          }
+        ],
+        "unlabeled": [
+          "file_import"
+        ],
+        "stepperNames": true,
+        "tabOrder": [
+          "RO-SUITE-NAV",
+          "RO-SUITE-NAV",
+          "A",
+          "A",
+          "chip7",
+          "chip2",
+          "chip4",
+          "chip7",
+          "sel_cur_stage",
+          "sel_target_stage",
+          "step0",
+          "step1",
+          "step2",
+          "step3"
+        ],
+        "chipFocusOutline": "auto"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "curTop": 690,
+        "targetTop": 755,
+        "stepperTop": 806,
+        "totalTop": 1022,
+        "marketTop": 2383,
+        "toolsTop": 2665,
+        "presetRows": 2,
+        "small": [
+          {
+            "t": "preset-chip active:เริ่มใหม่ → ครบ Lv",
+            "w": 125,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:เริ่มใหม่ → Slot 4",
+            "w": 130,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+            "w": 140,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+            "w": 140,
+            "h": 30
+          },
+          {
+            "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+            "w": 118,
+            "h": 29
+          },
+          {
+            "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+            "w": 118,
+            "h": 29
+          },
+          {
+            "t": "view-btn active:ของสำเร็จ",
+            "w": 67,
+            "h": 30
+          },
+          {
+            "t": "view-btn:แตกเป็นวัตถุดิบ",
+            "w": 96,
+            "h": 30
+          }
+        ],
+        "unlabeled": [
+          "file_import"
+        ],
+        "stepperNames": true,
+        "tabOrder": [
+          "RO-SUITE-NAV",
+          "RO-SUITE-NAV",
+          "A",
+          "A",
+          "chip7",
+          "chip2",
+          "chip4",
+          "chip7",
+          "sel_cur_stage",
+          "sel_target_stage",
+          "step0",
+          "step1",
+          "step2",
+          "step3"
+        ],
+        "chipFocusOutline": "auto"
+      },
+      {
+        "width": 1440,
+        "overflow": 0,
+        "curTop": 542,
+        "targetTop": 542,
+        "stepperTop": 593,
+        "totalTop": 817,
+        "marketTop": 328,
+        "toolsTop": 594,
+        "presetRows": 1,
+        "small": [
+          {
+            "t": "preset-chip active:เริ่มใหม่ → ครบ Lv",
+            "w": 125,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:เริ่มใหม่ → Slot 4",
+            "w": 130,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+            "w": 140,
+            "h": 30
+          },
+          {
+            "t": "preset-chip:มี 4 + 3 → Slot 2 ",
+            "w": 140,
+            "h": 30
+          },
+          {
+            "t": "sel_s4_method:วัตถุดิบปกติ\n     ",
+            "w": 118,
+            "h": 29
+          },
+          {
+            "t": "sel_s3_method:วัตถุดิบปกติ\n     ",
+            "w": 118,
+            "h": 29
+          },
+          {
+            "t": "view-btn active:ของสำเร็จ",
+            "w": 67,
+            "h": 30
+          },
+          {
+            "t": "view-btn:แตกเป็นวัตถุดิบ",
+            "w": 96,
+            "h": 30
+          }
+        ],
+        "unlabeled": [
+          "file_import"
+        ],
+        "stepperNames": true,
+        "tabOrder": [
+          "RO-SUITE-NAV",
+          "RO-SUITE-NAV",
+          "A",
+          "A",
+          "chip7",
+          "chip2",
+          "chip4",
+          "chip7",
+          "sel_cur_stage",
+          "sel_target_stage",
+          "step0",
+          "step1",
+          "step2",
+          "step3"
+        ],
+        "chipFocusOutline": "auto"
+      }
+    ],
+    "after": [
+      {
+        "width": 360,
+        "overflow": 0,
+        "curTop": 438,
+        "targetTop": 521,
+        "stepperTop": 715,
+        "totalTop": 956,
+        "marketTop": 2348,
+        "toolsTop": 3008,
+        "presetRows": 2,
+        "small": [],
+        "unlabeled": [
+          "file_import"
+        ],
+        "stepperNames": true,
+        "tabOrder": [
+          "RO-SUITE-NAV",
+          "RO-SUITE-NAV",
+          "A",
+          "sel_cur_stage",
+          "sel_target_stage",
+          "chip7",
+          "chip2",
+          "chip4",
+          "chip7",
+          "step0",
+          "step1",
+          "step2",
+          "step3",
+          "step4"
+        ],
+        "chipFocusOutline": "solid"
+      },
+      {
+        "width": 390,
+        "overflow": 0,
+        "curTop": 430,
+        "targetTop": 513,
+        "stepperTop": 707,
+        "totalTop": 948,
+        "marketTop": 2281,
+        "toolsTop": 2899,
+        "presetRows": 2,
+        "small": [],
+        "unlabeled": [
+          "file_import"
+        ],
+        "stepperNames": true,
+        "tabOrder": [
+          "RO-SUITE-NAV",
+          "RO-SUITE-NAV",
+          "A",
+          "sel_cur_stage",
+          "sel_target_stage",
+          "chip7",
+          "chip2",
+          "chip4",
+          "chip7",
+          "step0",
+          "step1",
+          "step2",
+          "step3",
+          "step4"
+        ],
+        "chipFocusOutline": "solid"
+      },
+      {
+        "width": 1440,
+        "overflow": 0,
+        "curTop": 407,
+        "targetTop": 407,
+        "stepperTop": 522,
+        "totalTop": 751,
+        "marketTop": 239,
+        "toolsTop": 816,
+        "presetRows": 1,
+        "small": [],
+        "unlabeled": [
+          "file_import"
+        ],
+        "stepperNames": true,
+        "tabOrder": [
+          "RO-SUITE-NAV",
+          "RO-SUITE-NAV",
+          "A",
+          "A",
+          "sel_cur_stage",
+          "sel_target_stage",
+          "chip7",
+          "chip2",
+          "chip4",
+          "chip7",
+          "step0",
+          "step1",
+          "step2",
+          "step3"
+        ],
+        "chipFocusOutline": "solid"
+      }
+    ]
+  },
+  "status": "PASS"
+}
