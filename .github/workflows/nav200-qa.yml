@@ -16,7 +16,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: '22.14.0'
+          node-version: '22.23.4'
       - run: node --test tests/nav200.test.cjs tests/nav150.test.cjs
       - run: npm install --prefix "$RUNNER_TEMP/nav200" --no-save --package-lock=false --ignore-scripts playwright@1.55.1
       - run: node "$RUNNER_TEMP/nav200/node_modules/playwright/cli.js" install --with-deps chromium

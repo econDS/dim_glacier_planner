@@ -2,10 +2,18 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p)),hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const baseline=JSON.parse(read('qa/nav140/baseline.json')),html=require('../qa/nav150/normalize.cjs')(require('../qa/ui-cohesion/normalize.cjs')(read('index.html').toString())),normalize=require('../qa/nav140/normalize.cjs');
+
+// Reverse only the approved security runtime pin when comparing historical bytes.
+const historicalWorkflowBytes = (file, bytes) => {
+ if (!file.startsWith('.github/workflows/') || !bytes.toString().includes("node-version: '22.23.4'")) return bytes;
+ const current = bytes.toString(), patched = "node-version: '22.23.4'";
+ assert.equal(current.split(patched).length - 1, 1, 'one patched Node pin');
+ return Buffer.from(current.replace(patched, "node-version: '22.14.0'"));
+};
 test('nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte',()=>{
  assert.equal(hash(normalize(html)),baseline.files['index.html']);
  for(const [file,expected]of Object.entries(baseline.files))if(!baseline.allowedModifiedFiles.includes(file)){
-  let bytes=read(file);
+  let bytes=historicalWorkflowBytes(file,read(file));
   if(file==='tests/first-run.browser.cjs'){
    let text=bytes.toString();
    for(const [before,after] of [...require('../qa/repair/first-run-harness-changes.json')].reverse()){
